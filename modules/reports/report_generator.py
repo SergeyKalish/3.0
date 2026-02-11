@@ -198,7 +198,7 @@ class ReportStyles:
 
     # Новые константы для шкалы game_mode
     GAME_MODE_SCALE_HEIGHT_PX = 30
-    GAME_MODE_FONT_SIZE_PT = 6
+    GAME_MODE_FONT_SIZE_PT = 5
     GAME_MODE_BG_COLOR = "#F5F5F5"
     GAME_MODE_TEXT_COLOR = "#000000"
     GAME_MODE_GRID_COLOR = "#C0C0C0"
@@ -1411,10 +1411,9 @@ class PlayerShiftMapReport:
         # Получаем высоту заголовка таблицы для позиционирования
         header_height = geom.get("header_height", 0)
         
-        # Низ шкалы game_mode = верх графической области + высота заголовка - высота шкалы game_mode
-        # То есть сразу над верхней шкалой времени
-        scale_bottom_y = geom["y"] + header_height - styles.TIME_SCALE_HEIGHT_PX
-        scale_y = scale_bottom_y - scale_height
+        # НОВОЕ: шкала в самом верху графической области
+        scale_y = geom["y"]
+        scale_bottom_y = scale_y + scale_height
         
         if time_range <= 0:
             return
