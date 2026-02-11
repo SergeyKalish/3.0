@@ -1,0 +1,9 @@
+# Игнорировать все файлы .pyc и другие байт-код файлы Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.png
+*.txt
+*.xls
+*.xlsx

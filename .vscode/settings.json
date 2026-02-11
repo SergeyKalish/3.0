@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.hkt": "json"
+    },
+    "editor.formatOnSave": true
+}

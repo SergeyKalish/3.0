@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../Парсинг протокола"
+		},
+		{
+			"path": "../Собрать весь код"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.hkt": "json"
+		},
+		"files.exclude": {
+			"**/*.png": true
+		}
+	}
+}
