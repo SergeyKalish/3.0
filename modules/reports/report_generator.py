@@ -26,8 +26,8 @@ class ReportStyles:
     COLOR_WHITE = "#FFFFFF"
     COLOR_BLACK = "#000000"
     COLOR_HEADER_BG = "#EEEEEE"
-    COLOR_GRID = "#C0C0C0"
-    COLOR_GRID_LIGHT = "#E0E0E0"
+    COLOR_GRID = "#9C9C9C"
+    COLOR_GRID_LIGHT = "#CACACA"
     
     # Цвета событий
     COLOR_OUR_GOAL = "#0064C8"
@@ -110,7 +110,7 @@ COLOR_HEADER_BG = "#EEEEEE"
 COLOR_GRID = "#000000"
 COLOR_CELL_BG = "#FFFFFF"
 
-TABLE_GRID_LINE_WIDTH = 4
+TABLE_GRID_LINE_WIDTH = 3
 TABLE_CELL_PADDING = 7
 TABLE_CELL_PADDING_NARROW = 2
 TABLE_HEADER_HEIGHT_RATIO = 1.4
@@ -1389,7 +1389,7 @@ class PlayerShiftMapReport:
                 draw.line(
                     [(graphic_x, line_y), (graphic_x + graphic_width, line_y)], 
                     fill=self.styles.COLOR_GRID_LIGHT,
-                    width=1
+                    width=3
                 )
         
 
@@ -1633,7 +1633,7 @@ class PlayerShiftMapReport:
                 dot_y_end = min(y + 3, int(line_bottom))
                 # Полупрозрачность через RGBA не работает напрямую в Draw, 
                 # используем обычный цвет с меньшей интенсивностью или штриховку
-                draw.line([(x_pos, y), (x_pos, dot_y_end)], fill=color, width=1)
+                draw.line([(x_pos, y), (x_pos, dot_y_end)], fill=color, width=2)
         
         return scale_y + SCALE_HEIGHT
 
