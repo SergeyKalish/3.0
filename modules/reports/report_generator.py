@@ -51,7 +51,7 @@ class ReportStyles:
     DPI = 300
     FOOTER_HEIGHT_PX = 30
     HEADER_HEIGHT_RATIO = 1.4
-    TABLE_GRID_LINE_WIDTH = 1
+    TABLE_GRID_LINE_WIDTH = 4
     
     # Отступы
     MARGIN_TOP = 100
@@ -110,7 +110,7 @@ COLOR_HEADER_BG = "#EEEEEE"
 COLOR_GRID = "#000000"
 COLOR_CELL_BG = "#FFFFFF"
 
-TABLE_GRID_LINE_WIDTH = 2
+TABLE_GRID_LINE_WIDTH = 4
 TABLE_CELL_PADDING = 7
 TABLE_CELL_PADDING_NARROW = 2
 TABLE_HEADER_HEIGHT_RATIO = 1.4
@@ -443,7 +443,8 @@ class PlayerShiftMapReport:
             draw.rectangle(
                 [current_x, header_y, current_x + col_width, header_y + header_height],
                 fill=self.styles.COLOR_HEADER_BG,
-                outline=self.styles.COLOR_GRID
+                outline=self.styles.COLOR_GRID,
+                width=TABLE_GRID_LINE_WIDTH
             )
             
             # Текст заголовка
@@ -463,7 +464,8 @@ class PlayerShiftMapReport:
                 draw.rectangle(
                     [current_x, row_y, current_x + col_width, row_y + body_row_height],
                     fill=self.styles.COLOR_WHITE,
-                    outline=self.styles.COLOR_GRID_LIGHT
+                    outline=self.styles.COLOR_GRID_LIGHT,
+                    width=TABLE_GRID_LINE_WIDTH
                 )
                 
                 # Текст ячейки
@@ -585,8 +587,12 @@ class PlayerShiftMapReport:
         total_end = max(seg.official_end for seg in report_data.segments_info)
         time_range = total_end
         
+        # Добавляем header_height в geom для передачи в _draw_top_time_scale
+        geom_with_header = geom.copy()
+        geom_with_header["header_height"] = header_height
+
         # Рисуем верхнюю шкалу времени (новая)
-        self._draw_top_time_scale(draw, geom, time_range=time_range, is_match_level=True)
+        self._draw_top_time_scale(draw, geom_with_header, time_range=time_range, is_match_level=True)
         
         # Рисуем смены (все)
         self._draw_shifts(draw, report_data, geom, time_range=time_range, period_start=0, header_height=header_height)
@@ -612,8 +618,12 @@ class PlayerShiftMapReport:
         period_end = segment.official_end
         time_range = period_end - period_start
         
+        # Добавляем header_height в geom для передачи в _draw_top_time_scale
+        geom_with_header = geom.copy()
+        geom_with_header["header_height"] = header_height
+
         # Рисуем верхнюю шкалу времени (новая)
-        self._draw_top_time_scale(draw, geom, time_range=time_range, is_match_level=False, period_abs_start=period_start)
+        self._draw_top_time_scale(draw, geom_with_header, time_range=time_range, is_match_level=False, period_abs_start=period_start)
         
         # Рисуем смены только этого периода
         self._draw_shifts(draw, report_data, geom, time_range=time_range, period_start=period_start, header_height=header_height)
@@ -656,6 +666,7 @@ class PlayerShiftMapReport:
         content_y = table_geom["content_y"]
         content_width = table_geom["content_width"]
         content_height = table_geom["content_height"]
+        header_height = table_geom["header_height"]  # ← новое
 
         table_x = table_geom["x"]
         table_width = table_geom["width"]
@@ -669,9 +680,11 @@ class PlayerShiftMapReport:
 
         geometry = {
             "x": graphic_x,
-            "y": graphic_y,
+            "y": graphic_y,                    # верх графической области
             "width": graphic_width,
             "height": graphic_height,
+            "header_height": header_height,    # ← новое: высота заголовка таблицы
+            "content_y": graphic_y + header_height,  # ← новое: низ заголовка = начало контента
         }
 
         print(f"DEBUG Graphic Geometry: {geometry}")
@@ -1037,6 +1050,7 @@ class PlayerShiftMapReport:
         # --- КОНЕЦ НОВОГО ---
         # Линия сетки снизу заголовка
         draw.line([(x_offset, header_y_pos + header_height), (x_offset + width, header_y_pos + header_height)], fill=COLOR_GRID, width=TABLE_GRID_LINE_WIDTH)
+        
 
         current_y += header_height # Переходим к телу таблицы
 
@@ -1051,7 +1065,8 @@ class PlayerShiftMapReport:
 
             # Рисуем линию сетки сверху строки (для первой строки это линия после заголовка, уже нарисована выше)
             if i > 0:
-                 draw.line([(x_offset, current_row_y), (x_offset + width, current_row_y)], fill=COLOR_GRID, width=TABLE_GRID_LINE_WIDTH)
+                draw.line([(x_offset, current_row_y), (x_offset + width, current_row_y)], fill=COLOR_GRID, width=TABLE_GRID_LINE_WIDTH)
+
 
             # Проходим по колонкам
             for j in range(len(TABLE_HEADERS)):
@@ -1119,14 +1134,20 @@ class PlayerShiftMapReport:
 
                 # Линия сетки справа от ячейки
                 draw.line([(current_x + col_width, current_row_y), (current_x + col_width, current_row_y + row_height)], fill=COLOR_GRID, width=TABLE_GRID_LINE_WIDTH)
+                print(f"777DEBUG: TABLE_GRID_LINE_WIDTH = {TABLE_GRID_LINE_WIDTH}")
+                print(f"777DEBUG: id = {id(TABLE_GRID_LINE_WIDTH)}")
 
                 current_x += col_width
 
             # Линия сетки снизу строки
             draw.line([(x_offset, current_row_y + row_height), (x_offset + width, current_row_y + row_height)], fill=COLOR_GRID, width=TABLE_GRID_LINE_WIDTH)
+            print(f"888DEBUG: TABLE_GRID_LINE_WIDTH = {TABLE_GRID_LINE_WIDTH}")
+            print(f"888DEBUG: id = {id(TABLE_GRID_LINE_WIDTH)}")
 
         # Рисуем внешнюю рамку таблицы (опционально, для наглядности)
-        draw.rectangle([x_offset, y_offset, x_offset + width, y_offset + height], outline=COLOR_BLACK, width=1)
+        draw.rectangle([x_offset, y_offset, x_offset + width, y_offset + height], outline=COLOR_BLACK, width=5)
+        print(f"999DEBUG: TABLE_GRID_LINE_WIDTH = {TABLE_GRID_LINE_WIDTH}")
+        print(f"999DEBUG: id = {id(TABLE_GRID_LINE_WIDTH)}")
 
 
     # --- ОБНОВЛЕНО: Метод отрисовки графической части с передачей table_geom ---
@@ -1155,62 +1176,64 @@ class PlayerShiftMapReport:
         # Шкала голов (уже работает)
         self._draw_goals_scale(draw, report_data, graphic_geom, self.mode, period_index)
 
-    def _draw_top_time_scale(self, draw: ImageDraw, geom: dict, time_range: float, 
+    def _draw_top_time_scale(self, draw: ImageDraw, geom: dict, time_range: float,
                             is_match_level: bool, period_abs_start: float = 0):
         """
-        Верхняя шкала времени — располагается на линии низа заголовка таблицы.
+        Верхняя шкала времени — располагается под заголовком таблицы.
+        Нижняя линия шкалы совпадает с нижней линией строки-заголовка таблицы.
         """
         time_scale_x = geom["x"]
         time_scale_width = geom["width"]
         time_scale_height = self.styles.TIME_SCALE_HEIGHT_PX
-        
-        # Получаем высоту заголовка таблицы из геометрии
-        header_height = geom.get("header_height", 0)
-        
-        # Низ шкалы = верх графической области + высота заголовка таблицы
-        # То есть сразу под шапкой таблицы
+
+        # Получаем высоту заголовка таблицы из geom
+        header_height = geom["header_height"]
+
+        # НИЖНЯЯ линия шкалы = нижняя линия заголовка таблицы
         scale_bottom_y = geom["y"] + header_height
-        time_scale_y = scale_bottom_y - time_scale_height
         
+        # ВЕРХНЯЯ линия шкалы = нижняя линия минус высота шкалы
+        time_scale_y = scale_bottom_y - time_scale_height
+
         if time_range <= 0:
             return
-        
+
         scale_factor = time_scale_width / time_range
-        
+
         # Фон
-        draw.rectangle([time_scale_x, time_scale_y, 
-                    time_scale_x + time_scale_width, scale_bottom_y], 
+        draw.rectangle([time_scale_x, time_scale_y,
+                        time_scale_x + time_scale_width, scale_bottom_y],
                     outline="black", fill="white")
-        
+
         # Шрифт
         try:
             font = ImageFont.truetype("arial.ttf", 20)
         except OSError:
             font = ImageFont.load_default()
-        
+
         # Тики каждые 2 минуты для матча, 1 минута для периода
         tick_interval = 300 if is_match_level else 60
-        
+
         for i, local_time in enumerate(range(0, int(time_range) + 1, tick_interval)):
             x_pos = time_scale_x + int(local_time * scale_factor)
-            
+
             # Рисуем тик от верха до низа шкалы
-            draw.line([(x_pos, time_scale_y), (x_pos, scale_bottom_y)], 
+            draw.line([(x_pos, time_scale_y), (x_pos, scale_bottom_y)],
                     fill="black", width=1)
-            
+
             # Подпись
             if is_match_level:
                 absolute_time = local_time
             else:
                 absolute_time = period_abs_start + local_time
-            
+
             minutes = int(absolute_time // 60)
             label_text = f"{minutes}'"
-            
+
             text_bbox = draw.textbbox((0, 0), label_text, font=font)
             text_width = text_bbox[2] - text_bbox[0]
             text_height = text_bbox[3] - text_bbox[1]
-            
+
             # Позиция X
             if i == 0:
                 label_x = x_pos + 3
@@ -1219,14 +1242,14 @@ class PlayerShiftMapReport:
                     label_x = x_pos - 1 - text_width
                 else:
                     label_x = x_pos - 3 - text_width
-            
+
             # Центрируем по вертикали
             label_y = time_scale_y + (time_scale_height - text_height) // 2 - 2
-            
+
             draw.text((label_x, label_y), label_text, fill="blue", font=font)
-        
+
         # Линия-разделитель под шкалой (совпадает с низом заголовка таблицы)
-        draw.line([(time_scale_x, scale_bottom_y), (time_scale_x + time_scale_width, scale_bottom_y)], 
+        draw.line([(time_scale_x, scale_bottom_y), (time_scale_x + time_scale_width, scale_bottom_y)],
                 fill=self.styles.COLOR_GRID, width=1)
 
     def _draw_time_scale(self, draw: ImageDraw, geom: dict, time_range: float, 
@@ -1345,9 +1368,9 @@ class PlayerShiftMapReport:
 
         graphic_width = geom["width"]
         graphic_x = geom["x"]
-        graphic_y = geom["y"] + header_height
+        graphic_y = geom["content_y"]  # ← стало: начинаем от низа верхней шкалы
         # graphic_height больше не нужен для линий, но оставим для контроля границ
-        graphic_height = geom["height"]
+        #graphic_height = geom["height"]
         
         if time_range <= 0:
             return
@@ -1600,8 +1623,8 @@ class PlayerShiftMapReport:
                 draw.text((text_x, text_y), score_text, fill=COLOR_TEXT, font=score_font)
             
             # === ПУНКТИРНАЯ ЛИНИЯ ВВЕРХ ===
-            # От колышка до низа заголовка таблицы (верх графической области)
-            line_top = geom["y"]  # Верх графической области = низ заголовка таблицы
+            # От колышка до низа верхней шкалы времени (начало контента)
+            line_top = geom["content_y"]  # ← было: geom["y"]
             line_bottom = scale_y
             
             # Рисуем пунктирную линию (точками)
