@@ -219,6 +219,10 @@ class ReportStyles:
     # Толщина рамки game_mode
     GAME_MODE_BORDER_WIDTH: int = 2
 
+    # --- Цвета для удалений ---
+    COLOR_PENALTY_BOX: str = "#D21111"      # Синий цвет для рамки и диагоналей
+    PENALTY_LINE_WIDTH: int = 3             # Толщина линий удаления
+
 
 # ============================================
 # КЛАСС ОТЧЁТА
@@ -813,9 +817,15 @@ class PlayerShiftMapReport:
         self._draw_goal_authors_vertical(draw, report_data, geom, time_range=time_range,
                                          period_start=0, authors_y=authors_y)
         
+        # === НОВОЕ: Рисуем удаления ===
+        self._draw_penalties(draw, report_data, geom, time_range=time_range, 
+                            period_start=0)
+
+        
                 # Рисуем смены
         self._draw_shifts(draw, report_data, geom, time_range=time_range, 
                           period_start=0, header_height=header_height)
+        
 
 
         # Рисуем нижнюю шкалу времени
@@ -858,9 +868,15 @@ class PlayerShiftMapReport:
                                          period_start=period_start, authors_y=authors_y)    
 
 
+        # === НОВОЕ: Рисуем удаления ===
+        self._draw_penalties(draw, report_data, geom, time_range=time_range, 
+                            period_start=period_start)
+
         # Рисуем смены только этого периода
         self._draw_shifts(draw, report_data, geom, time_range=time_range,
                           period_start=period_start, header_height=header_height)    
+        
+
         
         # Рисуем нижнюю шкалу времени
         self._draw_time_scale(draw, geom, time_range=time_range, 
@@ -1986,3 +2002,71 @@ class PlayerShiftMapReport:
 
             label_y = (time_scale_y + (time_scale_height - text_height) // 2) - 4
             draw.text((label_x, label_y), label_text, fill=styles.COLOR_BLACK, font=font)
+    
+    def _draw_penalties(self, draw: ImageDraw, report_data: ReportData, geom: dict,
+                        time_range: float, period_start: float):
+        """
+        Рисует удаления игроков как синие прямоугольники с диагоналями крест-накрест.
+        """
+        styles = self.styles
+        
+        graphic_width = geom["width"]
+        graphic_x = geom["x"]
+        graphic_y = geom["content_y"]
+        
+        if time_range <= 0:
+            return
+        
+        scale_factor = graphic_width / time_range
+        row_height = self._calculate_table_geometry(report_data)["body_row_height"]
+        
+        # Словарь для быстрого поиска индекса игрока по ID
+        player_index_by_id = {
+            player.player_id: idx 
+            for idx, player in enumerate(report_data.players_list)
+        }
+        
+        for penalty in report_data.penalties:
+            # Проверяем, попадает ли удаление в текущий временной диапазон
+            if penalty.official_end <= period_start or penalty.official_start >= period_start + time_range:
+                continue
+            
+            # Находим индекс игрока в таблице
+            player_idx = player_index_by_id.get(penalty.player_id_fhm)
+            if player_idx is None:
+                continue  # Игрок не в списке (например, вратарь или ошибка данных)
+            
+            # Вычисляем координаты
+            local_start = max(penalty.official_start - period_start, 0)
+            local_end = min(penalty.official_end - period_start, time_range)
+            
+            x_start = graphic_x + int(local_start * scale_factor)
+            x_end = graphic_x + int(local_end * scale_factor)
+            
+            # Гарантируем минимальную ширину
+            if x_end <= x_start:
+                x_end = x_start + 2
+            
+            y_top = graphic_y + player_idx * row_height
+            y_bottom = y_top + row_height
+            
+            # Рисуем прямоугольник (рамку)
+            draw.rectangle(
+                [x_start, y_top, x_end, y_bottom],
+                outline=styles.COLOR_PENALTY_BOX,
+                width=styles.PENALTY_LINE_WIDTH
+            )
+            
+            # Рисуем диагонали крест-накрест
+            # Диагональ 1: слева сверху → вправо вниз
+            draw.line(
+                [(x_start, y_top), (x_end, y_bottom)],
+                fill=styles.COLOR_PENALTY_BOX,
+                width=styles.PENALTY_LINE_WIDTH
+            )
+            # Диагональ 2: справа сверху → влево вниз
+            draw.line(
+                [(x_end, y_top), (x_start, y_bottom)],
+                fill=styles.COLOR_PENALTY_BOX,
+                width=styles.PENALTY_LINE_WIDTH
+            )
