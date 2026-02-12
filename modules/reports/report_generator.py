@@ -122,7 +122,7 @@ class ReportStyles:
     FOOTER_FONT_SIZE_PT: int = 5                    # Нумерация страниц, копирайт
     GOALS_SCALE_FONT_SIZE_PT: int = 6               # Счёт на шкале голов
     TIME_SCALE_FONT_SIZE_PT: int = 6                # Подписи времени на шкалах
-    SHIFT_LABEL_FONT_SIZE_PT: int = 4               # Номер и длительность смены
+    SHIFT_LABEL_FONT_SIZE_PT: int = 5               # Номер и длительность смены
     GOAL_AUTHOR_FONT_SIZE_PT: int = 5               # Авторы голов (вертикально)
     
     # --- Цвета (hex RGB) ---
@@ -1128,7 +1128,7 @@ class PlayerShiftMapReport:
     def _draw_shift_label(self, draw: ImageDraw, x_start: int, x_end: int, y_pos: int,
                           y_middle: int, y_bottom: int, row_height: int, shift_info,
                           graphic_x: int, graphic_width: int):
-        """Отрисовывает подпись смены (номер и длительность)."""
+        """Отрисовывает подпись смены с сохранением фона под текстом."""
         styles = self.styles
         
         MIN_WIDTH_FOR_HORIZONTAL_TEXT = 50
@@ -1136,69 +1136,119 @@ class PlayerShiftMapReport:
 
         shift_number_text = f"{shift_info.number}."
         duration_text = f'{int(shift_info.duration)}"'
-
-        font = self._get_font(styles.SHIFT_LABEL_FONT_SIZE_PT)
-
-        number_bbox = draw.textbbox((0, 0), shift_number_text, font=font)
-        duration_bbox = draw.textbbox((0, 0), duration_text, font=font)
-
+        
+        shift_width = x_end - x_start
+        
+        # Проверяем, помещается ли горизонтально
+        font_horizontal = self._get_font(styles.SHIFT_LABEL_FONT_SIZE_PT)
+        number_bbox = draw.textbbox((0, 0), shift_number_text, font=font_horizontal)
+        duration_bbox = draw.textbbox((0, 0), duration_text, font=font_horizontal)
         number_width = number_bbox[2] - number_bbox[0]
         duration_width = duration_bbox[2] - duration_bbox[0]
         text_height = number_bbox[3] - number_bbox[1]
-
         total_text_width = number_width + duration_width + (TEXT_PADDING_X * 3)
-        shift_width = x_end - x_start
-        lower_half_height = row_height // 2
 
         if shift_width >= MIN_WIDTH_FOR_HORIZONTAL_TEXT and total_text_width <= shift_width:
-            # Горизонтальный текст
+            # === ГОРИЗОНТАЛЬНЫЙ ТЕКСТ (шрифтом) ===
+            lower_half_height = row_height // 2
             text_y = y_middle + (lower_half_height - text_height) // 2
+            
             number_x = x_start + TEXT_PADDING_X
             draw.text((number_x, text_y), shift_number_text, 
-                     fill=styles.COLOR_BLACK, font=font)
+                     fill=styles.COLOR_BLACK, font=font_horizontal)
+            
             duration_x = x_end - duration_width - TEXT_PADDING_X
             draw.text((duration_x, text_y), duration_text, 
-                     fill=styles.COLOR_BLACK, font=font)
+                     fill=styles.COLOR_BLACK, font=font_horizontal)
         else:
-            # Вертикальный текст
-            vertical_text = f"{shift_info.number}.     {int(shift_info.duration)}\""
+            # === ВЕРТИКАЛЬНЫЙ ТЕКСТ с сохранением фона ===
+            # Определяем количество цифр
+            number_len = len(str(shift_info.number))
+            duration_len = len(str(int(shift_info.duration)))
+
+            # Форматируем текст в зависимости от комбинации
+            if number_len == 1 and duration_len == 1:
+                vertical_text = f"{shift_info.number}.     {int(shift_info.duration)}\""  # 5 пробелов
+            elif number_len == 1 and duration_len == 2:
+                vertical_text = f"{shift_info.number}.    {int(shift_info.duration)}\""   # 4 пробела
+            elif number_len == 1 and duration_len == 3:
+                vertical_text = f"{shift_info.number}.  {int(shift_info.duration)}\""    # 2 пробела
+            elif number_len == 2 and duration_len == 1:
+                vertical_text = f"{shift_info.number}.    {int(shift_info.duration)}\""   # 4 пробела
+            elif number_len == 2 and duration_len == 2:
+                vertical_text = f"{shift_info.number}.   {int(shift_info.duration)}\""    # 3 пробела
+            elif number_len == 2 and duration_len == 3:
+                vertical_text = f"{shift_info.number}. {int(shift_info.duration)}\""     # 1 пробела
             
-            margin = 2
-            temp_img_size = (200, 100)
-            temp_img = Image.new('RGBA', temp_img_size, (255, 255, 255, 0))
+            # Параметры рендеринга
+            font_size = styles.SHIFT_LABEL_FONT_SIZE_PT
+            font = self._get_font(font_size)
+            
+            # Создаём временное изображение для текста (горизонтально)
+            temp_width = 200
+            temp_height = 50
+            temp_img = Image.new('RGBA', (temp_width, temp_height), (255, 255, 255, 0))
             temp_draw = ImageDraw.Draw(temp_img)
-            temp_draw.text((margin, margin), vertical_text, 
-                          fill=styles.COLOR_BLACK, font=font)
-
+            
+            # Рисуем текст горизонтально
+            margin = 2
+            temp_draw.text((margin, margin), vertical_text, fill=styles.COLOR_BLACK, font=font)
+            
+            # Получаем границы текста для обрезки
             text_bbox = temp_draw.textbbox((margin, margin), vertical_text, font=font)
-            crop_box = (
-                max(0, text_bbox[0] - 1),
-                max(0, text_bbox[1] - 1),
-                min(temp_img_size[0], text_bbox[2] + 1),
-                min(temp_img_size[1], text_bbox[3] + 1)
-            )
-            text_only = temp_img.crop(crop_box)
+            crop_left = max(0, text_bbox[0] - 1)
+            crop_top = max(0, text_bbox[1] - 1)
+            crop_right = min(temp_width, text_bbox[2] + 1)
+            crop_bottom = min(temp_height, text_bbox[3] + 1)
+            
+            # Обрезаем лишнее прозрачное пространство
+            text_only = temp_img.crop((crop_left, crop_top, crop_right, crop_bottom))
+            
+            # Поворачиваем на 90 градусов
             rotated = text_only.rotate(90, expand=True, resample=Image.BICUBIC)
-
+            
+            # Размеры повёрнутого текста
+            text_w, text_h = rotated.size
+            
+            # Позиционирование
             is_first_shift = x_start < (graphic_x + graphic_width * 0.05)
             label_offset = 3
-
+            
             if is_first_shift:
-                label_x = x_end + label_offset
+                paste_x = x_end + label_offset
             else:
-                label_x = x_start - rotated.width - label_offset
-
-            label_y = y_pos + (row_height - rotated.height) // 2
-
-            if label_x < 0:
-                label_x = x_end + label_offset
-
-            if rotated.mode == 'RGBA':
-                background = Image.new('RGB', rotated.size, (255, 255, 255))
-                background.paste(rotated, mask=rotated.split()[3])
-                rotated = background
-
-            draw._image.paste(rotated, (label_x, label_y))
+                paste_x = x_start - text_w - label_offset
+            
+            paste_y = y_pos + (row_height - text_h) // 2
+            
+            # Проверяем границы
+            if paste_x < graphic_x:
+                paste_x = x_end + label_offset
+            
+            # === КЛЮЧЕВОЙ МОМЕНТ: Копируем фон с основного изображения ===
+            main_image = draw._image
+            
+            # Проверяем, что область в пределах изображения
+            img_width, img_height = main_image.size
+            if (paste_x < 0 or paste_y < 0 or 
+                paste_x + text_w > img_width or paste_y + text_h > img_height):
+                # Если выходит за границы — корректируем
+                paste_x = max(0, min(paste_x, img_width - text_w))
+                paste_y = max(0, min(paste_y, img_height - text_h))
+            
+            # Вырезаем фон под текстом
+            background = main_image.crop((paste_x, paste_y, paste_x + text_w, paste_y + text_h))
+            
+            # Конвертируем фон в RGBA для наложения
+            if background.mode != 'RGBA':
+                background = background.convert('RGBA')
+            
+            # Накладываем текст на фон с учётом альфа-канала
+            # Создаём композицию: фон + текст
+            composite = Image.alpha_composite(background, rotated)
+            
+            # Вставляем обратно в основное изображение
+            main_image.paste(composite, (paste_x, paste_y))
 
     def _draw_goals_scale(self, draw: ImageDraw, report_data: ReportData, geom: dict,
                         time_range: float, period_start: float) -> int:
