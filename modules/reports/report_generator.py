@@ -178,8 +178,8 @@ class ReportStyles:
     GOALS_SCALE_TOP_HALF_PX: int = 30                # Верхняя половина (колышки)
     GOALS_SCALE_BOTTOM_HALF_PX: int = 30             # Нижняя половина (счёт)
     GOAL_PEG_WIDTH: int = 3                          # Колышек гола
-    GOAL_PEG_BASE_WIDTH: int = 2                     # Основание колышка
-    GOAL_DASHED_LINE_WIDTH: int = 2                  # Пунктирная линия вверх от гола
+    GOAL_PEG_BASE_WIDTH: int = 4                     # Основание колышка
+    GOAL_DASHED_LINE_WIDTH: int = 4                  # Пунктирная линия вверх от гола
     GOALS_SCALE_OUTLINE_WIDTH: int = 2               # Рамка шкалы голов
     GOALS_SCALE_DIVIDER_WIDTH: int = 1               # Разделитель посередине шкалы голов
     
@@ -204,6 +204,20 @@ class ReportStyles:
     GAME_MODE_GRID_COLOR = "#C0C0C0"
     GAME_MODE_LINE_WIDTH = 1
     GAME_MODE_MIN_WIDTH_FOR_HORIZONTAL = 60  # минимальная ширина для горизонтального текста
+
+        # Цвета для наложений game_mode (с прозрачностью будем смешивать отдельно)
+    COLOR_GM_POWERPLAY_LIGHT: str = "#90EE90"      # Светло-зелёный (большинство +1)
+    COLOR_GM_POWERPLAY_STRONG: str = "#228B22"     # Насыщенный зелёный (большинство +2)
+    COLOR_GM_PENALTY_KILL_LIGHT: str = "#FFE4B5"   # Светло-жёлтый (меньшинство −1)
+    COLOR_GM_PENALTY_KILL_STRONG: str = "#FFA500"  # Насыщенный жёлтый (меньшинство −2)
+    COLOR_GM_EVEN_4ON4: str = "#DDA0DD"            # Светло-фиолетовый
+    COLOR_GM_EVEN_3ON3: str = "#9370DB"            # Насыщенный фиолетовый
+
+    # Прозрачность наложений game_mode (0-255)
+    GAME_MODE_OVERLAY_ALPHA: int = 80
+    
+    # Толщина рамки game_mode
+    GAME_MODE_BORDER_WIDTH: int = 2
 
 
 # ============================================
@@ -784,16 +798,12 @@ class PlayerShiftMapReport:
         # Рисуем шкалу game_mode (НОВОЕ)
         self._draw_game_mode_scale(draw, report_data, geom, time_range=time_range, 
                                 is_match_level=True, period_abs_start=0)
+        
 
-        # Рисуем верхнюю шкалу времени
-        self._draw_top_time_scale(draw, geom, time_range=time_range, is_match_level=True)
-
-        # Рисуем смены
-        self._draw_shifts(draw, report_data, geom, time_range=time_range, 
-                          period_start=0, header_height=header_height)
-
-        # Рисуем нижнюю шкалу времени
-        self._draw_time_scale(draw, geom, time_range=time_range, is_match_level=True)
+        # === НОВОЕ: Рисуем наложения game_mode ===
+        self._draw_game_mode_overlays(draw, report_data, geom, time_range=time_range,
+                                      is_match_level=True, period_abs_start=0)
+        # ==========================================
 
         # Рисуем шкалу голов
         authors_y = self._draw_goals_scale(draw, report_data, geom, 
@@ -802,6 +812,22 @@ class PlayerShiftMapReport:
         # Рисуем авторов голов
         self._draw_goal_authors_vertical(draw, report_data, geom, time_range=time_range,
                                          period_start=0, authors_y=authors_y)
+        
+                # Рисуем смены
+        self._draw_shifts(draw, report_data, geom, time_range=time_range, 
+                          period_start=0, header_height=header_height)
+
+
+        # === НОВОЕ: Рамки game_mode (после всего) ===
+        self._draw_game_mode_borders(draw, report_data, geom, time_range=time_range,
+                                     is_match_level=True, period_abs_start=0)
+        
+        # Рисуем ПОДПИСИ к нижней шкалк времени
+        self._draw_time_scale(draw, geom, time_range=time_range, is_match_level=True)
+
+        # Рисуем верхнюю шкалу времени
+        self._draw_top_time_scale(draw, geom, time_range=time_range, is_match_level=True)
+
 
     def _draw_graphics_period(self, draw: ImageDraw, report_data: ReportData, geom: dict,
                               period_index: int, header_height: float):
@@ -819,19 +845,18 @@ class PlayerShiftMapReport:
         # Рисуем шкалу game_mode (НОВОЕ)
         self._draw_game_mode_scale(draw, report_data, geom, time_range=time_range,
                                 is_match_level=False, period_abs_start=period_start)
+        
+
 
         # Рисуем верхнюю шкалу времени
         self._draw_top_time_scale(draw, geom, time_range=time_range, 
                                   is_match_level=False, period_abs_start=period_start)
 
-        # Рисуем смены только этого периода
-        self._draw_shifts(draw, report_data, geom, time_range=time_range,
-                          period_start=period_start, header_height=header_height)
 
-        # Рисуем нижнюю шкалу времени периода
-        self._draw_time_scale(draw, geom, time_range=time_range, 
-                              is_match_level=False, period_abs_start=period_start)
-
+        # === НОВОЕ: Рисуем наложения game_mode ===
+        self._draw_game_mode_overlays(draw, report_data, geom, time_range=time_range,
+                                      is_match_level=False, period_abs_start=period_start)
+        # ==========================================
         # Рисуем голы только этого периода
         authors_y = self._draw_goals_scale(draw, report_data, geom, 
                                            time_range=time_range, period_start=period_start)
@@ -839,6 +864,18 @@ class PlayerShiftMapReport:
         # Рисуем авторов голов
         self._draw_goal_authors_vertical(draw, report_data, geom, time_range=time_range,
                                          period_start=period_start, authors_y=authors_y)
+        
+        # Рисуем смены только этого периода
+        self._draw_shifts(draw, report_data, geom, time_range=time_range,
+                          period_start=period_start, header_height=header_height)
+        
+        # # === НОВОЕ: Рамки game_mode (после всего) ===
+        # self._draw_game_mode_borders(draw, report_data, geom, time_range=time_range,
+        #                              is_match_level=False, period_abs_start=period_start)
+        
+        # Рисуем ПОДПИСИ к нижней шкалк времени
+        self._draw_time_scale(draw, geom, time_range=time_range, 
+                              is_match_level=False, period_abs_start=period_start)
 
     def _draw_top_time_scale(self, draw: ImageDraw, geom: dict, time_range: float,
                             is_match_level: bool, period_abs_start: float = 0):
@@ -864,7 +901,7 @@ class PlayerShiftMapReport:
         draw.rectangle([time_scale_x, time_scale_y,
                     time_scale_x + time_scale_width, scale_bottom_y],
                     outline=styles.COLOR_BLACK, 
-                    fill=styles.COLOR_WHITE,
+                    #fill=styles.COLOR_WHITE,
                     width=styles.TIME_SCALE_OUTLINE_WIDTH)
 
         # Шрифт
@@ -925,7 +962,7 @@ class PlayerShiftMapReport:
         draw.rectangle([time_scale_x, time_scale_y,
                        time_scale_x + time_scale_width, time_scale_y + time_scale_height],
                       outline=styles.COLOR_BLACK,
-                      fill=styles.COLOR_WHITE,
+                      #fill=styles.COLOR_WHITE,
                       width=styles.TIME_SCALE_OUTLINE_WIDTH)
 
         # Шрифт
@@ -1398,8 +1435,8 @@ class PlayerShiftMapReport:
                             geom: dict, time_range: float,
                             is_match_level: bool, period_abs_start: float = 0):
         """
-        Отрисовывает шкалу численного состава (game_mode) над верхней шкалой времени.
-        Показывает режимы игры: "5 на 5", "5 на 4", "4 на 5" и т.д.
+        Отрисовывает шкалу численного состава (game_mode) в самом верху графической области.
+        Текст, не помещающийся внутри интервала, рисуется под шкалой с выравниванием по краям.
         """
         styles = self.styles
         
@@ -1408,10 +1445,7 @@ class PlayerShiftMapReport:
         scale_width = geom["width"]
         scale_height = styles.GAME_MODE_SCALE_HEIGHT_PX
         
-        # Получаем высоту заголовка таблицы для позиционирования
-        header_height = geom.get("header_height", 0)
-        
-        # НОВОЕ: шкала в самом верху графической области
+        # Шкала в самом верху графической области
         scale_y = geom["y"]
         scale_bottom_y = scale_y + scale_height
         
@@ -1443,9 +1477,12 @@ class PlayerShiftMapReport:
             report_data, time_range, period_abs_start, is_match_level
         )
         
+        # Константы для выравнивания
+        EDGE_MARGIN = 10  # px от края для определения "краевого" интервала
+        TEXT_PADDING = 2  # px отступ от границы интервала
+        
         # Рисуем каждый режим
         for gm in game_modes:
-            # Преобразуем в локальные координаты
             local_start = gm['local_start']
             local_end = gm['local_end']
             mode_name = gm['name']
@@ -1471,23 +1508,36 @@ class PlayerShiftMapReport:
                 width=styles.GAME_MODE_LINE_WIDTH
             )
             
-            # Рисуем текст режима
+            # Размеры текста
             text_bbox = draw.textbbox((0, 0), mode_name, font=font)
             text_width = text_bbox[2] - text_bbox[0]
             text_height = text_bbox[3] - text_bbox[1]
             
-            # Определяем ориентацию текста
-            if interval_width >= styles.GAME_MODE_MIN_WIDTH_FOR_HORIZONTAL and text_width <= interval_width - 6:
-                # Горизонтальный текст
+            # Определяем, помещается ли текст внутри интервала
+            if text_width <= interval_width - 2 * TEXT_PADDING:
+                # Текст помещается внутри — рисуем внутри шкалы по центру
                 text_x = x_start + (interval_width - text_width) // 2
                 text_y = scale_y + (scale_height - text_height) // 2 - 2
                 draw.text((text_x, text_y), mode_name, fill=styles.GAME_MODE_TEXT_COLOR, font=font)
             else:
-                # Вертикальный текст
-                self._draw_vertical_game_mode_text(
-                    draw, mode_name, x_start, x_end, scale_y, scale_height, 
-                    styles.GAME_MODE_TEXT_COLOR, font
-                )
+                # Текст не помещается — рисуем под шкалой
+                text_y = scale_bottom_y + 2  # небольшой отступ от нижней границы шкалы
+                
+                # Определяем выравнивание по краям
+                is_left_edge = (x_start < scale_x + EDGE_MARGIN)
+                is_right_edge = (x_end > scale_x + scale_width - EDGE_MARGIN)
+                
+                if is_left_edge:
+                    # Левое выравнивание
+                    text_x = x_start + TEXT_PADDING
+                elif is_right_edge:
+                    # Правое выравнивание
+                    text_x = x_end - text_width - TEXT_PADDING
+                else:
+                    # Центрирование
+                    text_x = x_start + (interval_width - text_width) // 2
+                
+                draw.text((text_x, text_y), mode_name, fill=styles.GAME_MODE_TEXT_COLOR, font=font)
         
         # Нижняя граница (разделитель с временной шкалой)
         draw.line(
@@ -1566,41 +1616,271 @@ class PlayerShiftMapReport:
         return result
 
 
-    def _draw_vertical_game_mode_text(self, draw: ImageDraw, text: str, 
-                                    x_start: int, x_end: int, scale_y: int, 
-                                    scale_height: int, color: str, font):
+    def _draw_game_mode_overlays(self, draw: ImageDraw, report_data: ReportData,
+                                geom: dict, time_range: float,
+                                is_match_level: bool, period_abs_start: float = 0):
         """
-        Рисует текст режима вертикально (поворот на 90 градусов).
+        Рисует полупрозрачные прямоугольники для неравных составов.
+        От верха шкалы game_mode до низа нижней временной шкалы (включительно).
         """
-        # Создаём временное изображение для текста
-        text_bbox = draw.textbbox((0, 0), text, font=font)
-        text_width = text_bbox[2] - text_bbox[0]
-        text_height = text_bbox[3] - text_bbox[1]
+        styles = self.styles
         
-        margin = 2
-        temp_width = text_width + 2 * margin
-        temp_height = text_height + 2 * margin
+        # Координаты
+        scale_x = geom["x"]
+        scale_width = geom["width"]
         
-        temp_img = Image.new('RGBA', (temp_width, temp_height), (255, 255, 255, 0))
-        temp_draw = ImageDraw.Draw(temp_img)
-        temp_draw.text((margin, margin), text, fill=color, font=font)
+        # Верх = верх шкалы game_mode
+        overlay_top = geom["y"]
         
-        # Поворачиваем на 90 градусов
-        rotated = temp_img.rotate(90, expand=True, resample=Image.BICUBIC)
+        # === ИЗМЕНЕНО: Низ = низ нижней временной шкалы (ниже графической области) ===
+        time_scale_height = styles.TIME_SCALE_HEIGHT_PX
+        graphic_bottom = geom["y"] + geom["height"]
+        overlay_bottom = graphic_bottom + time_scale_height
         
-        # Центрируем по интервалу
-        interval_width = x_end - x_start
-        label_x = x_start + (interval_width - rotated.height) // 2
-        label_y = scale_y + (scale_height - rotated.width) // 2
+        # Если нет места для наложения — выходим
+        if overlay_bottom <= overlay_top:
+            return
         
-        # Проверка границ
-        if label_x < x_start:
-            label_x = x_start + 2
-        if label_x + rotated.width > x_end:
-            label_x = x_end - rotated.width - 2
+        if time_range <= 0:
+            return
         
-        # Накладываем на основное изображение
-        if rotated.mode == 'RGBA':
-            draw._image.paste(rotated, (label_x, label_y), rotated)
+        scale_factor = scale_width / time_range
+        
+        # Получаем отфильтрованные game_modes
+        game_modes = self._get_filtered_game_modes(
+            report_data, time_range, period_abs_start, is_match_level
+        )
+        
+        if not game_modes:
+            return
+        
+        for gm in game_modes:
+            mode_name = gm.get('name', '5 на 5')
+            
+            # Пропускаем "5 на 5"
+            if mode_name == "5 на 5":
+                continue
+            
+            # Парсим "X на Y"
+            try:
+                parts = mode_name.split(' на ')
+                if len(parts) != 2:
+                    continue
+                f_team_count = int(parts[0])
+                s_team_count = int(parts[1])
+            except (ValueError, IndexError):
+                continue
+            
+            # Определяем наше количество и их количество
+            if report_data.our_team_key == "f-team":
+                our_count = f_team_count
+                their_count = s_team_count
+            else:  # s-team
+                our_count = s_team_count
+                their_count = f_team_count
+            
+            # Определяем цвет
+            color_hex = self._get_game_mode_overlay_color(
+                our_count, their_count, styles
+            )
+            
+            if color_hex is None:
+                continue
+            
+            # Координаты по ширине
+            local_start = gm['local_start']
+            local_end = gm['local_end']
+            
+            x_start = scale_x + int(local_start * scale_factor)
+            x_end = scale_x + int(local_end * scale_factor)
+            
+            if x_end <= x_start:
+                x_end = x_start + 1
+            
+            # Рисуем с прозрачностью через RGBA
+            color_rgba = self._hex_to_rgba(color_hex, styles.GAME_MODE_OVERLAY_ALPHA)
+            
+            # Создаём временный RGBA слой только для этого прямоугольника
+            temp_img = Image.new('RGBA', (self.width_px, self.height_px), (0, 0, 0, 0))
+            temp_draw = ImageDraw.Draw(temp_img)
+            temp_draw.rectangle(
+                [x_start, overlay_top, x_end, overlay_bottom],
+                fill=color_rgba
+            )
+            
+            # Накладываем на основное изображение через paste с маской
+            draw._image.paste(temp_img, (0, 0), temp_img)
+
+    def _get_game_mode_overlay_color(self, our_count: int, their_count: int, 
+                                     styles: ReportStyles) -> Optional[str]:
+        """
+        Возвращает hex-цвет для наложения game_mode или None.
+        """
+        if our_count == their_count:
+            # Равные составы
+            if our_count == 4:
+                return styles.COLOR_GM_EVEN_4ON4
+            elif our_count == 3:
+                return styles.COLOR_GM_EVEN_3ON3
+            else:
+                return None  # "5 на 5" и прочие не обрабатываем
+        
+        diff = our_count - their_count
+        
+        if diff > 0:
+            # Наше большинство
+            if diff == 1:
+                return styles.COLOR_GM_POWERPLAY_LIGHT
+            else:
+                return styles.COLOR_GM_POWERPLAY_STRONG
         else:
-            draw._image.paste(rotated, (label_x, label_y))
+            # Наше меньшинство
+            if diff == -1:
+                return styles.COLOR_GM_PENALTY_KILL_LIGHT
+            else:
+                return styles.COLOR_GM_PENALTY_KILL_STRONG
+
+    def _hex_to_rgba(self, hex_color: str, alpha: int) -> Tuple[int, int, int, int]:
+        """
+        Конвертирует hex-цвет в RGBA кортеж.
+        """
+        hex_color = hex_color.lstrip('#')
+        r = int(hex_color[0:2], 16)
+        g = int(hex_color[2:4], 16)
+        b = int(hex_color[4:6], 16)
+        return (r, g, b, alpha)
+    
+    def _draw_game_mode_borders(self, draw: ImageDraw, report_data: ReportData,
+                               geom: dict, time_range: float,
+                               is_match_level: bool, period_abs_start: float = 0):
+        """
+        Рисует цветные рамки-границы для неравных составов.
+        Без заливки, только контур. Запускать после всех прорисовок.
+        """
+        styles = self.styles
+        
+        # Координаты
+        scale_x = geom["x"]
+        scale_width = geom["width"]
+        
+        # Верх = верх шкалы game_mode
+        overlay_top = geom["y"]
+        
+        # Низ = низ нижней временной шкалы (ниже графической области)
+        time_scale_height = styles.TIME_SCALE_HEIGHT_PX
+        graphic_bottom = geom["y"] + geom["height"]
+        overlay_bottom = graphic_bottom + time_scale_height
+        
+        # Если нет места — выходим
+        if overlay_bottom <= overlay_top:
+            return
+        
+        if time_range <= 0:
+            return
+        
+        scale_factor = scale_width / time_range
+        
+        # Получаем отфильтрованные game_modes
+        game_modes = self._get_filtered_game_modes(
+            report_data, time_range, period_abs_start, is_match_level
+        )
+        
+        if not game_modes:
+            return
+        
+        for gm in game_modes:
+            mode_name = gm.get('name', '5 на 5')
+            
+            # Пропускаем "5 на 5"
+            if mode_name == "5 на 5":
+                continue
+            
+            # Парсим "X на Y"
+            try:
+                parts = mode_name.split(' на ')
+                if len(parts) != 2:
+                    continue
+                f_team_count = int(parts[0])
+                s_team_count = int(parts[1])
+            except (ValueError, IndexError):
+                continue
+            
+            # Определяем наше количество и их количество
+            if report_data.our_team_key == "f-team":
+                our_count = f_team_count
+                their_count = s_team_count
+            else:  # s-team
+                our_count = s_team_count
+                their_count = f_team_count
+            
+            # Определяем цвет рамки
+            color_hex = self._get_game_mode_overlay_color(
+                our_count, their_count, styles
+            )
+            
+            if color_hex is None:
+                continue
+            
+            # Координаты по ширине
+            local_start = gm['local_start']
+            local_end = gm['local_end']
+            
+            x_start = scale_x + int(local_start * scale_factor)
+            x_end = scale_x + int(local_end * scale_factor)
+            
+            if x_end <= x_start:
+                x_end = x_start + 1
+            
+            # === Рисуем только рамку без заливки ===
+            # Используем тот же цвет, но без прозрачности (полностью непрозрачный)
+            draw.rectangle(
+                [x_start, overlay_top, x_end, overlay_bottom],
+                outline=color_hex,
+                width=styles.GAME_MODE_BORDER_WIDTH
+            )
+
+    def _draw_time_scale_labels_only(self, draw: ImageDraw, geom: dict, time_range: float,
+                                     is_match_level: bool, period_abs_start: float = 0):
+        """
+        Рисует только подписи времени без самой шкалы.
+        Дублирует логику _draw_time_scale, но без фона и линий.
+        """
+        styles = self.styles
+        
+        time_scale_x = geom["x"]
+        time_scale_y = geom["y"] + geom["height"]
+        time_scale_width = geom["width"]
+        time_scale_height = styles.TIME_SCALE_HEIGHT_PX
+
+        if time_range <= 0:
+            return
+
+        scale_factor = time_scale_width / time_range
+
+        # Шрифт
+        font = self._get_font(styles.TIME_SCALE_FONT_SIZE_PT)
+
+        # Тики и подписи (без фона и линий шкалы)
+        tick_interval = 300 if is_match_level else 60
+
+        for i, local_time in enumerate(range(0, int(time_range) + 1, tick_interval)):
+            x_pos = time_scale_x + int(local_time * scale_factor)
+
+            absolute_time = local_time if is_match_level else period_abs_start + local_time
+            minutes = int(absolute_time // 60)
+            label_text = f"{minutes}'"
+
+            text_bbox = draw.textbbox((0, 0), label_text, font=font)
+            text_width = text_bbox[2] - text_bbox[0]
+            text_height = text_bbox[3] - text_bbox[1]
+
+            if i == 0:
+                label_x = x_pos + 3
+            else:
+                if len(str(minutes)) == 1:
+                    label_x = x_pos - 1 - text_width
+                else:
+                    label_x = x_pos - 3 - text_width
+
+            label_y = (time_scale_y + (time_scale_height - text_height) // 2) - 4
+            draw.text((label_x, label_y), label_text, fill=styles.COLOR_BLACK, font=font)
