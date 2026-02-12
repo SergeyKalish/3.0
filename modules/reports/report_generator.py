@@ -198,11 +198,11 @@ class ReportStyles:
 
     # Новые константы для шкалы game_mode
     GAME_MODE_SCALE_HEIGHT_PX = 30
-    GAME_MODE_FONT_SIZE_PT = 5
-    GAME_MODE_BG_COLOR = "#F5F5F5"
+    GAME_MODE_FONT_SIZE_PT = 6
+    GAME_MODE_BG_COLOR = "#FFFFFF"
     GAME_MODE_TEXT_COLOR = "#000000"
-    GAME_MODE_GRID_COLOR = "#C0C0C0"
-    GAME_MODE_LINE_WIDTH = 1
+    GAME_MODE_GRID_COLOR = "#B1B0B0"
+    GAME_MODE_LINE_WIDTH = 2
     GAME_MODE_MIN_WIDTH_FOR_HORIZONTAL = 60  # минимальная ширина для горизонтального текста
 
         # Цвета для наложений game_mode (с прозрачностью будем смешивать отдельно)
@@ -796,7 +796,7 @@ class PlayerShiftMapReport:
         time_range = total_end
 
         # Рисуем шкалу game_mode (НОВОЕ)
-        self._draw_game_mode_scale(draw, report_data, geom, time_range=time_range, 
+        self._draw_game_mode_scale_lines(draw, report_data, geom, time_range=time_range, 
                                 is_match_level=True, period_abs_start=0)
         
 
@@ -818,15 +818,14 @@ class PlayerShiftMapReport:
                           period_start=0, header_height=header_height)
 
 
-        # # === НОВОЕ: Рамки game_mode (после всего) ===
-        # self._draw_game_mode_borders(draw, report_data, geom, time_range=time_range,
-        #                              is_match_level=True, period_abs_start=0)
-        
-        # Рисуем ПОДПИСИ к нижней шкалк времени
+        # Рисуем нижнюю шкалу времени
         self._draw_time_scale(draw, geom, time_range=time_range, is_match_level=True)
 
         # Рисуем верхнюю шкалу времени
         self._draw_top_time_scale(draw, geom, time_range=time_range, is_match_level=True)
+
+        self._draw_game_mode_scale_text(draw, report_data, geom, time_range=time_range, 
+                                is_match_level=True, period_abs_start=0)
 
 
     def _draw_graphics_period(self, draw: ImageDraw, report_data: ReportData, geom: dict,
@@ -843,16 +842,9 @@ class PlayerShiftMapReport:
         time_range = period_end - period_start
 
         # Рисуем шкалу game_mode (НОВОЕ)
-        self._draw_game_mode_scale(draw, report_data, geom, time_range=time_range,
+        self._draw_game_mode_scale_lines(draw, report_data, geom, time_range=time_range,
                                 is_match_level=False, period_abs_start=period_start)
         
-
-
-        # Рисуем верхнюю шкалу времени
-        self._draw_top_time_scale(draw, geom, time_range=time_range, 
-                                  is_match_level=False, period_abs_start=period_start)
-
-
         # === НОВОЕ: Рисуем наложения game_mode ===
         self._draw_game_mode_overlays(draw, report_data, geom, time_range=time_range,
                                       is_match_level=False, period_abs_start=period_start)
@@ -860,22 +852,27 @@ class PlayerShiftMapReport:
         # Рисуем голы только этого периода
         authors_y = self._draw_goals_scale(draw, report_data, geom, 
                                            time_range=time_range, period_start=period_start)
-
+        
         # Рисуем авторов голов
         self._draw_goal_authors_vertical(draw, report_data, geom, time_range=time_range,
-                                         period_start=period_start, authors_y=authors_y)
-        
+                                         period_start=period_start, authors_y=authors_y)    
+
+
         # Рисуем смены только этого периода
         self._draw_shifts(draw, report_data, geom, time_range=time_range,
-                          period_start=period_start, header_height=header_height)
+                          period_start=period_start, header_height=header_height)    
         
-        # # === НОВОЕ: Рамки game_mode (после всего) ===
-        # self._draw_game_mode_borders(draw, report_data, geom, time_range=time_range,
-        #                              is_match_level=False, period_abs_start=period_start)
-        
-        # Рисуем ПОДПИСИ к нижней шкалк времени
+        # Рисуем нижнюю шкалу времени
         self._draw_time_scale(draw, geom, time_range=time_range, 
                               is_match_level=False, period_abs_start=period_start)
+                   
+        # Рисуем верхнюю шкалу времени
+        self._draw_top_time_scale(draw, geom, time_range=time_range, 
+                                  is_match_level=False, period_abs_start=period_start)
+ 
+        
+        self._draw_game_mode_scale_text(draw, report_data, geom, time_range=time_range,
+                                is_match_level=False, period_abs_start=period_start)
 
     def _draw_top_time_scale(self, draw: ImageDraw, geom: dict, time_range: float,
                             is_match_level: bool, period_abs_start: float = 0):
@@ -1485,25 +1482,40 @@ class PlayerShiftMapReport:
                             geom: dict, time_range: float,
                             is_match_level: bool, period_abs_start: float = 0):
         """
-        Отрисовывает шкалу численного состава (game_mode) в самом верху графической области.
-        Текст, не помещающийся внутри интервала, рисуется под шкалой с выравниванием по краям.
+        Отрисовывает шкалу численного состава (game_mode) — делегирует линиям и тексту.
+        Для кастомного порядка вызовов используйте _draw_game_mode_scale_lines 
+        и _draw_game_mode_scale_text напрямую.
+        """
+        # По умолчанию: сначала линии, потом текст
+        self._draw_game_mode_scale_lines(
+            draw, report_data, geom, time_range, is_match_level, period_abs_start
+        )
+        self._draw_game_mode_scale_text(
+            draw, report_data, geom, time_range, is_match_level, period_abs_start
+        )
+
+    def _draw_game_mode_scale_lines(self, draw: ImageDraw, report_data: ReportData,
+                                    geom: dict, time_range: float,
+                                    is_match_level: bool, period_abs_start: float = 0):
+        """
+        Рисует только линии и фон шкалы game_mode (без текста).
         """
         styles = self.styles
-        
+
         # Координаты и размеры
         scale_x = geom["x"]
         scale_width = geom["width"]
         scale_height = styles.GAME_MODE_SCALE_HEIGHT_PX
-        
+
         # Шкала в самом верху графической области
         scale_y = geom["y"]
         scale_bottom_y = scale_y + scale_height
-        
+
         if time_range <= 0:
             return
-        
+
         scale_factor = scale_width / time_range
-        
+
         # Фон шкалы
         draw.rectangle(
             [scale_x, scale_y, scale_x + scale_width, scale_bottom_y],
@@ -1511,41 +1523,24 @@ class PlayerShiftMapReport:
             outline=styles.GAME_MODE_GRID_COLOR,
             width=styles.GAME_MODE_LINE_WIDTH
         )
-        
-        # Загружаем шрифт
-        font_size_px = int(styles.GAME_MODE_FONT_SIZE_PT * (self.dpi / 72))
-        try:
-            font = ImageFont.truetype("arial.ttf", font_size_px)
-        except OSError:
-            try:
-                font = ImageFont.truetype("tahoma.ttf", font_size_px)
-            except OSError:
-                font = ImageFont.load_default()
-        
-        # Получаем и фильтруем game_modes
+
+        # Получаем отфильтрованные game_modes
         game_modes = self._get_filtered_game_modes(
             report_data, time_range, period_abs_start, is_match_level
         )
-        
-        # Константы для выравнивания
-        EDGE_MARGIN = 10  # px от края для определения "краевого" интервала
-        TEXT_PADDING = 2  # px отступ от границы интервала
-        
-        # Рисуем каждый режим
+
+        # Рисуем вертикальные линии-тики на границах интервалов
         for gm in game_modes:
             local_start = gm['local_start']
             local_end = gm['local_end']
-            mode_name = gm['name']
-            
+
             x_start = scale_x + int(local_start * scale_factor)
             x_end = scale_x + int(local_end * scale_factor)
-            
+
             # Гарантируем минимальную ширину в 1 пиксель
             if x_end <= x_start:
                 x_end = x_start + 1
-            
-            interval_width = x_end - x_start
-            
+
             # Вертикальные линии-тики на границах
             draw.line(
                 [(x_start, scale_y), (x_start, scale_bottom_y)],
@@ -1557,12 +1552,76 @@ class PlayerShiftMapReport:
                 fill=styles.GAME_MODE_GRID_COLOR,
                 width=styles.GAME_MODE_LINE_WIDTH
             )
-            
+
+        # Нижняя граница (разделитель с временной шкалой)
+        draw.line(
+            [(scale_x, scale_bottom_y), (scale_x + scale_width, scale_bottom_y)],
+            fill=styles.GAME_MODE_GRID_COLOR,
+            width=styles.GAME_MODE_LINE_WIDTH
+        )
+
+    def _draw_game_mode_scale_text(self, draw: ImageDraw, report_data: ReportData,
+                                   geom: dict, time_range: float,
+                                   is_match_level: bool, period_abs_start: float = 0):
+        """
+        Рисует только текст шкалы game_mode (внутри и снаружи интервалов).
+        Должен вызываться после _draw_game_mode_scale_lines (или самостоятельно 
+        если линии уже нарисованы).
+        """
+        styles = self.styles
+
+        # Координаты и размеры
+        scale_x = geom["x"]
+        scale_width = geom["width"]
+        scale_height = styles.GAME_MODE_SCALE_HEIGHT_PX
+
+        scale_y = geom["y"]
+        scale_bottom_y = scale_y + scale_height
+
+        if time_range <= 0:
+            return
+
+        scale_factor = scale_width / time_range
+
+        # Загружаем шрифт
+        font_size_px = int(styles.GAME_MODE_FONT_SIZE_PT * (self.dpi / 72))
+        try:
+            font = ImageFont.truetype("arial.ttf", font_size_px)
+        except OSError:
+            try:
+                font = ImageFont.truetype("tahoma.ttf", font_size_px)
+            except OSError:
+                font = ImageFont.load_default()
+
+        # Получаем отфильтрованные game_modes
+        game_modes = self._get_filtered_game_modes(
+            report_data, time_range, period_abs_start, is_match_level
+        )
+
+        # Константы для выравнивания
+        EDGE_MARGIN = 10  # px от края для определения "краевого" интервала
+        TEXT_PADDING = 2  # px отступ от границы интервала
+
+        # Рисуем текст для каждого режима
+        for gm in game_modes:
+            local_start = gm['local_start']
+            local_end = gm['local_end']
+            mode_name = gm['name']
+
+            x_start = scale_x + int(local_start * scale_factor)
+            x_end = scale_x + int(local_end * scale_factor)
+
+            # Гарантируем минимальную ширину в 1 пиксель
+            if x_end <= x_start:
+                x_end = x_start + 1
+
+            interval_width = x_end - x_start
+
             # Размеры текста
             text_bbox = draw.textbbox((0, 0), mode_name, font=font)
             text_width = text_bbox[2] - text_bbox[0]
             text_height = text_bbox[3] - text_bbox[1]
-            
+
             # Определяем, помещается ли текст внутри интервала
             if text_width <= interval_width - 2 * TEXT_PADDING:
                 # Текст помещается внутри — рисуем внутри шкалы по центру
@@ -1572,11 +1631,11 @@ class PlayerShiftMapReport:
             else:
                 # Текст не помещается — рисуем под шкалой
                 text_y = scale_bottom_y + 2  # небольшой отступ от нижней границы шкалы
-                
+
                 # Определяем выравнивание по краям
                 is_left_edge = (x_start < scale_x + EDGE_MARGIN)
                 is_right_edge = (x_end > scale_x + scale_width - EDGE_MARGIN)
-                
+
                 if is_left_edge:
                     # Левое выравнивание
                     text_x = x_start + TEXT_PADDING
@@ -1586,15 +1645,8 @@ class PlayerShiftMapReport:
                 else:
                     # Центрирование
                     text_x = x_start + (interval_width - text_width) // 2
-                
+
                 draw.text((text_x, text_y), mode_name, fill=styles.GAME_MODE_TEXT_COLOR, font=font)
-        
-        # Нижняя граница (разделитель с временной шкалой)
-        draw.line(
-            [(scale_x, scale_bottom_y), (scale_x + scale_width, scale_bottom_y)],
-            fill=styles.GAME_MODE_GRID_COLOR,
-            width=styles.GAME_MODE_LINE_WIDTH
-        )
 
 
     def _get_filtered_game_modes(self, report_data: ReportData, time_range: float,
