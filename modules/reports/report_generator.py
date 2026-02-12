@@ -214,7 +214,7 @@ class ReportStyles:
     COLOR_GM_EVEN_3ON3: str = "#9370DB"            # Насыщенный фиолетовый
 
     # Прозрачность наложений game_mode (0-255)
-    GAME_MODE_OVERLAY_ALPHA: int = 80
+    GAME_MODE_OVERLAY_ALPHA: int = 120
     
     # Толщина рамки game_mode
     GAME_MODE_BORDER_WIDTH: int = 2
@@ -818,9 +818,9 @@ class PlayerShiftMapReport:
                           period_start=0, header_height=header_height)
 
 
-        # === НОВОЕ: Рамки game_mode (после всего) ===
-        self._draw_game_mode_borders(draw, report_data, geom, time_range=time_range,
-                                     is_match_level=True, period_abs_start=0)
+        # # === НОВОЕ: Рамки game_mode (после всего) ===
+        # self._draw_game_mode_borders(draw, report_data, geom, time_range=time_range,
+        #                              is_match_level=True, period_abs_start=0)
         
         # Рисуем ПОДПИСИ к нижней шкалк времени
         self._draw_time_scale(draw, geom, time_range=time_range, is_match_level=True)
@@ -1113,7 +1113,7 @@ class PlayerShiftMapReport:
 
                 # Нижняя часть (белая)
                 draw.rectangle([x_start, y_middle, x_end, y_bottom],
-                            fill=styles.COLOR_WHITE,
+                            #fill=styles.COLOR_WHITE,
                             outline=styles.COLOR_BLACK,
                             width=styles.SHIFT_BORDER_WIDTH)
                 draw.line([(x_start, y_middle), (x_end, y_middle)], 
