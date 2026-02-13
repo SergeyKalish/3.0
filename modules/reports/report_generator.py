@@ -223,6 +223,15 @@ class ReportStyles:
     COLOR_PENALTY_BOX: str = "#D21111"      # Синий цвет для рамки и диагоналей
     PENALTY_LINE_WIDTH: int = 3             # Толщина линий удаления
 
+        # --- Шкала вбрасываний ---
+    FACEOFF_SCALE_HEIGHT_PX: int = 30
+    FACEOFF_PEG_WIDTH: int = 3           # Толщина вертикальной линии колышка
+    FACEOFF_PEG_BASE_WIDTH: int = 6      # Ширина горизонтальной перекладины "Т"
+    FACEOFF_PEG_COLOR: str = "#808080"   # Серый цвет
+    FACEOFF_LINE_COLOR: str = "#A0A0A0"  # Цвет вертикальной линии вниз
+    FACEOFF_LINE_WIDTH: int = 1
+    FACEOFF_LINE_DASH: tuple = (3, 3)    # Пунктир: 3px линия, 3px пробел
+
 
 # ============================================
 # КЛАСС ОТЧЁТА
@@ -842,6 +851,11 @@ class PlayerShiftMapReport:
 
         self._draw_game_mode_scale_text(draw, report_data, geom, time_range=time_range, 
                                 is_match_level=True, period_abs_start=0)
+        
+        # Рисуем шкалу вбрасываний (НАД графической областью)
+        self._draw_faceoffs_scale(draw, report_data, geom,
+                                time_range=time_range, 
+                                period_start=0)  # или period_start для периода
 
 
     def _draw_graphics_period(self, draw: ImageDraw, report_data: ReportData, geom: dict,
@@ -901,6 +915,11 @@ class PlayerShiftMapReport:
         
         self._draw_game_mode_scale_text(draw, report_data, geom, time_range=time_range,
                                 is_match_level=False, period_abs_start=period_start)
+        
+        # Рисуем шкалу вбрасываний (НАД графической областью)
+        self._draw_faceoffs_scale(draw, report_data, geom,
+                                time_range=time_range, 
+                                period_start=period_start)  # или period_start для периода
 
     def _draw_top_time_scale(self, draw: ImageDraw, geom: dict, time_range: float,
                             is_match_level: bool, period_abs_start: float = 0):
@@ -2365,3 +2384,68 @@ class PlayerShiftMapReport:
             
             current_dist += segment_len
             is_dash = not is_dash
+
+    def _draw_faceoffs_scale(self, draw: ImageDraw, report_data: ReportData, geom: dict,
+                            time_range: float, period_start: float):
+        """
+        Шкала вбрасываний (ЧИИ) — Т-образные колышки.
+        Рисуется НАД верхней шкалой времени (вне графической области).
+        """
+        styles = self.styles
+        
+        SCALE_HEIGHT = styles.FACEOFF_SCALE_HEIGHT_PX
+        TIME_SCALE_HEIGHT = styles.TIME_SCALE_HEIGHT_PX
+        PEG_WIDTH = styles.FACEOFF_PEG_WIDTH
+        BASE_WIDTH = styles.FACEOFF_PEG_BASE_WIDTH
+        PEG_COLOR = styles.FACEOFF_PEG_COLOR
+        LINE_COLOR = styles.FACEOFF_LINE_COLOR
+        
+        # Координаты — над верхней шкалой времени
+        scale_x = geom["x"]
+        scale_width = geom["width"]
+        # Низ шкалы вбрасываний = верх верхней шкалы времени = geom["y"]
+        scale_bottom = geom["y"]
+        scale_y = scale_bottom - SCALE_HEIGHT
+        
+        # Рамка шкалы
+        draw.rectangle([scale_x, scale_y, scale_x + scale_width, scale_bottom],
+                    outline=styles.COLOR_GRID,
+                    width=1)
+        
+        if time_range <= 0:
+            return
+
+        scale_factor = scale_width / time_range
+        
+        # Низ для вертикальных линий — низ нижней временной шкалы
+        graphic_bottom = geom["y"] + geom["height"]
+        line_bottom_y = graphic_bottom + TIME_SCALE_HEIGHT
+        
+        # Рисуем вбрасывания
+        for faceoff in report_data.faceoffs:
+            if not (period_start <= faceoff.official_time < period_start + time_range):
+                continue
+            
+            local_time = faceoff.official_time - period_start
+            x_pos = scale_x + int(local_time * scale_factor)
+            
+            # --- Т-образный колышек ---
+            # Вертикальная линия от низа шкалы вверх
+            peg_top = scale_y + 3
+            peg_bottom = scale_bottom - 2
+            draw.line([(x_pos, peg_top), (x_pos, peg_bottom)], 
+                    fill=PEG_COLOR, 
+                    width=PEG_WIDTH)
+            
+            # Горизонтальная перекладина "Т" вВЕРХУ
+            base_y = peg_top
+            draw.line([(x_pos - BASE_WIDTH // 2, base_y), 
+                    (x_pos + BASE_WIDTH // 2, base_y)], 
+                    fill=PEG_COLOR,
+                    width=PEG_WIDTH)
+            
+            # --- Вертикальная линия вниз через всё ---
+            # От низа шкалы вбрасываний до низа нижней шкалы времени
+            self._draw_dashed_line(draw, x_pos, scale_bottom, x_pos, line_bottom_y,
+                                LINE_COLOR, styles.FACEOFF_LINE_DASH, 
+                                styles.FACEOFF_LINE_WIDTH)

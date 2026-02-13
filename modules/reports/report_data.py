@@ -70,6 +70,17 @@ class PenaltyInfo:
         self.violation_type = violation_type
         self.player_id_fhm = player_id_fhm
 
+@dataclass
+class FaceoffInfo:
+    """
+    Класс для хранения информации о вбрасывании (ЧИИ).
+    """
+    official_time: float      # Время начала ЧИИ в official_timer
+    end_time: float           # Время конца ЧИИ (обычно совпадает с началом или чуть позже)
+    period_index: int         # Индекс периода (0, 1, 2...)
+    chii_number: int          # Номер ЧИИ в периоде (1, 2, 3...)
+    chii_name: str            # Полное имя ЧИИ (например, "Период 1. ЧИИ №5")
+
 class SegmentInfo:
     """
     Вспомогательный класс для хранения информации о сегменте (периоде).
@@ -99,7 +110,7 @@ class ReportData:
         # self.events: List[EventInfo] = [] # Больше не используется, заменено на goals и penalties
         self.game_modes: List[Any] = [] # Пока сырые данные
         self.active_penalties: List[Any] = [] # Пока сырые данные
-
+        self.faceoffs: List[FaceoffInfo] = []
         self._extract_and_validate_data()
 
     def _extract_and_validate_data(self):
@@ -434,6 +445,52 @@ class ReportData:
         self.game_modes = getattr(match_obj, 'game_modes', [])
         self.active_penalties = getattr(match_obj, 'active_penalties', [])
 
+        # 8. Извлечение ЧИИ (вбрасываний) из calculated_ranges
+        chii_ranges = [cr for cr in calculated_ranges if getattr(cr, 'label_type', '') == 'ЧИИ']
+
+        faceoffs_processed = []
+        for i, cr in enumerate(chii_ranges):
+            try:
+                official_start = convert_global_to_official_time(cr.start_time, calculated_ranges)
+                official_end = convert_global_to_official_time(cr.end_time, calculated_ranges)
+            except Exception as e:
+                print(f"Предупреждение: Не удалось преобразовать время ЧИИ '{cr.name}': {e}")
+                continue
+            
+            if official_start is None:
+                continue
+            
+            # Парсим имя ЧИИ для извлечения периода и номера
+            # Формат: "Период 1. ЧИИ №5" или "Период 2. ЧИИ №12"
+            period_idx = 0
+            chii_num = i + 1  # fallback нумерация
+            
+            name = getattr(cr, 'name', '')
+            if 'Период' in name and 'ЧИИ' in name:
+                try:
+                    # Извлекаем "Период X"
+                    period_part = name.split('.')[0]  # "Период 1"
+                    period_idx = int(period_part.split()[-1]) - 1  # 0-based index
+                    
+                    # Извлекаем "ЧИИ №Y"
+                    chii_part = name.split('№')[-1]  # "5"
+                    chii_num = int(chii_part.strip())
+                except (ValueError, IndexError):
+                    pass  # используем fallback
+            
+            faceoffs_processed.append(FaceoffInfo(
+                official_time=official_start,
+                end_time=official_end if official_end else official_start,
+                period_index=period_idx,
+                chii_number=chii_num,
+                chii_name=name
+            ))
+
+        # Сортировка по времени
+        faceoffs_processed.sort(key=lambda x: x.official_time)
+        self.faceoffs = faceoffs_processed
+
+        print(f"Извлечено {len(self.faceoffs)} вбрасываний (ЧИИ).")
 
         # --- Валидация завершена ---
         print("Данные успешно извлечены и прошли валидацию для отчёта.")
