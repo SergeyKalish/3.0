@@ -1346,7 +1346,7 @@ class PlayerShiftMapReport:
                 draw.text((text_x, text_y), score_text, fill=COLOR_TEXT, font=font)
 
             # ПУНКТИРНАЯ ЛИНИЯ ВВЕРХ — до content_y (низ заголовка таблицы)
-            line_top = content_y
+            line_top = max(content_y - styles.TIME_SCALE_HEIGHT_PX, 0)
             line_bottom = scale_y
 
             dot_spacing = 8
