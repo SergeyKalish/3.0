@@ -18,17 +18,19 @@ class ColumnConfig:
     width_format: str           # Строка для измерения ширины при TABLE_DATA_FONT_SIZE_PT
     align: str                  # "left", "right", "center"
     is_player_name: bool = False  # Особая логика для фамилий
+    vertical_header: bool = False # Вертикальная ориентация заголовка
 
 
 # Конфигурация для отчёта "Матч" (11 колонок)
+# Вертикальные заголовки для узких колонок: №, СМ, Г, П, +/-, Ш
 TABLE_CONFIG_MATCH = [
     ColumnConfig("number", "99", "right"),           # №
-    ColumnConfig("player", "", "left", is_player_name=True),  # Игрок (ширина динамическая)
-    ColumnConfig("shifts_count", "99", "center"),    # СМ
-    ColumnConfig("avg_shift", "99\"", "center"),     # СрСм (секунды со знаком")
-    ColumnConfig("total_time", "99:99", "center"),   # ВрМ
-    ColumnConfig("powerplay", "99:99", "center"),    # Б
-    ColumnConfig("penalty_kill", "99:99", "center"), # М
+    ColumnConfig("player", "", "left", is_player_name=True),               # Игрок (горизонтально)
+    ColumnConfig("shifts_count", "99", "center", vertical_header=True),    # СМ
+    ColumnConfig("avg_shift", "99\"", "center", vertical_header=True),                           # СрСм (горизонтально)
+    ColumnConfig("total_time", "99:99", "center"),                         # ВрМ (горизонтально)
+    ColumnConfig("powerplay", "99:99", "center"),                          # Б (горизонтально)
+    ColumnConfig("penalty_kill", "99:99", "center"),                       # М (горизонтально)
     ColumnConfig("goals", "9", "right"),             # Г
     ColumnConfig("assists", "9", "right"),           # П
     ColumnConfig("plus_minus", "+9", "right"),       # +/-
@@ -36,13 +38,14 @@ TABLE_CONFIG_MATCH = [
 ]
 
 # Конфигурация для отчёта "Период" (10 колонок)
+# Вертикальные заголовки для узких колонок: №, СП, Г, П, +/-, Ш
 TABLE_CONFIG_PERIOD = [
     ColumnConfig("number", "99", "right"),           # №
-    ColumnConfig("player", "", "left", is_player_name=True),  # Игрок
-    ColumnConfig("shifts_count", "99", "center"),    # СП
-    ColumnConfig("period_time", "99:99", "center"),  # ВрП
-    ColumnConfig("powerplay", "99:99", "center"),    # Б
-    ColumnConfig("penalty_kill", "99:99", "center"), # М
+    ColumnConfig("player", "", "left", is_player_name=True),               # Игрок
+    ColumnConfig("shifts_count", "99", "center", vertical_header=True),    # СП
+    ColumnConfig("period_time", "99:99", "center", vertical_header=True),                        # ВрП (горизонтально)
+    ColumnConfig("powerplay", "99:99", "center"),                          # Б
+    ColumnConfig("penalty_kill", "99:99", "center"),                       # М
     ColumnConfig("goals", "9", "right"),             # Г
     ColumnConfig("assists", "9", "right"),           # П
     ColumnConfig("plus_minus", "+9", "right"),       # +/-
@@ -702,10 +705,10 @@ class PlayerShiftMapReport:
         return full_name
 
     def _draw_table_v2(self, draw: ImageDraw, report_data: ReportData, 
-                       geom: dict, columns_config: List[ColumnConfig],
-                       period_index: Optional[int]):
+                    geom: dict, columns_config: List[ColumnConfig],
+                    period_index: Optional[int]):
         """
-        Отрисовка таблицы v2.
+        Отрисовка таблицы v2 с поддержкой вертикальных заголовков.
         """
         styles = self.styles
         
@@ -731,13 +734,13 @@ class PlayerShiftMapReport:
                 width=styles.TABLE_GRID_LINE_WIDTH
             )
             
-            # Текст заголовка (пока как есть, позже сократим)
-            self._draw_header_cell_v2(draw, col_config.key, current_x, header_y, 
-                                      col_width, header_height)
+            # Текст заголовка (горизонтальный или вертикальный)
+            self._draw_header_cell_v2(draw, col_config, current_x, header_y, 
+                                    col_width, header_height)
             
             current_x += col_width
         
-        # --- Строки данных ---
+        # --- Строки данных --- (без изменений)
         num_rows = styles.NUM_TABLE_ROWS
         
         for row_idx in range(num_rows):
@@ -765,11 +768,11 @@ class PlayerShiftMapReport:
                             'text': "?"
                         })
                         self._draw_player_cell(draw, font_info, current_x, row_y,
-                                              col_width, row_height, col_config.align)
+                                            col_width, row_height, col_config.align)
                     else:
                         # Обычная ячейка
                         text = self._get_cell_text_v2(col_config.key, player, 
-                                                      report_data, period_index)
+                                                    report_data, period_index)
                         self._draw_data_cell_v2(draw, text, current_x, row_y, 
                                                 col_width, row_height, 
                                                 col_config.align, 
@@ -784,26 +787,86 @@ class PlayerShiftMapReport:
             width=styles.TABLE_OUTLINE_WIDTH
         )
 
-    def _draw_header_cell_v2(self, draw: ImageDraw, text: str, x: int, y: int,
-                             w: int, h: int):
+    def _draw_header_cell_v2(self, draw: ImageDraw, col_config: ColumnConfig, 
+                            x: int, y: int, w: int, h: int):
         """
-        Отрисовка ячейки заголовка v2.
-        Пока просто центрируем. Позже: сокращения, переносы.
+        Отрисовка ячейки заголовка v2 — горизонтальная или вертикальная ориентация.
+        """
+        styles = self.styles
+        
+        # Получаем текст заголовка (сокращённый)
+        display_text = self._shorten_header(col_config.key)
+        
+        if col_config.vertical_header:
+            # Вертикальная ориентация
+            self._draw_vertical_header_text(draw, display_text, x, y, w, h)
+        else:
+            # Горизонтальная ориентация
+            font = self._get_font(styles.TABLE_DATA_FONT_SIZE_PT)
+            
+            bbox = draw.textbbox((0, 0), display_text, font=font)
+            text_w = bbox[2] - bbox[0]
+            text_h = bbox[3] - bbox[1]
+            
+            x_pos = x + (w - text_w) // 2
+            y_pos = y + (h - text_h) // 2
+            
+            draw.text((x_pos, y_pos), display_text, fill=styles.COLOR_BLACK, font=font)
+
+
+    def _draw_vertical_header_text(self, draw: ImageDraw, text: str, x: int, y: int,
+                                w: int, h: int):
+        """
+        Рисует текст вертикально (повёрнутый на 90° против часовой стрелки),
+        центрированный в ячейке. Текст читается снизу вверх.
         """
         styles = self.styles
         font = self._get_font(styles.TABLE_DATA_FONT_SIZE_PT)
         
-        # Замена на временные сокращения для компактности
-        display_text = self._shorten_header(text)
+        # Создаём временное изображение для текста
+        # Размер с запасом для любого текста заголовка
+        temp_size = 300
+        temp_img = Image.new('RGBA', (temp_size, temp_size), (255, 255, 255, 0))
+        temp_draw = ImageDraw.Draw(temp_img)
         
-        bbox = draw.textbbox((0, 0), display_text, font=font)
-        text_w = bbox[2] - bbox[0]
-        text_h = bbox[3] - bbox[1]
+        # Рисуем текст горизонтально
+        margin = 10
+        temp_draw.text((margin, margin), text, fill=styles.COLOR_BLACK, font=font)
         
-        x_pos = x + (w - text_w) // 2
-        y_pos = y + (h - text_h) // 2
+        # Находим реальные границы текста
+        text_bbox = temp_draw.textbbox((margin, margin), text, font=font)
+        text_w = text_bbox[2] - text_bbox[0]
+        text_h = text_bbox[3] - text_bbox[1]
         
-        draw.text((x_pos, y_pos), display_text, fill=styles.COLOR_BLACK, font=font)
+        if text_w <= 0 or text_h <= 0:
+            return  # Защита от пустого текста
+        
+        # Обрезаем лишнее прозрачное пространство
+        crop_box = (
+            max(0, text_bbox[0] - 3),
+            max(0, text_bbox[1] - 3),
+            min(temp_size, text_bbox[2] + 3),
+            min(temp_size, text_bbox[3] + 3)
+        )
+        text_only = temp_img.crop(crop_box)
+        
+        # Поворачиваем на 90° против часовой стрелки
+        # После поворота текст читается снизу вверх (естественно для вертикали)
+        rotated = text_only.rotate(90, expand=True, resample=Image.BICUBIC)
+        
+        rot_w, rot_h = rotated.size
+        
+        # Центрируем в ячейке
+        # После поворота: rot_w = оригинальная высота текста, rot_h = оригинальная ширина
+        x_pos = x + (w - rot_w) // 2
+        y_pos = y + (h - rot_h) // 2
+        
+        # Гарантируем, что текст не выйдет за границы ячейки
+        x_pos = max(x, min(x_pos, x + w - rot_w))
+        y_pos = max(y, min(y_pos, y + h - rot_h))
+        
+        # Накладываем на основное изображение с учётом альфа-канала
+        draw._image.paste(rotated, (x_pos, y_pos), rotated)
 
     def _shorten_header(self, key: str) -> str:
         """Временные сокращения для заголовков."""
