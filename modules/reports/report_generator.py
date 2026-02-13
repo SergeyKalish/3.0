@@ -230,7 +230,7 @@ class ReportStyles:
     FACEOFF_PEG_COLOR: str = "#808080"   # Серый цвет
     FACEOFF_LINE_COLOR: str = "#A0A0A0"  # Цвет вертикальной линии вниз
     FACEOFF_LINE_WIDTH: int = 1
-    FACEOFF_LINE_DASH: tuple = (3, 3)    # Пунктир: 3px линия, 3px пробел
+    FACEOFF_LINE_DASH: tuple = (3, 9)    # Пунктир: 3px линия, 3px пробел
 
 
 # ============================================
@@ -2389,7 +2389,7 @@ class PlayerShiftMapReport:
                             time_range: float, period_start: float):
         """
         Шкала вбрасываний (ЧИИ) — Т-образные колышки.
-        Рисуется НАД верхней шкалой времени (вне графической области).
+        Рисуется НАД верхней шкалой времени, внутри области заголовка таблицы.
         """
         styles = self.styles
         
@@ -2400,19 +2400,34 @@ class PlayerShiftMapReport:
         PEG_COLOR = styles.FACEOFF_PEG_COLOR
         LINE_COLOR = styles.FACEOFF_LINE_COLOR
         
-        # Координаты — над верхней шкалой времени
+        # Получаем высоту заголовка таблицы
+        header_height = geom.get("header_height", 0)
+        
+        # Координаты
         scale_x = geom["x"]
         scale_width = geom["width"]
-        # Низ шкалы вбрасываний = верх верхней шкалы времени = geom["y"]
-        scale_bottom = geom["y"]
+        
+        # Верхняя шкала времени: от (content_y - TIME_SCALE_HEIGHT) до content_y
+        # Шкала вбрасываний должна быть НАД ней, внутри заголовка таблицы
+        # Низ шкалы вбрасываний = верх верхней шкалы времени
+        scale_bottom = geom["content_y"] - TIME_SCALE_HEIGHT
         scale_y = scale_bottom - SCALE_HEIGHT
         
-        # Рамка шкалы
-        draw.rectangle([scale_x, scale_y, scale_x + scale_width, scale_bottom],
-                    outline=styles.COLOR_GRID,
-                    width=1)
+        # Проверяем, не вышли ли за пределы заголовка
+        # Верх заголовка = content_y - header_height
+        header_top = geom["content_y"] - header_height
+        if scale_y < header_top:
+            # Если не влезает — сдвигаем вниз или уменьшаем высоту
+            scale_y = header_top
+            SCALE_HEIGHT = scale_bottom - scale_y
         
-        if time_range <= 0:
+        # Рамка шкалы
+        if SCALE_HEIGHT > 0:
+            draw.rectangle([scale_x, scale_y, scale_x + scale_width, scale_bottom],
+                        outline=styles.COLOR_GRID,
+                        width=1)
+        
+        if time_range <= 0 or SCALE_HEIGHT <= 0:
             return
 
         scale_factor = scale_width / time_range
