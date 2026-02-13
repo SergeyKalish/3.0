@@ -813,9 +813,15 @@ class PlayerShiftMapReport:
         authors_y = self._draw_goals_scale(draw, report_data, geom, 
                                            time_range=time_range, period_start=0)
 
-        # Рисуем авторов голов
-        self._draw_goal_authors_vertical(draw, report_data, geom, time_range=time_range,
-                                         period_start=0, authors_y=authors_y)
+        # # Рисуем авторов голов
+        # self._draw_goal_authors_vertical(draw, report_data, geom, time_range=time_range,
+        #                                  period_start=0, authors_y=authors_y)
+        
+        # === НОВОЕ: Рисуем авторов голов ГОРИЗОНТАЛЬНО ===
+        self._draw_goal_authors_horizontal(draw, report_data, geom, 
+                                        time_range=time_range, 
+                                        period_start=0, 
+                                        authors_y=authors_y)
         
         # === НОВОЕ: Рисуем удаления ===
         self._draw_penalties(draw, report_data, geom, time_range=time_range, 
@@ -863,9 +869,15 @@ class PlayerShiftMapReport:
         authors_y = self._draw_goals_scale(draw, report_data, geom, 
                                            time_range=time_range, period_start=period_start)
         
-        # Рисуем авторов голов
-        self._draw_goal_authors_vertical(draw, report_data, geom, time_range=time_range,
-                                         period_start=period_start, authors_y=authors_y)    
+        # # Рисуем авторов голов
+        # self._draw_goal_authors_vertical(draw, report_data, geom, time_range=time_range,
+        #                                  period_start=period_start, authors_y=authors_y)    
+        
+        # === НОВОЕ: Рисуем авторов голов ГОРИЗОНТАЛЬНО ===
+        self._draw_goal_authors_horizontal(draw, report_data, geom, 
+                                        time_range=time_range, 
+                                        period_start=period_start,  # ВАЖНО: другое имя параметра!
+                                        authors_y=authors_y)
 
 
         # === НОВОЕ: Рисуем удаления ===
@@ -1266,7 +1278,7 @@ class PlayerShiftMapReport:
     def _draw_goals_scale(self, draw: ImageDraw, report_data: ReportData, geom: dict,
                         time_range: float, period_start: float) -> int:
         """
-        Шкала голов.
+        Шкала голов с "змейкой" подписей счёта.
         """
         styles = self.styles
         
@@ -1304,9 +1316,8 @@ class PlayerShiftMapReport:
         font = self._get_font(styles.GOALS_SCALE_FONT_SIZE_PT)
         score_ranges = self._get_score_ranges(report_data, period_start, time_range)
 
-        # === content_y — низ заголовка таблицы, куда идут линии голов ===
-        content_y = geom["content_y"]
-
+        # === НОВОЕ: Собираем голы с позициями и готовим змейку ===
+        goals_with_data = []
         for goal in report_data.goals:
             if not (period_start <= goal.official_time < period_start + time_range):
                 continue
@@ -1318,42 +1329,105 @@ class PlayerShiftMapReport:
             local_time = goal.official_time - period_start
             x_pos = scale_x + int(local_time * scale_factor)
 
-            # ВЕРХНЯЯ ПОЛОВИНА: колышек
-            peg_top = scale_y + 3
-            peg_bottom = divider_y - 2
-            draw.line([(x_pos, peg_top), (x_pos, peg_bottom)], 
-                    fill=color, 
-                    width=styles.GOAL_PEG_WIDTH)
-            draw.line([(x_pos - 2, peg_bottom), (x_pos + 2, peg_bottom)], 
-                    fill=color,
-                    width=styles.GOAL_PEG_BASE_WIDTH)
-
-            # НИЖНЯЯ ПОЛОВИНА: счёт
             score_text = self._get_score_at_time(score_ranges, goal.official_time)
+            
+            # Измеряем ширину текста
             if score_text:
                 text_bbox = draw.textbbox((0, 0), score_text, font=font)
                 text_width = text_bbox[2] - text_bbox[0]
                 text_height = text_bbox[3] - text_bbox[1]
+            else:
+                text_width = 0
+                text_height = 0
 
-                text_x = x_pos - text_width // 2
-                text_y = (divider_y + (BOTTOM_HALF_HEIGHT - text_height) // 2) - 4
+            goals_with_data.append({
+                'goal': goal,
+                'x': x_pos,
+                'color': color,
+                'score_text': score_text,
+                'text_width': text_width,
+                'text_height': text_height
+            })
 
-                if text_x < scale_x + 2:
-                    text_x = scale_x + 2
-                if text_x + text_width > scale_x + scale_width - 2:
-                    text_x = scale_x + scale_width - text_width - 2
+        # === НОВОЕ: Определяем уровни для змейки ===
+        # True = верх (уровень 1), False = низ (уровень 0)
+        current_level_is_top = False  # Начинаем снизу
+        
+        for i, gwd in enumerate(goals_with_data):
+            if not gwd['score_text']:
+                continue
+                
+            # Проверяем наложение с предыдущим голом на том же уровне
+            need_switch_to_top = False
+            
+            if i > 0 and not current_level_is_top:
+                # Были внизу, проверяем не наложится ли на предыдущую подпись
+                prev_gwd = goals_with_data[i - 1]
+                if prev_gwd['score_text']:
+                    # Центры подписей
+                    prev_center_x = prev_gwd['x']
+                    curr_center_x = gwd['x']
+                    # Половины ширин
+                    prev_half_width = prev_gwd['text_width'] / 2
+                    curr_half_width = gwd['text_width'] / 2
+                    
+                    # Проверяем пересечение интервалов
+                    prev_left = prev_center_x - prev_half_width
+                    prev_right = prev_center_x + prev_half_width
+                    curr_left = curr_center_x - curr_half_width
+                    curr_right = curr_center_x + curr_half_width
+                    
+                    # Если пересекаются или близко (менее 3px зазора) — смещаем наверх
+                    if curr_left < prev_right + 3:
+                        need_switch_to_top = True
+            
+            # Определяем финальный уровень
+            is_top = need_switch_to_top
+            
+            # Сохраняем для следующей итерации
+            current_level_is_top = is_top
+            
+            # Вычисляем Y позицию текста
+            if is_top:
+                # Верхняя половина: центрируем в TOP_HALF_HEIGHT
+                text_y = scale_y + (TOP_HALF_HEIGHT - gwd['text_height']) // 2 - 2
+            else:
+                # Нижняя половина: как раньше
+                text_y = (divider_y + (BOTTOM_HALF_HEIGHT - gwd['text_height']) // 2) - 4
 
-                draw.text((text_x, text_y), score_text, fill=COLOR_TEXT, font=font)
+            # Рисуем колышек (всегда в верхней половине)
+            peg_top = scale_y + 3
+            peg_bottom = divider_y - 2
+            draw.line([(gwd['x'], peg_top), (gwd['x'], peg_bottom)], 
+                    fill=gwd['color'], 
+                    width=styles.GOAL_PEG_WIDTH)
+            draw.line([(gwd['x'] - 2, peg_bottom), (gwd['x'] + 2, peg_bottom)], 
+                    fill=gwd['color'],
+                    width=styles.GOAL_PEG_BASE_WIDTH)
 
-            # ПУНКТИРНАЯ ЛИНИЯ ВВЕРХ — до content_y (низ заголовка таблицы)
-            line_top = max(content_y - styles.TIME_SCALE_HEIGHT_PX, 0)
-            line_bottom = scale_y
+            # Рисуем подпись счёта
+            text_x = gwd['x'] - gwd['text_width'] // 2
+            
+            # Проверяем границы
+            if text_x < scale_x + 2:
+                text_x = scale_x + 2
+            if text_x + gwd['text_width'] > scale_x + scale_width - 2:
+                text_x = scale_x + scale_width - gwd['text_width'] - 2
 
+            draw.text((text_x, text_y), gwd['score_text'], fill=COLOR_TEXT, font=font)
+
+        # === КОНЕЦ НОВОГО ===
+
+        # Пунктирные линии вверх (как раньше, но до верха верхней шкалы)
+        content_y = geom["content_y"]
+        line_top = max(content_y - styles.TIME_SCALE_HEIGHT_PX, 0)
+        
+        for gwd in goals_with_data:
             dot_spacing = 8
-            for y in range(int(line_top), int(line_bottom), dot_spacing):
-                dot_y_end = min(y + 3, int(line_bottom))
-                draw.line([(x_pos, y), (x_pos, dot_y_end)], 
-                        fill=color,
+            for y in range(int(line_top), int(scale_y), dot_spacing):
+                dot_y_end = min(y + 3, int(scale_y))
+                draw.line([(gwd['x'], y), (gwd['x'], dot_y_end)], 
+                        fill=gwd['color'],
                         width=styles.GOAL_DASHED_LINE_WIDTH)
 
         return scale_y + SCALE_HEIGHT
@@ -1400,10 +1474,11 @@ class PlayerShiftMapReport:
     def _draw_goal_authors_vertical(self, draw: ImageDraw, report_data: ReportData, 
                                     geom: dict, time_range: float, period_start: float, 
                                     authors_y: int):
-        """Отрисовывает авторов голов вертикально под шкалой."""
+        """Отрисовывает авторов голов вертикально с змейкой вправо/центр."""
         styles = self.styles
         
         COLOR_TEXT = styles.COLOR_BLACK
+        MIN_SPACING = 20  # минимальное расстояние между центрами подписей
 
         if time_range <= 0:
             return
@@ -1414,8 +1489,8 @@ class PlayerShiftMapReport:
 
         font = self._get_font(styles.GOAL_AUTHOR_FONT_SIZE_PT)
 
-        # Собираем голы с позициями
-        goals_with_positions = []
+        # Собираем голы с позициями и данными
+        goals_with_data = []
         for goal in report_data.goals:
             if not (period_start <= goal.official_time < period_start + time_range):
                 continue
@@ -1434,61 +1509,111 @@ class PlayerShiftMapReport:
 
             author_text = f"{player_number} {player_name}" if player_number else player_name
 
-            goals_with_positions.append({
-                'goal': goal,
-                'x': x_pos,
-                'text': author_text
-            })
-
-        MIN_SPACING = 20
-        goals_with_positions.sort(key=lambda g: g['x'])
-        positions = []
-
-        for i, gwp in enumerate(goals_with_positions):
-            base_x = gwp['x']
-            offset = 0
-
-            text_bbox = draw.textbbox((0, 0), gwp['text'], font=font)
-            text_width = text_bbox[2] - text_bbox[0]
-
-            conflict_left = False
-            for prev_g, prev_offset, prev_x, prev_width in positions:
-                prev_actual_x = prev_x + prev_offset
-                if abs(base_x - prev_actual_x) < MIN_SPACING:
-                    conflict_left = True
-                    break
-
-            if conflict_left:
-                offset = text_width // 2 + 5
-                if base_x + offset + text_width > scale_x + scale_width:
-                    offset = -(text_width // 2 + 5)
-                    if base_x + offset < scale_x:
-                        offset = 0
-
-            positions.append((gwp, offset, base_x, text_width))
-
-        # Рисуем подписи
-        for gwp, offset, base_x, text_width in positions:
-            text = gwp['text']
-
-            text_bbox = draw.textbbox((0, 0), text, font=font)
+            # Измеряем размеры текста
+            text_bbox = draw.textbbox((0, 0), author_text, font=font)
             text_w = text_bbox[2] - text_bbox[0]
             text_h = text_bbox[3] - text_bbox[1]
 
-            temp_img = Image.new('RGBA', (text_w + 4, text_h + 4), (255, 255, 255, 0))
+            goals_with_data.append({
+                'goal': goal,
+                'base_x': x_pos,
+                'text': author_text,
+                'text_w': text_w,
+                'text_h': text_h,
+                'final_x': x_pos,  # будет вычислено
+                'is_shifted': False
+            })
+
+        # === ЗМЕЙКА: определяем смещения ===
+        # Состояние: 0 = центр, 1 = смещено вправо
+        current_state = 0
+        EDGE_MARGIN = 15  # px от края для определения "краевого" положения
+
+        for i, gwd in enumerate(goals_with_data):
+            # Проверка левого края (гол на первых секундах)
+            if gwd['base_x'] < scale_x + EDGE_MARGIN:
+                # Смещаем вправо от левой границы
+                gwd['final_x'] = gwd['base_x'] + gwd['text_h'] // 2 + 5
+                gwd['is_shifted'] = True
+                current_state = 1
+                continue
+
+            # Проверка правого края (гол на последних секундах)
+            if gwd['base_x'] > scale_x + scale_width - EDGE_MARGIN:
+                # Смещаем влево от правой границы
+                gwd['final_x'] = gwd['base_x'] - gwd['text_h'] // 2 - 5
+                gwd['is_shifted'] = True
+                current_state = 0
+                continue
+
+            # Обычная логика змейки
+            if i == 0:
+                # Первый гол — всегда центр
+                gwd['final_x'] = gwd['base_x']
+                current_state = 0
+            else:
+                prev_gwd = goals_with_data[i - 1]
+                distance = gwd['base_x'] - prev_gwd['final_x']
+                
+                # Проверяем наложение с предыдущей подписью
+                if distance < MIN_SPACING:
+                    # Нужно смещение
+                    if current_state == 0:
+                        # Был центр — смещаем вправо
+                        gwd['final_x'] = gwd['base_x'] + gwd['text_h'] // 2 + 5
+                        gwd['is_shifted'] = True
+                        current_state = 1
+                    else:
+                        # Уже было смещение — продолжаем вправо
+                        gwd['final_x'] = gwd['base_x'] + gwd['text_h'] // 2 + 5
+                        gwd['is_shifted'] = True
+                        # Сброс в центр для следующего
+                        current_state = 0
+                else:
+                    # Расстояние достаточно — центр
+                    gwd['final_x'] = gwd['base_x']
+                    current_state = 0
+
+        # === Рисуем подписи ===
+        for gwd in goals_with_data:
+            text = gwd['text']
+            
+            # === ИСПРАВЛЕНИЕ ПОДРЕЗАНИЯ: увеличиваем отступы при создании временного изображения ===
+            margin = 5  # было 2, увеличиваем до 5
+            
+            # Создаём временное изображение с запасом по высоте
+            temp_width = gwd['text_w'] + 2 * margin
+            temp_height = gwd['text_h'] + 2 * margin + 4  # +4 дополнительный запас снизу
+            temp_img = Image.new('RGBA', (temp_width, temp_height), (255, 255, 255, 0))
             temp_draw = ImageDraw.Draw(temp_img)
-            temp_draw.text((2, 2), text, fill=COLOR_TEXT, font=font)
-
-            rotated = temp_img.rotate(90, expand=True, resample=Image.BICUBIC)
-
-            final_x = base_x + offset - rotated.width // 2
+            
+            # Рисуем текст с отступом
+            temp_draw.text((margin, margin), text, fill=COLOR_TEXT, font=font)
+            
+            # Получаем границы текста
+            text_bbox = temp_draw.textbbox((margin, margin), text, font=font)
+            crop_left = max(0, text_bbox[0] - 1)
+            crop_top = max(0, text_bbox[1] - 1)
+            crop_right = min(temp_width, text_bbox[2] + 1)
+            crop_bottom = min(temp_height, text_bbox[3] + 3)  # +3 вместо +1 для запаса снизу
+            
+            # Обрезаем
+            text_only = temp_img.crop((crop_left, crop_top, crop_right, crop_bottom))
+            
+            # Поворачиваем
+            rotated = text_only.rotate(90, expand=True, resample=Image.BICUBIC)
+            
+            # Позиционирование
+            final_x = gwd['final_x'] - rotated.width // 2
             final_y = authors_y + 5
-
+            
+            # Проверяем границы графической области
             if final_x < scale_x:
                 final_x = scale_x
             if final_x + rotated.width > scale_x + scale_width:
                 final_x = scale_x + scale_width - rotated.width
-
+            
+            # Накладываем на основное изображение
             if rotated.mode == 'RGBA':
                 draw._image.paste(rotated, (final_x, final_y), rotated)
             else:
@@ -2070,3 +2195,173 @@ class PlayerShiftMapReport:
                 fill=styles.COLOR_PENALTY_BOX,
                 width=styles.PENALTY_LINE_WIDTH
             )
+
+    def _draw_goal_authors_horizontal(self, draw: ImageDraw, report_data: ReportData, 
+                                    geom: dict, time_range: float, period_start: float, 
+                                    authors_y: int):
+        """
+        Отрисовывает авторов голов горизонтально с змейкой вниз (5 уровней: 0-4).
+        """
+        styles = self.styles
+        
+        MIN_SPACING = 25  # минимальное расстояние между центрами подписей
+        LEVEL_HEIGHT = 22  # расстояние между уровнями в px (было 12, теперь параметр)
+        MAX_LEVEL = 4  # максимальный уровень (0-4 = 5 уровней)
+        LEADER_LINE_COLOR = "#808080"  # Серая выноска
+        LEADER_LINE_DASH = (2, 4)  # пунктир: 2px линия, 2px пробел
+
+        if time_range <= 0:
+            return
+
+        scale_x = geom["x"]
+        scale_width = geom["width"]
+        scale_factor = scale_width / time_range
+
+        font = self._get_font(styles.GOAL_AUTHOR_FONT_SIZE_PT)
+
+        # Словарь для поиска игрока по ID
+        player_number_by_id = {
+            player.player_id: player.number 
+            for player in report_data.players_list
+        }
+
+        # Собираем голы с данными
+        goals_with_data = []
+        for goal in report_data.goals:
+            if not (period_start <= goal.official_time < period_start + time_range):
+                continue
+
+            local_time = goal.official_time - period_start
+            x_pos = scale_x + int(local_time * scale_factor)
+
+            team = goal.context.get('team', '')
+            is_our_goal = (team == report_data.our_team_key)
+            color = styles.COLOR_OUR_GOAL if is_our_goal else styles.COLOR_THEIR_GOAL
+
+            player_name = goal.context.get('player_name', 'Unknown')
+            player_id_fhm = goal.context.get('player_id_fhm', '')
+
+            # Ищем номер игрока в нашем составе, если не нашли — оставляем пустым
+            player_number = player_number_by_id.get(player_id_fhm, '')
+            
+            # Если номер не нашли в нашем составе, пробуем извлечь из контекста гола
+            if not player_number and 'player_number' in goal.context:
+                player_number = goal.context.get('player_number', '')
+
+            author_text = f"{player_number} {player_name}" if player_number else player_name
+
+            # Измеряем размеры текста
+            text_bbox = draw.textbbox((0, 0), author_text, font=font)
+            text_w = text_bbox[2] - text_bbox[0]
+            text_h = text_bbox[3] - text_bbox[1]
+
+            goals_with_data.append({
+                'goal': goal,
+                'base_x': x_pos,
+                'peg_y': authors_y - styles.GOALS_SCALE_HEIGHT_PX,  # низ колышка (верх шкалы голов)
+                'text': author_text,
+                'text_w': text_w,
+                'text_h': text_h,
+                'color': color,
+                'level': 0,  # будет вычислено
+                'final_x': x_pos,
+                'final_y': authors_y
+            })
+
+        # === ЗМЕЙКА: определяем уровни (0-4) ===
+        for i, gwd in enumerate(goals_with_data):
+            # Проверка левого края — смещаем вправо
+            if gwd['base_x'] - gwd['text_w'] // 2 < scale_x + 2:
+                gwd['final_x'] = scale_x + gwd['text_w'] // 2 + 2
+            
+            # Проверка правого края — смещаем влево
+            if gwd['base_x'] + gwd['text_w'] // 2 > scale_x + scale_width - 2:
+                gwd['final_x'] = scale_x + scale_width - gwd['text_w'] // 2 - 2
+
+            if i == 0:
+                gwd['level'] = 0
+                continue
+
+            # Проверяем наложение со всеми предыдущими на том же уровне
+            current_level = 0
+            while current_level < MAX_LEVEL:
+                has_overlap = False
+                for prev in goals_with_data[:i]:
+                    if prev['level'] != current_level:
+                        continue
+                    # Проверяем пересечение по X
+                    prev_left = prev['final_x'] - prev['text_w'] // 2 - 2
+                    prev_right = prev['final_x'] + prev['text_w'] // 2 + 2
+                    curr_left = gwd['final_x'] - gwd['text_w'] // 2 - 2
+                    curr_right = gwd['final_x'] + gwd['text_w'] // 2 + 2
+                    
+                    if not (curr_right < prev_left or curr_left > prev_right):
+                        has_overlap = True
+                        break
+                
+                if not has_overlap:
+                    break
+                current_level += 1
+            
+            gwd['level'] = min(current_level, MAX_LEVEL)
+            gwd['final_y'] = authors_y + gwd['level'] * LEVEL_HEIGHT
+
+        # === Рисуем подписи и выноски ===
+        for gwd in goals_with_data:
+            # Вычисляем координаты текста
+            text_x = gwd['final_x'] - gwd['text_w'] // 2
+            text_y = gwd['final_y']
+            
+            # Финальная проверка границ
+            if text_x < scale_x + 2:
+                text_x = scale_x + 2
+            if text_x + gwd['text_w'] > scale_x + scale_width - 2:
+                text_x = scale_x + scale_width - gwd['text_w'] - 2
+
+            # === НОВОЕ: Выноска от низа колышка к ЦЕНТРУ текста ===
+            if gwd['level'] > 0:
+                # Точка начала — низ колышка (верх шкалы голов)
+                start_x = gwd['base_x']
+                start_y = gwd['peg_y']
+                
+                # Точка конца — настоящий центр текста
+                end_x = text_x + gwd['text_w'] // 2
+                end_y = text_y + gwd['text_h'] // 2
+                
+                # Рисуем пунктирную линию
+                self._draw_dashed_line(draw, start_x, start_y, end_x, end_y, 
+                                    LEADER_LINE_COLOR, LEADER_LINE_DASH, 1)
+
+            # Рисуем текст
+            draw.text((text_x, text_y), gwd['text'], fill=gwd['color'], font=font)
+
+
+    def _draw_dashed_line(self, draw: ImageDraw, x1: int, y1: int, x2: int, y2: int,
+                        color: str, dash: tuple, width: int):
+        """Рисует пунктирную линию."""
+        dash_len, gap_len = dash
+        total_len = ((x2 - x1) ** 2 + (y2 - y1) ** 2) ** 0.5
+        
+        if total_len == 0:
+            return
+        
+        # Направление
+        dx = (x2 - x1) / total_len
+        dy = (y2 - y1) / total_len
+        
+        current_dist = 0
+        is_dash = True
+        
+        while current_dist < total_len:
+            segment_len = dash_len if is_dash else gap_len
+            segment_len = min(segment_len, total_len - current_dist)
+            
+            if is_dash:
+                start_x = int(x1 + dx * current_dist)
+                start_y = int(y1 + dy * current_dist)
+                end_x = int(x1 + dx * (current_dist + segment_len))
+                end_y = int(y1 + dy * (current_dist + segment_len))
+                draw.line([(start_x, start_y), (end_x, end_y)], fill=color, width=width)
+            
+            current_dist += segment_len
+            is_dash = not is_dash
