@@ -148,6 +148,15 @@ class MainWindow(QMainWindow):
             self.project.match.rosters = protocol_data.get("rosters", {})
             self.project.match.events = protocol_data.get("events", [])
             # -----------------------------------------
+            # --- НОВЫЕ МЕТАДАННЫЕ ---
+            self.project.match.tournament_name = protocol_data.get("tournament_name")
+            self.project.match.tour_number = protocol_data.get("tour_number")
+            self.project.match.match_date = protocol_data.get("match_date")
+            self.project.match.match_time = protocol_data.get("match_time")
+            self.project.match.venue_city = protocol_data.get("venue_city")
+            self.project.match.venue_arena = protocol_data.get("venue_arena")
+            self.project.match.referees = protocol_data.get("referees", [])
+            # -----------------------
 
             # --- Сохранение проекта ---
             save_project_to_file(self.project, self.project_file_path)
@@ -156,7 +165,19 @@ class MainWindow(QMainWindow):
             self.protocol_validation_widget.set_events(self.project.match.events)
             self._update_lineup_widget_with_team_roster()
 
-            self.status_label.setText(f"Протокол загружен из: {os.path.basename(protocol_path)}")
+            # --- Опционально: показать информацию о матче в статусе ---
+            info_parts = []
+            if self.project.match.tournament_name:
+                info_parts.append(self.project.match.tournament_name)
+            if self.project.match.tour_number:
+                info_parts.append(f"тур {self.project.match.tour_number}")
+            if self.project.match.match_date:
+                info_parts.append(self.project.match.match_date)
+            
+            info_str = " | ".join(info_parts) if info_parts else os.path.basename(protocol_path)
+            self.status_label.setText(f"Протокол загружен: {info_str}")
+
+            # self.status_label.setText(f"Протокол загружен из: {os.path.basename(protocol_path)}")
 
         except Exception as e:
             QMessageBox.critical(self, "Ошибка", f"Не удалось загрузить протокол:\n{str(e)}")

@@ -48,7 +48,7 @@ from modules.reports import PlayerShiftMapReport, ReportData
 from modules.reports.ui.report_generation_dialog import ReportGenerationDialog
 
 # Путь к тестовому файлу
-TEST_FILE_PATH = r"c:\код\3.0\TEST_REPORT_HKT_19_тур_10.01.2026_Русь 2014_vs_Созвездие 2014.hkt"
+TEST_FILE_PATH = r"c:\code\3.0\TEST_REPORT_HKT_19_тур_10.01.2026_Русь 2014_vs_Созвездие 2014.hkt"
 TEST_OUTPUT_DIR = os.path.dirname(TEST_FILE_PATH)
 
 

@@ -10,9 +10,9 @@
             "packageManager": "ms-python.python:pip"
         }
     ],
-    "python.defaultInterpreterPath": "C:\\Код\\3.0\\venv\\Scripts\\python.exe",
+    "python.defaultInterpreterPath": "C:\\code\\3.0\\venv\\Scripts\\python.exe",
     "python.terminal.activateEnvironment": true,
     "terminal.integrated.env.windows": {
-        "QT_QPA_PLATFORM_PLUGIN_PATH": "C:\\Код\\3.0\\venv\\Lib\\site-packages\\PyQt5\\Qt5\\plugins"
+        "QT_QPA_PLATFORM_PLUGIN_PATH": "C:\\code\\3.0\\venv\\Lib\\site-packages\\PyQt5\\Qt5\\plugins"
     }
 }

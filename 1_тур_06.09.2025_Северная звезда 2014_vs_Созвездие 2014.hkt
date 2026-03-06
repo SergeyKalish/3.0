@@ -38,6 +38,534 @@
         "label_type": "Сегмент",
         "global_time": 7796.846844720841,
         "context": null
+      },
+      {
+        "id": "7e1c566a-03ea-493c-b7d4-0f8bc0a975eb",
+        "label_type": "Черн.OSD",
+        "global_time": 1925.358879158251,
+        "context": {
+          "detected_text": "ГОЛ",
+          "confidence": 90.0
+        }
+      },
+      {
+        "id": "51c5f679-ecf1-4b31-adee-70136594655c",
+        "label_type": "Черн.OSD",
+        "global_time": 2706.0802038462994,
+        "context": {
+          "detected_text": "ГОЛ",
+          "confidence": 88.0
+        }
+      },
+      {
+        "id": "8a24e82f-c908-4f4b-b329-eb279736fa70",
+        "label_type": "Черн.OSD",
+        "global_time": 2843.807452919473,
+        "context": {
+          "detected_text": "ГОЛ",
+          "confidence": 90.0
+        }
+      },
+      {
+        "id": "d6144877-7441-4930-921f-5a24d146ed35",
+        "label_type": "Черн.OSD",
+        "global_time": 4102.0900063705485,
+        "context": {
+          "detected_text": "ГОЛ!",
+          "confidence": 94.0
+        }
+      },
+      {
+        "id": "45955ff4-2baf-43be-8814-0f4786da6220",
+        "label_type": "Черн.OSD",
+        "global_time": 4739.478903244073,
+        "context": {
+          "detected_text": "ГОЛ",
+          "confidence": 91.0
+        }
+      },
+      {
+        "id": "efd4322c-0f8d-46c1-86d7-7d7a23e4d543",
+        "label_type": "Черн.OSD",
+        "global_time": 5528.607996044147,
+        "context": {
+          "detected_text": "ГОЛ",
+          "confidence": 92.0
+        }
+      },
+      {
+        "id": "359d3d63-71cf-4e37-9019-dadff5f35ada",
+        "label_type": "Черн.OSD",
+        "global_time": 6918.1718430158435,
+        "context": {
+          "detected_text": "ГОЛ",
+          "confidence": 91.0
+        }
+      },
+      {
+        "id": "0dae2e21-3d07-466a-8cf4-e73cdaa07820",
+        "label_type": "Черн.OSD",
+        "global_time": 7045.889844336606,
+        "context": {
+          "detected_text": "ГОЛ",
+          "confidence": 90.0
+        }
+      },
+      {
+        "id": "388c4a60-bc1e-477a-873c-208fcc6abe95",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 1579.4392768349312,
+        "context": null
+      },
+      {
+        "id": "c0af2fd7-2f51-45c1-9d20-7f5ef1c95182",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 1586.645935216667,
+        "context": null
+      },
+      {
+        "id": "403aab44-0232-4f2f-8269-9a78d4f55176",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 1659.9136287643146,
+        "context": null
+      },
+      {
+        "id": "633a6896-47de-4e8d-b868-11faf8c056f2",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 1673.5262057075934,
+        "context": null
+      },
+      {
+        "id": "6c2fd9de-9e2e-4552-820b-f828b0cba0e1",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 1777.22201242257,
+        "context": null
+      },
+      {
+        "id": "f95ac203-e9b2-4280-b111-7cc24b11913c",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 1784.428670804306,
+        "context": null
+      },
+      {
+        "id": "60a3d5c4-cdb5-40b3-9cc6-8f9dcd22a683",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 1896.9326155414042,
+        "context": null
+      },
+      {
+        "id": "c46982ca-0b82-4c15-85fd-cf6226a8ab28",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 1905.3403836534292,
+        "context": null
+      },
+      {
+        "id": "da6ff59b-da1f-4839-9a95-13f795168517",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 1948.9807038539407,
+        "context": null
+      },
+      {
+        "id": "3ff0ecec-96f3-4afe-b55f-ffc718d87944",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 1965.3958701678946,
+        "context": null
+      },
+      {
+        "id": "b5e03d6a-e616-417f-bc0b-c3f2e781e54d",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 2036.66171416506,
+        "context": null
+      },
+      {
+        "id": "c04889ee-edb9-473c-a837-d0861d57d2f4",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 2044.6691123669887,
+        "context": null
+      },
+      {
+        "id": "ff1794ba-a01d-4ca3-b0d6-85c49f343c9f",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 2118.3371758247326,
+        "context": null
+      },
+      {
+        "id": "828b1403-c997-4a60-a0d5-80351874719a",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 2126.3445740266616,
+        "context": null
+      },
+      {
+        "id": "fce96557-0cc7-4aaf-85c9-5be40a19834d",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 2732.504617912664,
+        "context": null
+      },
+      {
+        "id": "73e60257-7982-43f8-9adb-645efb8ead9f",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 2749.7205240468106,
+        "context": null
+      },
+      {
+        "id": "007dfa6c-4c67-4f6d-9054-cf02facc011c",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 2864.6266882444875,
+        "context": null
+      },
+      {
+        "id": "93589657-e7a2-4ef8-8335-7428acb17681",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 2883.8444439291166,
+        "context": null
+      },
+      {
+        "id": "3b45a528-9de1-4d77-8bd7-dcfc09914b6f",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 2918.6766261075063,
+        "context": null
+      },
+      {
+        "id": "04027b31-3ac9-4587-bf07-abe54acfa40c",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 2925.082544669049,
+        "context": null
+      },
+      {
+        "id": "a44b39e6-7bc2-465e-9478-b6f75650194a",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 2973.9276737008145,
+        "context": null
+      },
+      {
+        "id": "cbf3bd77-909c-4146-b043-40a5938628d2",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 2980.3335922623573,
+        "context": null
+      },
+      {
+        "id": "ae4ab3f3-5961-4a1f-8923-6e2a7da63714",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 4125.711831066238,
+        "context": null
+      },
+      {
+        "id": "0c467923-71c6-446d-83a3-4ca372dcf5fb",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 4138.523668189325,
+        "context": null
+      },
+      {
+        "id": "8cf38034-c67f-4cb3-a26e-5396c38812a0",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 4206.1861829956215,
+        "context": null
+      },
+      {
+        "id": "db9a729c-000f-4274-9438-115ec739523d",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 4213.392841377357,
+        "context": null
+      },
+      {
+        "id": "d965ff3d-c4e4-4d7a-85d9-849b5b92b990",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 4443.605539682808,
+        "context": null
+      },
+      {
+        "id": "2dfdb5ff-ddec-4c84-aaff-1e8ab89681cf",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 4451.612937884736,
+        "context": null
+      },
+      {
+        "id": "2dc81c22-9eb2-4359-bc0f-65b30c0f70c5",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 4539.293948195856,
+        "context": null
+      },
+      {
+        "id": "bb400c8f-b3d5-419f-bc8f-474f82221239",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 4544.899126937205,
+        "context": null
+      },
+      {
+        "id": "1d06df5c-029a-4817-a2ff-a9627327a514",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 4640.98790536035,
+        "context": null
+      },
+      {
+        "id": "03a6de9c-31b4-477d-a231-ecb6d1ee1d3f",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 4648.594933652183,
+        "context": null
+      },
+      {
+        "id": "dbaf31e6-9603-4002-8aa2-51271fa4f8cd",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 4757.89591910851,
+        "context": null
+      },
+      {
+        "id": "1e268e6f-4450-485d-9ed0-a0a0181b15be",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 4772.709605782077,
+        "context": null
+      },
+      {
+        "id": "2971746f-24fc-4b72-986b-171a979f8213",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 4903.230196473515,
+        "context": null
+      },
+      {
+        "id": "cc70a428-3af1-4202-9580-e40c95486731",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 4910.436854855251,
+        "context": null
+      },
+      {
+        "id": "8f82e28d-5a6b-4ae8-ac8b-12cc59aa5ef8",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 4954.477544965859,
+        "context": null
+      },
+      {
+        "id": "8f7ccc82-9bdf-4ac0-bcd8-6751b8f7bc39",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 4967.289382088945,
+        "context": null
+      },
+      {
+        "id": "c160816b-9f37-42f7-98c8-add874e854f5",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 5184.289873361213,
+        "context": null
+      },
+      {
+        "id": "032a34c6-78d5-4e03-9d17-f030982643fd",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 5192.697641473238,
+        "context": null
+      },
+      {
+        "id": "ab72c61e-737a-4b52-8274-04f0fa09e040",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 5412.50072211618,
+        "context": null
+      },
+      {
+        "id": "ba8f4787-ae49-462e-874d-64eca3e2f96d",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 5419.707380497916,
+        "context": null
+      },
+      {
+        "id": "89b042e1-4699-4166-b41f-df66e2a607e4",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 5457.342152046981,
+        "context": null
+      },
+      {
+        "id": "2ba48b7c-c67e-4c96-ba43-613d1103e081",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 5463.748070608524,
+        "context": null
+      },
+      {
+        "id": "12bbbe03-3490-4f33-8a39-0f5799382fea",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 5549.427231369161,
+        "context": null
+      },
+      {
+        "id": "03f88823-574a-4fa6-8be7-763bdf22cb85",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 5568.244617143694,
+        "context": null
+      },
+      {
+        "id": "bd97b461-88f9-474e-b573-42082eebd5e0",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 5971.697375547871,
+        "context": null
+      },
+      {
+        "id": "0e8e337c-1849-48ba-a764-1e3b59b7eb0c",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 5979.304403839704,
+        "context": null
+      },
+      {
+        "id": "0e0650f6-ad75-4b70-bd1b-20af98abf2d4",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 6053.773207117641,
+        "context": null
+      },
+      {
+        "id": "cc81cabf-ba74-4d48-a43e-c38b3dcf22a6",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 6063.782454870051,
+        "context": null
+      },
+      {
+        "id": "b44d7417-865f-4a51-bbbb-340e607548a1",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 6244.3492843235435,
+        "context": null
+      },
+      {
+        "id": "05e133b4-caa2-4963-8964-6537c2f89045",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 6251.155572795183,
+        "context": null
+      },
+      {
+        "id": "46abdd63-46b9-4f3e-9179-8462fd865420",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 6462.550885326101,
+        "context": null
+      },
+      {
+        "id": "f13cb83a-79f1-484d-8f55-1b0e154e1bd2",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 6470.558283528029,
+        "context": null
+      },
+      {
+        "id": "414df202-5245-4a65-bf8a-10fb1b31566e",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 6529.813030222302,
+        "context": null
+      },
+      {
+        "id": "2c482ac3-81df-49d1-9eca-66d4a3f04eec",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 6538.220798334327,
+        "context": null
+      },
+      {
+        "id": "3868079c-b8b0-44bb-8ee8-b4d2659d1468",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 6717.186148147433,
+        "context": null
+      },
+      {
+        "id": "33b7d438-abc5-4002-bdda-d4559e37af97",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 6727.5957658099405,
+        "context": null
+      },
+      {
+        "id": "d8a0eac4-8ae4-4a22-a770-8e9da794da2e",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 6786.04977268402,
+        "context": null
+      },
+      {
+        "id": "70410cee-4ec3-4ed0-ab13-2b32ef710c49",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 6792.455691245563,
+        "context": null
+      },
+      {
+        "id": "8bb4904d-8130-4e8b-953a-187f4cb94b9b",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 6940.9929278913405,
+        "context": null
+      },
+      {
+        "id": "06be3d81-a033-48f2-b540-aff5a51bf7bc",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 6955.005874744716,
+        "context": null
+      },
+      {
+        "id": "3d32e195-b171-482f-840a-c18a330fa1d8",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 7063.906490290946,
+        "context": null
+      },
+      {
+        "id": "5d33acc0-4048-44cb-80a4-ad45c1f643c6",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 7076.718327414032,
+        "context": null
+      },
+      {
+        "id": "092fc69d-e948-4520-b251-6374e4eb7816",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 7174.408585477562,
+        "context": null
+      },
+      {
+        "id": "237fd0c1-1d7f-4f60-8f7f-bf3e0fd6da7c",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 7182.015613769394,
+        "context": null
+      },
+      {
+        "id": "43aee444-fa8d-4f98-a1c6-2b5d6f75ea00",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 7304.128436348807,
+        "context": null
+      },
+      {
+        "id": "2456303d-0a79-4a06-beaf-5171e72937ce",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 7310.934724820447,
+        "context": null
+      },
+      {
+        "id": "4699d9a2-2920-42d9-86da-feb4a6d0bb67",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 7474.686018049888,
+        "context": null
+      },
+      {
+        "id": "f2b15947-f41f-4e9f-b8ba-a1a4f5b9345b",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 7490.300444543649,
+        "context": null
+      },
+      {
+        "id": "cb5d0d4b-bfdd-49db-9131-1442d9f03dfe",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 7559.564438990333,
+        "context": null
+      },
+      {
+        "id": "d1adafd0-6701-4233-b83f-0fce833fb9e1",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 7565.169617731683,
+        "context": null
+      },
+      {
+        "id": "0fc6e3e8-9abc-4659-9f2a-8601b98df778",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 7673.26949345772,
+        "context": null
+      },
+      {
+        "id": "8c0685cd-5d27-483d-b114-fb9cf88a62c3",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 7684.880220850517,
+        "context": null
+      },
+      {
+        "id": "8e13822c-e623-4258-8555-68eab8d9a903",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 7721.714252579389,
+        "context": null
+      },
+      {
+        "id": "40381040-6bec-49e7-b46a-cb36fd25a5f9",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 7727.319431320739,
+        "context": null
       }
     ],
     "calculated_ranges": [

@@ -105,22 +105,36 @@ class Match:
         teams: Optional[Dict[str, Any]] = None,
         rosters: Optional[Dict[str, List[Dict[str, Any]]]] = None,
         events: Optional[List[Dict[str, Any]]] = None,
-        # -------------------------------
+        # --- НОВЫЕ ПОЛЯ МЕТАДАННЫХ ---
+        tournament_name: Optional[str] = None,
+        tour_number: Optional[str] = None,
+        match_date: Optional[str] = None,
+        match_time: Optional[str] = None,
+        venue_city: Optional[str] = None,
+        venue_arena: Optional[str] = None,
+        referees: Optional[List[str]] = None,
+        # -----------------------------
     ):
+                # --- ОСНОВНЫЕ ПОЛЯ (были пропущены!) ---
         self.generic_labels: List[GenericLabel] = generic_labels or []
         self.calculated_ranges: List[CalculatedRange] = calculated_ranges or []
-        # --- НОВЫЕ ПОЛЯ (после calculated_ranges) ---
-        # --- ИСПРАВЛЕНО: НОВЫЕ ПОЛЯ (после calculated_ranges) ---
         self.player_shifts: Dict[str, PlayerShiftInfo] = player_shifts or {}
-        self.player_shifts_official_timer: Dict[str, PlayerShiftInfo] = player_shifts_official_timer or {} # <-- Теперь корректно
-        # --- КОНЕЦ ИСПРАВЛЕНИЯ ---
-        # --- КОНЕЦ НОВЫХ ПОЛЕЙ ---
-        # --- Новые поля ---
+        self.player_shifts_official_timer: Dict[str, PlayerShiftInfo] = player_shifts_official_timer or {}
+        print(f"[DEBUG] Match.__init__ called with generic_labels={generic_labels is not None}")
+        # ... существующие поля ...
         self.match_id: Optional[str] = match_id
         self.teams: Dict[str, Any] = teams or {}
         self.rosters: Dict[str, List[Dict[str, Any]]] = rosters or {}
         self.events: List[Dict[str, Any]] = events or []
-        # -----------------
+        # --- НОВЫЕ ПОЛЯ ---
+        self.tournament_name: Optional[str] = tournament_name
+        self.tour_number: Optional[str] = tour_number
+        self.match_date: Optional[str] = match_date
+        self.match_time: Optional[str] = match_time
+        self.venue_city: Optional[str] = venue_city
+        self.venue_arena: Optional[str] = venue_arena
+        self.referees: List[str] = referees or []
+        # ------------------
 
 
     def to_dict(self) -> Dict[str, Any]:
@@ -149,6 +163,15 @@ class Match:
             "rosters": self.rosters,
             "events": self.events,
             # -----------------
+            # --- НОВЫЕ ПОЛЯ ---
+            "tournament_name": self.tournament_name,
+            "tour_number": self.tour_number,
+            "match_date": self.match_date,
+            "match_time": self.match_time,
+            "venue_city": self.venue_city,
+            "venue_arena": self.venue_arena,
+            "referees": self.referees,
+            # ------------------
         }
 
     @classmethod
@@ -196,7 +219,16 @@ class Match:
             rosters=raw_match_data.get("rosters", {}),
             events=raw_match_data.get("events", []),
             # -------------------------------
-        )
+            # --- НОВЫЕ ПОЛЯ ---
+            tournament_name=raw_match_data.get("tournament_name"),
+            tour_number=raw_match_data.get("tour_number"),
+            match_date=raw_match_data.get("match_date"),
+            match_time=raw_match_data.get("match_time"),
+            venue_city=raw_match_data.get("venue_city"),
+            venue_arena=raw_match_data.get("venue_arena"),
+            referees=raw_match_data.get("referees", []),
+            # ------------------
+            )
 
 class Project:
     """
