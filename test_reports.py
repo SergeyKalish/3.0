@@ -2,6 +2,44 @@ import sys
 import os
 from datetime import datetime
 
+# === FIX: Настройка путей Qt ===
+def setup_qt_plugins():
+    """Автоматическая настройка путей к плагинам Qt"""
+    possible_paths = [
+        # Стандартный путь в venv
+        os.path.join(os.path.dirname(sys.executable), '..', 'Lib', 'site-packages', 'PyQt5', 'Qt5', 'plugins'),
+        # Альтернативный путь
+        os.path.join(os.path.dirname(sys.executable), 'Lib', 'site-packages', 'PyQt5', 'Qt5', 'plugins'),
+        # PyQt5 в system Python
+        os.path.join(sys.prefix, 'Lib', 'site-packages', 'PyQt5', 'Qt5', 'plugins'),
+    ]
+    
+    for path in possible_paths:
+        platforms_path = os.path.join(path, 'platforms')
+        if os.path.exists(os.path.join(platforms_path, 'qwindows.dll')):
+            os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = platforms_path
+            print(f"Qt plugins найдены: {platforms_path}")
+            return True
+    
+    # Если не нашли, попробуем через PyQt5 напрямую
+    try:
+        import PyQt5
+        qt_path = os.path.join(os.path.dirname(PyQt5.__file__), 'Qt5', 'plugins')
+        if os.path.exists(qt_path):
+            os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = os.path.join(qt_path, 'platforms')
+            print(f"Qt plugins через PyQt5: {qt_path}")
+            return True
+    except ImportError:
+        pass
+    
+    return False
+
+if not setup_qt_plugins():
+    print("WARNING: Не удалось найти плагины Qt!")
+    print("Попробуйте установить: pip install PyQt5 --force-reinstall")
+
+# === Остальной код без изменений ===
+
 sys.path.insert(0, os.path.abspath('.'))
 
 from PyQt5.QtWidgets import QApplication, QFileDialog, QMessageBox
@@ -10,7 +48,7 @@ from modules.reports import PlayerShiftMapReport, ReportData
 from modules.reports.ui.report_generation_dialog import ReportGenerationDialog
 
 # Путь к тестовому файлу
-TEST_FILE_PATH = r"c:\hockey\4.0\3.0\TEST_REPORT_HKT_19_тур_10.01.2026_Русь 2014_vs_Созвездие 2014.hkt"
+TEST_FILE_PATH = r"c:\код\3.0\TEST_REPORT_HKT_19_тур_10.01.2026_Русь 2014_vs_Созвездие 2014.hkt"
 TEST_OUTPUT_DIR = os.path.dirname(TEST_FILE_PATH)
 
 

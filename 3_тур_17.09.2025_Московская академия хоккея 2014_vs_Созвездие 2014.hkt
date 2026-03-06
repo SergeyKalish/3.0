@@ -1,0 +1,193 @@
+{
+  "version": "4.0",
+  "video_path": "D:/Media/Матчи Созвездие 2014 сезона 25-26/3_тур_17.09.2025_Московская академия хоккея 2014_vs_Созвездие 2014.mp4",
+  "match": {
+    "generic_labels": [
+      {
+        "id": "1d728d97-9a13-4bb9-8632-6b67a6440d87",
+        "label_type": "Сегмент",
+        "global_time": 1232.0,
+        "context": null
+      },
+      {
+        "id": "74e8a033-fc8f-47ae-8eb1-9867f553beea",
+        "label_type": "Сегмент",
+        "global_time": 2830.9165332317352,
+        "context": null
+      },
+      {
+        "id": "3cef0c87-5f8f-46c3-8636-fdfbef8cdc9c",
+        "label_type": "Сегмент",
+        "global_time": 3852.506064891815,
+        "context": null
+      },
+      {
+        "id": "ac8c5f60-bbb8-466c-a9b2-4897655a964c",
+        "label_type": "Сегмент",
+        "global_time": 5451.139640569687,
+        "context": null
+      },
+      {
+        "id": "fc6d2029-6b5e-40b0-a0bb-afa6749f8991",
+        "label_type": "Сегмент",
+        "global_time": 5659.139640569687,
+        "context": null
+      },
+      {
+        "id": "cfee9f0a-4f77-4b8c-94ca-b29974554aaf",
+        "label_type": "Сегмент",
+        "global_time": 7315.694426059723,
+        "context": null
+      }
+    ],
+    "calculated_ranges": [
+      {
+        "id": "30f093d7-bc0b-4509-89df-7661a5aeff61",
+        "name": "Всё видео",
+        "label_type": "Всё видео",
+        "start_time": 0.0,
+        "end_time": 7804.022666666667,
+        "source_label_ids": [],
+        "context": null
+      },
+      {
+        "id": "d42a6b27-dc0a-4435-b546-1f243c9f37cb",
+        "name": "Период 1",
+        "label_type": "Сегмент",
+        "start_time": 1232.0,
+        "end_time": 2830.9165332317352,
+        "source_label_ids": [
+          "1d728d97-9a13-4bb9-8632-6b67a6440d87",
+          "74e8a033-fc8f-47ae-8eb1-9867f553beea"
+        ],
+        "context": null
+      },
+      {
+        "id": "886b1252-5ba4-4fc2-9b47-91300ffd57b2",
+        "name": "Период 2",
+        "label_type": "Сегмент",
+        "start_time": 3852.506064891815,
+        "end_time": 5451.139640569687,
+        "source_label_ids": [
+          "3cef0c87-5f8f-46c3-8636-fdfbef8cdc9c",
+          "ac8c5f60-bbb8-466c-a9b2-4897655a964c"
+        ],
+        "context": null
+      },
+      {
+        "id": "82f12148-00f4-41d5-bdad-a62e4f2fe06c",
+        "name": "Период 3",
+        "label_type": "Сегмент",
+        "start_time": 5659.139640569687,
+        "end_time": 7315.694426059723,
+        "source_label_ids": [
+          "fc6d2029-6b5e-40b0-a0bb-afa6749f8991",
+          "cfee9f0a-4f77-4b8c-94ca-b29974554aaf"
+        ],
+        "context": null
+      },
+      {
+        "id": "3e50ae31-4c77-4dc3-b970-5e45b5ede0ac",
+        "name": "Период 1. ЧИИ №1",
+        "label_type": "ЧИИ",
+        "start_time": 1232.0,
+        "end_time": 2830.9165332317352,
+        "source_label_ids": [
+          "1d728d97-9a13-4bb9-8632-6b67a6440d87",
+          "74e8a033-fc8f-47ae-8eb1-9867f553beea"
+        ],
+        "context": null
+      },
+      {
+        "id": "36ab8a53-447c-45c5-89ff-e70f08529b85",
+        "name": "Период 2. ЧИИ №1",
+        "label_type": "ЧИИ",
+        "start_time": 3852.506064891815,
+        "end_time": 5451.139640569687,
+        "source_label_ids": [
+          "3cef0c87-5f8f-46c3-8636-fdfbef8cdc9c",
+          "ac8c5f60-bbb8-466c-a9b2-4897655a964c"
+        ],
+        "context": null
+      },
+      {
+        "id": "c3949243-fe7b-4c91-8b65-c3a71d1cfaf4",
+        "name": "Период 3. ЧИИ №1",
+        "label_type": "ЧИИ",
+        "start_time": 5659.139640569687,
+        "end_time": 7315.694426059723,
+        "source_label_ids": [
+          "fc6d2029-6b5e-40b0-a0bb-afa6749f8991",
+          "cfee9f0a-4f77-4b8c-94ca-b29974554aaf"
+        ],
+        "context": null
+      },
+      {
+        "id": "8ec1a1e2-1381-40b7-93df-1657ce4af48c",
+        "name": "0:0",
+        "label_type": "Счёт",
+        "start_time": 1232.0,
+        "end_time": 2830.9165332317352,
+        "source_label_ids": [],
+        "context": null
+      },
+      {
+        "id": "621b729d-a191-4cfa-a644-a0f00b6b726d",
+        "name": "0:0",
+        "label_type": "Счёт",
+        "start_time": 3852.506064891815,
+        "end_time": 5451.139640569687,
+        "source_label_ids": [],
+        "context": null
+      },
+      {
+        "id": "b08931c1-621e-46f4-bb96-9ac320231630",
+        "name": "0:0",
+        "label_type": "Счёт",
+        "start_time": 5659.139640569687,
+        "end_time": 7315.694426059723,
+        "source_label_ids": [],
+        "context": null
+      },
+      {
+        "id": "ddfcea1f-4ca1-480b-8780-2ce27fbab783",
+        "name": "5 на 5",
+        "label_type": "game_mode",
+        "start_time": 1232.0,
+        "end_time": 2830.9165332317352,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": []
+        }
+      },
+      {
+        "id": "a78381fb-34fd-4e05-9430-3f24b92bb2ca",
+        "name": "5 на 5",
+        "label_type": "game_mode",
+        "start_time": 3852.506064891815,
+        "end_time": 5451.139640569687,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": []
+        }
+      },
+      {
+        "id": "fff35577-7eda-4d4e-bb96-89568d3c7feb",
+        "name": "5 на 5",
+        "label_type": "game_mode",
+        "start_time": 5659.139640569687,
+        "end_time": 7315.694426059723,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": []
+        }
+      }
+    ],
+    "player_shifts": {},
+    "player_shifts_official_timer": {},
+    "match_id": null,
+    "teams": {},
+    "rosters": {},
+    "events": []
+  }
+}

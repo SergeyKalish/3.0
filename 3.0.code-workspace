@@ -15,7 +15,21 @@
 			"*.hkt": "json"
 		},
 		"files.exclude": {
-			"**/*.png": true
+			"**/*.png": true,
+			"**/venv": true,
+			"**/.venv": true,
+			"**/__pycache__": true,
+			"**/*.pyc": true
+		},
+		"files.watcherExclude": {
+			"**/venv/**": true,
+			"**/.venv/**": true,
+			"**/__pycache__/**": true
+		},
+		"search.exclude": {
+			"**/venv": true,
+			"**/.venv": true,
+			"**/__pycache__": true
 		}
 	}
 }

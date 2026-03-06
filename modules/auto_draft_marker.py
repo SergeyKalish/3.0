@@ -419,7 +419,7 @@ def main_interactive():
 
     # 2. Выбор PNG шаблона футажа
     # --- ИСПОЛЬЗУЕМ ШАБЛОН ПО УМОЛЧАНИЮ ---
-    default_template_path = r"c:\hockey\4.0\3.0\data\league_logo_footage.png"
+    default_template_path = r"c:\код\3.0\data\league_logo_footage.png"
     if os.path.exists(default_template_path):
         reply = QMessageBox.information(None, "Шаблон футажа", f"Найден шаблон по умолчанию:\n{default_template_path}\n\nИспользовать его?", QMessageBox.Yes | QMessageBox.No)
         use_default = reply == QMessageBox.Yes # <-- Исправлено
