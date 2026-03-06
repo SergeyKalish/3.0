@@ -570,7 +570,7 @@
     ],
     "calculated_ranges": [
       {
-        "id": "6cb0490f-9dca-4431-ace0-57358bf912f0",
+        "id": "8faa56cf-9436-4ed7-b978-dc1c1867e1f5",
         "name": "Всё видео",
         "label_type": "Всё видео",
         "start_time": 0.0,
@@ -579,7 +579,7 @@
         "context": null
       },
       {
-        "id": "eb3924a3-d9d3-4fd3-92a1-8d423f6632a1",
+        "id": "414be2ce-3615-42e8-bef3-de4c4c697b31",
         "name": "Период 1",
         "label_type": "Сегмент",
         "start_time": 1515.8,
@@ -591,7 +591,7 @@
         "context": null
       },
       {
-        "id": "277f6b11-356c-4d73-b40d-6f6951157440",
+        "id": "fb28556a-c005-4d94-a3f6-b9988855ca7a",
         "name": "Период 2",
         "label_type": "Сегмент",
         "start_time": 4000.8,
@@ -603,7 +603,7 @@
         "context": null
       },
       {
-        "id": "2d92861e-d9f2-4326-9d0c-a8694d71f614",
+        "id": "42057813-e302-4058-b6ff-21a222fd4e17",
         "name": "Период 3",
         "label_type": "Сегмент",
         "start_time": 5921.6575327396395,
@@ -615,7 +615,7 @@
         "context": null
       },
       {
-        "id": "acdccbd6-68b0-43b2-bcef-0e7db525bc51",
+        "id": "eafa0378-2921-413a-8373-0275a868c0ee",
         "name": "Период 1. ЧИИ №1",
         "label_type": "ЧИИ",
         "start_time": 1515.8,
@@ -627,7 +627,7 @@
         "context": null
       },
       {
-        "id": "e55b902b-85a8-4a00-80aa-800503e38759",
+        "id": "f1556f44-cb3e-46f1-897c-f0801feded3f",
         "name": "Период 2. ЧИИ №1",
         "label_type": "ЧИИ",
         "start_time": 4000.8,
@@ -639,7 +639,7 @@
         "context": null
       },
       {
-        "id": "98da8bc5-e287-470f-8304-46813873e1dd",
+        "id": "52df0595-45f0-413a-b31c-4cbd96fd0d52",
         "name": "Период 3. ЧИИ №1",
         "label_type": "ЧИИ",
         "start_time": 5921.6575327396395,
@@ -651,7 +651,7 @@
         "context": null
       },
       {
-        "id": "654bb0e9-fcdc-42ba-ac6a-f27a70c4c4f0",
+        "id": "12aee507-8cfa-4d07-bf60-251d072e78c9",
         "name": "0:0",
         "label_type": "Счёт",
         "start_time": 1515.8,
@@ -660,7 +660,7 @@
         "context": null
       },
       {
-        "id": "103b7495-96c6-4716-babe-94a84ef7a433",
+        "id": "d503b742-79f4-43db-86b4-b357549beacc",
         "name": "0:0",
         "label_type": "Счёт",
         "start_time": 4000.8,
@@ -669,7 +669,7 @@
         "context": null
       },
       {
-        "id": "bbc054e7-758b-4ed0-9f64-ea5635a9adef",
+        "id": "0685ec0e-2223-40e5-811c-3f8d89cee7e0",
         "name": "0:0",
         "label_type": "Счёт",
         "start_time": 5921.6575327396395,
@@ -678,7 +678,7 @@
         "context": null
       },
       {
-        "id": "faed175c-770b-4c19-a430-0f873768c2bd",
+        "id": "a3690b54-cd7d-49db-a599-b0b56588ac56",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 1515.8,
@@ -689,7 +689,7 @@
         }
       },
       {
-        "id": "02e7b0b3-6435-46b3-8ef5-0684ec18ba62",
+        "id": "9a9aca29-91dc-40bd-9a84-d7a0c58f5943",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 4000.8,
@@ -700,7 +700,7 @@
         }
       },
       {
-        "id": "7d50305a-a783-42a6-abae-f0e70df41124",
+        "id": "8d33b362-2f93-445b-9677-b0a0945bc002",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 5921.6575327396395,
@@ -713,494 +713,9 @@
     ],
     "player_shifts": {},
     "player_shifts_official_timer": {},
-    "match_id": "10032",
-    "teams": {
-      "f-team": "Северная звезда 2014",
-      "f-team_id": 201,
-      "s-team": "Созвездие 2014",
-      "s-team_id": 301
-    },
-    "rosters": {
-      "f-team": [
-        {
-          "name": "Горбунов Илья",
-          "number": "13",
-          "role": "Вратарь",
-          "birth_date": "23.11.2014",
-          "id_fhm": "3830"
-        },
-        {
-          "name": "Лунёв Роман",
-          "number": "20",
-          "role": "Вратарь",
-          "birth_date": "01.11.2014",
-          "id_fhm": "8314"
-        },
-        {
-          "name": "Абу Бакер Амир",
-          "number": "25",
-          "role": "Нападающий",
-          "birth_date": "23.04.2014",
-          "id_fhm": "8306"
-        },
-        {
-          "name": "Бабушкин Фёдор",
-          "number": "75",
-          "role": "Нападающий",
-          "birth_date": "19.06.2015",
-          "id_fhm": "936"
-        },
-        {
-          "name": "Барановский Матвей",
-          "number": "9",
-          "role": "Нападающий",
-          "birth_date": "10.08.2014",
-          "id_fhm": "9519"
-        },
-        {
-          "name": "Буренков Владимир",
-          "number": "21",
-          "role": "Защитник",
-          "birth_date": "30.01.2014",
-          "id_fhm": "8307"
-        },
-        {
-          "name": "Голиков Андрей",
-          "number": "8",
-          "role": "Нападающий",
-          "birth_date": "10.06.2014",
-          "id_fhm": "8311"
-        },
-        {
-          "name": "Гришанов Макар",
-          "number": "19",
-          "role": "Защитник",
-          "birth_date": "12.02.2014",
-          "id_fhm": "2669"
-        },
-        {
-          "name": "Егоров Александр",
-          "number": "35",
-          "role": "Защитник",
-          "birth_date": "13.12.2014",
-          "id_fhm": "7210"
-        },
-        {
-          "name": "Ефимов Павел",
-          "number": "47",
-          "role": "Нападающий",
-          "birth_date": "12.02.2014",
-          "id_fhm": "6358"
-        },
-        {
-          "name": "Кинякин Вячеслав",
-          "number": "97",
-          "role": "Нападающий",
-          "birth_date": "25.09.2014",
-          "id_fhm": "1452"
-        },
-        {
-          "name": "Клеева Анна",
-          "number": "12",
-          "role": "Защитник",
-          "birth_date": "07.01.2014",
-          "id_fhm": "940"
-        },
-        {
-          "name": "Леонтьев Даниил",
-          "number": "28",
-          "role": "Нападающий",
-          "birth_date": "08.04.2014",
-          "id_fhm": "8313"
-        },
-        {
-          "name": "Мохначев Савва",
-          "number": "29",
-          "role": "Нападающий",
-          "birth_date": "28.01.2014",
-          "id_fhm": "8316"
-        },
-        {
-          "name": "Мыцыков Артем",
-          "number": "78",
-          "role": "Защитник",
-          "birth_date": "03.02.2014",
-          "id_fhm": "8317"
-        },
-        {
-          "name": "Неверов Артем",
-          "number": "88",
-          "role": "Защитник",
-          "birth_date": "05.10.2014",
-          "id_fhm": "8318"
-        },
-        {
-          "name": "Петухов Александр",
-          "number": "86",
-          "role": "Нападающий",
-          "birth_date": "16.12.2014",
-          "id_fhm": "7226"
-        },
-        {
-          "name": "Синкевич Александр",
-          "number": "57",
-          "role": "Нападающий",
-          "birth_date": "13.10.2014",
-          "id_fhm": "6873"
-        },
-        {
-          "name": "Ткачук Кирилл",
-          "number": "23",
-          "role": "Защитник",
-          "birth_date": "30.01.2014",
-          "id_fhm": "8325"
-        }
-      ],
-      "s-team": [
-        {
-          "name": "Никонов Владислав",
-          "number": "20",
-          "role": "Вратарь",
-          "birth_date": "23.05.2014",
-          "id_fhm": "9507"
-        },
-        {
-          "name": "Новиков Павел",
-          "number": "1",
-          "role": "Вратарь",
-          "birth_date": "27.01.2014",
-          "id_fhm": "6976"
-        },
-        {
-          "name": "Арнаут Иван",
-          "number": "77",
-          "role": "Нападающий",
-          "birth_date": "20.01.2014",
-          "id_fhm": "8962"
-        },
-        {
-          "name": "Белан Дмитрий",
-          "number": "59",
-          "role": "Защитник",
-          "birth_date": "15.01.2014",
-          "id_fhm": "6966"
-        },
-        {
-          "name": "Волвенкин Андрей",
-          "number": "69",
-          "role": "Защитник",
-          "birth_date": "30.09.2014",
-          "id_fhm": "8963"
-        },
-        {
-          "name": "Ефимов Андрей",
-          "number": "52",
-          "role": "Защитник",
-          "birth_date": "19.08.2014",
-          "id_fhm": "1447"
-        },
-        {
-          "name": "Калиш Иван",
-          "number": "54",
-          "role": "Нападающий",
-          "birth_date": "15.06.2014",
-          "id_fhm": "6971"
-        },
-        {
-          "name": "Карнаухов Иван",
-          "number": "23",
-          "role": "Нападающий",
-          "birth_date": "23.07.2014",
-          "id_fhm": "4157"
-        },
-        {
-          "name": "Митин Павел",
-          "number": "3",
-          "role": "Защитник",
-          "birth_date": "03.12.2014",
-          "id_fhm": "6972"
-        },
-        {
-          "name": "Орлов Андрей",
-          "number": "70",
-          "role": "Нападающий",
-          "birth_date": "18.07.2014",
-          "id_fhm": "6977"
-        },
-        {
-          "name": "Паршин Игорь",
-          "number": "40",
-          "role": "Нападающий",
-          "birth_date": "17.03.2014",
-          "id_fhm": "5770"
-        },
-        {
-          "name": "Пимкин Артём",
-          "number": "99",
-          "role": "Защитник",
-          "birth_date": "04.01.2014",
-          "id_fhm": "6978"
-        },
-        {
-          "name": "Попков Олег",
-          "number": "98",
-          "role": "Нападающий",
-          "birth_date": "03.10.2014",
-          "id_fhm": "6979"
-        },
-        {
-          "name": "Рахматуллин Тамерлан",
-          "number": "13",
-          "role": "Защитник",
-          "birth_date": "19.07.2014",
-          "id_fhm": "6980"
-        },
-        {
-          "name": "Силин Леонид",
-          "number": "91",
-          "role": "Нападающий",
-          "birth_date": "25.06.2014",
-          "id_fhm": "6982"
-        },
-        {
-          "name": "Филаретов Кирилл",
-          "number": "47",
-          "role": "Нападающий",
-          "birth_date": "10.08.2014",
-          "id_fhm": "6983"
-        },
-        {
-          "name": "Флигинских Владислав",
-          "number": "17",
-          "role": "Нападающий",
-          "birth_date": "25.01.2014",
-          "id_fhm": "9509"
-        },
-        {
-          "name": "Шинкин Дмитрий",
-          "number": "10",
-          "role": "Нападающий",
-          "birth_date": "15.08.2014",
-          "id_fhm": "6984"
-        },
-        {
-          "name": "Широков Тимофей",
-          "number": "96",
-          "role": "Нападающий",
-          "birth_date": "12.09.2014",
-          "id_fhm": "6985"
-        }
-      ]
-    },
-    "events": [
-      {
-        "type": "goal",
-        "team": "f-team",
-        "player_name": "Петухов А.",
-        "player_id_fhm": "7226",
-        "f-pass": "Синкевич А.",
-        "f-pass_id_fhm": "6873",
-        "s-pass": "N/A",
-        "s-pass_id_fhm": "N/A",
-        "time_sec": 311
-      },
-      {
-        "type": "penalty",
-        "team": "f-team",
-        "player_name": "Абу Бакер А.",
-        "player_id_fhm": "8306",
-        "start_time_sec": 575,
-        "end_time_sec": 695,
-        "violation_type": "Удар клюшкой"
-      },
-      {
-        "type": "goal",
-        "team": "s-team",
-        "player_name": "Силин Л.",
-        "player_id_fhm": "6982",
-        "f-pass": "Волвенкин А.",
-        "f-pass_id_fhm": "8963",
-        "s-pass": "N/A",
-        "s-pass_id_fhm": "N/A",
-        "time_sec": 975
-      },
-      {
-        "type": "goal",
-        "team": "f-team",
-        "player_name": "Гришанов М.",
-        "player_id_fhm": "2669",
-        "f-pass": "N/A",
-        "f-pass_id_fhm": "N/A",
-        "s-pass": "N/A",
-        "s-pass_id_fhm": "N/A",
-        "time_sec": 1070
-      },
-      {
-        "type": "penalty",
-        "team": "f-team",
-        "player_name": "Ткачук К.",
-        "player_id_fhm": "8325",
-        "start_time_sec": 1133,
-        "end_time_sec": 1253,
-        "violation_type": "Подножка"
-      },
-      {
-        "type": "goal",
-        "team": "f-team",
-        "player_name": "Кинякин В.",
-        "player_id_fhm": "1452",
-        "f-pass": "N/A",
-        "f-pass_id_fhm": "N/A",
-        "s-pass": "N/A",
-        "s-pass_id_fhm": "N/A",
-        "time_sec": 1300
-      },
-      {
-        "type": "penalty",
-        "team": "s-team",
-        "player_name": "Ефимов А.",
-        "player_id_fhm": "1447",
-        "start_time_sec": 1627,
-        "end_time_sec": 1747,
-        "violation_type": "Неправильная атака"
-      },
-      {
-        "type": "penalty",
-        "team": "s-team",
-        "player_name": "Рахматуллин Т.",
-        "player_id_fhm": "6980",
-        "start_time_sec": 1697,
-        "end_time_sec": 1757,
-        "violation_type": "Неправильная атака"
-      },
-      {
-        "type": "goal",
-        "team": "f-team",
-        "player_name": "Абу Бакер А.",
-        "player_id_fhm": "8306",
-        "f-pass": "Барановский М.",
-        "f-pass_id_fhm": "9519",
-        "s-pass": "N/A",
-        "s-pass_id_fhm": "N/A",
-        "time_sec": 1757
-      },
-      {
-        "type": "goal",
-        "team": "s-team",
-        "player_name": "Калиш И.",
-        "player_id_fhm": "6971",
-        "f-pass": "Арнаут И.",
-        "f-pass_id_fhm": "8962",
-        "s-pass": "N/A",
-        "s-pass_id_fhm": "N/A",
-        "time_sec": 1886
-      },
-      {
-        "type": "penalty",
-        "team": "f-team",
-        "player_name": "Абу Бакер А.",
-        "player_id_fhm": "8306",
-        "start_time_sec": 2214,
-        "end_time_sec": 2277,
-        "violation_type": "Удар клюшкой"
-      },
-      {
-        "type": "penalty",
-        "team": "f-team",
-        "player_name": "Гришанов М.",
-        "player_id_fhm": "2669",
-        "start_time_sec": 2239,
-        "end_time_sec": 2359,
-        "violation_type": "Задержка соперника"
-      },
-      {
-        "type": "goal",
-        "team": "s-team",
-        "player_name": "Белан Д.",
-        "player_id_fhm": "6966",
-        "f-pass": "Калиш И.",
-        "f-pass_id_fhm": "6971",
-        "s-pass": "N/A",
-        "s-pass_id_fhm": "N/A",
-        "time_sec": 2277
-      },
-      {
-        "type": "penalty",
-        "team": "s-team",
-        "player_name": "Волвенкин А.",
-        "player_id_fhm": "8963",
-        "start_time_sec": 3046,
-        "end_time_sec": 3140,
-        "violation_type": "Подножка"
-      },
-      {
-        "type": "goal",
-        "team": "f-team",
-        "player_name": "Ефимов П.",
-        "player_id_fhm": "6358",
-        "f-pass": "Кинякин В.",
-        "f-pass_id_fhm": "1452",
-        "s-pass": "Клеева А.",
-        "s-pass_id_fhm": "940",
-        "time_sec": 3140
-      },
-      {
-        "type": "goal",
-        "team": "s-team",
-        "player_name": "Волвенкин А.",
-        "player_id_fhm": "8963",
-        "f-pass": "Арнаут И.",
-        "f-pass_id_fhm": "8962",
-        "s-pass": "Шинкин Д.",
-        "s-pass_id_fhm": "6984",
-        "time_sec": 3206
-      },
-      {
-        "type": "penalty",
-        "team": "s-team",
-        "player_name": "Попков О.",
-        "player_id_fhm": "6979",
-        "start_time_sec": 3280,
-        "end_time_sec": 3400,
-        "violation_type": "Задержка клюшкой"
-      },
-      {
-        "type": "penalty",
-        "team": "s-team",
-        "player_name": "Белан Д.",
-        "player_id_fhm": "6966",
-        "start_time_sec": 3370,
-        "end_time_sec": 3490,
-        "violation_type": "Неправильная атака"
-      },
-      {
-        "type": "penalty",
-        "team": "f-team",
-        "player_name": "Петухов А.",
-        "player_id_fhm": "7226",
-        "start_time_sec": 3500,
-        "end_time_sec": 3620,
-        "violation_type": "Подножка"
-      },
-      {
-        "type": "penalty",
-        "team": "f-team",
-        "player_name": "Гришанов М.",
-        "player_id_fhm": "2669",
-        "start_time_sec": 3545,
-        "end_time_sec": 3665,
-        "violation_type": "Неправильная атака"
-      }
-    ],
-    "tournament_name": "Первенство г. Москвы по хоккею 2014 г.р. 25/26",
-    "tour_number": "1",
-    "match_date": "2025-09-06",
-    "match_time": "11:40:00",
-    "venue_city": "Москва",
-    "venue_arena": "ЛД Медведково",
-    "referees": [
-      "Приходько И.А.",
-      "Бессуднов М.А."
-    ]
+    "match_id": null,
+    "teams": {},
+    "rosters": {},
+    "events": []
   }
 }
