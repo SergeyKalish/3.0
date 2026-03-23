@@ -947,7 +947,8 @@ class PlayerShiftMapReport:
         shifts = report_data.shifts_by_player_id.get(player.player_id, [])
         
         # Фильтрация смен по периоду (если нужно)
-        if period_index is not None:
+        # Для листа "Матч" (mode='game_on_sheet') period_index=0, но фильтровать не нужно
+        if period_index is not None and self.mode != 'game_on_sheet':
             seg = report_data.segments_info[period_index]
             period_shifts = [s for s in shifts 
                            if seg.official_start <= s.official_start < seg.official_end]
@@ -979,26 +980,357 @@ class PlayerShiftMapReport:
             return f"{minutes}:{seconds:02d}"
         
         elif key in ["powerplay", "penalty_kill"]:
-            # Время в большинстве/меньшинстве — пока заглушка
-            return "0:00"
+            # Расчёт времени в большинстве/меньшинстве
+            total_seconds = self._calculate_special_team_time(
+                player, report_data, period_index, key
+            )
+            minutes = total_seconds // 60
+            seconds = total_seconds % 60
+            return f"{minutes}:{seconds:02d}"
         
         elif key == "goals":
-            # Голы игрока — пока заглушка
-            return "0"
+            # Голы игрока
+            goals_count = self._calculate_player_goals(player, report_data, period_index)
+            return str(goals_count)
         
         elif key == "assists":
-            # Передачи — пока заглушка
-            return "0"
+            # Передачи игрока
+            assists_count = self._calculate_player_assists(player, report_data, period_index)
+            return str(assists_count)
         
         elif key == "plus_minus":
-            # +/- — пока заглушка
-            return "0"
+            # +/- игрока
+            pm = self._calculate_player_plus_minus(player, report_data, period_index)
+            return f"{pm:+d}" if pm != 0 else "0"
         
         elif key == "penalties":
-            # Штрафные минуты — пока заглушка
-            return "0"
+            # Штрафные минуты игрока
+            penalty_minutes = self._calculate_player_penalties(player, report_data, period_index)
+            return str(penalty_minutes)
         
         return ""
+
+    def _calculate_special_team_time(self, player, report_data: ReportData,
+                                     period_index: Optional[int], key: str) -> int:
+        """
+        Расчёт времени, которое игрок провёл на льду в большинстве или меньшинстве.
+        
+        :param key: "powerplay" для большинства, "penalty_kill" для меньшинства
+        :return: время в секундах
+        """
+        from utils.helpers import convert_global_to_official_time
+        
+        # Получаем смены игрока
+        shifts = report_data.shifts_by_player_id.get(player.player_id, [])
+        if not shifts:
+            return 0
+        
+        # Фильтрация смен по периоду (если нужно)
+        if period_index is not None and self.mode != 'game_on_sheet':
+            seg = report_data.segments_info[period_index]
+            period_shifts = [s for s in shifts 
+                           if seg.official_start <= s.official_start < seg.official_end]
+        else:
+            period_shifts = shifts
+        
+        if not period_shifts:
+            return 0
+        
+        # Получаем game_mode ranges
+        raw_modes = getattr(report_data.original_project.match, 'calculated_ranges', [])
+        game_modes = [cr for cr in raw_modes if getattr(cr, 'label_type', '') == 'game_mode']
+        
+        if not game_modes:
+            return 0
+        
+        # Определяем, является ли game_mode большинством/меньшинством для нашей команды
+        our_team_key = report_data.our_team_key
+        
+        def is_special_team_mode(mode_name: str, mode_type: str) -> bool:
+            """
+            Проверяет, является ли режим большинством или меньшинством для нашей команды.
+            mode_type: "powerplay" или "penalty_kill"
+            """
+            # Формат имени: "X на Y", где X — f-team, Y — s-team
+            if ' на ' not in mode_name:
+                return False
+            
+            try:
+                parts = mode_name.split(' на ')
+                f_team_count = int(parts[0].strip())
+                s_team_count = int(parts[1].strip())
+            except (ValueError, IndexError):
+                return False
+            
+            if our_team_key == 'f-team':
+                our_count = f_team_count
+                their_count = s_team_count
+            else:  # s-team
+                our_count = s_team_count
+                their_count = f_team_count
+            
+            if mode_type == 'powerplay':
+                # Большинство: наших больше чем их
+                return our_count > their_count
+            else:  # penalty_kill
+                # Меньшинство: наших меньше чем их
+                return our_count < their_count
+        
+        # Конвертируем game_mode в официальное время и фильтруем
+        special_intervals = []
+        for gm in game_modes:
+            mode_name = getattr(gm, 'name', '5 на 5')
+            
+            # Проверяем, подходит ли этот режим (большинство/меньшинство)
+            if not is_special_team_mode(mode_name, key):
+                continue
+            
+            try:
+                official_start = convert_global_to_official_time(
+                    gm.start_time,
+                    report_data.original_project.match.calculated_ranges
+                )
+                official_end = convert_global_to_official_time(
+                    gm.end_time,
+                    report_data.original_project.match.calculated_ranges
+                )
+            except:
+                continue
+            
+            if official_start is None or official_end is None:
+                continue
+            
+            # Для периода — фильтруем по границам периода
+            if period_index is not None and self.mode != 'game_on_sheet':
+                seg = report_data.segments_info[period_index]
+                period_start = seg.official_start
+                period_end = seg.official_end
+                
+                if official_end <= period_start or official_start >= period_end:
+                    continue
+                
+                official_start = max(official_start, period_start)
+                official_end = min(official_end, period_end)
+            
+            special_intervals.append((official_start, official_end))
+        
+        if not special_intervals:
+            return 0
+        
+        # Считаем пересечение смен игрока с интервалами большинства/меньшинства
+        total_seconds = 0
+        
+        for shift in period_shifts:
+            shift_start = shift.official_start
+            shift_end = shift.official_end
+            
+            for interval_start, interval_end in special_intervals:
+                # Находим пересечение
+                intersect_start = max(shift_start, interval_start)
+                intersect_end = min(shift_end, interval_end)
+                
+                if intersect_end > intersect_start:
+                    total_seconds += int(intersect_end - intersect_start)
+        
+        return total_seconds
+
+    def _calculate_player_goals(self, player, report_data: ReportData,
+                                period_index: Optional[int]) -> int:
+        """
+        Подсчёт количества голов, забитых игроком.
+        """
+        goals_count = 0
+        
+        for goal in report_data.goals:
+            # Проверяем, принадлежит ли гол нашему игроку
+            goal_player_id = goal.context.get('player_id_fhm', '')
+            if goal_player_id == player.player_id:
+                # Проверяем попадание в период (если нужно)
+                if period_index is not None and self.mode != 'game_on_sheet':
+                    seg = report_data.segments_info[period_index]
+                    if not (seg.official_start <= goal.official_time < seg.official_end):
+                        continue
+                goals_count += 1
+        
+        return goals_count
+
+    def _calculate_player_assists(self, player, report_data: ReportData,
+                                  period_index: Optional[int]) -> int:
+        """
+        Подсчёт передач игрока (первая и вторая передачи).
+        """
+        assists_count = 0
+        
+        for goal in report_data.goals:
+            # Проверяем попадание в период (если нужно)
+            if period_index is not None and self.mode != 'game_on_sheet':
+                seg = report_data.segments_info[period_index]
+                # Гол в момент окончания периода относится к периоду
+                if not (seg.official_start < goal.official_time <= seg.official_end):
+                    continue
+            
+            # Проверяем первую передачу
+            f_pass_id = goal.context.get('f-pass', '')
+            if f_pass_id == player.player_id:
+                assists_count += 1
+            
+            # Проверяем вторую передачу
+            s_pass_id = goal.context.get('s-pass', '')
+            if s_pass_id == player.player_id:
+                assists_count += 1
+        
+        return assists_count
+
+    def _calculate_player_plus_minus(self, player, report_data: ReportData,
+                                     period_index: Optional[int]) -> int:
+        """
+        Расчёт +/- игрока.
+        +1 за каждый гол нашей команды, когда игрок был на льду
+        -1 за каждый гол соперника, когда игрок был на льду
+        ВАЖНО: +/- учитывается только при игре в равных составах (5 на 5, 4 на 4, 3 на 3)
+        """
+        from utils.helpers import convert_global_to_official_time
+        
+        plus_minus = 0
+        
+        # Получаем смены игрока
+        shifts = report_data.shifts_by_player_id.get(player.player_id, [])
+        if not shifts:
+            return 0
+        
+        # Фильтрация смен по периоду (если нужно)
+        if period_index is not None and self.mode != 'game_on_sheet':
+            seg = report_data.segments_info[period_index]
+            period_shifts = [s for s in shifts 
+                           if seg.official_start <= s.official_start < seg.official_end]
+        else:
+            period_shifts = shifts
+        
+        if not period_shifts:
+            return 0
+        
+        # Получаем game_mode ranges для проверки равных составов
+        raw_modes = getattr(report_data.original_project.match, 'calculated_ranges', [])
+        game_modes = [cr for cr in raw_modes if getattr(cr, 'label_type', '') == 'game_mode']
+        
+        def is_even_strength_mode(mode_name: str) -> bool:
+            """Проверяет, является ли режим равными составами."""
+            if ' на ' not in mode_name:
+                return False
+            try:
+                parts = mode_name.split(' на ')
+                f_team_count = int(parts[0].strip())
+                s_team_count = int(parts[1].strip())
+                return f_team_count == s_team_count  # Равные составы: 5 на 5, 4 на 4, 3 на 3
+            except (ValueError, IndexError):
+                return False
+        
+        for goal in report_data.goals:
+            # Проверяем попадание в период (если нужно)
+            if period_index is not None and self.mode != 'game_on_sheet':
+                seg = report_data.segments_info[period_index]
+                if not (seg.official_start <= goal.official_time < seg.official_end):
+                    continue
+            
+            # Проверяем, был ли гол забит в равных составах
+            goal_time = goal.official_time
+            is_even_strength = False
+            found_mode_name = None
+            found_mode_start = None
+            found_mode_end = None
+            
+            for gm in game_modes:
+                try:
+                    official_start = convert_global_to_official_time(
+                        gm.start_time,
+                        report_data.original_project.match.calculated_ranges
+                    )
+                    official_end = convert_global_to_official_time(
+                        gm.end_time,
+                        report_data.original_project.match.calculated_ranges
+                    )
+                except:
+                    continue
+                
+                if official_start is None or official_end is None:
+                    continue
+                
+                # ВАЖНО: Гол в момент окончания game_mode относится к ЭТОМУ game_mode
+                # (как со сменами: гол в конец смены засчитывается)
+                if official_start < goal_time <= official_end:
+                    mode_name = getattr(gm, 'name', None)
+                    found_mode_name = mode_name
+                    found_mode_start = official_start
+                    found_mode_end = official_end
+                    if mode_name and is_even_strength_mode(mode_name):
+                        is_even_strength = True
+                    break
+            
+            # Если гол не в равных составах — пропускаем
+            if not is_even_strength:
+                continue
+            
+            # Проверяем, был ли игрок на льду в момент гола
+            # ВАЖНО: Гол засчитывается игрокам, у которых он совпал с КОНЦОМ смены,
+            # но не засчитывается тем, у кого он совпал с НАЧАЛОМ смены
+            player_on_ice = False
+            for shift in period_shifts:
+                if shift.official_start < goal.official_time <= shift.official_end:
+                    player_on_ice = True
+                    break
+            
+            if player_on_ice:
+                team = goal.context.get('team', '')
+                if team == report_data.our_team_key:
+                    # Наш гол - плюс
+                    plus_minus += 1
+                else:
+                    # Гол соперника - минус
+                    plus_minus -= 1
+        
+        return plus_minus
+
+    def _calculate_player_penalties(self, player, report_data: ReportData,
+                                    period_index: Optional[int]) -> int:
+        """
+        Подсчёт штрафных минут игрока (назначенных, не отбытых).
+        Возвращает суммарное количество минут.
+        """
+        penalty_minutes = 0
+        
+        for penalty in report_data.penalties:
+            # Проверяем, принадлежит ли удаление нашему игроку
+            if penalty.player_id_fhm != player.player_id:
+                continue
+            
+            # Проверяем попадание в период (если нужно)
+            if period_index is not None and self.mode != 'game_on_sheet':
+                seg = report_data.segments_info[period_index]
+                # Для удаления проверяем начало
+                if not (seg.official_start < penalty.official_start <= seg.official_end):
+                    continue
+            
+            # Определяем назначенные минуты по типу нарушения
+            violation_type = penalty.violation_type.lower() if penalty.violation_type else ""
+            
+            # Маппинг типов нарушений на минуты
+            if "двойной малый" in violation_type or "двойное удаление" in violation_type:
+                minutes = 4
+            elif "крупное" in violation_type or "матч" in violation_type:
+                minutes = 5
+            elif "удаление" in violation_type or "10" in violation_type:
+                # 10-минутное удаление или до конца игры (считаем как 10)
+                minutes = 10
+            elif "игрушечный" in violation_type or "лишение" in violation_type:
+                # Пенальти/лишение - не штрафные минуты
+                minutes = 0
+            else:
+                # Обычный малый штраф (2 минуты)
+                minutes = 2
+            
+            penalty_minutes += minutes
+        
+        return penalty_minutes
 
     # ============================================
     # СУЩЕСТВУЮЩИЕ МЕТОДЫ (без изменений или минимальные правки)
