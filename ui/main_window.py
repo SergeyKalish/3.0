@@ -370,15 +370,15 @@ class MainWindow(QMainWindow):
 
         # Обновить ключ нашей команды в LineupModuleWidget
         self.lineup_module_widget.set_our_team_key(our_team_key) # Даже если None
-        #отладка gamemode НАЧАЛО
-        active_game_mode = None
-        for cr in self.project.match.calculated_ranges:
-            if cr.label_type == "game_mode" and cr.start_time <= global_time < cr.end_time:
-                active_game_mode = cr
-                break
-        if active_game_mode:
-            print(f"[DEBUG MW] Active game_mode at {global_time}: {active_game_mode.name}, penalties: {active_game_mode.context.get('active_penalties', [])}")
-        #отладка gamemode КОНЕЦ
+        # #отладка gamemode НАЧАЛО (калиш)
+        # active_game_mode = None
+        # for cr in self.project.match.calculated_ranges:
+        #     if cr.label_type == "game_mode" and cr.start_time <= global_time < cr.end_time:
+        #         active_game_mode = cr
+        #         break
+        # if active_game_mode:
+        #     print(f"[DEBUG MW] Active game_mode at {global_time}: {active_game_mode.name}, penalties: {active_game_mode.context.get('active_penalties', [])}")
+        # #отладка gamemode КОНЕЦ
         
         # Вызвать self.lineup_module_widget.set_current_global_time_and_calculated_ranges(global_time, calculated_ranges)
         #self.lineup_module_widget.set_current_global_time_and_calculated_ranges(global_time, calculated_ranges, generic_labels)

@@ -30,6 +30,8 @@
 			"**/venv": true,
 			"**/.venv": true,
 			"**/__pycache__": true
-		}
+		},
+		"python.locator": "js",
+		"python.defaultInterpreterPath": "C:\\code\\3.0\\venv\\Scripts\\python.exe"
 	}
 }
