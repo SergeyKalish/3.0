@@ -236,6 +236,12 @@ class ReportStyles:
     # Отступ сверху внутри рабочей области (5% — воздух под заголовком листа)
     CONTENT_AREA_TOP_MARGIN_PERCENT: float = 0.05
     
+    # === ДОПОЛНИТЕЛЬНЫЙ ОТСТУП ДЛЯ ПОДЪЁМА/ОПУСКАНИЯ КОНТЕНТА ===
+    # Используйте эту константу чтобы поднять или опустить табличную и графическую часть
+    # Положительное значение = опустить ниже, Отрицательное значение = поднять выше
+    # Например: -30 поднимет всё содержимое на 30 пикселей ближе к заголовку
+    CONTENT_TOP_OFFSET_PX: int = -80
+    
     # Максимальная ширина таблицы (39% — остальное 61% под графику минимум)
     TABLE_MAX_WIDTH_PERCENT: float = 0.25
     
@@ -405,6 +411,53 @@ class ReportStyles:
     
     # Пунктирная линия вниз: (3px линия, 3px пробел)
     FACEOFF_LINE_DASH: tuple = (3, 3)
+    
+    # ============================================
+    # ЛЕГЕНДА
+    # ============================================
+    
+    # === ОТСТУПЫ ЛЕГЕНДЫ (регулируйте эти значения) ===
+    
+    # Отступ от ТАБЛИЦЫ до легенды под таблицей (левая легенда)
+    LEGEND_TABLE_TOP_PADDING_PX: int = 15
+    
+    # Отступ от ГРАФИКИ до легенды под графикой (правая легенда)
+    LEGEND_GRAPHIC_TOP_PADDING_PX: int = 15
+    
+    # Разрыв между заголовком легенды и текстом
+    LEGEND_TITLE_GAP_PX: int = 8
+    
+    # Отступ между обозначением и пояснением
+    LEGEND_ABBR_DESC_GAP_PX: int = 3
+    
+    # === ШРИФТЫ ЛЕГЕНДЫ ===
+    
+    # Размер шрифта для текста легенды (общий)
+    LEGEND_FONT_SIZE_PT: int = 6
+    
+    # Размер шрифта для заголовков секций легенды
+    LEGEND_TITLE_FONT_SIZE_PT: int = 8
+    
+    # --- Настройки для "обозначений" (сокращений) ---
+    LEGEND_ABBR_FONT_SIZE_PT: int = 6
+    LEGEND_ABBR_FONT_BOLD: bool = True
+    LEGEND_ABBR_FONT_COLOR: str = "#000000"  # HEX формат
+    
+    # --- Настройки для "пояснений" (расшифровок) ---
+    LEGEND_DESC_FONT_SIZE_PT: int = 6
+    LEGEND_DESC_FONT_BOLD: bool = False
+    LEGEND_DESC_FONT_COLOR: str = "#333333"  # HEX формат
+    
+    # === ПРОЧИЕ НАСТРОЙКИ ЛЕГЕНДЫ ===
+    
+    # Высота строки текста легенды
+    LEGEND_LINE_HEIGHT_PX: int = 25
+    
+    # Размер цветного квадратика для обозначений
+    LEGEND_COLOR_BOX_SIZE: int = 18
+    
+    # Отступ между элементами легенды
+    LEGEND_PADDING_PX: int = 10
 
 
 # ============================================
@@ -543,6 +596,9 @@ class PlayerShiftMapReport:
 
         # Рамка графической области
         self._draw_graphic_area_border(draw, graphic_geom)
+        
+        # Легенды под таблицей и графикой
+        self._draw_legend_columns(draw, table_geom, graphic_geom)
 
         # Подвал
         self._draw_sheet_footer(draw, page_num, total_pages, table_geom)
@@ -566,7 +622,8 @@ class PlayerShiftMapReport:
         
         content_height = int(styles.CONTENT_AREA_HEIGHT_PERCENT * available_height)
         content_top_margin = int(styles.CONTENT_AREA_TOP_MARGIN_PERCENT * available_height)
-        content_y = styles.MARGIN_TOP + content_top_margin
+        # Применяем дополнительный отступ для подъёма/опускания контента
+        content_y = styles.MARGIN_TOP + content_top_margin + styles.CONTENT_TOP_OFFSET_PX
         
         content_width = available_width
         content_x = styles.MARGIN_LEFT
@@ -2578,3 +2635,161 @@ class PlayerShiftMapReport:
             self._draw_dashed_line(draw, x_pos, scale_bottom, x_pos, line_bottom_y,
                                 LINE_COLOR, styles.FACEOFF_LINE_DASH, 
                                 styles.FACEOFF_LINE_WIDTH)
+
+    def _draw_legend_color_box(self, draw, x, y, size, color):
+        fill = color if isinstance(color, tuple) else color
+        draw.rectangle([x, y, x + size, y + size], fill=fill, outline='#000000', width=1)
+
+
+    # ============================================
+    # ЛЕГЕНДА
+    # ============================================
+    
+    def _draw_legend_columns(self, draw, table_geom, graphic_geom):
+        styles = self.styles
+        TABLE_PADDING = styles.LEGEND_TABLE_TOP_PADDING_PX
+        GRAPHIC_PADDING = styles.LEGEND_GRAPHIC_TOP_PADDING_PX
+        
+        legend_table_x = table_geom['x']
+        legend_table_y = table_geom['y'] + table_geom['height'] + TABLE_PADDING
+        legend_table_width = table_geom['width']
+        
+        EXTRA_GRAPHIC_HEIGHT = styles.TIME_SCALE_HEIGHT_PX + styles.GOALS_SCALE_HEIGHT_PX + 110
+        
+        legend_graphic_x = graphic_geom['x']
+        legend_graphic_y = graphic_geom['y'] + graphic_geom['height'] + EXTRA_GRAPHIC_HEIGHT + GRAPHIC_PADDING
+        legend_graphic_width = graphic_geom['width']
+        
+        # DEBUG линия
+        debug_boundary_y = graphic_geom['y'] + graphic_geom['height'] + EXTRA_GRAPHIC_HEIGHT
+        draw.line([(legend_graphic_x, debug_boundary_y), (legend_graphic_x + legend_graphic_width, debug_boundary_y)], fill='#FF0000', width=2)
+        
+        self._draw_table_legend(draw, legend_table_x, legend_table_y, legend_table_width)
+        self._draw_graphic_legend(draw, legend_graphic_x, legend_graphic_y, legend_graphic_width)
+    
+    def _draw_table_legend(self, draw, x, y, width):
+        styles = self.styles
+        font_title = self._get_font(styles.LEGEND_TITLE_FONT_SIZE_PT)
+        line_height = styles.LEGEND_LINE_HEIGHT_PX + 3
+        padding = styles.LEGEND_PADDING_PX
+        
+        font_abbr = self._get_font(styles.LEGEND_ABBR_FONT_SIZE_PT, bold=styles.LEGEND_ABBR_FONT_BOLD)
+        font_desc = self._get_font(styles.LEGEND_DESC_FONT_SIZE_PT, bold=styles.LEGEND_DESC_FONT_BOLD)
+        
+        abbr_ascent, _ = font_abbr.getmetrics()
+        desc_ascent, _ = font_desc.getmetrics()
+        ascent_diff = abbr_ascent - desc_ascent
+        
+        title = 'Обозначения таблицы:'
+        draw.text((x, y), title, fill=styles.COLOR_BLACK, font=font_title)
+        y += line_height + styles.LEGEND_TITLE_GAP_PX
+        
+        legend_items = [
+            ('№', 'Номер игрока'), ('Игрок', 'Фамилия И.'),
+            ('СМ', 'Количество смен (матч)'), ('СП', 'Количество смен (период)'),
+            ('СрСм', 'Среднее время смены'), ('ВрМ', 'Время на льду (матч)'),
+            ('ВрП', 'Время на льду (период)'), ('Б', 'Время в большинстве'),
+            ('М', 'Время в меньшинстве'), ('Г', 'Голы'),
+            ('П', 'Передачи'), ('+/-', 'Плюс/минус'), ('Ш', 'Штрафные минуты'),
+        ]
+        
+        col_width = (width - padding) // 2
+        mid_x = x + col_width + padding
+        items_per_col = (len(legend_items) + 1) // 2
+        
+        for i, (abbr, desc) in enumerate(legend_items):
+            if i < items_per_col:
+                item_x, item_y = x, y + i * line_height
+            else:
+                item_x, item_y = mid_x, y + (i - items_per_col) * line_height
+            
+            abbr_text = f'{abbr}:'
+            draw.text((item_x, item_y), abbr_text, fill=styles.LEGEND_ABBR_FONT_COLOR, font=font_abbr)
+            
+            abbr_bbox = draw.textbbox((0, 0), abbr_text, font=font_abbr)
+            abbr_width = abbr_bbox[2] - abbr_bbox[0]
+            
+            desc_x = item_x + abbr_width + styles.LEGEND_ABBR_DESC_GAP_PX
+            desc_y = item_y + ascent_diff
+            draw.text((desc_x, desc_y), desc, fill=styles.LEGEND_DESC_FONT_COLOR, font=font_desc)
+
+    
+    def _draw_graphic_legend(self, draw, x, y, width):
+        styles = self.styles
+        font_title = self._get_font(styles.LEGEND_TITLE_FONT_SIZE_PT)
+        font_text = self._get_font(styles.LEGEND_FONT_SIZE_PT)
+        line_height = styles.LEGEND_LINE_HEIGHT_PX
+        box_size = styles.LEGEND_COLOR_BOX_SIZE
+        
+        LABEL_GAP = 8
+        ITEM_GAP = 10
+        BOX_GAP = 4
+        current_y = y
+        
+        # Строка 1: Цвета смен
+        title = 'Цвета смен:'
+        draw.text((x, current_y), title, fill=styles.COLOR_BLACK, font=font_title)
+        title_bbox = draw.textbbox((0, 0), title, font=font_title)
+        item_x = x + (title_bbox[2] - title_bbox[0]) + LABEL_GAP
+        
+        shift_colors = [
+            (styles.COLOR_VERY_LIGHT_GREEN, '< 35 сек'),
+            (styles.COLOR_DARK_GREEN, '35-70 сек'),
+            (styles.COLOR_ORANGE, '70+ (ф1)'),
+            (styles.COLOR_BRIGHT_RED, '70+ (ф2)'),
+        ]
+        for color, text in shift_colors:
+            self._draw_legend_color_box(draw, item_x, current_y, box_size, color)
+            draw.text((item_x + box_size + BOX_GAP, current_y), text, fill=styles.COLOR_BLACK, font=font_text)
+            text_bbox = draw.textbbox((0, 0), text, font=font_text)
+            item_x += box_size + (text_bbox[2] - text_bbox[0]) + ITEM_GAP
+        current_y += line_height
+        
+        # Строка 2: Составы
+        title = 'Составы:'
+        draw.text((x, current_y), title, fill=styles.COLOR_BLACK, font=font_title)
+        title_bbox = draw.textbbox((0, 0), title, font=font_title)
+        item_x = x + (title_bbox[2] - title_bbox[0]) + LABEL_GAP
+        
+        game_modes = [
+            (styles.COLOR_GM_POWERPLAY_LIGHT, 'Большинство +1'),
+            (styles.COLOR_GM_POWERPLAY_STRONG, '+2'),
+            (styles.COLOR_GM_PENALTY_KILL_LIGHT, 'Меньшинство -1'),
+            (styles.COLOR_GM_PENALTY_KILL_STRONG, '-2'),
+            (styles.COLOR_GM_EVEN_4ON4, '4x4'),
+            (styles.COLOR_GM_EVEN_3ON3, '3x3'),
+        ]
+        for color, text in game_modes:
+            self._draw_legend_color_box(draw, item_x, current_y, box_size, color)
+            draw.text((item_x + box_size + BOX_GAP, current_y), text, fill=styles.COLOR_BLACK, font=font_text)
+            text_bbox = draw.textbbox((0, 0), text, font=font_text)
+            item_x += box_size + (text_bbox[2] - text_bbox[0]) + ITEM_GAP
+        current_y += line_height
+        
+        # Строка 3: События
+        title = 'События:'
+        draw.text((x, current_y), title, fill=styles.COLOR_BLACK, font=font_title)
+        title_bbox = draw.textbbox((0, 0), title, font=font_title)
+        item_x = x + (title_bbox[2] - title_bbox[0]) + LABEL_GAP
+        
+        events = [
+            (styles.COLOR_OUR_GOAL, 'Наш гол', 'peg'),
+            (styles.COLOR_THEIR_GOAL, 'Гол соп.', 'peg'),
+            (styles.COLOR_PENALTY_BOX, 'Удаление', 'cross'),
+            (styles.FACEOFF_PEG_COLOR, 'Вбрасыв.', 'peg'),
+        ]
+        for color, text, icon_type in events:
+            if icon_type == 'peg':
+                draw.line([(item_x + 2, current_y + 2), (item_x + 2, current_y + box_size - 2)], fill=color, width=2)
+                draw.line([(item_x, current_y + 2), (item_x + 4, current_y + 2)], fill=color, width=2)
+            else:
+                cm = 2
+                draw.line([(item_x + cm, current_y + cm), (item_x + box_size - cm, current_y + box_size - cm)], fill=color, width=2)
+                draw.line([(item_x + box_size - cm, current_y + cm), (item_x + cm, current_y + box_size - cm)], fill=color, width=2)
+            draw.text((item_x + box_size + BOX_GAP, current_y), text, fill=styles.COLOR_BLACK, font=font_text)
+            text_bbox = draw.textbbox((0, 0), text, font=font_text)
+            item_x += box_size + (text_bbox[2] - text_bbox[0]) + ITEM_GAP
+    
+    def _draw_legend_color_box(self, draw, x, y, size, color):
+        fill = color if isinstance(color, tuple) else color
+        draw.rectangle([x, y, x + size, y + size], fill=fill, outline='#000000', width=1)

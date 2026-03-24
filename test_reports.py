@@ -55,31 +55,24 @@ TEST_OUTPUT_DIR = os.path.dirname(TEST_FILE_PATH)
 def main():
     app = QApplication(sys.argv)
 
-    # Диалог для выбора режима загрузки
-    load_test_question = QMessageBox.question(
-        None,
-        "Режим тестирования",
-        f"Загрузить тестовый файл?\n{os.path.basename(TEST_FILE_PATH)}",
-        QMessageBox.Yes | QMessageBox.No
-    )
-
+    # === АВТОМАТИЧЕСКИЙ РЕЖИМ (без диалогов) ===
+    # Для включения диалогов обратно закомментируйте этот блок и раскомментируйте старый ниже
+    
     hkt_file_path = None
     is_test_mode = False
-
-    if load_test_question == QMessageBox.Yes:
-        if os.path.exists(TEST_FILE_PATH):
-            hkt_file_path = TEST_FILE_PATH
-            is_test_mode = True
-            print(f"Выбран тестовый файл: {hkt_file_path}")
-        else:
-            print(f"Тестовый файл не найден: {TEST_FILE_PATH}")
-            hkt_file_path, _ = QFileDialog.getOpenFileName(
-                None, "Выберите файл проекта (.hkt)", "", "Файлы проектов (*.hkt);;Все файлы (*)"
-            )
+    
+    # Проверяем тестовый файл - если есть, используем автоматически
+    if os.path.exists(TEST_FILE_PATH):
+        hkt_file_path = TEST_FILE_PATH
+        is_test_mode = True
+        print(f"[AUTO] Тестовый файл найден и выбран автоматически: {hkt_file_path}")
     else:
+        # Если тестового файла нет - показываем диалог выбора
+        print(f"[AUTO] Тестовый файл не найден: {TEST_FILE_PATH}")
         hkt_file_path, _ = QFileDialog.getOpenFileName(
             None, "Выберите файл проекта (.hkt)", "", "Файлы проектов (*.hkt);;Все файлы (*)"
         )
+        is_test_mode = False
 
     if not hkt_file_path:
         print("Файл .hkt не выбран. Выход.")
@@ -92,15 +85,16 @@ def main():
         project = load_project_from_file(hkt_file_path)
         print(f"Проект загружен: {project.video_path}")
 
-        # Диалог настроек (только размер страницы)
-        dialog = ReportGenerationDialog()
-        if dialog.exec_() != ReportGenerationDialog.Accepted:
-            print("Генерация отчёта отменена пользователем.")
-            return
-
-        # Получаем только размер (режим больше не нужен)
-        selected_page_size = dialog.get_selected_params()
-        print(f"Выбран размер: {selected_page_size}")
+        # === РАЗМЕР ЛИСТА ВСЕГДА A4 (без диалога) ===
+        # Для включения диалога выбора размера раскомментируйте:
+        # dialog = ReportGenerationDialog()
+        # if dialog.exec_() != ReportGenerationDialog.Accepted:
+        #     print("Генерация отчёта отменена пользователем.")
+        #     return
+        # selected_page_size = dialog.get_selected_params()
+        
+        selected_page_size = "A4"  # <-- РАЗМЕР ЛИСТА ВСЕГДА A4
+        print(f"[AUTO] Размер листа: {selected_page_size}")
 
         # Создание отчёта с новой архитектурой
         report_data = ReportData(original_project=project)
