@@ -2804,11 +2804,11 @@ class PlayerShiftMapReport:
         item_y = current_y + baseline_offset
         
         game_modes = [
-            (styles.COLOR_GM_POWERPLAY_LIGHT, 'Большинство +1'),
+            (styles.COLOR_GM_POWERPLAY_LIGHT, 'наше большинство +1'),
             (styles.COLOR_GM_POWERPLAY_STRONG, '+2'),
-            (styles.COLOR_GM_PENALTY_KILL_LIGHT, 'Меньшинство -1'),
+            (styles.COLOR_GM_PENALTY_KILL_LIGHT, 'наше меньшинство -1'),
             (styles.COLOR_GM_PENALTY_KILL_STRONG, '-2'),
-            (styles.COLOR_GM_EVEN_4ON4, '4x4'),
+            (styles.COLOR_GM_EVEN_4ON4, 'равные 4x4'),
             (styles.COLOR_GM_EVEN_3ON3, '3x3'),
         ]
         for color, text in game_modes:
