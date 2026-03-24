@@ -2943,6 +2943,54 @@ class PlayerShiftMapReport:
                 draw.text((item_x + box_size + BOX_GAP, item_y), text, fill=styles.COLOR_BLACK, font=font_text)
                 text_bbox = draw.textbbox((0, 0), text, font=font_text)
             item_x += box_size + (text_bbox[2] - text_bbox[0]) + ITEM_GAP
+        
+        # Добавляем кружочки с +/- для полезности (в той же строке)
+        # item_x уже содержит отступ после последнего элемента (→∞)
+        
+        # Кружочек с "+" (плюс к полезности)
+        plus_label = '+1 к полезности'
+        legend_circle_radius = 15  # Меньше диаметр для легенды
+        plus_circle_y = item_y + box_size // 2  # Центрируем по высоте квадратика
+        
+        # Белый кружок
+        draw.ellipse(
+            [item_x, plus_circle_y - legend_circle_radius, 
+             item_x + legend_circle_radius * 2, plus_circle_y + legend_circle_radius],
+            fill=styles.PLUS_MINUS_CIRCLE_BG,
+            outline=styles.COLOR_BLACK,
+            width=1
+        )
+        # Символ "+" с корректировкой
+        plus_font = self._get_font(styles.PLUS_MINUS_FONT_SIZE_PT - 1)  # Чуть меньше шрифт
+        draw.text((item_x + legend_circle_radius + styles.PLUS_X_OFFSET_PX, 
+                   plus_circle_y), 
+                  '+', fill=styles.PLUS_MINUS_PLUS_COLOR, font=plus_font, anchor='mm')
+        # Подпись
+        draw.text((item_x + legend_circle_radius * 2 + BOX_GAP, item_y), 
+                  plus_label, fill=styles.COLOR_BLACK, font=font_text)
+        text_bbox_plus = draw.textbbox((0, 0), plus_label, font=font_text)
+        item_x += legend_circle_radius * 2 + (text_bbox_plus[2] - text_bbox_plus[0]) + ITEM_GAP
+        
+        # Кружочек с "-" (минус к полезности)
+        minus_label = '-1 к полезности'
+        minus_circle_y = item_y + box_size // 2
+        
+        # Белый кружок
+        draw.ellipse(
+            [item_x, minus_circle_y - legend_circle_radius, 
+             item_x + legend_circle_radius * 2, minus_circle_y + legend_circle_radius],
+            fill=styles.PLUS_MINUS_CIRCLE_BG,
+            outline=styles.COLOR_BLACK,
+            width=1
+        )
+        # Символ "-" с корректировкой
+        draw.text((item_x + legend_circle_radius, 
+                   minus_circle_y + styles.MINUS_Y_OFFSET_PX // 2),  # Меньше корректировка для легенды
+                  '-', fill=styles.PLUS_MINUS_MINUS_COLOR, font=plus_font, anchor='mm')
+        # Подпись
+        draw.text((item_x + legend_circle_radius * 2 + BOX_GAP, item_y), 
+                  minus_label, fill=styles.COLOR_BLACK, font=font_text)
+        
         current_y += line_height
         
         # Строка 2: Составы
