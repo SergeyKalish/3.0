@@ -146,6 +146,9 @@ class ReportStyles:
     # Чёрный цвет для текста и линий сетки
     COLOR_BLACK: str = "#000000"
     
+    # Синий цвет для текста заголовков таблицы
+    COLOR_TABLE_HEADER_TEXT: str = "#0241FF"
+    
     # Светло-серый фон для заголовка таблицы (отличие от данных)
     COLOR_HEADER_BG: str = "#EEEEEE"
     
@@ -889,7 +892,7 @@ class PlayerShiftMapReport:
             x_pos = x + (w - text_w) // 2
             y_pos = y + (h - text_h) // 2
             
-            draw.text((x_pos, y_pos), display_text, fill=styles.COLOR_BLACK, font=font)
+            draw.text((x_pos, y_pos), display_text, fill=styles.COLOR_TABLE_HEADER_TEXT, font=font)
 
 
     def _draw_vertical_header_text(self, draw: ImageDraw, text: str, x: int, y: int,
@@ -909,7 +912,7 @@ class PlayerShiftMapReport:
         
         # Рисуем текст горизонтально
         margin = 10
-        temp_draw.text((margin, margin), text, fill=styles.COLOR_BLACK, font=font)
+        temp_draw.text((margin, margin), text, fill=styles.COLOR_TABLE_HEADER_TEXT, font=font)
         
         # Находим реальные границы текста
         text_bbox = temp_draw.textbbox((margin, margin), text, font=font)
@@ -2683,7 +2686,7 @@ class PlayerShiftMapReport:
         
         # DEBUG линия
         debug_boundary_y = graphic_geom['y'] + graphic_geom['height'] + EXTRA_GRAPHIC_HEIGHT
-        draw.line([(legend_graphic_x, debug_boundary_y), (legend_graphic_x + legend_graphic_width, debug_boundary_y)], fill='#FF0000', width=2)
+        draw.line([(legend_graphic_x, debug_boundary_y), (legend_graphic_x + legend_graphic_width, debug_boundary_y)], fill="#0307FF", width=2)
         
         self._draw_table_legend(draw, legend_table_x, legend_table_y, legend_table_width)
         self._draw_graphic_legend(draw, legend_graphic_x, legend_graphic_y, legend_graphic_width)
