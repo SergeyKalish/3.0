@@ -482,6 +482,25 @@ class ReportStyles:
     
     # Отступ между элементами легенды
     LEGEND_PADDING_PX: int = 18
+    
+    # ============================================
+    # ИНДИКАТОРЫ +/- НА СМЕНАХ (показатель полезности)
+    # ============================================
+    
+    # Белый фон кружка для +/-
+    PLUS_MINUS_CIRCLE_BG: str = "#FFFFFF"
+    
+    # Синий цвет для "+" (наш гол)
+    PLUS_MINUS_PLUS_COLOR: str = "#0064C8"
+    
+    # Красный цвет для "-" (гол соперника)
+    PLUS_MINUS_MINUS_COLOR: str = "#C80032"
+    
+    # Диаметр кружка индикатора (на ~2px меньше высоты верхней части смены)
+    PLUS_MINUS_CIRCLE_DIAMETER_PX: int = 28
+    
+    # Размер шрифта для символов +/-
+    PLUS_MINUS_FONT_SIZE_PT: int = 15
 
 
 # ============================================
@@ -1532,7 +1551,7 @@ class PlayerShiftMapReport:
                             period_start=0)
 
         self._draw_shifts(draw, report_data, geom, time_range=time_range, 
-                          period_start=0, header_height=header_height)
+                          period_start=0, header_height=header_height, draw_plus_minus=False)
 
         self._draw_time_scale(draw, geom, time_range=time_range, is_match_level=True)
 
@@ -1574,7 +1593,7 @@ class PlayerShiftMapReport:
                             period_start=period_start)
 
         self._draw_shifts(draw, report_data, geom, time_range=time_range,
-                          period_start=period_start, header_height=header_height)
+                          period_start=period_start, header_height=header_height, draw_plus_minus=True)
         
         self._draw_time_scale(draw, geom, time_range=time_range, 
                               is_match_level=False, period_abs_start=period_start)
@@ -1700,7 +1719,8 @@ class PlayerShiftMapReport:
             draw.text((label_x, label_y), label_text, fill=styles.COLOR_BLACK, font=font)
 
     def _draw_shifts(self, draw: ImageDraw, report_data: ReportData, geom: dict,
-                    time_range: float, period_start: float, header_height: float):
+                    time_range: float, period_start: float, header_height: float,
+                    draw_plus_minus: bool = False):
         """Отрисовка смен."""
         styles = self.styles
         
@@ -1816,6 +1836,44 @@ class PlayerShiftMapReport:
                 draw.line([(x_start, y_middle), (x_end, y_middle)], 
                         fill=styles.COLOR_BLACK,
                         width=styles.SHIFT_DIVIDER_WIDTH)
+                
+                # === ИНДИКАТОРЫ +/- ДЛЯ ГОЛОВ В РАВНЫХ СОСТАВАХ ===
+                if draw_plus_minus:
+                    for goal in report_data.goals:
+                        goal_time = goal.official_time
+                        
+                        # Гол должен быть внутри смены, но НЕ в начале
+                        # (shift_start < goal_time <= shift_end)
+                        if not (shift_info.official_start < goal_time <= shift_info.official_end):
+                            continue
+                        
+                        # Проверяем, что гол в текущем периоде
+                        if not (period_start < goal_time <= period_start + time_range):
+                            continue
+                        
+                        # Проверяем равные составы
+                        is_even_strength = self._is_even_strength_at_time(
+                            goal_time, report_data, period_start
+                        )
+                        if not is_even_strength:
+                            continue
+                        
+                        # Определяем, наш гол или соперника
+                        goal_team = goal.context.get('team', '')
+                        is_our_goal = (goal_team == report_data.our_team_key)
+                        
+                        # Вычисляем позицию X гола
+                        goal_x = graphic_x + int((goal_time - period_start) * scale_factor)
+                        
+                        # Центр верхней части смены по Y
+                        indicator_y = (y_pos + y_middle) // 2
+                        
+                        # Рисуем индикатор
+                        self._draw_plus_minus_indicator(
+                            draw, goal_x, indicator_y,
+                            styles.PLUS_MINUS_CIRCLE_DIAMETER_PX,
+                            is_our_goal, styles
+                        )
 
                 # Подпись номера смены и длительности
                 self._draw_shift_label(draw, x_start, x_end, y_pos, y_middle, 
@@ -1926,6 +1984,83 @@ class PlayerShiftMapReport:
             
             composite = Image.alpha_composite(background, rotated)
             main_image.paste(composite, (paste_x, paste_y))
+
+    def _draw_plus_minus_indicator(self, draw: ImageDraw, x: int, y: int,
+                                   diameter: int, is_our_goal: bool, styles):
+        """
+        Рисует индикатор +/- для гола в смене.
+        Белый кружок с символом + (синий) или - (красный) внутри.
+        """
+        radius = diameter // 2
+        
+        # Белый кружок с чёрной обводкой
+        draw.ellipse(
+            [x - radius, y - radius, x + radius, y + radius],
+            fill=styles.PLUS_MINUS_CIRCLE_BG,
+            outline=styles.COLOR_BLACK,
+            width=1
+        )
+        
+        # Символ +/-
+        symbol = "+" if is_our_goal else "-"
+        color = styles.PLUS_MINUS_PLUS_COLOR if is_our_goal else styles.PLUS_MINUS_MINUS_COLOR
+        font = self._get_font(styles.PLUS_MINUS_FONT_SIZE_PT)
+        
+        # Центрирование символа в кружке с учетом метрик шрифта
+        bbox = draw.textbbox((0, 0), symbol, font=font)
+        text_w = bbox[2] - bbox[0]
+        ascent, descent = font.getmetrics()
+        text_x = x - text_w // 2
+        text_y = y - ascent // 2  # Центрируем по baseline
+        
+        draw.text((text_x, text_y), symbol, fill=color, font=font)
+
+    def _is_even_strength_at_time(self, time: float, report_data: ReportData,
+                                  period_start: float) -> bool:
+        """
+        Проверяет, были ли равные составы в указанный момент времени.
+        Равные составы: 5 на 5, 4 на 4, 3 на 3.
+        """
+        from utils.helpers import convert_global_to_official_time
+        
+        raw_modes = getattr(report_data.original_project.match, 'calculated_ranges', [])
+        game_modes = [cr for cr in raw_modes if getattr(cr, 'label_type', '') == 'game_mode']
+        
+        if not game_modes:
+            return True
+        
+        def is_even_strength_mode(mode_name: str) -> bool:
+            if ' на ' not in mode_name:
+                return False
+            try:
+                parts = mode_name.split(' на ')
+                f_team_count = int(parts[0].strip())
+                s_team_count = int(parts[1].strip())
+                return f_team_count == s_team_count
+            except (ValueError, IndexError):
+                return False
+        
+        for gm in game_modes:
+            try:
+                official_start = convert_global_to_official_time(
+                    gm.start_time,
+                    report_data.original_project.match.calculated_ranges
+                )
+                official_end = convert_global_to_official_time(
+                    gm.end_time,
+                    report_data.original_project.match.calculated_ranges
+                )
+            except Exception:
+                continue
+            
+            if official_start is None or official_end is None:
+                continue
+            
+            if official_start < time <= official_end:
+                mode_name = getattr(gm, 'name', '5 на 5')
+                return is_even_strength_mode(mode_name)
+        
+        return True
 
     def _draw_goals_scale(self, draw: ImageDraw, report_data: ReportData, geom: dict,
                         time_range: float, period_start: float) -> int:
