@@ -106,9 +106,34 @@ class ReportStyles:
     # РАЗМЕРЫ ШРИФТОВ (в пунктах, pt)
     # ============================================
     
-    # Заголовок листа ("Карта смен — Матч/Период 1")
-    # Крупный, заметный, по центру вверху страницы
-    HEADER_FONT_SIZE_PT: int = 12
+    # ============================================
+    # ЗАГОЛОВОК ЛИСТА (новый стиль)
+    # ============================================
+    
+    # Размер логотипа команд в заголовке (увеличен в 4 раза)
+    HEADER_LOGO_SIZE_PX: int = 190
+    
+    # Позиция логотипов по Y (от верха страницы)
+    # Увеличьте чтобы опустить логотипы, уменьшите чтобы поднять
+    HEADER_LOGO_Y_POSITION_PX: int = 25
+    
+    # Шрифт названия турнира
+    HEADER_TITLE_FONT_SIZE_PT: int = 14
+    
+    # Шрифт названий команд
+    HEADER_TEAMS_FONT_SIZE_PT: int = 16
+    
+    # Шрифт счёта (крупный)
+    HEADER_SCORE_FONT_SIZE_PT: int = 24
+    
+    # Шрифт дополнительной информации (судьи, арена)
+    HEADER_INFO_FONT_SIZE_PT: int = 8
+    
+    # Отступ между элементами заголовка
+    HEADER_LINE_SPACING_PX: int = 5
+    
+    # Цвет фона заголовка (опционально)
+    HEADER_BG_COLOR: str = "#F5F5F5"
     
     # Основной размер для данных в таблице (номера, время, статистика)
     # Баланс между читаемостью и компактностью
@@ -632,7 +657,9 @@ class PlayerShiftMapReport:
         draw = ImageDraw.Draw(img)
 
         # Заголовок листа
-        self._draw_sheet_header(draw, sheet_title, table_geom)
+        is_period = (mode != 'game_on_sheet')
+        self._draw_sheet_header(draw, sheet_title, table_geom, report_data, 
+                               is_period=is_period, period_num=period_index + 1 if is_period else 0)
 
         # Таблица (новая версия)
         self._draw_table_v2(draw, report_data, table_geom, columns_config, period_index)
@@ -1444,22 +1471,158 @@ class PlayerShiftMapReport:
     # СУЩЕСТВУЮЩИЕ МЕТОДЫ (без изменений или минимальные правки)
     # ============================================
 
-    def _draw_sheet_header(self, draw: ImageDraw, title: str, geom: dict):
-        """Заголовок листа."""
+    def _draw_sheet_header(self, draw: ImageDraw, sheet_title: str, geom: dict, 
+                          report_data: ReportData, is_period: bool = False, period_num: int = 0):
+        """
+        Новый заголовок листа с информацией о матче.
+        f-team всегда слева, s-team всегда справа.
+        """
         styles = self.styles
-        font = self._get_font(styles.HEADER_FONT_SIZE_PT)
         
-        text_bbox = draw.textbbox((0, 0), title, font=font)
-        text_width = text_bbox[2] - text_bbox[0]
-        text_height = text_bbox[3] - text_bbox[1]
+        # Получаем данные о матче
+        match_info = report_data.get_match_info()
+        our_goals, their_goals = report_data.get_final_score()
         
+        # Названия команд: f-team слева, s-team справа
+        left_team_name = match_info['f_team_name']
+        right_team_name = match_info['s_team_name']
+        
+        # Убираем постфикс " 2014" из названий
+        left_team_name = left_team_name.replace(' 2014', '').replace('2014', '')
+        right_team_name = right_team_name.replace(' 2014', '').replace('2014', '')
+        
+        # Определяем голы для каждой стороны
+        if match_info['our_team_key'] == 'f-team':
+            left_goals = our_goals
+            right_goals = their_goals
+        else:
+            left_goals = their_goals
+            right_goals = our_goals
+        
+        score_text = f"{left_goals}:{right_goals}"
+        
+        # Пути к логотипам (f-team слева, s-team справа)
+        left_logo_path = report_data.get_team_logo_path('f-team')
+        right_logo_path = report_data.get_team_logo_path('s-team')
+        
+        # Основные параметры
         content_x = geom["content_x"]
         content_width = geom["content_width"]
+        center_x = content_x + content_width // 2
+        table_top_y = geom["y"]  # Верхняя граница таблицы
         
-        x = content_x + (content_width - text_width) // 2
-        y = 40
+        logo_size = styles.HEADER_LOGO_SIZE_PX
+        line_spacing = styles.HEADER_LINE_SPACING_PX
         
-        draw.text((x, y), title, fill=styles.COLOR_BLACK, font=font)
+        # Начальная Y-координата
+        current_y = 30
+        
+        # === ЛИНИЯ 1: Название турнира ===
+        font_tournament = self._get_font(styles.HEADER_TITLE_FONT_SIZE_PT, bold=True)
+        tournament_text = match_info['tournament_name'] or ''
+        if match_info['tour_number']:
+            tournament_text += f" | Тур {match_info['tour_number']}"
+        
+        bbox = draw.textbbox((0, 0), tournament_text, font=font_tournament)
+        text_w = bbox[2] - bbox[0]
+        draw.text((center_x - text_w // 2, current_y), tournament_text, 
+                 fill=styles.COLOR_BLACK, font=font_tournament)
+        current_y += (bbox[3] - bbox[1]) + line_spacing
+        
+        # === ЛОГОТИПЫ И КОМАНДЫ ===
+        # Позиция логотипов по Y задаётся константой HEADER_LOGO_Y_POSITION_PX
+        logo_y = styles.HEADER_LOGO_Y_POSITION_PX
+        
+        # Рисуем логотип f-team слева
+        if left_logo_path and os.path.exists(left_logo_path):
+            try:
+                logo = Image.open(left_logo_path)
+                logo = logo.resize((logo_size, logo_size), Image.Resampling.LANCZOS)
+                draw._image.paste(logo, (content_x + 20, logo_y), 
+                                logo if logo.mode == 'RGBA' else None)
+            except Exception:
+                pass
+        
+        # Рисуем логотип s-team справа
+        if right_logo_path and os.path.exists(right_logo_path):
+            try:
+                logo = Image.open(right_logo_path)
+                logo = logo.resize((logo_size, logo_size), Image.Resampling.LANCZOS)
+                draw._image.paste(logo, (content_x + content_width - 20 - logo_size, logo_y), 
+                                logo if logo.mode == 'RGBA' else None)
+            except Exception:
+                pass
+        
+        # Центр логотипа по Y (для выравнивания текста и счёта)
+        logo_center_y = logo_y + logo_size // 2
+        
+        # Названия команд - справа от левого лого и слева от правого
+        font_team = self._get_font(styles.HEADER_TEAMS_FONT_SIZE_PT, bold=True)
+        
+        # Название f-team справа от левого логотипа
+        bbox_left = draw.textbbox((0, 0), left_team_name, font=font_team)
+        left_text_x = content_x + 20 + logo_size + 30  # Отступ 30px от логотипа
+        left_text_y = logo_center_y - (bbox_left[3] - bbox_left[1]) // 2
+        draw.text((left_text_x, left_text_y), 
+                 left_team_name, fill=styles.COLOR_BLACK, font=font_team)
+        
+        # Название s-team слева от правого логотипа
+        bbox_right = draw.textbbox((0, 0), right_team_name, font=font_team)
+        right_text_x = content_x + content_width - 20 - logo_size - 30 - (bbox_right[2] - bbox_right[0])
+        right_text_y = logo_center_y - (bbox_right[3] - bbox_right[1]) // 2
+        draw.text((right_text_x, right_text_y), 
+                 right_team_name, fill=styles.COLOR_BLACK, font=font_team)
+        
+        # Счёт по центру (на уровне центра логотипов)
+        font_score = self._get_font(styles.HEADER_SCORE_FONT_SIZE_PT, bold=True)
+        bbox = draw.textbbox((0, 0), score_text, font=font_score)
+        score_x = center_x - (bbox[2] - bbox[0]) // 2
+        score_y = logo_center_y - (bbox[3] - bbox[1]) // 2
+        draw.text((score_x, score_y), 
+                 score_text, fill=styles.COLOR_BLACK, font=font_score)
+        
+        # === НИЖНЯЯ СТРОКА: Судьи (слева) и Дата-Время-Арена (справа) ===
+        # Размещаем с фиксированным отступом от логотипов
+        bottom_line_y = logo_y + logo_size + 10  # Отступ от низа логотипов
+        font_info = self._get_font(styles.HEADER_INFO_FONT_SIZE_PT)
+        
+        # Судьи слева
+        referees = match_info.get('referees', [])
+        if referees:
+            referees_text = "Судьи: " + ", ".join(referees)
+            draw.text((content_x, bottom_line_y), 
+                     referees_text, fill=styles.COLOR_BLACK, font=font_info)
+        
+        # Дата-Время-Арена справа (формат: ДАТА-ВРЕМЯ, НАЗВАНИЕ АРЕНЫ (Город))
+        date_str = match_info['match_date'] or ''
+        time_str = match_info['match_time'] or ''
+        arena = match_info.get('venue_arena', '')
+        city = match_info.get('venue_city', '')
+        
+        # Формируем строку даты-времени-арены
+        parts = []
+        
+        # Дата и время (убираем секунды из времени)
+        if date_str:
+            if time_str:
+                # Убираем секунды из времени (11:00:00 -> 11:00)
+                time_short = time_str[:5] if len(time_str) >= 5 else time_str
+                parts.append(f"{date_str} - {time_short}")
+            else:
+                parts.append(date_str)
+        
+        # Арена и город
+        if arena or city:
+            if arena and city:
+                parts.append(f"{arena} ({city})")
+            else:
+                parts.append(arena or city)
+        
+        if parts:
+            arena_text = ", ".join(parts)
+            bbox = draw.textbbox((0, 0), arena_text, font=font_info)
+            draw.text((content_x + content_width - (bbox[2] - bbox[0]), bottom_line_y), 
+                     arena_text, fill=styles.COLOR_BLACK, font=font_info)
 
     def _draw_sheet_footer(self, draw: ImageDraw, page_num: int, total_pages: int, geom: dict):
         """Подвал с нумерацией."""

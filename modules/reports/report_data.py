@@ -494,3 +494,77 @@ class ReportData:
 
         # --- Валидация завершена ---
         print("Данные успешно извлечены и прошли валидацию для отчёта.")
+
+
+    # ============================================
+    # METODY DLYA ZAGOLOVKA OTCHETA
+    # ============================================
+    
+    def get_match_info(self) -> dict:
+        '''
+        ���������� ����� ���������� � ����� ��� ��������� ������.
+        '''
+        match_obj = self.original_project.match
+        teams = getattr(match_obj, 'teams', {})
+        
+        return {
+            'tournament_name': getattr(match_obj, 'tournament_name', ''),
+            'tour_number': getattr(match_obj, 'tour_number', ''),
+            'match_date': getattr(match_obj, 'match_date', ''),
+            'match_time': getattr(match_obj, 'match_time', ''),
+            'venue_city': getattr(match_obj, 'venue_city', ''),
+            'venue_arena': getattr(match_obj, 'venue_arena', ''),
+            'referees': getattr(match_obj, 'referees', []),
+            'our_team_name': teams.get(self.our_team_key, ''),
+            'opponent_team_name': teams.get('s-team' if self.our_team_key == 'f-team' else 'f-team', ''),
+            'our_team_key': self.our_team_key,
+            'f_team_name': teams.get('f-team', ''),
+            's_team_name': teams.get('s-team', ''),
+        }
+    
+    def get_final_score(self) -> tuple:
+        '''
+        ���������� �������� ���� ����� (���� ����, ���� ���������).
+        '''
+        our_goals = 0
+        their_goals = 0
+        
+        for goal in self.goals:
+            team = goal.context.get('team', '')
+            if team == self.our_team_key:
+                our_goals += 1
+            else:
+                their_goals += 1
+        
+        return (our_goals, their_goals)
+    
+    def get_team_logo_path(self, team_key: str) -> str:
+        '''
+        ���������� ���� � �������� �������.
+        ���� �� team_id ��� team_name.
+        '''
+        import os
+        
+        match_obj = self.original_project.match
+        teams = getattr(match_obj, 'teams', {})
+        team_id = teams.get(f'{team_key}_id', '')
+        team_name = teams.get(team_key, '')
+        
+        logo_dir = 'Data/team_logos'
+        
+        # ������� ����� �� ID
+        if team_id:
+            path_by_id = os.path.join(logo_dir, f'{team_id}.png')
+            if os.path.exists(path_by_id):
+                return path_by_id
+        
+        # ������� ����� �� �����
+        if team_name:
+            # ������� ������� � ����������� �� �����
+            safe_name = ''.join(c for c in team_name if c.isalnum() or c in '-_')
+            path_by_name = os.path.join(logo_dir, f'{safe_name}.png')
+            if os.path.exists(path_by_name):
+                return path_by_name
+        
+        return ''
+
