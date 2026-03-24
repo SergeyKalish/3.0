@@ -450,14 +450,24 @@ class ReportStyles:
     
     # === ПРОЧИЕ НАСТРОЙКИ ЛЕГЕНДЫ ===
     
-    # Высота строки текста легенды
+    # Высота строки текста легенды (для легенды таблицы)
     LEGEND_LINE_HEIGHT_PX: int = 25
     
+    # === НАСТРОЙКИ ЛЕГЕНДЫ ГРАФИКИ (горизонтальный формат) ===
+    
+    # Высота строки в легенде графики (отступ между строками "Цвета смен", "Составы", "События")
+    # Увеличьте для большего расстояния между строками
+    LEGEND_GRAPHIC_LINE_HEIGHT_PX: int = 45
+    
+    # Отступ между элементами в строке (между цветными квадратиками с пояснениями)
+    # Увеличьте для большего расстояния между "до 35 сек", "35-70 сек" и т.д.
+    LEGEND_GRAPHIC_ITEM_GAP_PX: int = 30
+    
     # Размер цветного квадратика для обозначений
-    LEGEND_COLOR_BOX_SIZE: int = 25
+    LEGEND_COLOR_BOX_SIZE: int = 30
     
     # Отступ между элементами легенды
-    LEGEND_PADDING_PX: int = 40
+    LEGEND_PADDING_PX: int = 18
 
 
 # ============================================
@@ -2718,19 +2728,32 @@ class PlayerShiftMapReport:
         styles = self.styles
         font_title = self._get_font(styles.LEGEND_TITLE_FONT_SIZE_PT)
         font_text = self._get_font(styles.LEGEND_FONT_SIZE_PT)
-        line_height = styles.LEGEND_LINE_HEIGHT_PX
+        # Используем отдельную константу высоты строки для легенды графики
+        line_height = styles.LEGEND_GRAPHIC_LINE_HEIGHT_PX
         box_size = styles.LEGEND_COLOR_BOX_SIZE
         
         LABEL_GAP = 8
-        ITEM_GAP = 10
+        # Используем константу для отступа между элементами (пояснениями)
+        ITEM_GAP = styles.LEGEND_GRAPHIC_ITEM_GAP_PX
         BOX_GAP = 4
         current_y = y
+        
+        # === ВЫРАВНИВАНИЕ ПО БАЗОВОЙ ЛИНИИ ===
+        # Получаем метрики шрифтов для выравнивания элементов по низу заголовка
+        title_ascent, _ = font_title.getmetrics()
+        text_ascent, _ = font_text.getmetrics()
+        # Разница в высоте над базовой линией
+        # Элементы с меньшим ascent нужно сдвинуть вниз, чтобы базовые линии совпали
+        baseline_offset = title_ascent - text_ascent
         
         # Строка 1: Цвета смен
         title = 'Цвета смен:'
         draw.text((x, current_y), title, fill=styles.COLOR_BLACK, font=font_title)
         title_bbox = draw.textbbox((0, 0), title, font=font_title)
         item_x = x + (title_bbox[2] - title_bbox[0]) + LABEL_GAP
+        
+        # Y-координата для элементов с выравниванием по базовой линии заголовка
+        item_y = current_y + baseline_offset
         
         shift_colors = [
             (styles.COLOR_VERY_LIGHT_GREEN, '< 35 сек'),
@@ -2739,8 +2762,8 @@ class PlayerShiftMapReport:
             (styles.COLOR_BRIGHT_RED, '70+ (ф2)'),
         ]
         for color, text in shift_colors:
-            self._draw_legend_color_box(draw, item_x, current_y, box_size, color)
-            draw.text((item_x + box_size + BOX_GAP, current_y), text, fill=styles.COLOR_BLACK, font=font_text)
+            self._draw_legend_color_box(draw, item_x, item_y, box_size, color)
+            draw.text((item_x + box_size + BOX_GAP, item_y), text, fill=styles.COLOR_BLACK, font=font_text)
             text_bbox = draw.textbbox((0, 0), text, font=font_text)
             item_x += box_size + (text_bbox[2] - text_bbox[0]) + ITEM_GAP
         current_y += line_height
@@ -2751,6 +2774,9 @@ class PlayerShiftMapReport:
         title_bbox = draw.textbbox((0, 0), title, font=font_title)
         item_x = x + (title_bbox[2] - title_bbox[0]) + LABEL_GAP
         
+        # Y-координата для элементов с выравниванием по базовой линии заголовка
+        item_y = current_y + baseline_offset
+        
         game_modes = [
             (styles.COLOR_GM_POWERPLAY_LIGHT, 'Большинство +1'),
             (styles.COLOR_GM_POWERPLAY_STRONG, '+2'),
@@ -2760,8 +2786,8 @@ class PlayerShiftMapReport:
             (styles.COLOR_GM_EVEN_3ON3, '3x3'),
         ]
         for color, text in game_modes:
-            self._draw_legend_color_box(draw, item_x, current_y, box_size, color)
-            draw.text((item_x + box_size + BOX_GAP, current_y), text, fill=styles.COLOR_BLACK, font=font_text)
+            self._draw_legend_color_box(draw, item_x, item_y, box_size, color)
+            draw.text((item_x + box_size + BOX_GAP, item_y), text, fill=styles.COLOR_BLACK, font=font_text)
             text_bbox = draw.textbbox((0, 0), text, font=font_text)
             item_x += box_size + (text_bbox[2] - text_bbox[0]) + ITEM_GAP
         current_y += line_height
@@ -2772,6 +2798,9 @@ class PlayerShiftMapReport:
         title_bbox = draw.textbbox((0, 0), title, font=font_title)
         item_x = x + (title_bbox[2] - title_bbox[0]) + LABEL_GAP
         
+        # Y-координата для элементов с выравниванием по базовой линии заголовка
+        item_y = current_y + baseline_offset
+        
         events = [
             (styles.COLOR_OUR_GOAL, 'Наш гол', 'peg'),
             (styles.COLOR_THEIR_GOAL, 'Гол соп.', 'peg'),
@@ -2780,13 +2809,13 @@ class PlayerShiftMapReport:
         ]
         for color, text, icon_type in events:
             if icon_type == 'peg':
-                draw.line([(item_x + 2, current_y + 2), (item_x + 2, current_y + box_size - 2)], fill=color, width=2)
-                draw.line([(item_x, current_y + 2), (item_x + 4, current_y + 2)], fill=color, width=2)
+                draw.line([(item_x + 2, item_y + 2), (item_x + 2, item_y + box_size - 2)], fill=color, width=2)
+                draw.line([(item_x, item_y + 2), (item_x + 4, item_y + 2)], fill=color, width=2)
             else:
                 cm = 2
-                draw.line([(item_x + cm, current_y + cm), (item_x + box_size - cm, current_y + box_size - cm)], fill=color, width=2)
-                draw.line([(item_x + box_size - cm, current_y + cm), (item_x + cm, current_y + box_size - cm)], fill=color, width=2)
-            draw.text((item_x + box_size + BOX_GAP, current_y), text, fill=styles.COLOR_BLACK, font=font_text)
+                draw.line([(item_x + cm, item_y + cm), (item_x + box_size - cm, item_y + box_size - cm)], fill=color, width=2)
+                draw.line([(item_x + box_size - cm, item_y + cm), (item_x + cm, item_y + box_size - cm)], fill=color, width=2)
+            draw.text((item_x + box_size + BOX_GAP, item_y), text, fill=styles.COLOR_BLACK, font=font_text)
             text_bbox = draw.textbbox((0, 0), text, font=font_text)
             item_x += box_size + (text_bbox[2] - text_bbox[0]) + ITEM_GAP
     
