@@ -240,7 +240,7 @@ class ReportStyles:
     # Используйте эту константу чтобы поднять или опустить табличную и графическую часть
     # Положительное значение = опустить ниже, Отрицательное значение = поднять выше
     # Например: -30 поднимет всё содержимое на 30 пикселей ближе к заголовку
-    CONTENT_TOP_OFFSET_PX: int = -80
+    CONTENT_TOP_OFFSET_PX: int = -65
     
     # Максимальная ширина таблицы (39% — остальное 61% под графику минимум)
     TABLE_MAX_WIDTH_PERCENT: float = 0.25
@@ -419,16 +419,16 @@ class ReportStyles:
     # === ОТСТУПЫ ЛЕГЕНДЫ (регулируйте эти значения) ===
     
     # Отступ от ТАБЛИЦЫ до легенды под таблицей (левая легенда)
-    LEGEND_TABLE_TOP_PADDING_PX: int = 15
+    LEGEND_TABLE_TOP_PADDING_PX: int = 105
     
     # Отступ от ГРАФИКИ до легенды под графикой (правая легенда)
-    LEGEND_GRAPHIC_TOP_PADDING_PX: int = 15
+    LEGEND_GRAPHIC_TOP_PADDING_PX: int = 5
     
     # Разрыв между заголовком легенды и текстом
-    LEGEND_TITLE_GAP_PX: int = 8
+    LEGEND_TITLE_GAP_PX: int = 10
     
     # Отступ между обозначением и пояснением
-    LEGEND_ABBR_DESC_GAP_PX: int = 3
+    LEGEND_ABBR_DESC_GAP_PX: int = 5
     
     # === ШРИФТЫ ЛЕГЕНДЫ ===
     
@@ -439,9 +439,9 @@ class ReportStyles:
     LEGEND_TITLE_FONT_SIZE_PT: int = 8
     
     # --- Настройки для "обозначений" (сокращений) ---
-    LEGEND_ABBR_FONT_SIZE_PT: int = 6
+    LEGEND_ABBR_FONT_SIZE_PT: int = 7
     LEGEND_ABBR_FONT_BOLD: bool = True
-    LEGEND_ABBR_FONT_COLOR: str = "#000000"  # HEX формат
+    LEGEND_ABBR_FONT_COLOR: str = "#1640F8"  # HEX формат
     
     # --- Настройки для "пояснений" (расшифровок) ---
     LEGEND_DESC_FONT_SIZE_PT: int = 6
@@ -454,10 +454,10 @@ class ReportStyles:
     LEGEND_LINE_HEIGHT_PX: int = 25
     
     # Размер цветного квадратика для обозначений
-    LEGEND_COLOR_BOX_SIZE: int = 18
+    LEGEND_COLOR_BOX_SIZE: int = 25
     
     # Отступ между элементами легенды
-    LEGEND_PADDING_PX: int = 10
+    LEGEND_PADDING_PX: int = 40
 
 
 # ============================================
