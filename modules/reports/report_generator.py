@@ -497,10 +497,18 @@ class ReportStyles:
     PLUS_MINUS_MINUS_COLOR: str = "#C80032"
     
     # Диаметр кружка индикатора (на ~2px меньше высоты верхней части смены)
-    PLUS_MINUS_CIRCLE_DIAMETER_PX: int = 28
+    PLUS_MINUS_CIRCLE_DIAMETER_PX: int = 30
+    
+    # === РУЧНЫЕ КОРРЕКТИРОВКИ ПОЗИЦИЙ +/- ===
+    # Смещение "+" по X (положительное = вправо, отрицательное = влево)
+    PLUS_X_OFFSET_PX: int = 1
+    
+    # Смещение "-" по Y (положительное = вниз, отрицательное = вверх)
+    # Рекомендуется: -(radius // 2) чтобы поднять на половину радиуса
+    MINUS_Y_OFFSET_PX: int = -5
     
     # Размер шрифта для символов +/-
-    PLUS_MINUS_FONT_SIZE_PT: int = 15
+    PLUS_MINUS_FONT_SIZE_PT: int = 13
 
 
 # ============================================
@@ -2006,14 +2014,19 @@ class PlayerShiftMapReport:
         color = styles.PLUS_MINUS_PLUS_COLOR if is_our_goal else styles.PLUS_MINUS_MINUS_COLOR
         font = self._get_font(styles.PLUS_MINUS_FONT_SIZE_PT)
         
-        # Центрирование символа в кружке с учетом метрик шрифта
-        bbox = draw.textbbox((0, 0), symbol, font=font)
-        text_w = bbox[2] - bbox[0]
-        ascent, descent = font.getmetrics()
-        text_x = x - text_w // 2
-        text_y = y - ascent // 2  # Центрируем по baseline
+        # Применяем корректировки позиции
+        if is_our_goal:
+            # Для "+" сдвигаем вправо на PLUS_X_OFFSET_PX
+            draw_x = x + styles.PLUS_X_OFFSET_PX
+            draw_y = y
+        else:
+            # Для "-" поднимаем на MINUS_Y_OFFSET_PX
+            draw_x = x
+            draw_y = y + styles.MINUS_Y_OFFSET_PX
         
-        draw.text((text_x, text_y), symbol, fill=color, font=font)
+        # Центрирование символа в кружке с использованием anchor
+        # anchor="mm" означает: привязать середину текста (middle-middle) к точке (x, y)
+        draw.text((draw_x, draw_y), symbol, fill=color, font=font, anchor="mm")
 
     def _is_even_strength_at_time(self, time: float, report_data: ReportData,
                                   period_start: float) -> bool:
