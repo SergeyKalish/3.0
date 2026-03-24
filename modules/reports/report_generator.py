@@ -1451,7 +1451,7 @@ class PlayerShiftMapReport:
         page_text = f"{page_num}/{total_pages}"
         draw.text((content_x, footer_y), page_text, fill=styles.COLOR_BLACK, font=font)
         
-        copyright_text = 'Отчет составлен программным комплексом "HockeyTagagger v.4". Все права не защищены'
+        copyright_text = 'Отчет составлен программным комплексом "HockeyTagger v.4". Все права скоро будут защищены'
         text_bbox = draw.textbbox((0, 0), copyright_text, font=font)
         text_width = text_bbox[2] - text_bbox[0]
         x_center = content_x + (content_width - text_width) // 2 * 2
@@ -2767,9 +2767,9 @@ class PlayerShiftMapReport:
         item_y = current_y + baseline_offset
         
         shift_colors = [
-            (styles.COLOR_VERY_LIGHT_GREEN, '< 35 сек'),
-            (styles.COLOR_DARK_GREEN, '35-70 сек'),
-            (styles.COLOR_ORANGE, '70 сек'),
+            (styles.COLOR_VERY_LIGHT_GREEN, '< 35 сек.'),
+            (styles.COLOR_DARK_GREEN, '35-70 сек.'),
+            (styles.COLOR_ORANGE, '70 сек.'),
             (styles.COLOR_BRIGHT_RED, '→∞'),
         ]
         # Шрифт для символа бесконечности (отдельный размер)
@@ -2795,7 +2795,7 @@ class PlayerShiftMapReport:
         current_y += line_height
         
         # Строка 2: Составы
-        title = 'Составы:'
+        title = 'Численные составы:'
         draw.text((x, current_y), title, fill=styles.COLOR_BLACK, font=font_title)
         title_bbox = draw.textbbox((0, 0), title, font=font_title)
         item_x = x + (title_bbox[2] - title_bbox[0]) + LABEL_GAP
@@ -2819,7 +2819,7 @@ class PlayerShiftMapReport:
         current_y += line_height
         
         # Строка 3: События
-        title = 'События:'
+        title = 'Игровые события:'
         draw.text((x, current_y), title, fill=styles.COLOR_BLACK, font=font_title)
         title_bbox = draw.textbbox((0, 0), title, font=font_title)
         item_x = x + (title_bbox[2] - title_bbox[0]) + LABEL_GAP
@@ -2829,19 +2829,26 @@ class PlayerShiftMapReport:
         
         events = [
             (styles.COLOR_OUR_GOAL, 'Наш гол', 'peg'),
-            (styles.COLOR_THEIR_GOAL, 'Гол соп.', 'peg'),
+            (styles.COLOR_THEIR_GOAL, 'Гол соперника', 'peg'),
+            (styles.FACEOFF_PEG_COLOR, 'Вбрасывание', 'peg'),
             (styles.COLOR_PENALTY_BOX, 'Удаление', 'cross'),
-            (styles.FACEOFF_PEG_COLOR, 'Вбрасыв.', 'peg'),
         ]
         for color, text, icon_type in events:
             if icon_type == 'peg':
-                draw.line([(item_x + 2, item_y + 2), (item_x + 2, item_y + box_size - 2)], fill=color, width=2)
-                draw.line([(item_x, item_y + 2), (item_x + 4, item_y + 2)], fill=color, width=2)
+                # Колышек толщиной 3 пикселя (было 2)
+                draw.line([(item_x + 2, item_y + 2), (item_x + 2, item_y + box_size - 2)], fill=color, width=3)
+                draw.line([(item_x, item_y + 2), (item_x + 4, item_y + 2)], fill=color, width=3)
             else:
-                cm = 2
+                # Крест внутри прямоугольника цвета удаления
+                # Рисуем прямоугольник фона
+                draw.rectangle([item_x, item_y, item_x + box_size, item_y + box_size], 
+                              fill=styles.COLOR_WHITE, outline=color, width=2)
+                # Рисуем крест внутри
+                cm = 3
                 draw.line([(item_x + cm, item_y + cm), (item_x + box_size - cm, item_y + box_size - cm)], fill=color, width=2)
                 draw.line([(item_x + box_size - cm, item_y + cm), (item_x + cm, item_y + box_size - cm)], fill=color, width=2)
-            draw.text((item_x + box_size + BOX_GAP, item_y), text, fill=styles.COLOR_BLACK, font=font_text)
+            # Текст цветом колышка/иконки (не черным)
+            draw.text((item_x + box_size + BOX_GAP, item_y), text, fill=color, font=font_text)
             text_bbox = draw.textbbox((0, 0), text, font=font_text)
             item_x += box_size + (text_bbox[2] - text_bbox[0]) + ITEM_GAP
     
