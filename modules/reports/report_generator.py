@@ -457,11 +457,22 @@ class ReportStyles:
     
     # Высота строки в легенде графики (отступ между строками "Цвета смен", "Составы", "События")
     # Увеличьте для большего расстояния между строками
-    LEGEND_GRAPHIC_LINE_HEIGHT_PX: int = 45
+    LEGEND_GRAPHIC_LINE_HEIGHT_PX: int = 48
     
     # Отступ между элементами в строке (между цветными квадратиками с пояснениями)
     # Увеличьте для большего расстояния между "до 35 сек", "35-70 сек" и т.д.
     LEGEND_GRAPHIC_ITEM_GAP_PX: int = 30
+    
+    # === СПЕЦИАЛЬНЫЙ ШРИФТ ДЛЯ СИМВОЛА БЕСКОНЕЧНОСТИ ===
+    # Размер шрифта для символа "стремится к бесконечности" в легенде графики
+    # Увеличьте/уменьшите для изменения размера только этого символа
+    LEGEND_INFINITY_FONT_SIZE_PT: int = 12
+    
+    # === РУЧНАЯ КОРРЕКТИРОВКА ПОЗИЦИИ СИМВОЛА БЕСКОНЕЧНОСТИ ===
+    # Используйте эту константу чтобы поднять (+) или опустить (-) символ "→∞"
+    # Положительное значение = опустить ниже, Отрицательное значение = поднять выше
+    # Например: 3 опустит на 3 пикселя, -2 поднимет на 2 пикселя
+    LEGEND_INFINITY_Y_OFFSET_PX: int = 4
     
     # Размер цветного квадратика для обозначений
     LEGEND_COLOR_BOX_SIZE: int = 30
@@ -2758,13 +2769,28 @@ class PlayerShiftMapReport:
         shift_colors = [
             (styles.COLOR_VERY_LIGHT_GREEN, '< 35 сек'),
             (styles.COLOR_DARK_GREEN, '35-70 сек'),
-            (styles.COLOR_ORANGE, '70+ (ф1)'),
-            (styles.COLOR_BRIGHT_RED, '70+ (ф2)'),
+            (styles.COLOR_ORANGE, '70 сек'),
+            (styles.COLOR_BRIGHT_RED, '→∞'),
         ]
-        for color, text in shift_colors:
+        # Шрифт для символа бесконечности (отдельный размер)
+        font_infinity = self._get_font(styles.LEGEND_INFINITY_FONT_SIZE_PT)
+        # Вычисляем смещение относительно ОСНОВНОГО ТЕКСТА (не заголовка)
+        # Чтобы символ был на одной линии с соседними подписями
+        infinity_ascent, _ = font_infinity.getmetrics()
+        # Разница между ascent бесконечности и обычного текста
+        infinity_relative_offset = text_ascent - infinity_ascent
+        
+        for idx, (color, text) in enumerate(shift_colors):
             self._draw_legend_color_box(draw, item_x, item_y, box_size, color)
-            draw.text((item_x + box_size + BOX_GAP, item_y), text, fill=styles.COLOR_BLACK, font=font_text)
-            text_bbox = draw.textbbox((0, 0), text, font=font_text)
+            # Для последнего элемента (→∞) используем специальный шрифт
+            if idx == 3:
+                # Выравниваем относительно позиции основного текста + ручная корректировка
+                infinity_y = item_y + infinity_relative_offset + styles.LEGEND_INFINITY_Y_OFFSET_PX
+                draw.text((item_x + box_size + BOX_GAP, infinity_y), text, fill=styles.COLOR_BLACK, font=font_infinity)
+                text_bbox = draw.textbbox((0, 0), text, font=font_infinity)
+            else:
+                draw.text((item_x + box_size + BOX_GAP, item_y), text, fill=styles.COLOR_BLACK, font=font_text)
+                text_bbox = draw.textbbox((0, 0), text, font=font_text)
             item_x += box_size + (text_bbox[2] - text_bbox[0]) + ITEM_GAP
         current_y += line_height
         
