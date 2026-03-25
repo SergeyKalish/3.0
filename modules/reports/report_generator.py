@@ -183,6 +183,11 @@ class ReportStyles:
     # Не меньше 8pt чтобы оставаться читаемым после печати
     TABLE_DATA_MIN_FONT_SIZE_PT: int = 6
     
+    # === ОТОБРАЖЕНИЕ НУЛЕВЫХ ЗНАЧЕНИЙ В ТАБЛИЦЕ ===
+    # Если True - нулевые значения (0, 0:00, 0") отображаются как пустые ячейки
+    # Если False - нулевые значения отображаются явно
+    TABLE_HIDE_ZERO_VALUES: bool = True
+    
     # Мелкий шрифт для подвала (нумерация страниц, копирайт)
     # Может быть мелким — служебная информация
     FOOTER_FONT_SIZE_PT: int = 5
@@ -1145,24 +1150,24 @@ class PlayerShiftMapReport:
             return player.number
         
         elif key == "shifts_count":
-            return str(len(period_shifts))
+            return self._format_table_value(str(len(period_shifts)), "0")
         
         elif key == "avg_shift":
             # Среднее время смены в секундах
             if not period_shifts:
-                return "0\""
+                return self._format_table_value("0\"", "0\"")
             total_duration = sum(s.duration for s in period_shifts)
             avg_seconds = int(total_duration / len(period_shifts))
-            return f"{avg_seconds}\""
+            return self._format_table_value(f"{avg_seconds}\"", "0\"")
         
         elif key in ["total_time", "period_time"]:
             # Общее время в формате MM:SS
             if not period_shifts:
-                return "0:00"
+                return self._format_table_value("0:00", "0:00")
             total_seconds = int(sum(s.duration for s in period_shifts))
             minutes = total_seconds // 60
             seconds = total_seconds % 60
-            return f"{minutes}:{seconds:02d}"
+            return self._format_table_value(f"{minutes}:{seconds:02d}", "0:00")
         
         elif key in ["powerplay", "penalty_kill"]:
             # Расчёт времени в большинстве/меньшинстве
@@ -1171,29 +1176,45 @@ class PlayerShiftMapReport:
             )
             minutes = total_seconds // 60
             seconds = total_seconds % 60
-            return f"{minutes}:{seconds:02d}"
+            return self._format_table_value(f"{minutes}:{seconds:02d}", "0:00")
         
         elif key == "goals":
             # Голы игрока
             goals_count = self._calculate_player_goals(player, report_data, period_index)
-            return str(goals_count)
+            return self._format_table_value(str(goals_count), "0")
         
         elif key == "assists":
             # Передачи игрока
             assists_count = self._calculate_player_assists(player, report_data, period_index)
-            return str(assists_count)
+            return self._format_table_value(str(assists_count), "0")
         
         elif key == "plus_minus":
             # +/- игрока
             pm = self._calculate_player_plus_minus(player, report_data, period_index)
-            return f"{pm:+d}" if pm != 0 else "0"
+            result = f"{pm:+d}" if pm != 0 else "0"
+            return self._format_table_value(result, "0")
         
         elif key == "penalties":
             # Штрафные минуты игрока
             penalty_minutes = self._calculate_player_penalties(player, report_data, period_index)
-            return str(penalty_minutes)
+            return self._format_table_value(str(penalty_minutes), "0")
         
         return ""
+
+    def _format_table_value(self, value: str, zero_value: str) -> str:
+        """
+        Форматирует значение для отображения в таблице с учётом флага TABLE_HIDE_ZERO_VALUES.
+        
+        :param value: Исходное значение
+        :param zero_value: Строка, представляющая "ноль" (например, "0", "0:00", "0\"")
+        :return: Отформатированное значение или пустая строка если значение равно нулю и флаг установлен
+        """
+        styles = self.styles
+        
+        if styles.TABLE_HIDE_ZERO_VALUES and value == zero_value:
+            return ""
+        
+        return value
 
     def _calculate_special_team_time(self, player, report_data: ReportData,
                                      period_index: Optional[int], key: str) -> int:
