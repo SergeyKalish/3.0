@@ -538,6 +538,33 @@ class ReportData:
         
         return (our_goals, their_goals)
     
+    def get_period_scores(self) -> list:
+        """
+        Возвращает счёт по периодам в формате списка кортежей [(f_score, s_score), ...].
+        Индекс 0 = первый период и т.д.
+        """
+        if not hasattr(self, 'segments_info') or not self.segments_info:
+            return []
+        
+        period_scores = []
+        
+        for segment in self.segments_info:
+            f_goals = 0
+            s_goals = 0
+            
+            for goal in self.goals:
+                # Проверяем, что гол попал в текущий период
+                if segment.official_start <= goal.official_time <= segment.official_end:
+                    team = goal.context.get('team', '')
+                    if team == 'f-team':
+                        f_goals += 1
+                    elif team == 's-team':
+                        s_goals += 1
+            
+            period_scores.append((f_goals, s_goals))
+        
+        return period_scores
+    
     def get_team_logo_path(self, team_key: str) -> str:
         '''
         ���������� ���� � �������� �������.

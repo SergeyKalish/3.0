@@ -107,33 +107,73 @@ class ReportStyles:
     # ============================================
     
     # ============================================
-    # ЗАГОЛОВОК ЛИСТА (новый стиль)
+    # ЗАГОЛОВОК ЛИСТА (детальные настройки)
     # ============================================
     
-    # Размер логотипа команд в заголовке (увеличен в 4 раза)
+    # Размер логотипа команд в заголовке
     HEADER_LOGO_SIZE_PX: int = 190
     
     # Позиция логотипов по Y (от верха страницы)
-    # Увеличьте чтобы опустить логотипы, уменьшите чтобы поднять
     HEADER_LOGO_Y_POSITION_PX: int = 25
-    
-    # Шрифт названия турнира
-    HEADER_TITLE_FONT_SIZE_PT: int = 14
-    
-    # Шрифт названий команд
-    HEADER_TEAMS_FONT_SIZE_PT: int = 16
-    
-    # Шрифт счёта (крупный)
-    HEADER_SCORE_FONT_SIZE_PT: int = 24
-    
-    # Шрифт дополнительной информации (судьи, арена)
-    HEADER_INFO_FONT_SIZE_PT: int = 8
     
     # Отступ между элементами заголовка
     HEADER_LINE_SPACING_PX: int = 5
     
-    # Цвет фона заголовка (опционально)
-    HEADER_BG_COLOR: str = "#F5F5F5"
+    # === НАЗВАНИЕ ТУРНИРА (первая строка) ===
+    HEADER_TOURNAMENT_FONT_SIZE_PT: int = 14
+    HEADER_TOURNAMENT_FONT_BOLD: bool = True
+    HEADER_TOURNAMENT_FONT_COLOR: str = "#000000"
+    
+    # === НОМЕР ТУРА (первая строка, после названия) ===
+    HEADER_TOUR_NUMBER_FONT_SIZE_PT: int = 14
+    HEADER_TOUR_NUMBER_FONT_BOLD: bool = True
+    HEADER_TOUR_NUMBER_FONT_COLOR: str = "#FF0101"
+    
+    # === F-TEAM (название команды слева) ===
+    HEADER_F_TEAM_FONT_SIZE_PT: int = 16
+    HEADER_F_TEAM_FONT_BOLD: bool = True
+    HEADER_F_TEAM_FONT_COLOR: str = "#000000"
+    
+    # === S-TEAM (название команды справа) ===
+    HEADER_S_TEAM_FONT_SIZE_PT: int = 16
+    HEADER_S_TEAM_FONT_BOLD: bool = True
+    HEADER_S_TEAM_FONT_COLOR: str = "#000000"
+    
+    # === СЧЁТ (первое число) ===
+    HEADER_SCORE_FIRST_FONT_SIZE_PT: int = 24
+    HEADER_SCORE_FIRST_FONT_BOLD: bool = True
+    HEADER_SCORE_FIRST_FONT_COLOR: str = "#000000"
+    
+    # === СЧЁТ (двоеточие) ===
+    HEADER_SCORE_COLON_FONT_SIZE_PT: int = 24
+    HEADER_SCORE_COLON_FONT_BOLD: bool = True
+    HEADER_SCORE_COLON_FONT_COLOR: str = "#000000"
+    
+    # === СЧЁТ (второе число) ===
+    HEADER_SCORE_SECOND_FONT_SIZE_PT: int = 24
+    HEADER_SCORE_SECOND_FONT_BOLD: bool = True
+    HEADER_SCORE_SECOND_FONT_COLOR: str = "#000000"
+    
+    # === ВЫРАВНИВАНИЕ СЧЁТА ===
+    # Смещение цифр счёта вниз для выравнивания с двоеточием
+    # Увеличьте чтобы опустить цифры, уменьшите чтобы поднять
+    HEADER_SCORE_NUMBERS_Y_OFFSET_PX: int = 14
+    
+    # === СЧЁТ ПО ПЕРИОДАМ (под основным счётом) ===
+    HEADER_PERIOD_SCORE_FONT_SIZE_PT: int = 10
+    HEADER_PERIOD_SCORE_FONT_BOLD: bool = True
+    HEADER_PERIOD_SCORE_COLOR: str = "#000000"
+    HEADER_PERIOD_SCORE_Y_OFFSET_PX: int = 32  # Отступ от основного счёта вниз
+    
+    # === СУДЬИ (нижняя строка слева) ===
+    HEADER_REFEREES_FONT_SIZE_PT: int = 8
+    HEADER_REFEREES_FONT_BOLD: bool = False
+    HEADER_REFEREES_FONT_COLOR: str = "#000000"
+    
+    # === ДАТА-ВРЕМЯ-АРЕНА (нижняя строка справа) ===
+    HEADER_ARENA_DATE_FONT_SIZE_PT: int = 8
+    HEADER_ARENA_DATE_FONT_BOLD: bool = False
+    HEADER_ARENA_DATE_FONT_COLOR: str = "#000000"
     
     # Основной размер для данных в таблице (номера, время, статистика)
     # Баланс между читаемостью и компактностью
@@ -183,11 +223,21 @@ class ReportStyles:
     # Светлый серый для горизонтальных линий в графической части (разделение строк)
     COLOR_GRID_LIGHT: str = "#E0E0E0"
     
-    # Синий — наши голы на шкале голов
-    COLOR_OUR_GOAL: str = "#0064C8"
+    # ============================================
+    # БАЗОВЫЕ ЦВЕТА КОМАНД (управляют всеми элементами отчёта)
+    # ============================================
     
-    # Красный — голы соперника на шкале голов
-    COLOR_THEIR_GOAL: str = "#C80032"
+    # Цвет "нашей" команды - влияет на: линии голов, авторов, счёт, индикаторы, легенду
+    COLOR_OUR_TEAM: str = "#1410F3"  # Синий
+    
+    # Цвет соперника - влияет на: линии голов, авторов, счёт, индикаторы, легенду
+    COLOR_OPPONENT_TEAM: str = "#D31515"  # Красный
+    
+    # Синий — наши голы на шкале голов (ссылка на базовый цвет)
+    COLOR_OUR_GOAL: str = COLOR_OUR_TEAM
+    
+    # Красный — голы соперника на шкале голов (ссылка на базовый цвет)
+    COLOR_THEIR_GOAL: str = COLOR_OPPONENT_TEAM
     
     # Серый для разделителей и вспомогательных линий
     COLOR_DIVIDER: str = "#A0A0A0"
@@ -515,11 +565,11 @@ class ReportStyles:
     # Белый фон кружка для +/-
     PLUS_MINUS_CIRCLE_BG: str = "#FFFFFF"
     
-    # Синий цвет для "+" (наш гол)
-    PLUS_MINUS_PLUS_COLOR: str = "#0064C8"
+    # Синий цвет для "+" (наш гол) - ссылка на базовый цвет команды
+    PLUS_MINUS_PLUS_COLOR: str = COLOR_OUR_TEAM
     
-    # Красный цвет для "-" (гол соперника)
-    PLUS_MINUS_MINUS_COLOR: str = "#C80032"
+    # Красный цвет для "-" (гол соперника) - ссылка на базовый цвет соперника
+    PLUS_MINUS_MINUS_COLOR: str = COLOR_OPPONENT_TEAM
     
     # Диаметр кружка индикатора (на ~2px меньше высоты верхней части смены)
     PLUS_MINUS_CIRCLE_DIAMETER_PX: int = 30
@@ -1499,7 +1549,8 @@ class PlayerShiftMapReport:
             left_goals = their_goals
             right_goals = our_goals
         
-        score_text = f"{left_goals}:{right_goals}"
+        # Добавляем пробелы вокруг двоеточия для визуального разделения
+        score_text = f"{left_goals} : {right_goals}"
         
         # Пути к логотипам (f-team слева, s-team справа)
         left_logo_path = report_data.get_team_logo_path('f-team')
@@ -1517,17 +1568,38 @@ class PlayerShiftMapReport:
         # Начальная Y-координата
         current_y = 30
         
-        # === ЛИНИЯ 1: Название турнира ===
-        font_tournament = self._get_font(styles.HEADER_TITLE_FONT_SIZE_PT, bold=True)
+        # === ЛИНИЯ 1: Название турнира и номер тура ===
+        # Название турнира
+        font_tournament = self._get_font(
+            styles.HEADER_TOURNAMENT_FONT_SIZE_PT, 
+            bold=styles.HEADER_TOURNAMENT_FONT_BOLD
+        )
         tournament_text = match_info['tournament_name'] or ''
-        if match_info['tour_number']:
-            tournament_text += f" | Тур {match_info['tour_number']}"
         
-        bbox = draw.textbbox((0, 0), tournament_text, font=font_tournament)
-        text_w = bbox[2] - bbox[0]
-        draw.text((center_x - text_w // 2, current_y), tournament_text, 
-                 fill=styles.COLOR_BLACK, font=font_tournament)
-        current_y += (bbox[3] - bbox[1]) + line_spacing
+        bbox_tour = draw.textbbox((0, 0), tournament_text, font=font_tournament)
+        text_w = bbox_tour[2] - bbox_tour[0]
+        
+        # Номер тура (отдельный шрифт)
+        if match_info['tour_number']:
+            font_tour_num = self._get_font(
+                styles.HEADER_TOUR_NUMBER_FONT_SIZE_PT,
+                bold=styles.HEADER_TOUR_NUMBER_FONT_BOLD
+            )
+            tour_num_text = f" | Тур {match_info['tour_number']}"
+            bbox_num = draw.textbbox((0, 0), tour_num_text, font=font_tour_num)
+            text_w += bbox_num[2] - bbox_num[0]
+            
+            # Рисуем название турнира
+            draw.text((center_x - text_w // 2, current_y), tournament_text, 
+                     fill=styles.HEADER_TOURNAMENT_FONT_COLOR, font=font_tournament)
+            # Рисуем номер тура
+            draw.text((center_x - text_w // 2 + (bbox_tour[2] - bbox_tour[0]), current_y), 
+                     tour_num_text, fill=styles.HEADER_TOUR_NUMBER_FONT_COLOR, font=font_tour_num)
+        else:
+            draw.text((center_x - text_w // 2, current_y), tournament_text, 
+                     fill=styles.HEADER_TOURNAMENT_FONT_COLOR, font=font_tournament)
+        
+        current_y += (bbox_tour[3] - bbox_tour[1]) + line_spacing
         
         # === ЛОГОТИПЫ И КОМАНДЫ ===
         # Позиция логотипов по Y задаётся константой HEADER_LOGO_Y_POSITION_PX
@@ -1556,44 +1628,185 @@ class PlayerShiftMapReport:
         # Центр логотипа по Y (для выравнивания текста и счёта)
         logo_center_y = logo_y + logo_size // 2
         
-        # Названия команд - справа от левого лого и слева от правого
-        font_team = self._get_font(styles.HEADER_TEAMS_FONT_SIZE_PT, bold=True)
+        # Определяем цвета для названий команд
+        # f-team всегда слева, s-team всегда справа
+        if match_info['our_team_key'] == 'f-team':
+            f_team_color = styles.COLOR_OUR_TEAM      # Наша команда слева
+            s_team_color = styles.COLOR_OPPONENT_TEAM # Соперник справа
+        else:
+            f_team_color = styles.COLOR_OPPONENT_TEAM # Соперник слева
+            s_team_color = styles.COLOR_OUR_TEAM      # Наша команда справа
         
-        # Название f-team справа от левого логотипа
-        bbox_left = draw.textbbox((0, 0), left_team_name, font=font_team)
+        # Названия команд - справа от левого лого и слева от правого
+        # F-TEAM (слева)
+        font_f_team = self._get_font(
+            styles.HEADER_F_TEAM_FONT_SIZE_PT,
+            bold=styles.HEADER_F_TEAM_FONT_BOLD
+        )
+        bbox_left = draw.textbbox((0, 0), left_team_name, font=font_f_team)
         left_text_x = content_x + 20 + logo_size + 30  # Отступ 30px от логотипа
         left_text_y = logo_center_y - (bbox_left[3] - bbox_left[1]) // 2
         draw.text((left_text_x, left_text_y), 
-                 left_team_name, fill=styles.COLOR_BLACK, font=font_team)
+                 left_team_name, fill=f_team_color, font=font_f_team)
         
-        # Название s-team слева от правого логотипа
-        bbox_right = draw.textbbox((0, 0), right_team_name, font=font_team)
+        # S-TEAM (справа)
+        font_s_team = self._get_font(
+            styles.HEADER_S_TEAM_FONT_SIZE_PT,
+            bold=styles.HEADER_S_TEAM_FONT_BOLD
+        )
+        bbox_right = draw.textbbox((0, 0), right_team_name, font=font_s_team)
         right_text_x = content_x + content_width - 20 - logo_size - 30 - (bbox_right[2] - bbox_right[0])
         right_text_y = logo_center_y - (bbox_right[3] - bbox_right[1]) // 2
         draw.text((right_text_x, right_text_y), 
-                 right_team_name, fill=styles.COLOR_BLACK, font=font_team)
+                 right_team_name, fill=s_team_color, font=font_s_team)
         
-        # Счёт по центру (на уровне центра логотипов)
-        font_score = self._get_font(styles.HEADER_SCORE_FONT_SIZE_PT, bold=True)
-        bbox = draw.textbbox((0, 0), score_text, font=font_score)
-        score_x = center_x - (bbox[2] - bbox[0]) // 2
-        score_y = logo_center_y - (bbox[3] - bbox[1]) // 2
-        draw.text((score_x, score_y), 
-                 score_text, fill=styles.COLOR_BLACK, font=font_score)
+        # Счёт по центру (на уровне центра логотипов) - три отдельных элемента
+        # Определяем цвета для цифр счёта в зависимости от того, какая команда "наша"
+        # Первое число = f-team, второе число = s-team
+        if match_info['our_team_key'] == 'f-team':
+            first_num_color = styles.COLOR_OUR_TEAM   # Наша команда слева
+            second_num_color = styles.COLOR_OPPONENT_TEAM  # Соперник справа
+        else:
+            first_num_color = styles.COLOR_OPPONENT_TEAM   # Соперник слева
+            second_num_color = styles.COLOR_OUR_TEAM  # Наша команда справа
+        
+        # Первое число
+        font_first = self._get_font(
+            styles.HEADER_SCORE_FIRST_FONT_SIZE_PT,
+            bold=styles.HEADER_SCORE_FIRST_FONT_BOLD
+        )
+        # Двоеточие
+        font_colon = self._get_font(
+            styles.HEADER_SCORE_COLON_FONT_SIZE_PT,
+            bold=styles.HEADER_SCORE_COLON_FONT_BOLD
+        )
+        # Второе число
+        font_second = self._get_font(
+            styles.HEADER_SCORE_SECOND_FONT_SIZE_PT,
+            bold=styles.HEADER_SCORE_SECOND_FONT_BOLD
+        )
+        
+        # Разбираем счёт (оставляем числа без пробелов)
+        parts = score_text.split(':')
+        first_num = parts[0].strip()  # Только первая цифра
+        second_num = parts[1].strip()  # Только вторая цифра
+        
+        # Двоеточие с пробелами для отображения
+        colon_with_spaces = ' : '
+        
+        # Вычисляем ширины (двоеточие с пробелами " : ")
+        bbox_first = draw.textbbox((0, 0), first_num, font=font_first)
+        bbox_colon = draw.textbbox((0, 0), colon_with_spaces, font=font_colon)
+        bbox_second = draw.textbbox((0, 0), second_num, font=font_second)
+        
+        total_width = (bbox_first[2] - bbox_first[0]) + (bbox_colon[2] - bbox_colon[0]) + (bbox_second[2] - bbox_second[0])
+        start_x = center_x - total_width // 2
+        
+        # Высоты для центрирования по Y
+        height_first = bbox_first[3] - bbox_first[1]
+        height_colon = bbox_colon[3] - bbox_colon[1]
+        height_second = bbox_second[3] - bbox_second[1]
+        
+        # Рисуем первое число (цвет зависит от команды)
+        # Добавляем смещение вниз для выравнивания с двоеточием
+        score_y_first = logo_center_y - height_first // 2 + styles.HEADER_SCORE_NUMBERS_Y_OFFSET_PX
+        draw.text((start_x, score_y_first), 
+                 first_num, fill=first_num_color, font=font_first)
+        
+        # Рисуем двоеточие с пробелами (нейтральный цвет)
+        score_y_colon = logo_center_y - height_colon // 2
+        draw.text((start_x + (bbox_first[2] - bbox_first[0]), score_y_colon), 
+                 colon_with_spaces, fill=styles.HEADER_SCORE_COLON_FONT_COLOR, font=font_colon)
+        
+        # Рисуем второе число (цвет зависит от команды)
+        # Добавляем смещение вниз для выравнивания с двоеточием
+        score_y_second = logo_center_y - height_second // 2 + styles.HEADER_SCORE_NUMBERS_Y_OFFSET_PX
+        draw.text((start_x + (bbox_first[2] - bbox_first[0]) + (bbox_colon[2] - bbox_colon[0]), score_y_second), 
+                 second_num, fill=second_num_color, font=font_second)
+        
+        # === СЧЁТ ПО ПЕРИОДАМ (под основным счётом) ===
+        # Формат: (x1:y1; x2:y2; x3:y3)
+        period_scores = report_data.get_period_scores()
+        if period_scores:
+            font_period = self._get_font(
+                styles.HEADER_PERIOD_SCORE_FONT_SIZE_PT,
+                bold=styles.HEADER_PERIOD_SCORE_FONT_BOLD
+            )
+            
+            # Строим текст периодов с цветами
+            # Используем цвета команд: f-team_color для левых цифр, s-team_color для правых
+            period_parts = []
+            for f_goals, s_goals in period_scores:
+                period_parts.append(f"{f_goals}:{s_goals}")
+            period_text = "(" + "; ".join(period_parts) + ")"
+            
+            # Вычисляем позицию под основным счётом
+            bbox_period = draw.textbbox((0, 0), period_text, font=font_period)
+            period_width = bbox_period[2] - bbox_period[0]
+            period_x = center_x - period_width // 2
+            period_y = max(score_y_first, score_y_second, score_y_colon) + max(height_first, height_second, height_colon) + styles.HEADER_PERIOD_SCORE_Y_OFFSET_PX
+            
+            # Рисуем периоды по частям, чтобы использовать разные цвета
+            current_x = period_x
+            
+            # Открывающая скобка (нейтральный цвет)
+            open_bracket = "("
+            bbox_bracket = draw.textbbox((0, 0), open_bracket, font=font_period)
+            draw.text((current_x, period_y), open_bracket, fill=styles.HEADER_PERIOD_SCORE_COLOR, font=font_period)
+            current_x += bbox_bracket[2] - bbox_bracket[0]
+            
+            # Рисуем каждый период
+            for i, (f_goals, s_goals) in enumerate(period_scores):
+                if i > 0:
+                    # Разделитель "; "
+                    separator = "; "
+                    bbox_sep = draw.textbbox((0, 0), separator, font=font_period)
+                    draw.text((current_x, period_y), separator, fill=styles.HEADER_PERIOD_SCORE_COLOR, font=font_period)
+                    current_x += bbox_sep[2] - bbox_sep[0]
+                
+                # Голы f-team (левые) - цвет команды слева
+                f_goals_str = str(f_goals)
+                bbox_f = draw.textbbox((0, 0), f_goals_str, font=font_period)
+                draw.text((current_x, period_y), f_goals_str, fill=f_team_color, font=font_period)
+                current_x += bbox_f[2] - bbox_f[0]
+                
+                # Двоеточие (нейтральный цвет)
+                colon = ":"
+                bbox_colon_period = draw.textbbox((0, 0), colon, font=font_period)
+                draw.text((current_x, period_y), colon, fill=styles.HEADER_PERIOD_SCORE_COLOR, font=font_period)
+                current_x += bbox_colon_period[2] - bbox_colon_period[0]
+                
+                # Голы s-team (правые) - цвет команды справа
+                s_goals_str = str(s_goals)
+                bbox_s = draw.textbbox((0, 0), s_goals_str, font=font_period)
+                draw.text((current_x, period_y), s_goals_str, fill=s_team_color, font=font_period)
+                current_x += bbox_s[2] - bbox_s[0]
+            
+            # Закрывающая скобка (нейтральный цвет)
+            close_bracket = ")"
+            draw.text((current_x, period_y), close_bracket, fill=styles.HEADER_PERIOD_SCORE_COLOR, font=font_period)
         
         # === НИЖНЯЯ СТРОКА: Судьи (слева) и Дата-Время-Арена (справа) ===
         # Размещаем с фиксированным отступом от логотипов
         bottom_line_y = logo_y + logo_size + 10  # Отступ от низа логотипов
-        font_info = self._get_font(styles.HEADER_INFO_FONT_SIZE_PT)
         
         # Судьи слева
+        font_referees = self._get_font(
+            styles.HEADER_REFEREES_FONT_SIZE_PT,
+            bold=styles.HEADER_REFEREES_FONT_BOLD
+        )
         referees = match_info.get('referees', [])
         if referees:
             referees_text = "Судьи: " + ", ".join(referees)
             draw.text((content_x, bottom_line_y), 
-                     referees_text, fill=styles.COLOR_BLACK, font=font_info)
+                     referees_text, fill=styles.HEADER_REFEREES_FONT_COLOR, font=font_referees)
         
         # Дата-Время-Арена справа (формат: ДАТА-ВРЕМЯ, НАЗВАНИЕ АРЕНЫ (Город))
+        font_arena_date = self._get_font(
+            styles.HEADER_ARENA_DATE_FONT_SIZE_PT,
+            bold=styles.HEADER_ARENA_DATE_FONT_BOLD
+        )
+        
         date_str = match_info['match_date'] or ''
         time_str = match_info['match_time'] or ''
         arena = match_info.get('venue_arena', '')
@@ -1620,9 +1833,9 @@ class PlayerShiftMapReport:
         
         if parts:
             arena_text = ", ".join(parts)
-            bbox = draw.textbbox((0, 0), arena_text, font=font_info)
+            bbox = draw.textbbox((0, 0), arena_text, font=font_arena_date)
             draw.text((content_x + content_width - (bbox[2] - bbox[0]), bottom_line_y), 
-                     arena_text, fill=styles.COLOR_BLACK, font=font_info)
+                     arena_text, fill=styles.HEADER_ARENA_DATE_FONT_COLOR, font=font_arena_date)
 
     def _draw_sheet_footer(self, draw: ImageDraw, page_num: int, total_pages: int, geom: dict):
         """Подвал с нумерацией."""
