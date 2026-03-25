@@ -842,7 +842,7 @@ class LineupModuleWidget(QWidget):
         Устанавливает идентификатор нашей команды ("f-team" или "s-team").
         """
         self._our_team_key = team_key
-        print(f"[DEBUG LUM] Our team key received: {team_key}")
+        # print(f"[DEBUG LUM] Our team key received: {team_key}")
         # print(f"[DEBUG] LineupModuleWidget: Our team key set to {team_key}") # Для отладки
 
     def _on_cell_double_clicked(self, row: int, column: int):
@@ -1377,6 +1377,96 @@ class LineupModuleWidget(QWidget):
             if checkbox.isChecked():
                 selected_ids.append(player_id)
         return selected_ids
+
+    def get_expected_player_count(self) -> tuple:
+        """
+        Возвращает информацию о текущем game mode и ожидаемом количестве игроков.
+        
+        Returns:
+            tuple: (is_valid, expected_total, actual_total, game_mode_name, message)
+                - is_valid: bool - соответствует ли фактическое количество ожидаемому
+                - expected_total: int - ожидаемое количество игроков (полевые + вратарь)
+                - actual_total: int - фактическое количество отмеченных игроков
+                - game_mode_name: str - название game_mode (например, "5 на 4")
+                - message: str - сообщение о статусе
+        """
+        # Найти активный game_mode
+        active_game_mode = None
+        for cr in self._calculated_ranges:
+            if cr.label_type == "game_mode":
+                if cr.start_time <= self._current_global_time < cr.end_time:
+                    active_game_mode = cr
+                    break
+        
+        if not active_game_mode:
+            return (False, 0, 0, "Неизвестно", "Не удалось определить game mode для текущего времени")
+        
+        mode_str = active_game_mode.name  # e.g., "5 на 4"
+        
+        # Определяем ожидаемое количество полевых игроков для нашей команды
+        expected_field_players = 5  # Значение по умолчанию
+        try:
+            parts = mode_str.split(" на ")
+            f_team_count = int(parts[0])
+            s_team_count = int(parts[1])
+            
+            if self._our_team_key == "f-team":
+                expected_field_players = f_team_count
+            elif self._our_team_key == "s-team":
+                expected_field_players = s_team_count
+        except (ValueError, IndexError):
+            pass
+        
+        # Ожидаемое общее количество игроков (полевые + вратарь)
+        expected_total = expected_field_players + 1
+        
+        # Получаем ID игроков на штрафе
+        penalty_player_ids = set()
+        active_penalties = active_game_mode.context.get("active_penalties", [])
+        for penalty in active_penalties:
+            if penalty.get("team") == self._our_team_key and penalty.get("player_id_fhm"):
+                penalty_player_ids.add(penalty.get("player_id_fhm"))
+        
+        # Подсчитываем фактическое количество отмеченных игроков (не на штрафе)
+        actual_total = 0
+        actual_field = 0
+        actual_goalie = 0
+        
+        for player_id, checkbox in self._checkboxes.items():
+            if checkbox.isChecked() and player_id not in penalty_player_ids:
+                player_info = self._id_to_player_info.get(player_id)
+                if player_info:
+                    actual_total += 1
+                    if player_info.get("role") == "Вратарь":
+                        actual_goalie += 1
+                    else:
+                        actual_field += 1
+        
+        # Проверяем соответствие
+        is_valid = actual_total == expected_total
+        
+        if is_valid:
+            message = f"Корректно: {actual_total} игроков (game mode: {mode_str})"
+        else:
+            message = f"Ожидается {expected_total} игроков (включая вратаря), выбрано {actual_total} (полевых: {actual_field}, вратарей: {actual_goalie})"
+        
+        return (is_valid, expected_total, actual_total, mode_str, message)
+
+    def validate_shift_for_marking(self) -> tuple:
+        """
+        Проверяет, можно ли устанавливать метку "Смена" с текущим выбором игроков.
+        
+        Returns:
+            tuple: (can_mark, message)
+                - can_mark: bool - можно ли ставить метку
+                - message: str - сообщение для пользователя
+        """
+        is_valid, expected, actual, mode_str, info_message = self.get_expected_player_count()
+        
+        if not is_valid:
+            return (False, f"Невозможно установить метку 'Смена':\n{info_message}\n\nПожалуйста, выберите {expected} игроков для текущего режима игры ({mode_str}).")
+        
+        return (True, "")
 
     def restore_from_context(self, context: dict):
         """

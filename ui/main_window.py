@@ -448,6 +448,12 @@ class MainWindow(QMainWindow):
 
         # --- НОВОЕ: Обработка метки "Смена" ---
         if label_type == "Смена":
+            # 0. Проверка количества выбранных игроков для текущего game mode
+            can_mark, error_message = self.lineup_module_widget.validate_shift_for_marking()
+            if not can_mark:
+                QMessageBox.warning(self, "Некорректное количество игроков", error_message)
+                return  # Не устанавливаем метку
+            
             # 1. Получить ID отмеченных игроков из LineupModuleWidget
             selected_player_ids = set(self.lineup_module_widget.get_selected_player_ids())
 
@@ -501,7 +507,6 @@ class MainWindow(QMainWindow):
                     save_project_to_file(self.project, self.project_file_path)
                     self.status_label.setText(f"Метка '{label_type}' добавлена в {global_time:.1f}s. Проект сохранён.")
                 except Exception as e:
-                    from PyQt5.QtWidgets import QMessageBox
                     QMessageBox.warning(self, "Предупреждение", f"Не удалось сохранить проект: {str(e)}")
             else:
                 self.status_label.setText(f"Метка '{label_type}' добавлена в {global_time:.1f}s. Нет пути для сохранения.")
@@ -567,7 +572,6 @@ class MainWindow(QMainWindow):
                 save_project_to_file(self.project, self.project_file_path)
                 self.status_label.setText(f"Метка '{label_type}' добавлена в {global_time:.1f}s. Проект сохранён.")
             except Exception as e:
-                from PyQt5.QtWidgets import QMessageBox
                 QMessageBox.warning(self, "Предупреждение", f"Не удалось сохранить проект: {str(e)}")
         else:
             self.status_label.setText(f"Метка '{label_type}' добавлена в {global_time:.1f}s. Нет пути для сохранения.")
