@@ -165,6 +165,18 @@ class ReportStyles:
     HEADER_PERIOD_SCORE_COLOR: str = "#000000"
     HEADER_PERIOD_SCORE_Y_OFFSET_PX: int = 32  # Отступ от основного счёта вниз
     
+    # === ЗАГОЛОВОК ПЕРИОДА (для листов "Период 1/2/3") ===
+    # Заменяет основной счёт на листах периодов
+    HEADER_PERIOD_LABEL_FONT_SIZE_PT: int = 16
+    HEADER_PERIOD_LABEL_FONT_BOLD: bool = True
+    HEADER_PERIOD_LABEL_FONT_COLOR: str = "#000000"
+    
+    # === СЧЁТ В ПЕРИОДЕ (для листов "Период 1/2/3") ===
+    # Отображается вместо строки со счётом по периодам
+    HEADER_PERIOD_SINGLE_SCORE_FONT_SIZE_PT: int = 20
+    HEADER_PERIOD_SINGLE_SCORE_FONT_BOLD: bool = True
+    HEADER_PERIOD_SINGLE_SCORE_Y_OFFSET_PX: int = 10  # Отступ от надписи "Период X"
+    
     # === СУДЬИ (нижняя строка слева) ===
     HEADER_REFEREES_FONT_SIZE_PT: int = 8
     HEADER_REFEREES_FONT_BOLD: bool = False
@@ -1681,7 +1693,6 @@ class PlayerShiftMapReport:
         draw.text((right_text_x, right_text_y), 
                  right_team_name, fill=s_team_color, font=font_s_team)
         
-        # Счёт по центру (на уровне центра логотипов) - три отдельных элемента
         # Определяем цвета для цифр счёта в зависимости от того, какая команда "наша"
         # Первое число = f-team, второе число = s-team
         if match_info['our_team_key'] == 'f-team':
@@ -1691,121 +1702,177 @@ class PlayerShiftMapReport:
             first_num_color = styles.COLOR_OPPONENT_TEAM   # Соперник слева
             second_num_color = styles.COLOR_OUR_TEAM  # Наша команда справа
         
-        # Первое число
-        font_first = self._get_font(
-            styles.HEADER_SCORE_FIRST_FONT_SIZE_PT,
-            bold=styles.HEADER_SCORE_FIRST_FONT_BOLD
-        )
-        # Двоеточие
-        font_colon = self._get_font(
-            styles.HEADER_SCORE_COLON_FONT_SIZE_PT,
-            bold=styles.HEADER_SCORE_COLON_FONT_BOLD
-        )
-        # Второе число
-        font_second = self._get_font(
-            styles.HEADER_SCORE_SECOND_FONT_SIZE_PT,
-            bold=styles.HEADER_SCORE_SECOND_FONT_BOLD
-        )
+        if is_period:
+            # === ЗАГОЛОВОК ДЛЯ ЛИСТОВ ПЕРИОДОВ ===
+            # "Период X" вместо общего счёта
+            font_period_label = self._get_font(
+                styles.HEADER_PERIOD_LABEL_FONT_SIZE_PT,
+                bold=styles.HEADER_PERIOD_LABEL_FONT_BOLD
+            )
+            period_label_text = f"Период {period_num}"
+            bbox_label = draw.textbbox((0, 0), period_label_text, font=font_period_label)
+            label_width = bbox_label[2] - bbox_label[0]
+            label_height = bbox_label[3] - bbox_label[1]
+            label_x = center_x - label_width // 2
+            label_y = logo_center_y - label_height // 2
+            
+            draw.text((label_x, label_y), period_label_text, 
+                     fill=styles.HEADER_PERIOD_LABEL_FONT_COLOR, font=font_period_label)
+            
+            # === СЧЁТ В КОНКРЕТНОМ ПЕРИОДЕ ===
+            # Под надписью "Период X" выводим счёт в этом периоде
+            period_scores = report_data.get_period_scores()
+            if period_scores and period_num <= len(period_scores):
+                font_single_score = self._get_font(
+                    styles.HEADER_PERIOD_SINGLE_SCORE_FONT_SIZE_PT,
+                    bold=styles.HEADER_PERIOD_SINGLE_SCORE_FONT_BOLD
+                )
+                
+                f_goals, s_goals = period_scores[period_num - 1]
+                
+                # Формируем счёт периода с цветами команд
+                # Рисуем вручную, чтобы применить разные цвета
+                score_text_period = f"{f_goals} : {s_goals}"
+                
+                # Вычисляем позиции
+                bbox_f_num = draw.textbbox((0, 0), str(f_goals), font=font_single_score)
+                bbox_colon_spaced = draw.textbbox((0, 0), " : ", font=font_single_score)
+                bbox_s_num = draw.textbbox((0, 0), str(s_goals), font=font_single_score)
+                
+                total_score_width = (bbox_f_num[2] - bbox_f_num[0]) + (bbox_colon_spaced[2] - bbox_colon_spaced[0]) + (bbox_s_num[2] - bbox_s_num[0])
+                score_start_x = center_x - total_score_width // 2
+                score_y = label_y + label_height + styles.HEADER_PERIOD_SINGLE_SCORE_Y_OFFSET_PX
+                
+                # Рисуем первое число (f-team)
+                draw.text((score_start_x, score_y), str(f_goals), fill=first_num_color, font=font_single_score)
+                
+                # Рисуем двоеточие с пробелами
+                draw.text((score_start_x + (bbox_f_num[2] - bbox_f_num[0]), score_y), 
+                         " : ", fill=styles.COLOR_BLACK, font=font_single_score)
+                
+                # Рисуем второе число (s-team)
+                draw.text((score_start_x + (bbox_f_num[2] - bbox_f_num[0]) + (bbox_colon_spaced[2] - bbox_colon_spaced[0]), score_y), 
+                         str(s_goals), fill=second_num_color, font=font_single_score)
         
-        # Разбираем счёт (оставляем числа без пробелов)
-        parts = score_text.split(':')
-        first_num = parts[0].strip()  # Только первая цифра
-        second_num = parts[1].strip()  # Только вторая цифра
-        
-        # Двоеточие с пробелами для отображения
-        colon_with_spaces = ' : '
-        
-        # Вычисляем ширины (двоеточие с пробелами " : ")
-        bbox_first = draw.textbbox((0, 0), first_num, font=font_first)
-        bbox_colon = draw.textbbox((0, 0), colon_with_spaces, font=font_colon)
-        bbox_second = draw.textbbox((0, 0), second_num, font=font_second)
-        
-        total_width = (bbox_first[2] - bbox_first[0]) + (bbox_colon[2] - bbox_colon[0]) + (bbox_second[2] - bbox_second[0])
-        start_x = center_x - total_width // 2
-        
-        # Высоты для центрирования по Y
-        height_first = bbox_first[3] - bbox_first[1]
-        height_colon = bbox_colon[3] - bbox_colon[1]
-        height_second = bbox_second[3] - bbox_second[1]
-        
-        # Рисуем первое число (цвет зависит от команды)
-        # Добавляем смещение вниз для выравнивания с двоеточием
-        score_y_first = logo_center_y - height_first // 2 + styles.HEADER_SCORE_NUMBERS_Y_OFFSET_PX
-        draw.text((start_x, score_y_first), 
-                 first_num, fill=first_num_color, font=font_first)
-        
-        # Рисуем двоеточие с пробелами (нейтральный цвет)
-        score_y_colon = logo_center_y - height_colon // 2
-        draw.text((start_x + (bbox_first[2] - bbox_first[0]), score_y_colon), 
-                 colon_with_spaces, fill=styles.HEADER_SCORE_COLON_FONT_COLOR, font=font_colon)
-        
-        # Рисуем второе число (цвет зависит от команды)
-        # Добавляем смещение вниз для выравнивания с двоеточием
-        score_y_second = logo_center_y - height_second // 2 + styles.HEADER_SCORE_NUMBERS_Y_OFFSET_PX
-        draw.text((start_x + (bbox_first[2] - bbox_first[0]) + (bbox_colon[2] - bbox_colon[0]), score_y_second), 
-                 second_num, fill=second_num_color, font=font_second)
-        
-        # === СЧЁТ ПО ПЕРИОДАМ (под основным счётом) ===
-        # Формат: (x1:y1; x2:y2; x3:y3)
-        period_scores = report_data.get_period_scores()
-        if period_scores:
-            font_period = self._get_font(
-                styles.HEADER_PERIOD_SCORE_FONT_SIZE_PT,
-                bold=styles.HEADER_PERIOD_SCORE_FONT_BOLD
+        else:
+            # === ЗАГОЛОВОК ДЛЯ ЛИСТА "МАТЧ" ===
+            # Счёт по центру (на уровне центра логотипов) - три отдельных элемента
+            
+            # Первое число
+            font_first = self._get_font(
+                styles.HEADER_SCORE_FIRST_FONT_SIZE_PT,
+                bold=styles.HEADER_SCORE_FIRST_FONT_BOLD
+            )
+            # Двоеточие
+            font_colon = self._get_font(
+                styles.HEADER_SCORE_COLON_FONT_SIZE_PT,
+                bold=styles.HEADER_SCORE_COLON_FONT_BOLD
+            )
+            # Второе число
+            font_second = self._get_font(
+                styles.HEADER_SCORE_SECOND_FONT_SIZE_PT,
+                bold=styles.HEADER_SCORE_SECOND_FONT_BOLD
             )
             
-            # Строим текст периодов с цветами
-            # Используем цвета команд: f-team_color для левых цифр, s-team_color для правых
-            period_parts = []
-            for f_goals, s_goals in period_scores:
-                period_parts.append(f"{f_goals}:{s_goals}")
-            period_text = "(" + "; ".join(period_parts) + ")"
+            # Разбираем счёт (оставляем числа без пробелов)
+            parts = score_text.split(':')
+            first_num = parts[0].strip()  # Только первая цифра
+            second_num = parts[1].strip()  # Только вторая цифра
             
-            # Вычисляем позицию под основным счётом
-            bbox_period = draw.textbbox((0, 0), period_text, font=font_period)
-            period_width = bbox_period[2] - bbox_period[0]
-            period_x = center_x - period_width // 2
-            period_y = max(score_y_first, score_y_second, score_y_colon) + max(height_first, height_second, height_colon) + styles.HEADER_PERIOD_SCORE_Y_OFFSET_PX
+            # Двоеточие с пробелами для отображения
+            colon_with_spaces = ' : '
             
-            # Рисуем периоды по частям, чтобы использовать разные цвета
-            current_x = period_x
+            # Вычисляем ширины (двоеточие с пробелами " : ")
+            bbox_first = draw.textbbox((0, 0), first_num, font=font_first)
+            bbox_colon = draw.textbbox((0, 0), colon_with_spaces, font=font_colon)
+            bbox_second = draw.textbbox((0, 0), second_num, font=font_second)
             
-            # Открывающая скобка (нейтральный цвет)
-            open_bracket = "("
-            bbox_bracket = draw.textbbox((0, 0), open_bracket, font=font_period)
-            draw.text((current_x, period_y), open_bracket, fill=styles.HEADER_PERIOD_SCORE_COLOR, font=font_period)
-            current_x += bbox_bracket[2] - bbox_bracket[0]
+            total_width = (bbox_first[2] - bbox_first[0]) + (bbox_colon[2] - bbox_colon[0]) + (bbox_second[2] - bbox_second[0])
+            start_x = center_x - total_width // 2
             
-            # Рисуем каждый период
-            for i, (f_goals, s_goals) in enumerate(period_scores):
-                if i > 0:
-                    # Разделитель "; "
-                    separator = "; "
-                    bbox_sep = draw.textbbox((0, 0), separator, font=font_period)
-                    draw.text((current_x, period_y), separator, fill=styles.HEADER_PERIOD_SCORE_COLOR, font=font_period)
-                    current_x += bbox_sep[2] - bbox_sep[0]
+            # Высоты для центрирования по Y
+            height_first = bbox_first[3] - bbox_first[1]
+            height_colon = bbox_colon[3] - bbox_colon[1]
+            height_second = bbox_second[3] - bbox_second[1]
+            
+            # Рисуем первое число (цвет зависит от команды)
+            # Добавляем смещение вниз для выравнивания с двоеточием
+            score_y_first = logo_center_y - height_first // 2 + styles.HEADER_SCORE_NUMBERS_Y_OFFSET_PX
+            draw.text((start_x, score_y_first), 
+                     first_num, fill=first_num_color, font=font_first)
+            
+            # Рисуем двоеточие с пробелами (нейтральный цвет)
+            score_y_colon = logo_center_y - height_colon // 2
+            draw.text((start_x + (bbox_first[2] - bbox_first[0]), score_y_colon), 
+                     colon_with_spaces, fill=styles.HEADER_SCORE_COLON_FONT_COLOR, font=font_colon)
+            
+            # Рисуем второе число (цвет зависит от команды)
+            # Добавляем смещение вниз для выравнивания с двоеточием
+            score_y_second = logo_center_y - height_second // 2 + styles.HEADER_SCORE_NUMBERS_Y_OFFSET_PX
+            draw.text((start_x + (bbox_first[2] - bbox_first[0]) + (bbox_colon[2] - bbox_colon[0]), score_y_second), 
+                     second_num, fill=second_num_color, font=font_second)
+            
+            # === СЧЁТ ПО ПЕРИОДАМ (под основным счётом) ===
+            # Формат: (x1:y1; x2:y2; x3:y3)
+            period_scores = report_data.get_period_scores()
+            if period_scores:
+                font_period = self._get_font(
+                    styles.HEADER_PERIOD_SCORE_FONT_SIZE_PT,
+                    bold=styles.HEADER_PERIOD_SCORE_FONT_BOLD
+                )
                 
-                # Голы f-team (левые) - цвет команды слева
-                f_goals_str = str(f_goals)
-                bbox_f = draw.textbbox((0, 0), f_goals_str, font=font_period)
-                draw.text((current_x, period_y), f_goals_str, fill=f_team_color, font=font_period)
-                current_x += bbox_f[2] - bbox_f[0]
+                # Строим текст периодов с цветами
+                # Используем цвета команд: f-team_color для левых цифр, s-team_color для правых
+                period_parts = []
+                for f_goals, s_goals in period_scores:
+                    period_parts.append(f"{f_goals}:{s_goals}")
+                period_text = "(" + "; ".join(period_parts) + ")"
                 
-                # Двоеточие (нейтральный цвет)
-                colon = ":"
-                bbox_colon_period = draw.textbbox((0, 0), colon, font=font_period)
-                draw.text((current_x, period_y), colon, fill=styles.HEADER_PERIOD_SCORE_COLOR, font=font_period)
-                current_x += bbox_colon_period[2] - bbox_colon_period[0]
+                # Вычисляем позицию под основным счётом
+                bbox_period = draw.textbbox((0, 0), period_text, font=font_period)
+                period_width = bbox_period[2] - bbox_period[0]
+                period_x = center_x - period_width // 2
+                period_y = max(score_y_first, score_y_second, score_y_colon) + max(height_first, height_second, height_colon) + styles.HEADER_PERIOD_SCORE_Y_OFFSET_PX
                 
-                # Голы s-team (правые) - цвет команды справа
-                s_goals_str = str(s_goals)
-                bbox_s = draw.textbbox((0, 0), s_goals_str, font=font_period)
-                draw.text((current_x, period_y), s_goals_str, fill=s_team_color, font=font_period)
-                current_x += bbox_s[2] - bbox_s[0]
-            
-            # Закрывающая скобка (нейтральный цвет)
-            close_bracket = ")"
-            draw.text((current_x, period_y), close_bracket, fill=styles.HEADER_PERIOD_SCORE_COLOR, font=font_period)
+                # Рисуем периоды по частям, чтобы использовать разные цвета
+                current_x = period_x
+                
+                # Открывающая скобка (нейтральный цвет)
+                open_bracket = "("
+                bbox_bracket = draw.textbbox((0, 0), open_bracket, font=font_period)
+                draw.text((current_x, period_y), open_bracket, fill=styles.HEADER_PERIOD_SCORE_COLOR, font=font_period)
+                current_x += bbox_bracket[2] - bbox_bracket[0]
+                
+                # Рисуем каждый период
+                for i, (f_goals, s_goals) in enumerate(period_scores):
+                    if i > 0:
+                        # Разделитель "; "
+                        separator = "; "
+                        bbox_sep = draw.textbbox((0, 0), separator, font=font_period)
+                        draw.text((current_x, period_y), separator, fill=styles.HEADER_PERIOD_SCORE_COLOR, font=font_period)
+                        current_x += bbox_sep[2] - bbox_sep[0]
+                    
+                    # Голы f-team (левые) - цвет команды слева
+                    f_goals_str = str(f_goals)
+                    bbox_f = draw.textbbox((0, 0), f_goals_str, font=font_period)
+                    draw.text((current_x, period_y), f_goals_str, fill=f_team_color, font=font_period)
+                    current_x += bbox_f[2] - bbox_f[0]
+                    
+                    # Двоеточие (нейтральный цвет)
+                    colon = ":"
+                    bbox_colon_period = draw.textbbox((0, 0), colon, font=font_period)
+                    draw.text((current_x, period_y), colon, fill=styles.HEADER_PERIOD_SCORE_COLOR, font=font_period)
+                    current_x += bbox_colon_period[2] - bbox_colon_period[0]
+                    
+                    # Голы s-team (правые) - цвет команды справа
+                    s_goals_str = str(s_goals)
+                    bbox_s = draw.textbbox((0, 0), s_goals_str, font=font_period)
+                    draw.text((current_x, period_y), s_goals_str, fill=s_team_color, font=font_period)
+                    current_x += bbox_s[2] - bbox_s[0]
+                
+                # Закрывающая скобка (нейтральный цвет)
+                close_bracket = ")"
+                draw.text((current_x, period_y), close_bracket, fill=styles.HEADER_PERIOD_SCORE_COLOR, font=font_period)
         
         # === НИЖНЯЯ СТРОКА: Судьи (слева) и Дата-Время-Арена (справа) ===
         # Размещаем с фиксированным отступом от логотипов
