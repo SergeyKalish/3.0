@@ -241,6 +241,14 @@ class ReportStyles:
     COLOR_GRID_LIGHT: str = "#E0E0E0"
     
     # ============================================
+    # ФОН ДЛЯ ЧЁТНЫХ СТРОК (зебра в таблице и графике)
+    # ============================================
+    # Включить/выключить зебру (True - включено, False - выключено)
+    TABLE_ALTERNATING_ROW_BG_ENABLED: bool = True
+    # Цвет фона для четных строк (лёгкий серый, не отвлекающий от данных)
+    TABLE_ALTERNATING_ROW_BG_COLOR: str = "#F5F5F5"
+    
+    # ============================================
     # БАЗОВЫЕ ЦВЕТА КОМАНД (управляют всеми элементами отчёта)
     # ============================================
     
@@ -942,12 +950,18 @@ class PlayerShiftMapReport:
             
             current_x += col_width
         
-        # --- Строки данных --- (без изменений)
+        # --- Строки данных ---
         num_rows = styles.NUM_TABLE_ROWS
         
         for row_idx in range(num_rows):
             player = report_data.players_list[row_idx] if row_idx < len(report_data.players_list) else None
             row_y = y_offset + header_height + row_idx * row_height
+            
+            # Определяем фон строки: белый для чётных, серый для нечётных (если включена зебра)
+            if styles.TABLE_ALTERNATING_ROW_BG_ENABLED and row_idx % 2 == 1:
+                row_bg_color = styles.TABLE_ALTERNATING_ROW_BG_COLOR
+            else:
+                row_bg_color = styles.COLOR_WHITE
             
             current_x = x_offset
             for i, col_config in enumerate(columns_config):
@@ -956,7 +970,7 @@ class PlayerShiftMapReport:
                 # Фон ячейки
                 draw.rectangle(
                     [current_x, row_y, current_x + col_width, row_y + row_height],
-                    fill=styles.COLOR_WHITE,
+                    fill=row_bg_color,
                     outline=styles.COLOR_GRID_LIGHT,
                     width=styles.TABLE_GRID_LINE_WIDTH
                 )
@@ -1996,6 +2010,35 @@ class PlayerShiftMapReport:
     # ГРАФИЧЕСКАЯ ЧАСТЬ (сохранена как есть из оригинала)
     # ============================================
     
+    def _draw_alternating_row_background(self, draw: ImageDraw, report_data: ReportData, 
+                                         geom: dict):
+        """
+        Рисует фон для чётных строк (зебру) в графической части.
+        Должен вызываться ДО отрисовки линий голов, режимов игры и смен.
+        """
+        styles = self.styles
+        
+        if not styles.TABLE_ALTERNATING_ROW_BG_ENABLED:
+            return
+        
+        graphic_x = geom["x"]
+        graphic_y = geom["content_y"]
+        graphic_width = geom["width"]
+        graphic_height = geom["height"] - (geom["content_y"] - geom["y"])
+        
+        row_height = self._calculate_table_geometry_v2(report_data, TABLE_CONFIG_MATCH)["row_height"]
+        num_rows = len(report_data.players_list) if report_data.players_list else 22
+        
+        for row_idx in range(num_rows):
+            if row_idx % 2 == 1:  # Нечётные индексы = чётные строки (0-based)
+                bg_y = graphic_y + row_idx * row_height
+                bg_y_end = bg_y + row_height
+                if bg_y_end <= geom["y"] + geom["height"]:
+                    draw.rectangle(
+                        [(graphic_x, bg_y), (graphic_x + graphic_width, bg_y_end)],
+                        fill=styles.TABLE_ALTERNATING_ROW_BG_COLOR
+                    )
+    
     def _draw_graphics_match(self, draw: ImageDraw, report_data: ReportData, 
                              geom: dict, header_height: float):
         """Графика для листа 'Матч'."""
@@ -2004,6 +2047,9 @@ class PlayerShiftMapReport:
 
         total_end = max(seg.official_end for seg in report_data.segments_info)
         time_range = total_end
+
+        # Сначала рисуем фон для чётных строк (зебра)
+        self._draw_alternating_row_background(draw, report_data, geom)
 
         self._draw_game_mode_scale_lines(draw, report_data, geom, time_range=time_range, 
                                 is_match_level=True, period_abs_start=0)
@@ -2046,6 +2092,9 @@ class PlayerShiftMapReport:
         period_start = segment.official_start
         period_end = segment.official_end
         time_range = period_end - period_start
+
+        # Сначала рисуем фон для чётных строк (зебра)
+        self._draw_alternating_row_background(draw, report_data, geom)
 
         self._draw_game_mode_scale_lines(draw, report_data, geom, time_range=time_range,
                                 is_match_level=False, period_abs_start=period_start)
