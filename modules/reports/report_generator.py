@@ -1354,14 +1354,14 @@ class PlayerShiftMapReport:
                 if not (seg.official_start < goal.official_time <= seg.official_end):
                     continue
             
-            # Проверяем первую передачу
-            f_pass_id = goal.context.get('f-pass', '')
-            if f_pass_id == player.player_id:
+            # Проверяем первую передачу (используем ID игрока, а не имя)
+            f_pass_id = goal.context.get('f-pass_id_fhm', '')
+            if f_pass_id and f_pass_id == player.player_id:
                 assists_count += 1
             
-            # Проверяем вторую передачу
-            s_pass_id = goal.context.get('s-pass', '')
-            if s_pass_id == player.player_id:
+            # Проверяем вторую передачу (используем ID игрока, а не имя)
+            s_pass_id = goal.context.get('s-pass_id_fhm', '')
+            if s_pass_id and s_pass_id == player.player_id:
                 assists_count += 1
         
         return assists_count
