@@ -880,11 +880,12 @@ class MainWindow(QMainWindow):
 
         # 2. Вызвать процессор для player_shifts
         try:
-            # Передаём generic_labels, только что вычисленные calculated_ranges и total_duration
+            # Передаём generic_labels, только что вычисленные calculated_ranges, total_duration и rosters
             new_player_shifts = self.smart_processor._process_player_shifts(
                 generic_labels=self.project.match.generic_labels,
                 calculated_ranges=new_calculated_ranges, # Используем свежие calculated_ranges
-                total_duration_sec=total_duration
+                total_duration_sec=total_duration,
+                rosters=getattr(self.project.match, 'rosters', None) # Передаём составы для определения вратарей
             )
         except Exception as e:
             QMessageBox.warning(self, "Предупреждение", f"Ошибка при выполнении анализа SMART (player_shifts): {str(e)}")

@@ -390,7 +390,8 @@ class SMARTProcessor:
         self,
         generic_labels: List[GenericLabel],
         calculated_ranges: List[CalculatedRange],
-        total_duration_sec: float
+        total_duration_sec: float,
+        rosters: Dict[str, List[Dict]] = None
     ) -> Dict[str, PlayerShiftInfo]:
         """
         Обрабатывает метки 'Смена' и формирует структуру player_shifts.
@@ -399,6 +400,7 @@ class SMARTProcessor:
             generic_labels: Список всех GenericLabel из проекта.
             calculated_ranges: Список всех CalculatedRange из проекта (для получения Сегментов).
             total_duration_sec: Общая длительность видео.
+            rosters: Словарь составов команд (для определения ролей игроков).
 
         Returns:
             Словарь player_shifts, где ключ - player_id_fhm, значение - PlayerShiftInfo.
@@ -451,17 +453,26 @@ class SMARTProcessor:
 
         # Результат: словарь player_id_fhm -> PlayerShiftInfo
         player_shifts_result: Dict[str, PlayerShiftInfo] = {}
+        
+        # --- НОВОЕ: Создаём множество ID вратарей из rosters ---
+        goalie_ids: Set[str] = set()
+        if rosters:
+            for team_key, team_roster in rosters.items():
+                for player_data in team_roster:
+                    if isinstance(player_data, dict):
+                        player_role = player_data.get("role", "").lower()
+                        player_id = player_data.get("id_fhm")
+                        if player_role == "вратарь" and player_id:
+                            goalie_ids.add(str(player_id))
+        # --- КОНЕЦ НОВОГО ---
 
         # Проходим по меткам "Смена" в хронологическом порядке
         for label in filtered_change_labels:
             # Получаем состав после изменения (только id_fhm)
             players_after_change_set = {player_info["id_fhm"] for player_info in label.context["players_on_ice"]}
-            # NOTE: player_name берётся из метки, где игрок *вошёл* или *ушёл*.
-
-            # Находим вышедших игроков (были до, нет после)
+            
+            # Находим вышедших и вошедших игроков
             left_players = players_on_ice_before - players_after_change_set
-
-            # Находим вошедших игроков (нет до, есть после)
             entered_players = players_after_change_set - players_on_ice_before
 
             # --- Закрываем интервалы для вышедших игроков ---
@@ -474,25 +485,53 @@ class SMARTProcessor:
                     # Однако, имя можно взять из *текущей* метки (где он *ушёл*), если он там есть.
                     # Лучше всего - хранить {player_id: (entry_global_time, player_name_at_entry)}
                     # Для простоты, возьмём имя из *текущей* метки, где он ушёл.
-                    player_name = "Unknown Player"
-                    for player_info in label.context["players_on_ice"]:
-                        if player_info["id_fhm"] == player_id:
-                            player_name = player_info["name"]
-                            break # Нашли имя
-
-                    # Найдём номер смены для этого игрока
+                    # Найдём или создадим PlayerShiftInfo
                     existing_info = player_shifts_result.get(player_id)
-                    if existing_info is None:
+                    
+                    # Найдём имя игрока: сначала из existing_info, если нет — из текущей метки
+                    player_name = "Unknown Player"
+                    if existing_info is not None:
+                        player_name = existing_info.name
+                    else:
+                        # Ищем в текущей метке (хотя для выхода игрока там его не будет)
+                        for player_info in label.context["players_on_ice"]:
+                            if player_info["id_fhm"] == player_id:
+                                player_name = player_info["name"]
+                                break
                         existing_info = PlayerShiftInfo(id_fhm=player_id, name=player_name)
                         player_shifts_result[player_id] = existing_info
-                    else:
-                        # Если PlayerShiftInfo уже существует, имя уже установлено. Можем проверить на совпадение.
-                        if existing_info.name != player_name:
-                            print(f"Предупреждение: Игрок {player_id} имеет разные имена в метках 'Смена': '{existing_info.name}' vs '{player_name}'. Используется первое.")
 
-                    shift_number = len(existing_info.shifts) + 1
-                    shift_obj = PlayerShift(number=shift_number, start_time=entry_time, end_time=label.global_time)
-                    existing_info.shifts.append(shift_obj)
+                    # --- НОВОЕ: Специальная обработка для вратарей ---
+                    if player_id in goalie_ids:
+                        # Находим сегменты входа и выхода
+                        entry_segment_idx = 0
+                        for seg_idx, seg_range in enumerate(segment_ranges):
+                            if seg_range.start_time <= entry_time <= seg_range.end_time:
+                                entry_segment_idx = seg_idx
+                                break
+                        exit_segment_idx = 0
+                        for seg_idx, seg_range in enumerate(segment_ranges):
+                            if seg_range.start_time <= label.global_time <= seg_range.end_time:
+                                exit_segment_idx = seg_idx
+                                break
+                        # Создаём отдельную смену для каждого периода
+                        for seg_idx in range(entry_segment_idx, exit_segment_idx + 1):
+                            seg_range = segment_ranges[seg_idx]
+                            if seg_idx == entry_segment_idx:
+                                shift_start = entry_time
+                            else:
+                                shift_start = seg_range.start_time
+                            if seg_idx == exit_segment_idx:
+                                shift_end = label.global_time
+                            else:
+                                shift_end = seg_range.end_time
+                            shift_number = len(existing_info.shifts) + 1
+                            shift_obj = PlayerShift(number=shift_number, start_time=shift_start, end_time=shift_end)
+                            existing_info.shifts.append(shift_obj)
+                    else:
+                        shift_number = len(existing_info.shifts) + 1
+                        shift_obj = PlayerShift(number=shift_number, start_time=entry_time, end_time=label.global_time)
+                        existing_info.shifts.append(shift_obj)
 
                     # Удаляем игрока из словаря точек входа
                     del player_entry_times[player_id]
@@ -524,70 +563,73 @@ class SMARTProcessor:
         # и закрыть его смену в end_time этого Сегмента.
         for player_id, entry_time in player_entry_times.items():
             # Найдём Сегмент, в котором находилась метка "Смена", установившая entry_time
-            # Это требует поиска метки, которая установила entry_time.
-            # Сопоставим entry_time с global_time меток из filtered_change_labels.
-            # Найдём метку с минимальной разницей global_time - entry_time, где global_time >= entry_time.
-            # Или, проще: пройти по отсортированным меткам и найти первую, где global_time == entry_time (если timestamps точные).
-            # Если не точные, ищем ближайшую.
             corresponding_change_label = None
             for change_label in filtered_change_labels:
                 if abs(change_label.global_time - entry_time) < 1e-6: # Проверим с небольшой погрешностью
                     corresponding_change_label = change_label
                     break
-                elif change_label.global_time > entry_time: # Если время метки больше, то entry_time не может быть этой метки
-                    # Если предыдущая метка была ближе, то нужно было её проверить раньше.
-                    # Текущая метка уже за границей. entry_time не найден точно.
+                elif change_label.global_time > entry_time:
                     break
 
             if corresponding_change_label is None:
-                # Не удалось найти метку, установившую entry_time. Артефакт.
                 print(f"Предупреждение: Не найдена метка 'Смена', установившая точку входа {entry_time} для игрока {player_id}. Смена не будет завершена.")
-                continue # Пропускаем этого игрока
+                continue
 
             # Теперь найдём, в каком Сегменте была эта метка
             corresponding_segment = None
-            for seg_range in segment_ranges:
-                # Проверим, попадает ли время метки в интервал Сегмента
+            entry_segment_index = -1
+            for idx, seg_range in enumerate(segment_ranges):
                 if seg_range.start_time <= corresponding_change_label.global_time <= seg_range.end_time:
                     corresponding_segment = seg_range
-                    break # Нашли
+                    entry_segment_index = idx
+                    break
 
             if corresponding_segment is None:
-                # Метка "Смена" вне любого Сегмента. Артефакт.
                 print(f"Предупреждение: Метка 'Смена' (id: {corresponding_change_label.id}, time: {corresponding_change_label.global_time}) находится вне любого 'Сегмента'.")
-                # В этом случае, возможно, нужно завершить смену в total_duration_sec
-                # Но по ТЗ, смены должны быть внутри Сегментов.
-                # Решим, что завершаем в total_duration_sec, если не нашли сегмент.
                 end_time_final = total_duration_sec
             else:
-                # Смена завершается в конце соответствующего Сегмента
                 end_time_final = corresponding_segment.end_time
 
-            # Найдём имя игрока из метки входа (corresponding_change_label)
+            # Найдём имя игрока из метки входа
             player_name = "Unknown Player"
             for player_info in corresponding_change_label.context["players_on_ice"]:
                 if player_info["id_fhm"] == player_id:
                     player_name = player_info["name"]
-                    break # Нашли имя
+                    break
 
-            # Найдём номер смены для этого игрока
+            # Найдём или создадим PlayerShiftInfo для этого игрока
             existing_info = player_shifts_result.get(player_id)
             if existing_info is None:
-                # Теоретически, если он был в player_entry_times, он должен быть и в player_shifts_result
-                # из-за логики добавления в entered_players.
                 existing_info = PlayerShiftInfo(id_fhm=player_id, name=player_name)
                 player_shifts_result[player_id] = existing_info
             else:
-                # Проверим имя
                 if existing_info.name != player_name:
                     print(f"Предупреждение: Игрок {player_id} имеет разные имена в метках 'Смена' (финализация): '{existing_info.name}' vs '{player_name}'. Используется существующее.")
 
-            shift_number = len(existing_info.shifts) + 1
-            shift_obj = PlayerShift(number=shift_number, start_time=entry_time, end_time=end_time_final)
-            existing_info.shifts.append(shift_obj)
-
-            # Удаляем из временного словаря (хотя это последняя итерация)
-            # del player_entry_times[player_id] # Не обязательно, цикл закончен
+            # --- НОВОЕ: Специальная обработка для вратарей ---
+            # Для вратарей разбиваем смену по границам периодов
+            if player_id in goalie_ids and entry_segment_index >= 0:
+                # Создаём смену для каждого периода, начиная с entry_segment_index
+                for seg_idx in range(entry_segment_index, len(segment_ranges)):
+                    seg_range = segment_ranges[seg_idx]
+                    
+                    # Определяем начало и конец смены для этого периода
+                    if seg_idx == entry_segment_index:
+                        shift_start = entry_time
+                    else:
+                        shift_start = seg_range.start_time
+                    
+                    # Конец смены - конец текущего периода
+                    shift_end = seg_range.end_time
+                    
+                    shift_number = len(existing_info.shifts) + 1
+                    shift_obj = PlayerShift(number=shift_number, start_time=shift_start, end_time=shift_end)
+                    existing_info.shifts.append(shift_obj)
+            else:
+                # Для обычных игроков - одна смена до конца периода (старая логика)
+                shift_number = len(existing_info.shifts) + 1
+                shift_obj = PlayerShift(number=shift_number, start_time=entry_time, end_time=end_time_final)
+                existing_info.shifts.append(shift_obj)
 
         return player_shifts_result
 

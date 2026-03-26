@@ -1170,7 +1170,7 @@ class PlayerShiftMapReport:
         
         # Для вратарей разрешенные колонки (возвращаем пусто для остальных)
         if is_goalie:
-            allowed_keys = {"shifts_count", "total_time", "period_time", "goals", "assists", "penalties"}
+            allowed_keys = {"number", "shifts_count", "total_time", "period_time", "goals", "assists", "penalties"}
             if key not in allowed_keys:
                 return ""
         
