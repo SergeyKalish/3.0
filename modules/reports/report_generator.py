@@ -2830,7 +2830,7 @@ class PlayerShiftMapReport:
             if not player_number and 'player_number' in goal.context:
                 player_number = goal.context.get('player_number', '')
 
-            author_text = f"{player_number} {player_name}" if player_number else player_name
+            author_text = player_name  # Только имя без номера
 
             text_bbox = draw.textbbox((0, 0), author_text, font=font)
             text_w = text_bbox[2] - text_bbox[0]
