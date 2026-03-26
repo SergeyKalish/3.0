@@ -864,9 +864,7 @@ class PlayerShiftMapReport:
             "player_fonts": player_fonts,  # Кэш шрифтов для игроков
         }
         
-        print(f"DEBUG Table Geometry v2: width={geometry['width']}, "
-              f"player_col={player_col_width}, row_height={row_height}, "
-              f"header_height={header_height}")
+
         
         return geometry
 
@@ -3024,41 +3022,152 @@ class PlayerShiftMapReport:
 
         EDGE_MARGIN = 10
         TEXT_PADDING = 2
-
-        for gm in game_modes:
+        ROTATION_ANGLE = 45  # Градусы для поворота текста против часовой стрелки
+        
+        # Сначала объединяем соседние game_modes с одинаковым именем
+        # (когда режим переносится через границу периода)
+        if len(game_modes) > 1:
+            merged_modes = [game_modes[0]]
+            for i in range(1, len(game_modes)):
+                curr = game_modes[i]
+                prev = merged_modes[-1]
+                if curr['name'] == prev['name']:
+                    # Объединяем: расширяем end предыдущего
+                    prev['local_end'] = curr['local_end']
+                else:
+                    merged_modes.append(curr)
+            game_modes = merged_modes
+        
+        # Сначала определяем, какие подписи будут "конфликтными"
+        # (не влезают и идут подряд)
+        labels_info = []
+        for i, gm in enumerate(game_modes):
+            mode_name = gm['name']
+            
+            # Не подписываем "5 на 5" на шкале (есть в легенде)
+            if mode_name == '5 на 5':
+                continue
+            
             local_start = gm['local_start']
             local_end = gm['local_end']
-            mode_name = gm['name']
-
+            
             x_start = scale_x + int(local_start * scale_factor)
             x_end = scale_x + int(local_end * scale_factor)
-
             if x_end <= x_start:
                 x_end = x_start + 1
-
+            
             interval_width = x_end - x_start
-
             text_bbox = draw.textbbox((0, 0), mode_name, font=font)
             text_width = text_bbox[2] - text_bbox[0]
             text_height = text_bbox[3] - text_bbox[1]
-
-            if text_width <= interval_width - 2 * TEXT_PADDING:
+            
+            fits_inside = text_width <= interval_width - 2 * TEXT_PADDING
+            
+            labels_info.append({
+                'gm': gm,
+                'x_start': x_start,
+                'x_end': x_end,
+                'interval_width': interval_width,
+                'text_width': text_width,
+                'text_height': text_height,
+                'fits_inside': fits_inside,
+                'mode_name': mode_name,
+                'conflict': False  # Пока не определено
+            })
+        
+        # Определяем конфликтные подписи
+        # Сначала вычисляем, где фактически будут размещены тексты (для ВСЕХ подписей)
+        for i in range(len(labels_info)):
+            info = labels_info[i]
+            x_start = info['x_start']
+            x_end = info['x_end']
+            interval_width = info['interval_width']
+            text_width = info['text_width']
+            
+            if info['fits_inside']:
+                # Влезает - рисуем по центру внутри шкалы
+                info['text_x'] = x_start + (interval_width - text_width) // 2
+            else:
+                # Не влезает - смотрим края
+                is_left_edge = (x_start < scale_x + EDGE_MARGIN)
+                is_right_edge = (x_end > scale_x + scale_width - EDGE_MARGIN)
+                
+                if is_left_edge:
+                    info['text_x'] = x_start + TEXT_PADDING
+                elif is_right_edge:
+                    info['text_x'] = x_end - text_width - TEXT_PADDING
+                else:
+                    info['text_x'] = x_start + (interval_width - text_width) // 2
+        
+        # Теперь проверяем перекрытие текстов (не интервалов)
+        # Конфликт = текст не влезает И перекрывается со следующим соседом (любым)
+        for i in range(len(labels_info)):
+            if not labels_info[i]['fits_inside']:
+                has_conflict_neighbor = False
+                for j in range(i + 1, len(labels_info)):
+                    curr = labels_info[i]
+                    next_label = labels_info[j]
+                    # Проверяем перекрытие текстов по X
+                    curr_text_end = curr['text_x'] + curr['text_width']
+                    next_text_end = next_label['text_x'] + next_label['text_width']
+                    # Тексты перекрываются, если curr начинается до конца next И next начинается до конца curr
+                    overlap = curr['text_x'] < next_text_end and next_label['text_x'] < curr_text_end
+                    if overlap:
+                        has_conflict_neighbor = True
+                        break  # Проверяем только ближайший перекрывающийся
+                
+                if has_conflict_neighbor:
+                    labels_info[i]['conflict'] = True
+        
+        # Рисуем подписи
+        for info in labels_info:
+            x_start = info['x_start']
+            x_end = info['x_end']
+            interval_width = info['interval_width']
+            text_width = info['text_width']
+            text_height = info['text_height']
+            mode_name = info['mode_name']
+            
+            if info['fits_inside']:
+                # Обычное рисование внутри шкалы
                 text_x = x_start + (interval_width - text_width) // 2
                 text_y = scale_y + (scale_height - text_height) // 2 - 2
                 draw.text((text_x, text_y), mode_name, fill=styles.GAME_MODE_TEXT_COLOR, font=font)
+            elif info['conflict']:
+                # Конфликтная подпись — рисуем на первой строке, прижимаем вправо и поворачиваем
+                ROTATED_TEXT_OFFSET = 14  # Смещение вниз для повёрнутых подписей
+                anchor_x = x_end - TEXT_PADDING
+                anchor_y = scale_y + scale_height // 2 + ROTATED_TEXT_OFFSET
+                
+                temp_img = Image.new('RGBA', (text_width + 10, text_height + 10), (255, 255, 255, 0))
+                temp_draw = ImageDraw.Draw(temp_img)
+                temp_draw.text((5, 5), mode_name, fill=styles.GAME_MODE_TEXT_COLOR, font=font)
+                
+                rotated = temp_img.rotate(ROTATION_ANGLE, expand=True, resample=Image.BICUBIC)
+                
+                rot_w, rot_h = rotated.size
+                paste_x = anchor_x - rot_w + 5
+                paste_y = anchor_y - rot_h // 2
+                
+                if paste_x < scale_x:
+                    paste_x = scale_x
+                
+                draw._image.paste(rotated, (paste_x, paste_y), rotated)
             else:
-                text_y = scale_bottom_y + 2
-
+                # Не влезает, но не конфликтная — рисуем под шкалой как раньше
+                BELOW_TEXT_OFFSET = 6  # Дополнительное смещение вниз
+                text_y = scale_bottom_y + 2 + BELOW_TEXT_OFFSET
+                
                 is_left_edge = (x_start < scale_x + EDGE_MARGIN)
                 is_right_edge = (x_end > scale_x + scale_width - EDGE_MARGIN)
-
+                
                 if is_left_edge:
                     text_x = x_start + TEXT_PADDING
                 elif is_right_edge:
                     text_x = x_end - text_width - TEXT_PADDING
                 else:
                     text_x = x_start + (interval_width - text_width) // 2
-
+                
                 draw.text((text_x, text_y), mode_name, fill=styles.GAME_MODE_TEXT_COLOR, font=font)
 
     def _get_filtered_game_modes(self, report_data: ReportData, time_range: float,
@@ -3547,12 +3656,13 @@ class PlayerShiftMapReport:
         item_y = current_y + baseline_offset
         
         game_modes = [
+            (styles.COLOR_WHITE, 'равные 5 на 5'),
             (styles.COLOR_GM_POWERPLAY_LIGHT, 'наше большинство +1'),
             (styles.COLOR_GM_POWERPLAY_STRONG, '+2'),
             (styles.COLOR_GM_PENALTY_KILL_LIGHT, 'наше меньшинство -1'),
             (styles.COLOR_GM_PENALTY_KILL_STRONG, '-2'),
-            (styles.COLOR_GM_EVEN_4ON4, 'равные 4x4'),
-            (styles.COLOR_GM_EVEN_3ON3, '3x3'),
+            (styles.COLOR_GM_EVEN_4ON4, 'равные 4 на 4'),
+            (styles.COLOR_GM_EVEN_3ON3, '3 на 3'),
         ]
         for color, text in game_modes:
             self._draw_legend_color_box(draw, item_x, item_y, box_size, color)

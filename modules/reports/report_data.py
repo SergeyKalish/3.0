@@ -318,25 +318,9 @@ class ReportData:
             # lineup_group НЕ используется как отдельное поле в сортировке, только для определения типа линии.
             return (is_goalie, fst, pos_prio, int(player_info.number) if player_info.number.isdigit() else float('inf'))
 
-        # --- ДОБАВЛЕННЫЙ ОТЛАДОЧНЫЙ ВЫВОД ---
-        print("--- DEBUG: Players BEFORE sorting (after shifts loaded) ---")
-        for idx, p in enumerate(self.players_list):
-             sort_key = get_sort_key(p)
-             print(f"{idx+1:2d}. #{p.number:>3} {p.full_name:<15} (Role: {p.role}, Pos: {p.lineup_position}) | Key: {sort_key}")
-        print("------------------------------------")
-        # --- КОНЕЦ ДОБАВЛЕННОГО ОТЛАДОЧНОГО ВЫВОДА ---
-
         # 3. Сортируем список игроков
         # Используем новую функцию get_sort_key
         self.players_list.sort(key=get_sort_key)
-
-        # --- ДОБАВЛЕННЫЙ ОТЛАДОЧНЫЙ ВЫВОД ---
-        print("--- DEBUG: Players AFTER sorting ---")
-        for idx, p in enumerate(self.players_list):
-             sort_key = get_sort_key(p)
-             print(f"{idx+1:2d}. #{p.number:>3} {p.full_name:<15} (Role: {p.role}, Pos: {p.lineup_position}) | Key: {sort_key}")
-        print("-----------------------------------")
-        # --- КОНЕЦ ДОБАВЛЕННОГО ОТЛАДОЧНОГО ВЫВОДА ---
 
         print(f"Извлечено и отсортировано {len(self.players_list)} игроков для отчёта.")
 

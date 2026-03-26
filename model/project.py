@@ -120,7 +120,7 @@ class Match:
         self.calculated_ranges: List[CalculatedRange] = calculated_ranges or []
         self.player_shifts: Dict[str, PlayerShiftInfo] = player_shifts or {}
         self.player_shifts_official_timer: Dict[str, PlayerShiftInfo] = player_shifts_official_timer or {}
-        print(f"[DEBUG] Match.__init__ called with generic_labels={generic_labels is not None}")
+
         # ... существующие поля ...
         self.match_id: Optional[str] = match_id
         self.teams: Dict[str, Any] = teams or {}
