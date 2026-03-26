@@ -2329,6 +2329,9 @@ class PlayerShiftMapReport:
             y_bottom = y_pos + row_height
 
             player_shifts = report_data.shifts_by_player_id.get(player_info.player_id, [])
+            
+            # Проверяем, является ли игрок вратарем (для +/- индикаторов)
+            is_goalie = player_info.role.lower().startswith('вратарь')
 
             for shift_info in player_shifts:
                 if shift_info.official_end <= period_start or shift_info.official_start >= period_start + time_range:
@@ -2385,7 +2388,8 @@ class PlayerShiftMapReport:
                         width=styles.SHIFT_DIVIDER_WIDTH)
                 
                 # === ИНДИКАТОРЫ +/- ДЛЯ ГОЛОВ В РАВНЫХ СОСТАВАХ ===
-                if draw_plus_minus:
+                # Не рисуем для вратарей
+                if draw_plus_minus and not is_goalie:
                     for goal in report_data.goals:
                         goal_time = goal.official_time
                         
