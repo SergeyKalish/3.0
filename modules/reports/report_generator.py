@@ -3120,6 +3120,10 @@ class PlayerShiftMapReport:
                     labels_info[i]['conflict'] = True
         
         # Рисуем подписи
+        # Для листа "Матч" не рисуем подписи game_mode вообще
+        if is_match_level:
+            return
+        
         for info in labels_info:
             x_start = info['x_start']
             x_end = info['x_end']
@@ -3133,42 +3137,47 @@ class PlayerShiftMapReport:
                 text_x = x_start + (interval_width - text_width) // 2
                 text_y = scale_y + (scale_height - text_height) // 2 - 2
                 draw.text((text_x, text_y), mode_name, fill=styles.GAME_MODE_TEXT_COLOR, font=font)
-            elif info['conflict']:
-                # Конфликтная подпись — рисуем на первой строке, прижимаем вправо и поворачиваем
-                ROTATED_TEXT_OFFSET = 14  # Смещение вниз для повёрнутых подписей
-                anchor_x = x_end - TEXT_PADDING
-                anchor_y = scale_y + scale_height // 2 + ROTATED_TEXT_OFFSET
-                
-                temp_img = Image.new('RGBA', (text_width + 10, text_height + 10), (255, 255, 255, 0))
-                temp_draw = ImageDraw.Draw(temp_img)
-                temp_draw.text((5, 5), mode_name, fill=styles.GAME_MODE_TEXT_COLOR, font=font)
-                
-                rotated = temp_img.rotate(ROTATION_ANGLE, expand=True, resample=Image.BICUBIC)
-                
-                rot_w, rot_h = rotated.size
-                paste_x = anchor_x - rot_w + 5
-                paste_y = anchor_y - rot_h // 2
-                
-                if paste_x < scale_x:
-                    paste_x = scale_x
-                
-                draw._image.paste(rotated, (paste_x, paste_y), rotated)
+                continue
+            
+            # Не влезает — будем рисовать под шкалой
+            is_left_edge = (x_start < scale_x + EDGE_MARGIN)
+            is_right_edge = (x_end > scale_x + scale_width - EDGE_MARGIN)
+            
+            if is_left_edge:
+                text_x = x_start + TEXT_PADDING
+            elif is_right_edge:
+                text_x = x_end - text_width - TEXT_PADDING
             else:
-                # Не влезает, но не конфликтная — рисуем под шкалой как раньше
-                BELOW_TEXT_OFFSET = 6  # Дополнительное смещение вниз
-                text_y = scale_bottom_y + 2 + BELOW_TEXT_OFFSET
+                text_x = x_start + (interval_width - text_width) // 2
+            
+            text_y = scale_bottom_y + 2
+            
+            # Для листа "Матч" проверяем конфликт с уже нарисованными подписями под шкалой
+            if is_match_level:
+                current_left = text_x
+                current_right = text_x + text_width
                 
-                is_left_edge = (x_start < scale_x + EDGE_MARGIN)
-                is_right_edge = (x_end > scale_x + scale_width - EDGE_MARGIN)
+                has_overlap = False
+                for prev in drawn_below_labels:
+                    # Перекрытие по X
+                    overlap = not (current_right < prev['left'] or current_left > prev['right'])
+                    if overlap:
+                        has_overlap = True
+                        break
                 
-                if is_left_edge:
-                    text_x = x_start + TEXT_PADDING
-                elif is_right_edge:
-                    text_x = x_end - text_width - TEXT_PADDING
-                else:
-                    text_x = x_start + (interval_width - text_width) // 2
+                if has_overlap:
+                    # Конфликт — пропускаем эту подпись
+                    continue
                 
-                draw.text((text_x, text_y), mode_name, fill=styles.GAME_MODE_TEXT_COLOR, font=font)
+                # Нет конфликта — рисуем и запоминаем
+                drawn_below_labels.append({
+                    'left': current_left,
+                    'right': current_right
+                })
+            
+            # Рисуем под шкалой
+            BELOW_TEXT_OFFSET = 6  # Дополнительное смещение вниз
+            draw.text((text_x, text_y + BELOW_TEXT_OFFSET), mode_name, fill=styles.GAME_MODE_TEXT_COLOR, font=font)
 
     def _get_filtered_game_modes(self, report_data: ReportData, time_range: float,
                                 period_abs_start: float, is_match_level: bool) -> list:
