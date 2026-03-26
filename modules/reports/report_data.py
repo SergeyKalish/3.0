@@ -433,10 +433,37 @@ class ReportData:
                         print(f"Предупреждение: Время удаления игрока {player_name} ({player_id_fhm}) не попало в ЧИИ, событие пропущено.")
 
         # Сортировка удалений по времени начала
-        penalties_processed.sort(key=lambda x: x.official_start)
-        self.penalties = penalties_processed
-
-        print(f"Извлечено {len(self.penalties)} удалений нашей команды.")
+        penalties_processed.sort(key=lambda x: (x.player_id_fhm, x.official_start))
+        
+        # --- НОВОЕ: Объединяем разбитые части одного штрафа ---
+        # Если у одного игрока штрафы идут подряд (разница < 1 сек), объединяем их
+        merged_penalties = []
+        i = 0
+        while i < len(penalties_processed):
+            current = penalties_processed[i]
+            # Ищем следующие штрафы того же игрока, которые идут сразу после текущего
+            j = i + 1
+            while j < len(penalties_processed):
+                next_penalty = penalties_processed[j]
+                # Проверяем, что это тот же игрок и штрафы идут подряд (разница < 1 сек)
+                if (next_penalty.player_id_fhm == current.player_id_fhm and 
+                    abs(next_penalty.official_start - current.official_end) < 1.0):
+                    # Объединяем: расширяем конец текущего штрафа
+                    current = PenaltyInfo(
+                        official_start=current.official_start,
+                        official_end=next_penalty.official_end,
+                        player_name=current.player_name,
+                        violation_type=current.violation_type,
+                        player_id_fhm=current.player_id_fhm
+                    )
+                    j += 1
+                else:
+                    break
+            merged_penalties.append(current)
+            i = j
+        
+        self.penalties = merged_penalties
+        print(f"Извлечено {len(penalties_processed)} удалений, после объединения: {len(self.penalties)}")
 
 
         # 7. Извлечение game_modes и active_penalties (пока для справки, может понадобиться позже)
