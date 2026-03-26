@@ -448,7 +448,29 @@ class MainWindow(QMainWindow):
 
         # --- НОВОЕ: Обработка метки "Смена" ---
         if label_type == "Смена":
-            # 0. Проверка количества выбранных игроков для текущего game mode
+            # 0. Проверка, что время установки метки попадает в ЧИИ
+            chii_ranges = [cr for cr in self.project.match.calculated_ranges 
+                          if getattr(cr, 'label_type', '') == 'ЧИИ']
+            
+            is_in_chii = False
+            for chii in chii_ranges:
+                if chii.start_time <= global_time <= chii.end_time:
+                    is_in_chii = True
+                    break
+            
+            if not is_in_chii:
+                QMessageBox.warning(
+                    self, 
+                    "Некорректное время для метки",
+                    f"Невозможно установить метку 'Смена':\n\n"
+                    f"Текущее время ({global_time:.1f}с) не попадает в чистое игровое время (ЧИИ).\n\n"
+                    f"Метки 'Смена' можно устанавливать только во время игры, "
+                    f"а не во время пауз или остановок.\n\n"
+                    f"Пожалуйста, отрегулируйте позицию плеера."
+                )
+                return  # Не устанавливаем метку
+            
+            # 0.1. Проверка количества выбранных игроков для текущего game mode
             can_mark, error_message = self.lineup_module_widget.validate_shift_for_marking()
             if not can_mark:
                 QMessageBox.warning(self, "Некорректное количество игроков", error_message)
@@ -529,6 +551,32 @@ class MainWindow(QMainWindow):
             # 9. ВАЖНО: Завершаем метод, чтобы не выполнить оставшуюся логику
             return
 
+        # --- КОНЕЦ НОВОГО ---
+
+        # --- НОВОЕ: Проверка для меток "Гол" и "Удаление" — время должно быть в ЧИИ ---
+        if label_type in ("Гол", "Удаление"):
+            # Получаем все ЧИИ из calculated_ranges
+            chii_ranges = [cr for cr in self.project.match.calculated_ranges 
+                          if getattr(cr, 'label_type', '') == 'ЧИИ']
+            
+            # Проверяем, попадает ли время в один из ЧИИ
+            is_in_chii = False
+            for chii in chii_ranges:
+                if chii.start_time <= global_time <= chii.end_time:
+                    is_in_chii = True
+                    break
+            
+            if not is_in_chii:
+                QMessageBox.warning(
+                    self, 
+                    "Некорректное время для метки",
+                    f"Невозможно установить метку '{label_type}':\n\n"
+                    f"Текущее время ({global_time:.1f}с) не попадает в чистое игровое время (ЧИИ).\n\n"
+                    f"Метки 'Гол' и 'Удаление' можно устанавливать только во время игры, "
+                    f"а не во время пауз или остановок.\n\n"
+                    f"Пожалуйста, отрегулируйте позицию плеера."
+                )
+                return  # Не устанавливаем метку
         # --- КОНЕЦ НОВОГО ---
 
         # --- Оригинальная логика для других меток (Гол, Удаление и т.д.) ---
