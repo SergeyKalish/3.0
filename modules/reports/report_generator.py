@@ -277,6 +277,10 @@ class ReportStyles:
     # Насыщенный зелёный: 35-70 секунд (средняя длительность)
     COLOR_DARK_GREEN: Tuple[int, int, int] = (18, 229, 29)
     
+    # === ЦВЕТ СМЕНЫ ВРАТАРЯ ===
+    # Нежно-зелёный цвет для смен вратарей (без градиента) - hex формат
+    COLOR_GOALIE_SHIFT: str = "#51F3FF"  # Такой же как COLOR_VERY_LIGHT_GREEN
+    
     # Оранжевый: 70+ секунд, первая фаза (длинная смена, внимание)
     COLOR_ORANGE: Tuple[int, int, int] = (231, 95, 36)
     
@@ -1159,7 +1163,17 @@ class PlayerShiftMapReport:
                           period_index: Optional[int]) -> str:
         """
         Получение текста для ячейки v2.
+        Для вратарей отображаем только колонки: СМ, ВрМ (или ВрП), Г, П, Ш.
         """
+        # Проверяем, является ли игрок вратарем
+        is_goalie = player.role.lower().startswith('вратарь')
+        
+        # Для вратарей разрешенные колонки (возвращаем пусто для остальных)
+        if is_goalie:
+            allowed_keys = {"shifts_count", "total_time", "period_time", "goals", "assists", "penalties"}
+            if key not in allowed_keys:
+                return ""
+        
         shifts = report_data.shifts_by_player_id.get(player.player_id, [])
         
         # Фильтрация смен по периоду (если нужно)
@@ -2331,13 +2345,25 @@ class PlayerShiftMapReport:
 
                 shift_width = x_end - x_start
                 duration = shift_info.duration
+                
+                # Проверяем, является ли игрок вратарем
+                is_goalie = player_info.role.lower().startswith('вратарь')
 
-                # Верхняя часть с градиентом
-                for dx in range(shift_width):
-                    x = x_start + dx
-                    position = dx / shift_width if shift_width > 0 else 0
-                    color = get_gradient_color(duration, position)
-                    draw.line([(x, y_pos), (x, y_middle)], fill=color)
+                # Верхняя часть с градиентом (для полевых) или однотонно (для вратарей)
+                if is_goalie:
+                    # Для вратарей используем однотонный нежно-зеленый цвет (конвертируем hex в RGB)
+                    hex_color = styles.COLOR_GOALIE_SHIFT.lstrip('#')
+                    goalie_color = tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
+                    for dx in range(shift_width):
+                        x = x_start + dx
+                        draw.line([(x, y_pos), (x, y_middle)], fill=goalie_color)
+                else:
+                    # Для полевых игроков используем градиент
+                    for dx in range(shift_width):
+                        x = x_start + dx
+                        position = dx / shift_width if shift_width > 0 else 0
+                        color = get_gradient_color(duration, position)
+                        draw.line([(x, y_pos), (x, y_middle)], fill=color)
 
                 # Контур
                 draw.line([(x_start, y_pos), (x_end, y_pos)], 
@@ -3435,6 +3461,7 @@ class PlayerShiftMapReport:
             (styles.COLOR_DARK_GREEN, '35-70 сек.'),
             (styles.COLOR_ORANGE, '70 сек.'),
             (styles.COLOR_BRIGHT_RED, '→∞'),
+            (styles.COLOR_GOALIE_SHIFT, 'Вратарь'),
         ]
         # Шрифт для символа бесконечности (отдельный размер)
         font_infinity = self._get_font(styles.LEGEND_INFINITY_FONT_SIZE_PT)
@@ -3446,8 +3473,8 @@ class PlayerShiftMapReport:
         
         for idx, (color, text) in enumerate(shift_colors):
             self._draw_legend_color_box(draw, item_x, item_y, box_size, color)
-            # Для последнего элемента (→∞) используем специальный шрифт
-            if idx == 3:
+            # Для символа бесконечности (→∞) используем специальный шрифт
+            if text == '→∞':
                 # Выравниваем относительно позиции основного текста + ручная корректировка
                 infinity_y = item_y + infinity_relative_offset + styles.LEGEND_INFINITY_Y_OFFSET_PX
                 draw.text((item_x + box_size + BOX_GAP, infinity_y), text, fill=styles.COLOR_BLACK, font=font_infinity)
