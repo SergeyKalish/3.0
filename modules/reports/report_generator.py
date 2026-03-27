@@ -246,7 +246,7 @@ class ReportStyles:
     # Включить/выключить зебру (True - включено, False - выключено)
     TABLE_ALTERNATING_ROW_BG_ENABLED: bool = True
     # Цвет фона для четных строк (лёгкий серый, не отвлекающий от данных)
-    TABLE_ALTERNATING_ROW_BG_COLOR: str = "#F5F5F5"
+    TABLE_ALTERNATING_ROW_BG_COLOR: str = "#E6E8EB"
     
     # ============================================
     # БАЗОВЫЕ ЦВЕТА КОМАНД (управляют всеми элементами отчёта)
@@ -419,10 +419,13 @@ class ReportStyles:
     GOAL_PEG_WIDTH: int = 3
     
     # Ширина горизонтального основания колышка (чтобы было похоже на "Т")
-    GOAL_PEG_BASE_WIDTH: int = 4
+    GOAL_PEG_BASE_WIDTH: int = 8
     
     # Толщина пунктирной линии вверх от гола к графику смен
     GOAL_DASHED_LINE_WIDTH: int = 4
+    
+    # Пунктирная линия для голов: (3px линия, 5px пробел)
+    GOAL_LINE_DASH: tuple = (10, 10)
     
     # Толщина рамки шкалы голов
     GOALS_SCALE_OUTLINE_WIDTH: int = 2
@@ -502,10 +505,10 @@ class ReportStyles:
     FACEOFF_SCALE_HEIGHT_PX: int = 30
     
     # Толщина вертикальной линии колышка вбрасывания
-    FACEOFF_PEG_WIDTH: int = 3
+    FACEOFF_PEG_WIDTH: int = 4
     
     # Ширина горизонтальной перекладины "Т"
-    FACEOFF_PEG_BASE_WIDTH: int = 6
+    FACEOFF_PEG_BASE_WIDTH: int = 8
     
     # Цвет колышка вбрасывания (серый, нейтральный)
     FACEOFF_PEG_COLOR: str = "#808080"
@@ -514,10 +517,10 @@ class ReportStyles:
     FACEOFF_LINE_COLOR: str = "#A0A0A0"
     
     # Толщина вертикальной линии вниз
-    FACEOFF_LINE_WIDTH: int = 1
+    FACEOFF_LINE_WIDTH: int = 2
     
     # Пунктирная линия вниз: (3px линия, 3px пробел)
-    FACEOFF_LINE_DASH: tuple = (3, 3)
+    FACEOFF_LINE_DASH: tuple = (10, 10)
     
     # ============================================
     # ЛЕГЕНДА
@@ -2722,9 +2725,11 @@ class PlayerShiftMapReport:
             draw.line([(gwd['x'], peg_top), (gwd['x'], peg_bottom)], 
                     fill=gwd['color'], 
                     width=styles.GOAL_PEG_WIDTH)
-            draw.line([(gwd['x'] - 2, peg_bottom), (gwd['x'] + 2, peg_bottom)], 
+            # Горизонтальное основание колышка (ширина GOAL_PEG_BASE_WIDTH, толщина GOAL_PEG_WIDTH)
+            draw.line([(gwd['x'] - styles.GOAL_PEG_BASE_WIDTH // 2, peg_bottom), 
+                    (gwd['x'] + styles.GOAL_PEG_BASE_WIDTH // 2, peg_bottom)], 
                     fill=gwd['color'],
-                    width=styles.GOAL_PEG_BASE_WIDTH)
+                    width=styles.GOAL_PEG_WIDTH)
 
             text_x = gwd['x'] - gwd['text_width'] // 2
             
@@ -2738,13 +2743,10 @@ class PlayerShiftMapReport:
         content_y = geom["content_y"]
         line_top = max(content_y - styles.TIME_SCALE_HEIGHT_PX, 0)
         
+        # Рисуем пунктирные линии от голов к графику смен используя стиль GOAL_LINE_DASH
         for gwd in goals_with_data:
-            dot_spacing = 8
-            for y in range(int(line_top), int(scale_y), dot_spacing):
-                dot_y_end = min(y + 3, int(scale_y))
-                draw.line([(gwd['x'], y), (gwd['x'], dot_y_end)], 
-                        fill=gwd['color'],
-                        width=styles.GOAL_DASHED_LINE_WIDTH)
+            self._draw_dashed_line(draw, gwd['x'], line_top, gwd['x'], scale_y,
+                                  gwd['color'], styles.GOAL_LINE_DASH, styles.GOAL_DASHED_LINE_WIDTH)
 
         return scale_y + SCALE_HEIGHT
 
@@ -3611,50 +3613,7 @@ class PlayerShiftMapReport:
         
         # Добавляем кружочки с +/- для полезности (в той же строке)
         # item_x уже содержит отступ после последнего элемента (→∞)
-        
-        # Кружочек с "+" (плюс к полезности)
-        plus_label = '+1 к полезности'
-        legend_circle_radius = 15  # Меньше диаметр для легенды
-        plus_circle_y = item_y + box_size // 2  # Центрируем по высоте квадратика
-        
-        # Белый кружок
-        draw.ellipse(
-            [item_x, plus_circle_y - legend_circle_radius, 
-             item_x + legend_circle_radius * 2, plus_circle_y + legend_circle_radius],
-            fill=styles.PLUS_MINUS_CIRCLE_BG,
-            outline=styles.COLOR_BLACK,
-            width=1
-        )
-        # Символ "+" с корректировкой
-        plus_font = self._get_font(styles.PLUS_MINUS_FONT_SIZE_PT - 1)  # Чуть меньше шрифт
-        draw.text((item_x + legend_circle_radius + styles.PLUS_X_OFFSET_PX, 
-                   plus_circle_y), 
-                  '+', fill=styles.PLUS_MINUS_PLUS_COLOR, font=plus_font, anchor='mm')
-        # Подпись
-        draw.text((item_x + legend_circle_radius * 2 + BOX_GAP, item_y), 
-                  plus_label, fill=styles.COLOR_BLACK, font=font_text)
-        text_bbox_plus = draw.textbbox((0, 0), plus_label, font=font_text)
-        item_x += legend_circle_radius * 2 + (text_bbox_plus[2] - text_bbox_plus[0]) + ITEM_GAP
-        
-        # Кружочек с "-" (минус к полезности)
-        minus_label = '-1 к полезности'
-        minus_circle_y = item_y + box_size // 2
-        
-        # Белый кружок
-        draw.ellipse(
-            [item_x, minus_circle_y - legend_circle_radius, 
-             item_x + legend_circle_radius * 2, minus_circle_y + legend_circle_radius],
-            fill=styles.PLUS_MINUS_CIRCLE_BG,
-            outline=styles.COLOR_BLACK,
-            width=1
-        )
-        # Символ "-" с корректировкой
-        draw.text((item_x + legend_circle_radius, 
-                   minus_circle_y + styles.MINUS_Y_OFFSET_PX // 2),  # Меньше корректировка для легенды
-                  '-', fill=styles.PLUS_MINUS_MINUS_COLOR, font=plus_font, anchor='mm')
-        # Подпись
-        draw.text((item_x + legend_circle_radius * 2 + BOX_GAP, item_y), 
-                  minus_label, fill=styles.COLOR_BLACK, font=font_text)
+        # +1 и -1 перенесены в строку "Игровые события"
         
         current_y += line_height
         
@@ -3693,29 +3652,135 @@ class PlayerShiftMapReport:
         item_y = current_y + baseline_offset
         
         events = [
-            (styles.COLOR_OUR_GOAL, 'Наш гол', 'peg'),
-            (styles.COLOR_THEIR_GOAL, 'Гол соперника', 'peg'),
-            (styles.FACEOFF_PEG_COLOR, 'Вбрасывание', 'peg'),
+            (styles.COLOR_OUR_GOAL, 'Наш гол', 'goal_peg'),
+            (styles.COLOR_THEIR_GOAL, 'Гол соперника', 'goal_peg'),
+            (styles.FACEOFF_PEG_COLOR, 'Вбрасывание', 'faceoff_peg'),
             (styles.COLOR_PENALTY_BOX, 'Удаление', 'cross'),
+            (styles.PLUS_MINUS_PLUS_COLOR, '+1 к полезности', 'plus'),
+            (styles.PLUS_MINUS_MINUS_COLOR, '-1 к полезности', 'minus'),
         ]
         for color, text, icon_type in events:
-            if icon_type == 'peg':
-                # Колышек толщиной 3 пикселя (было 2)
-                draw.line([(item_x + 2, item_y + 2), (item_x + 2, item_y + box_size - 2)], fill=color, width=3)
-                draw.line([(item_x, item_y + 2), (item_x + 4, item_y + 2)], fill=color, width=3)
+            text_x = 0  # Инициализируем для отслеживания позиции текста
+            
+            if icon_type == 'goal_peg':
+                # Горизонтальный колышек гола (основание слева) + пунктирная линия
+                peg_center_y = item_y + box_size // 2
+                peg_left = item_x + 2
+                peg_right = item_x + box_size - 2
+                # Горизонтальная линия
+                draw.line([(peg_left, peg_center_y), (peg_right, peg_center_y)], 
+                         fill=color, width=styles.GOAL_PEG_WIDTH)
+                # Вертикальное основание слева
+                draw.line([(peg_left, peg_center_y - styles.GOAL_PEG_BASE_WIDTH // 2), 
+                          (peg_left, peg_center_y + styles.GOAL_PEG_BASE_WIDTH // 2)], 
+                         fill=color, width=styles.GOAL_PEG_WIDTH)
+                # Пунктирная линия от колышка
+                dash_start_x = peg_right
+                dash_end_x = peg_right + int((box_size - 4) * 2)
+                self._draw_dashed_line(draw, dash_start_x, peg_center_y, dash_end_x, peg_center_y,
+                                      color, styles.GOAL_LINE_DASH, styles.GOAL_PEG_WIDTH)
+                # Текст после пунктирной линии
+                text_x = dash_end_x + BOX_GAP
+                draw.text((text_x, item_y), text, fill=color, font=font_text)
+                
+                # Обновляем позицию
+                text_bbox = draw.textbbox((0, 0), text, font=font_text)
+                item_x = text_x + (text_bbox[2] - text_bbox[0]) + ITEM_GAP
+                
+            elif icon_type == 'faceoff_peg':
+                # Горизонтальный колышек вбрасывания (основание слева) + пунктирная линия
+                peg_center_y = item_y + box_size // 2
+                peg_left = item_x + 2
+                peg_right = item_x + box_size - 2
+                # Горизонтальная линия
+                draw.line([(peg_left, peg_center_y), (peg_right, peg_center_y)], 
+                         fill=color, width=styles.FACEOFF_PEG_WIDTH)
+                # Вертикальное основание слева
+                draw.line([(peg_left, peg_center_y - styles.FACEOFF_PEG_BASE_WIDTH // 2), 
+                          (peg_left, peg_center_y + styles.FACEOFF_PEG_BASE_WIDTH // 2)], 
+                         fill=color, width=styles.FACEOFF_PEG_WIDTH)
+                # Пунктирная линия от колышка
+                dash_start_x = peg_right
+                dash_end_x = peg_right + int((box_size - 4) * 2)
+                self._draw_dashed_line(draw, dash_start_x, peg_center_y, dash_end_x, peg_center_y,
+                                      color, styles.FACEOFF_LINE_DASH, styles.FACEOFF_PEG_WIDTH)
+                # Текст после пунктирной линии
+                text_x = dash_end_x + BOX_GAP
+                draw.text((text_x, item_y), text, fill=color, font=font_text)
+                
+                # Обновляем позицию
+                text_bbox = draw.textbbox((0, 0), text, font=font_text)
+                item_x = text_x + (text_bbox[2] - text_bbox[0]) + ITEM_GAP
+                
+            elif icon_type == 'plus':
+                # Кружок с "+" (плюс к полезности)
+                legend_circle_radius = box_size // 2
+                circle_y = item_y + box_size // 2
+                
+                # Белый кружок
+                draw.ellipse(
+                    [item_x, circle_y - legend_circle_radius, 
+                     item_x + legend_circle_radius * 2, circle_y + legend_circle_radius],
+                    fill=styles.PLUS_MINUS_CIRCLE_BG,
+                    outline=styles.COLOR_BLACK,
+                    width=1
+                )
+                # Символ "+"
+                plus_font = self._get_font(styles.PLUS_MINUS_FONT_SIZE_PT - 1)
+                draw.text((item_x + legend_circle_radius + styles.PLUS_X_OFFSET_PX, circle_y), 
+                          '+', fill=color, font=plus_font, anchor='mm')
+                # Текст
+                text_x = item_x + legend_circle_radius * 2 + BOX_GAP
+                draw.text((text_x, item_y), text, fill=styles.COLOR_BLACK, font=font_text)
+                
+                # Обновляем позицию
+                text_bbox = draw.textbbox((0, 0), text, font=font_text)
+                item_x = text_x + (text_bbox[2] - text_bbox[0]) + ITEM_GAP
+                
+            elif icon_type == 'minus':
+                # Кружок с "-" (минус к полезности)
+                legend_circle_radius = box_size // 2
+                circle_y = item_y + box_size // 2
+                
+                # Белый кружок
+                draw.ellipse(
+                    [item_x, circle_y - legend_circle_radius, 
+                     item_x + legend_circle_radius * 2, circle_y + legend_circle_radius],
+                    fill=styles.PLUS_MINUS_CIRCLE_BG,
+                    outline=styles.COLOR_BLACK,
+                    width=1
+                )
+                # Символ "-"
+                plus_font = self._get_font(styles.PLUS_MINUS_FONT_SIZE_PT - 1)
+                draw.text((item_x + legend_circle_radius, 
+                           circle_y + styles.MINUS_Y_OFFSET_PX // 2), 
+                          '-', fill=color, font=plus_font, anchor='mm')
+                # Текст
+                text_x = item_x + legend_circle_radius * 2 + BOX_GAP
+                draw.text((text_x, item_y), text, fill=styles.COLOR_BLACK, font=font_text)
+                
+                # Обновляем позицию
+                text_bbox = draw.textbbox((0, 0), text, font=font_text)
+                item_x = text_x + (text_bbox[2] - text_bbox[0]) + ITEM_GAP
+                
             else:
-                # Крест внутри прямоугольника цвета удаления
-                # Рисуем прямоугольник фона
-                draw.rectangle([item_x, item_y, item_x + box_size, item_y + box_size], 
+                # Крест внутри прямоугольника цвета удаления (ширина 2.5x высоты)
+                rect_width = int(box_size * 2.5)
+                rect_height = box_size
+                draw.rectangle([item_x, item_y, item_x + rect_width, item_y + rect_height], 
                               fill=styles.COLOR_WHITE, outline=color, width=2)
-                # Рисуем крест внутри
-                cm = 3
-                draw.line([(item_x + cm, item_y + cm), (item_x + box_size - cm, item_y + box_size - cm)], fill=color, width=2)
-                draw.line([(item_x + box_size - cm, item_y + cm), (item_x + cm, item_y + box_size - cm)], fill=color, width=2)
-            # Текст цветом колышка/иконки (не черным)
-            draw.text((item_x + box_size + BOX_GAP, item_y), text, fill=color, font=font_text)
-            text_bbox = draw.textbbox((0, 0), text, font=font_text)
-            item_x += box_size + (text_bbox[2] - text_bbox[0]) + ITEM_GAP
+                # Крест отцентрирован в прямоугольнике
+                cm_x = 4
+                cm_y = 3
+                draw.line([(item_x + cm_x, item_y + cm_y), (item_x + rect_width - cm_x, item_y + rect_height - cm_y)], fill=color, width=2)
+                draw.line([(item_x + rect_width - cm_x, item_y + cm_y), (item_x + cm_x, item_y + rect_height - cm_y)], fill=color, width=2)
+                # Текст цветом иконки (после прямоугольника)
+                text_x = item_x + rect_width + BOX_GAP
+                draw.text((text_x, item_y), text, fill=color, font=font_text)
+                
+                # Обновляем позицию
+                text_bbox = draw.textbbox((0, 0), text, font=font_text)
+                item_x = text_x + (text_bbox[2] - text_bbox[0]) + ITEM_GAP
     
     def _draw_legend_color_box(self, draw, x, y, size, color):
         fill = color if isinstance(color, tuple) else color
