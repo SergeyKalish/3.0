@@ -999,10 +999,21 @@ class PlayerShiftMapReport:
                         # Обычная ячейка
                         text = self._get_cell_text_v2(col_config.key, player, 
                                                     report_data, period_index)
+                        # Для колонки СрСм (avg_shift) определяем цвет текста по значению
+                        text_color = None
+                        if col_config.key == "avg_shift" and text:
+                            try:
+                                # Извлекаем числовое значение из строки вида "45\""
+                                avg_value = int(text.replace('"', ''))
+                                text_color = self._get_avg_shift_color(avg_value)
+                            except (ValueError, AttributeError):
+                                pass
+                        
                         self._draw_data_cell_v2(draw, text, current_x, row_y, 
                                                 col_width, row_height, 
                                                 col_config.align, 
-                                                styles.TABLE_DATA_FONT_SIZE_PT)
+                                                styles.TABLE_DATA_FONT_SIZE_PT,
+                                                text_color)
                 
                 current_x += col_width
         
@@ -1141,7 +1152,7 @@ class PlayerShiftMapReport:
         draw.text((x_pos, y_pos), text, fill=styles.COLOR_BLACK, font=font)
 
     def _draw_data_cell_v2(self, draw: ImageDraw, text: str, x: int, y: int,
-                           w: int, h: int, align: str, font_size: float):
+                           w: int, h: int, align: str, font_size: float, text_color: str = None):
         """
         Отрисовка обычной ячейки данных v2.
         """
@@ -1163,7 +1174,8 @@ class PlayerShiftMapReport:
         
         y_pos = y + (h - text_h) // 2
         
-        draw.text((x_pos, y_pos), str(text), fill=styles.COLOR_BLACK, font=font)
+        color = text_color if text_color else styles.COLOR_BLACK
+        draw.text((x_pos, y_pos), str(text), fill=color, font=font)
 
     def _get_cell_text_v2(self, key: str, player, report_data: ReportData,
                           period_index: Optional[int]) -> str:
@@ -1261,6 +1273,39 @@ class PlayerShiftMapReport:
             return ""
         
         return value
+
+    def _get_avg_shift_color(self, avg_seconds: int) -> str:
+        """
+        Возвращает цвет текста для значения СрСм (среднее время смены)
+        на основе градиента цветов смен:
+        - До 35 сек: зелёный (#90EE90)
+        - 35-70 сек: градиент от зелёного к оранжевому
+        - Более 70 сек: оранжевый/красный (#FF6347)
+        """
+        if avg_seconds <= 35:
+            # Светло-зелёный
+            return "#228B22"  # Тёмно-зелёный для читаемости на белом фоне
+        elif avg_seconds <= 70:
+            # Интерполяция между зелёным и оранжевым
+            factor = (avg_seconds - 35) / 35.0
+            # Зелёный: #228B22 (34, 139, 34) -> Оранжевый: #FF8C00 (255, 140, 0)
+            r = int(34 + (255 - 34) * factor)
+            g = int(139 + (140 - 139) * factor)
+            b = int(34 + (0 - 34) * factor)
+            return f"#{r:02X}{g:02X}{b:02X}"
+        else:
+            # Оранжево-красный для длинных смен
+            if avg_seconds <= 90:
+                # От оранжевого к красному
+                factor = min(1.0, (avg_seconds - 70) / 20.0)
+                # Оранжевый: #FF8C00 (255, 140, 0) -> Красный: #DC143C (220, 20, 60)
+                r = int(255 + (220 - 255) * factor)
+                g = int(140 + (20 - 140) * factor)
+                b = int(0 + (60 - 0) * factor)
+                return f"#{r:02X}{g:02X}{b:02X}"
+            else:
+                # Тёмно-красный для очень длинных смен
+                return "#8B0000"
 
     def _calculate_special_team_time(self, player, report_data: ReportData,
                                      period_index: Optional[int], key: str) -> int:
@@ -3649,7 +3694,7 @@ class PlayerShiftMapReport:
         
         shift_colors = [
             (styles.COLOR_VERY_LIGHT_GREEN, '< 35 сек.'),
-            (styles.COLOR_DARK_GREEN, '35-70 сек.'),
+            (styles.COLOR_DARK_GREEN, '35 сек.'),
             (styles.COLOR_ORANGE, '70 сек.'),
             (styles.COLOR_BRIGHT_RED, '→∞'),
             (styles.COLOR_GOALIE_SHIFT, 'Вратарь'),
