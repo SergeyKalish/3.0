@@ -1,0 +1,11 @@
+Python: C:\Code\3.0\venv\Scripts\python.exe
+Args: ['c:/Code/3.0/png_to_pdf.py']
+PyQt5 imported OK
+PyQt5 widgets imported OK
+img2pdf import failed: No module named 'img2pdf'
+PIL Image imported OK
+Defining classes...
+main() started
+QApplication created
+PngToPdfConverter created
+converter shown, starting exec_
