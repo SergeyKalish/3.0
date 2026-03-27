@@ -167,9 +167,14 @@ class ReportStyles:
     
     # === ЗАГОЛОВОК ПЕРИОДА (для листов "Период 1/2/3") ===
     # Заменяет основной счёт на листах периодов
-    HEADER_PERIOD_LABEL_FONT_SIZE_PT: int = 16
+    HEADER_PERIOD_LABEL_FONT_SIZE_PT: int = 20  # Увеличен на 20% (было 16)
     HEADER_PERIOD_LABEL_FONT_BOLD: bool = True
-    HEADER_PERIOD_LABEL_FONT_COLOR: str = "#000000"
+    HEADER_PERIOD_LABEL_FONT_COLOR: str = "#FF0000"  # Красный цвет для контраста
+    
+    # === НАЗВАНИЕ ТУРНИРА НА ЛИСТЕ ПЕРИОДА (уменьшено на 40%) ===
+    HEADER_PERIOD_TOURNAMENT_FONT_SIZE_PT: int = 9  # ~40% меньше от 16
+    HEADER_PERIOD_TOURNAMENT_FONT_BOLD: bool = True
+    HEADER_PERIOD_TOURNAMENT_FONT_COLOR: str = "#000000"
     
     # === СЧЁТ В ПЕРИОДЕ (для листов "Период 1/2/3") ===
     # Отображается вместо строки со счётом по периодам
@@ -1631,11 +1636,17 @@ class PlayerShiftMapReport:
         current_y = 30
         
         # === ЛИНИЯ 1: Название турнира и номер тура ===
-        # Название турнира
-        font_tournament = self._get_font(
-            styles.HEADER_TOURNAMENT_FONT_SIZE_PT, 
-            bold=styles.HEADER_TOURNAMENT_FONT_BOLD
-        )
+        # Для листа "Период" используем уменьшенный шрифт
+        if is_period:
+            font_tournament = self._get_font(
+                styles.HEADER_PERIOD_TOURNAMENT_FONT_SIZE_PT, 
+                bold=styles.HEADER_PERIOD_TOURNAMENT_FONT_BOLD
+            )
+        else:
+            font_tournament = self._get_font(
+                styles.HEADER_TOURNAMENT_FONT_SIZE_PT, 
+                bold=styles.HEADER_TOURNAMENT_FONT_BOLD
+            )
         tournament_text = match_info['tournament_name'] or ''
         
         bbox_tour = draw.textbbox((0, 0), tournament_text, font=font_tournament)
@@ -1643,10 +1654,16 @@ class PlayerShiftMapReport:
         
         # Номер тура (отдельный шрифт)
         if match_info['tour_number']:
-            font_tour_num = self._get_font(
-                styles.HEADER_TOUR_NUMBER_FONT_SIZE_PT,
-                bold=styles.HEADER_TOUR_NUMBER_FONT_BOLD
-            )
+            if is_period:
+                font_tour_num = self._get_font(
+                    styles.HEADER_PERIOD_TOURNAMENT_FONT_SIZE_PT,
+                    bold=styles.HEADER_PERIOD_TOURNAMENT_FONT_BOLD
+                )
+            else:
+                font_tour_num = self._get_font(
+                    styles.HEADER_TOUR_NUMBER_FONT_SIZE_PT,
+                    bold=styles.HEADER_TOUR_NUMBER_FONT_BOLD
+                )
             tour_num_text = f" | Тур {match_info['tour_number']}"
             bbox_num = draw.textbbox((0, 0), tour_num_text, font=font_tour_num)
             text_w += bbox_num[2] - bbox_num[0]
@@ -1661,7 +1678,8 @@ class PlayerShiftMapReport:
             draw.text((center_x - text_w // 2, current_y), tournament_text, 
                      fill=styles.HEADER_TOURNAMENT_FONT_COLOR, font=font_tournament)
         
-        current_y += (bbox_tour[3] - bbox_tour[1]) + line_spacing
+        tournament_line_height = bbox_tour[3] - bbox_tour[1]
+        current_y += tournament_line_height + line_spacing
         
         # === ЛОГОТИПЫ И КОМАНДЫ ===
         # Позиция логотипов по Y задаётся константой HEADER_LOGO_Y_POSITION_PX
@@ -1689,6 +1707,7 @@ class PlayerShiftMapReport:
         
         # Центр логотипа по Y (для выравнивания текста и счёта)
         logo_center_y = logo_y + logo_size // 2
+        logo_bottom_y = logo_y + logo_size  # Низ логотипа
         
         # Определяем цвета для названий команд
         # f-team всегда слева, s-team всегда справа
@@ -1733,7 +1752,7 @@ class PlayerShiftMapReport:
         
         if is_period:
             # === ЗАГОЛОВОК ДЛЯ ЛИСТОВ ПЕРИОДОВ ===
-            # "Период X" вместо общего счёта
+            # "Период X" вместо общего счёта - отцентрован по вертикали
             font_period_label = self._get_font(
                 styles.HEADER_PERIOD_LABEL_FONT_SIZE_PT,
                 bold=styles.HEADER_PERIOD_LABEL_FONT_BOLD
@@ -1743,7 +1762,11 @@ class PlayerShiftMapReport:
             label_width = bbox_label[2] - bbox_label[0]
             label_height = bbox_label[3] - bbox_label[1]
             label_x = center_x - label_width // 2
-            label_y = logo_center_y - label_height // 2
+            
+            # Отцентровываем по вертикали между названием турнира и счётом периода
+            # Позиция Y: середина между концом строки турнира и началом области логотипов
+            space_below_tournament = logo_bottom_y - current_y
+            label_y = current_y + (space_below_tournament - label_height) // 2 - 30
             
             draw.text((label_x, label_y), period_label_text, 
                      fill=styles.HEADER_PERIOD_LABEL_FONT_COLOR, font=font_period_label)
