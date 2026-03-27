@@ -238,7 +238,7 @@ class ReportStyles:
     COLOR_GRID: str = "#9B9B9B"
     
     # Светлый серый для горизонтальных линий в графической части (разделение строк)
-    COLOR_GRID_LIGHT: str = "#E0E0E0"
+    COLOR_GRID_LIGHT: str = "#B2B2B2"
     
     # ============================================
     # ФОН ДЛЯ ЧЁТНЫХ СТРОК (зебра в таблице и графике)
@@ -387,7 +387,7 @@ class ReportStyles:
     GRAPHIC_AREA_BORDER_WIDTH: int = 2
     
     # Цвет рамки графической области (тёмно-красный, отличимый от сетки)
-    GRAPHIC_AREA_BORDER_COLOR: str = "#B31919"
+    GRAPHIC_AREA_BORDER_COLOR: str = "#000000"
     
     # ============================================
     # ВРЕМЕННЫЕ ШКАЛЫ (верхняя и нижняя)
@@ -2084,7 +2084,7 @@ class PlayerShiftMapReport:
                             period_start=0)
 
         self._draw_shifts(draw, report_data, geom, time_range=time_range, 
-                          period_start=0, header_height=header_height, draw_plus_minus=False)
+                          period_start=0, header_height=header_height, draw_plus_minus=True, is_match_level=True)
 
         self._draw_time_scale(draw, geom, time_range=time_range, is_match_level=True)
 
@@ -2096,6 +2096,9 @@ class PlayerShiftMapReport:
         self._draw_faceoffs_scale(draw, report_data, geom,
                                 time_range=time_range, 
                                 period_start=0)
+        
+        # Рисуем вертикальные линии границ периодов последними (поверх всего)
+        self._draw_period_boundaries(draw, report_data, geom, time_range)
 
     def _draw_graphics_period(self, draw: ImageDraw, report_data: ReportData, geom: dict,
                               period_index: int, header_height: float):
@@ -2129,7 +2132,7 @@ class PlayerShiftMapReport:
                             period_start=period_start)
 
         self._draw_shifts(draw, report_data, geom, time_range=time_range,
-                          period_start=period_start, header_height=header_height, draw_plus_minus=True)
+                          period_start=period_start, header_height=header_height, draw_plus_minus=True, is_match_level=False)
         
         self._draw_time_scale(draw, geom, time_range=time_range, 
                               is_match_level=False, period_abs_start=period_start)
@@ -2203,6 +2206,38 @@ class PlayerShiftMapReport:
                 fill=styles.COLOR_GRID, 
                 width=styles.TABLE_GRID_LINE_WIDTH)
 
+    def _draw_period_boundaries(self, draw: ImageDraw, report_data: ReportData, 
+                                geom: dict, time_range: float):
+        """
+        Рисует вертикальные чёрные линии на границах периодов (только для листа 'Матч').
+        Линии идут от верха верхней шкалы до низа нижней шкалы времени.
+        """
+        styles = self.styles
+        
+        graphic_x = geom["x"]
+        graphic_width = geom["width"]
+        graphic_y = geom["y"]
+        graphic_height = geom["height"]
+        
+        # Получаем сегменты (периоды)
+        segments = report_data.segments_info
+        if not segments or len(segments) <= 1:
+            return
+        
+        scale_factor = graphic_width / time_range
+        
+        # Рисуем линии на границах периодов (кроме начала первого и конца последнего)
+        for i in range(len(segments) - 1):
+            # Конец текущего периода = начало следующего
+            boundary_time = segments[i].official_end
+            x_pos = graphic_x + int(boundary_time * scale_factor)
+            
+            # Вертикальная линия от верха верхней шкалы до низа нижней шкалы времени
+            line_bottom = graphic_y + graphic_height + styles.TIME_SCALE_HEIGHT_PX
+            draw.line([(x_pos, graphic_y), (x_pos, line_bottom)],
+                     fill=styles.COLOR_BLACK,
+                     width=3)
+
     def _draw_time_scale(self, draw: ImageDraw, geom: dict, time_range: float,
                          is_match_level: bool, period_abs_start: float = 0):
         """Нижняя шкала времени."""
@@ -2256,7 +2291,7 @@ class PlayerShiftMapReport:
 
     def _draw_shifts(self, draw: ImageDraw, report_data: ReportData, geom: dict,
                     time_range: float, period_start: float, header_height: float,
-                    draw_plus_minus: bool = False):
+                    draw_plus_minus: bool = False, is_match_level: bool = False):
         """Отрисовка смен."""
         styles = self.styles
         
@@ -2430,12 +2465,18 @@ class PlayerShiftMapReport:
                 # Подпись номера смены и длительности
                 self._draw_shift_label(draw, x_start, x_end, y_pos, y_middle, 
                                     y_bottom, row_height, shift_info, 
-                                    graphic_x, graphic_width)
+                                    graphic_x, graphic_width, is_match_level)
 
     def _draw_shift_label(self, draw: ImageDraw, x_start: int, x_end: int, y_pos: int,
                           y_middle: int, y_bottom: int, row_height: int, shift_info,
-                          graphic_x: int, graphic_width: int):
-        """Отрисовывает подпись смены."""
+                          graphic_x: int, graphic_width: int, is_match_level: bool = False):
+        """Отрисовывает подпись смены.
+        
+        На листе 'Матч' подписи не рисуются (is_match_level=True)."""
+        # На листе 'Матч' подписи с номером и длительностью не рисуются
+        if is_match_level:
+            return
+            
         styles = self.styles
         
         MIN_WIDTH_FOR_HORIZONTAL_TEXT = 50
