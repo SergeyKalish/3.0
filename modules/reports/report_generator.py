@@ -3124,6 +3124,9 @@ class PlayerShiftMapReport:
         if is_match_level:
             return
         
+        # Для периодов: отслеживаем подписи под шкалой для проверки конфликтов
+        drawn_below_labels = []
+        
         for info in labels_info:
             x_start = info['x_start']
             x_end = info['x_end']
