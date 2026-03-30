@@ -1,37 +1,40 @@
 {
-	"folders": [
-		{
-			"path": "."
-		},
-		{
-			"path": "../Parser"
-		},
-		{
-			"path": "../Собрать весь код"
-		}
-	],
-	"settings": {
-		"files.associations": {
-			"*.hkt": "json"
-		},
-		"files.exclude": {
-			"**/*.png": true,
-			"**/venv": true,
-			"**/.venv": true,
-			"**/__pycache__": true,
-			"**/*.pyc": true
-		},
-		"files.watcherExclude": {
-			"**/venv/**": true,
-			"**/.venv/**": true,
-			"**/__pycache__/**": true
-		},
-		"search.exclude": {
-			"**/venv": true,
-			"**/.venv": true,
-			"**/__pycache__": true
-		},
-		"python.locator": "js",
-		"python.defaultInterpreterPath": "C:\\code\\3.0\\venv\\Scripts\\python.exe"
-	}
+  "folders": [
+    {
+      "path": ".",
+    },
+    {
+      "path": "../Parser",
+    },
+    {
+      "path": "../Собрать весь код",
+    },
+    {
+      "path": "../motion_analysis",
+    },
+  ],
+  "settings": {
+    "files.associations": {
+      "*.hkt": "json",
+    },
+    "files.exclude": {
+      "**/*.png": true,
+      "**/venv": true,
+      "**/.venv": true,
+      "**/__pycache__": true,
+      "**/*.pyc": true,
+    },
+    "files.watcherExclude": {
+      "**/venv/**": true,
+      "**/.venv/**": true,
+      "**/__pycache__/**": true,
+    },
+    "search.exclude": {
+      "**/venv": true,
+      "**/.venv": true,
+      "**/__pycache__": true,
+    },
+    "python.locator": "js",
+    "python.defaultInterpreterPath": "C:\\code\\3.0\\venv\\Scripts\\python.exe",
+  },
 }
