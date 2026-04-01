@@ -39,6 +39,29 @@ def format_seconds_to_min_sec(total_seconds: int) -> str:
     minutes = total_seconds // 60
     seconds = total_seconds % 60
     return f"{minutes} м {seconds} с"
+
+
+def format_player_name(player_name: str) -> str:
+    """
+    Преобразует полное имя "Фамилия Имя" в формат "Фамилия И.".
+    
+    Args:
+        player_name: Полное имя игрока (например, "Иванов Иван").
+        
+    Returns:
+        Строка в формате "Фамилия И." или исходное имя, если формат не распознан.
+    """
+    if not player_name or player_name == "N/A":
+        return ""
+    
+    parts = player_name.split()
+    if len(parts) >= 2:
+        # Фамилия Имя → Фамилия И.
+        return f"{parts[0]} {parts[1][0]}."
+    elif len(parts) == 1:
+        # Только фамилия
+        return parts[0]
+    return player_name
 # --- Конец новых функций ---
 
 class LabelsTreeWidget(QWidget):
@@ -376,7 +399,7 @@ class LabelsTreeWidget(QWidget):
                         # Сохраняем индекс метки в списке как user data в первом столбце дочернего элемента
                         child_item.setData(4, 0, id(label)) # Используем id объекта как уникальный ключ
             else:
-                # --- Старая логика для остальных типов (например, "Сегмент") ---
+                # --- Старая логика для остальных типов (например, "Сегмент", "Гол", "Удаление") ---
                 # Создаём узел для типа метки
                 type_item = QTreeWidgetItem(labels_parent_item, [label_type, "", "", ""])
                 # Восстанавливаем состояние группы меток (если нужно, можно хранить отдельно для каждого типа)
@@ -390,11 +413,19 @@ class LabelsTreeWidget(QWidget):
                     # Форматирование времени в "мин:сек"
                     formatted_time_min_sec = format_seconds_to_min_sec(int(label.global_time))
 
+                    # === НОВОЕ: Для меток "Удаление" и "Гол" показываем имя игрока в колонке "Длительность" ===
+                    duration_text = ""
+                    if label_type in ("Удаление", "Гол") and label.context and isinstance(label.context, dict):
+                        player_name = label.context.get("player_name", "")
+                        if player_name:
+                            duration_text = format_player_name(player_name)
+                    # === КОНЕЦ НОВОГО ===
+
                     child_item = QTreeWidgetItem(type_item, [
                         "", # Тип уже в родительском элементе
                         str(i + 1), # Порядковый номер (начинаем с 1)
                         f"{formatted_time} ({formatted_time_min_sec})", # Время с округлением, разделителем и в "мин:сек"
-                        "" # Длительность для метки - пустая строка
+                        duration_text # Длительность: имя игрока для "Удаление" и "Гол", иначе пусто
                     ])
                     # --- Новое: Установка выравнивания по правому краю для числовых колонок ---
                     child_item.setTextAlignment(2, Qt.AlignRight | Qt.AlignVCenter) # Время

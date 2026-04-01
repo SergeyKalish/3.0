@@ -892,7 +892,455 @@
         }
       },
       {
-        "id": "ddc861ae-af57-4ec7-9476-5b1b5c5224de",
+        "id": "656e7622-23f1-40a0-b933-4e7af8458824",
+        "label_type": "Пауза",
+        "global_time": 4823.454750857454,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "8c3cdc97-b653-426f-8bf8-2431cbccbb4f",
+        "label_type": "Пауза",
+        "global_time": 4840.960444293123,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "97d513ef-c9cc-4c52-a593-4f25e11ed21a",
+        "label_type": "Пауза",
+        "global_time": 4757.27021813828,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "6640d135-8d17-45e1-b3f9-078c21472607",
+        "label_type": "Пауза",
+        "global_time": 4924.063932976824,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "8ea94266-3fc9-4628-a65a-f66462e59474",
+        "label_type": "Удаление",
+        "global_time": 4924.063932976824,
+        "context": {
+          "team": "f-team",
+          "player_name": "Судьин М.",
+          "player_id_fhm": "7499",
+          "violation_type": "Подножка",
+          "start_time_sec": 1409,
+          "end_time_sec": 1529,
+          "event_time_sec": 1409
+        }
+      },
+      {
+        "id": "7d937343-c3b1-4b0f-ac5b-be095b1849d0",
+        "label_type": "Пауза",
+        "global_time": 4954.063932976824,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "94c41040-23f2-49f1-8a69-ff12b7979a5a",
+        "label_type": "Удаление",
+        "global_time": 4966.563932976824,
+        "context": {
+          "team": "f-team",
+          "player_name": "Козлов И.",
+          "player_id_fhm": "12515",
+          "violation_type": "Грубость",
+          "start_time_sec": 1309,
+          "end_time_sec": 1429,
+          "event_time_sec": 1309
+        }
+      },
+      {
+        "id": "df8b234f-16fa-4bfe-80e8-ba7c752e0e94",
+        "label_type": "Удаление",
+        "global_time": 4966.563932976824,
+        "context": {
+          "team": "s-team",
+          "player_name": "Широков Т.",
+          "player_id_fhm": "6985",
+          "violation_type": "Блокировка",
+          "start_time_sec": 1309,
+          "end_time_sec": 1429,
+          "event_time_sec": 1309
+        }
+      },
+      {
+        "id": "42ce8fc8-6629-4858-b934-c245875c359f",
+        "label_type": "Удаление",
+        "global_time": 5075.040887267618,
+        "context": {
+          "team": "f-team",
+          "player_name": "Судьин М.",
+          "player_id_fhm": "7499",
+          "violation_type": "Подножка",
+          "start_time_sec": 1409,
+          "end_time_sec": 1529,
+          "event_time_sec": 1409
+        }
+      },
+      {
+        "id": "e5035f90-4f6e-4eb3-b105-651965ae1663",
+        "label_type": "Пауза",
+        "global_time": 5918.691217915022,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "5c2d52be-efb9-40d9-a6bf-fb13c69f9390",
+        "label_type": "Удаление",
+        "global_time": 5918.691217915022,
+        "context": {
+          "team": "s-team",
+          "player_name": "Филаретов К.",
+          "player_id_fhm": "6983",
+          "violation_type": "Грубость",
+          "start_time_sec": 2230,
+          "end_time_sec": 2350,
+          "event_time_sec": 2230
+        }
+      },
+      {
+        "id": "84ea2d41-46e2-4f57-a688-f9a945f76dce",
+        "label_type": "Пауза",
+        "global_time": 5962.319711065473,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "eee29a6f-bee7-476d-a909-9403732334d3",
+        "label_type": "Удаление",
+        "global_time": 6083.319711065473,
+        "context": {
+          "team": "s-team",
+          "player_name": "Филаретов К.",
+          "player_id_fhm": "6983",
+          "violation_type": "Грубость",
+          "start_time_sec": 2230,
+          "end_time_sec": 2350,
+          "event_time_sec": 2230
+        }
+      },
+      {
+        "id": "254dceba-6a6a-4057-bcca-ba3cff28eaaa",
+        "label_type": "Удаление",
+        "global_time": 6090.691090059456,
+        "context": {
+          "team": "s-team",
+          "player_name": "Левчук А.",
+          "player_id_fhm": "5518",
+          "violation_type": "Подножка",
+          "start_time_sec": 2360,
+          "end_time_sec": 2480,
+          "event_time_sec": 2360
+        }
+      },
+      {
+        "id": "99e1582c-b459-4135-8101-98d7d15a5edc",
+        "label_type": "Пауза",
+        "global_time": 6090.691090059456,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "4040347d-b80f-4fea-bd18-b4b4953dbd65",
+        "label_type": "Пауза",
+        "global_time": 6124.359463453468,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "10da41bb-5479-428e-8175-e2a5164eee4c",
+        "label_type": "Удаление",
+        "global_time": 6965.255381229988,
+        "context": {
+          "team": "s-team",
+          "player_name": "Филаретов К.",
+          "player_id_fhm": "6983",
+          "violation_type": "Оскорбление судей и неспортивное поведение",
+          "start_time_sec": 2811,
+          "end_time_sec": 2931,
+          "event_time_sec": 2811
+        }
+      },
+      {
+        "id": "56734333-6535-4343-b7c8-d4c8a8489727",
+        "label_type": "Удаление",
+        "global_time": 6965.255381229988,
+        "context": {
+          "team": "f-team",
+          "player_name": "Костин В.",
+          "player_id_fhm": "7485",
+          "violation_type": "Неправильная атака",
+          "start_time_sec": 2811,
+          "end_time_sec": 2931,
+          "event_time_sec": 2811
+        }
+      },
+      {
+        "id": "5e1e157e-6050-464d-9ce3-e2b2118d1a05",
+        "label_type": "Пауза",
+        "global_time": 6965.255381229988,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "3fd46ac8-8913-4d93-8091-0dde65ad3984",
+        "label_type": "Пауза",
+        "global_time": 7011.3519254957355,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "4f3c5571-d60d-4f8e-8574-7dfb78682b34",
+        "label_type": "Пауза",
+        "global_time": 7058.35090291845,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "7982a75d-cc3b-4817-981e-f279863ab517",
+        "label_type": "Пауза",
+        "global_time": 7084.35090291845,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "e4b6f4fe-fbb3-4403-afa4-42751dedbc89",
+        "label_type": "Удаление",
+        "global_time": 7157.35090291845,
+        "context": {
+          "team": "s-team",
+          "player_name": "Филаретов К.",
+          "player_id_fhm": "6983",
+          "violation_type": "Оскорбление судей и неспортивное поведение",
+          "start_time_sec": 2811,
+          "end_time_sec": 2931,
+          "event_time_sec": 2811
+        }
+      },
+      {
+        "id": "a34eeb10-fcf9-491d-812a-26d53a935e4c",
+        "label_type": "Удаление",
+        "global_time": 7157.35090291845,
+        "context": {
+          "team": "f-team",
+          "player_name": "Костин В.",
+          "player_id_fhm": "7485",
+          "violation_type": "Неправильная атака",
+          "start_time_sec": 2811,
+          "end_time_sec": 2931,
+          "event_time_sec": 2811
+        }
+      },
+      {
+        "id": "4dcf90cc-6791-48a2-8d33-97fc49c74ae0",
+        "label_type": "Удаление",
+        "global_time": 7389.970649405854,
+        "context": {
+          "team": "f-team",
+          "player_name": "Фендриков С.",
+          "player_id_fhm": "8405",
+          "violation_type": "Подножка",
+          "start_time_sec": 3100,
+          "end_time_sec": 3110,
+          "event_time_sec": 3100
+        }
+      },
+      {
+        "id": "d3ca14e7-b228-4838-b23a-cac141ef079e",
+        "label_type": "Пауза",
+        "global_time": 7389.970649405854,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "23fb194e-70f4-407a-8bd8-8cb52bf266ad",
+        "label_type": "Пауза",
+        "global_time": 7424.704135581391,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "7a32851a-f4d4-4e64-917f-54518476a06e",
+        "label_type": "Удаление",
+        "global_time": 7433.064601463512,
+        "context": {
+          "team": "f-team",
+          "player_name": "Фендриков С.",
+          "player_id_fhm": "8405",
+          "violation_type": "Подножка",
+          "start_time_sec": 3100,
+          "end_time_sec": 3110,
+          "event_time_sec": 3100
+        }
+      },
+      {
+        "id": "70cd31bb-c02b-47e8-b57b-5f9d48daa8a7",
+        "label_type": "Удаление",
+        "global_time": 7522.460294822613,
+        "context": {
+          "team": "f-team",
+          "player_name": "Вдовухин Н.",
+          "player_id_fhm": "7475",
+          "violation_type": "Толчок на борт",
+          "start_time_sec": 3164,
+          "end_time_sec": 3237,
+          "event_time_sec": 3164
+        }
+      },
+      {
+        "id": "b2887fd7-74ce-416f-95ac-c4197bc70e5c",
+        "label_type": "Пауза",
+        "global_time": 7522.460294822613,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "6f54f4fb-824b-43a8-b51b-66c3c862a62d",
+        "label_type": "Пауза",
+        "global_time": 7556.240922311703,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "52a0080a-77ad-4012-b56e-d0f9d849bae8",
+        "label_type": "Удаление",
+        "global_time": 7646.130397088718,
+        "context": {
+          "team": "f-team",
+          "player_name": "Вдовухин Н.",
+          "player_id_fhm": "7475",
+          "violation_type": "Толчок на борт",
+          "start_time_sec": 3164,
+          "end_time_sec": 3237,
+          "event_time_sec": 3164
+        }
+      },
+      {
+        "id": "94c6a130-cc70-4713-8075-5749ba9a9862",
+        "label_type": "Удаление",
+        "global_time": 7750.057819013132,
+        "context": {
+          "team": "s-team",
+          "player_name": "Шинкин Д.",
+          "player_id_fhm": "6984",
+          "violation_type": "Подножка",
+          "start_time_sec": 3307,
+          "end_time_sec": 3361,
+          "event_time_sec": 3307
+        }
+      },
+      {
+        "id": "15ab2300-be84-4b23-a193-900f035d48f3",
+        "label_type": "Пауза",
+        "global_time": 7750.057819013132,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "20cf45c6-e3fc-47a9-a3f5-fbc1863bfe99",
+        "label_type": "Пауза",
+        "global_time": 7788.865082864298,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "b40ef0b0-1ed5-4abc-8cc2-78968b825723",
+        "label_type": "Удаление",
+        "global_time": 7855.615764827989,
+        "context": {
+          "team": "s-team",
+          "player_name": "Шинкин Д.",
+          "player_id_fhm": "6984",
+          "violation_type": "Подножка",
+          "start_time_sec": 3307,
+          "end_time_sec": 3361,
+          "event_time_sec": 3307
+        }
+      },
+      {
+        "id": "76be71c0-7f5a-47d9-8af9-3d9c661b2c45",
+        "label_type": "Удаление",
+        "global_time": 8022.167595008743,
+        "context": {
+          "team": "f-team",
+          "player_name": "Фендриков С.",
+          "player_id_fhm": "8405",
+          "violation_type": "Удар ногой",
+          "start_time_sec": 3450,
+          "end_time_sec": 3750,
+          "event_time_sec": 3450
+        }
+      },
+      {
+        "id": "43411f91-b7cc-44b7-9ab2-05537a611849",
+        "label_type": "Пауза",
+        "global_time": 8022.167595008743,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "f3700ce0-fa2f-4a16-b975-2e29a63c7c2d",
+        "label_type": "Пауза",
+        "global_time": 8082.065596727272,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "dd881c34-3dfe-46aa-8e46-d55cbd1555d8",
+        "label_type": "Удаление",
+        "global_time": 8315.990014118554,
+        "context": {
+          "team": "f-team",
+          "player_name": "Фендриков С.",
+          "player_id_fhm": "8405",
+          "violation_type": "Удар ногой",
+          "start_time_sec": 3450,
+          "end_time_sec": 3750,
+          "event_time_sec": 3450
+        }
+      },
+      {
+        "id": "8db8d831-88a6-4b22-9309-ef7cd11a54a5",
+        "label_type": "Удаление",
+        "global_time": 6528.188714308145,
+        "context": {
+          "team": "s-team",
+          "player_name": "Левчук А.",
+          "player_id_fhm": "5518",
+          "violation_type": "Подножка",
+          "start_time_sec": 2360,
+          "end_time_sec": 2480,
+          "event_time_sec": 2360
+        }
+      },
+      {
+        "id": "0ce677c8-5981-4bbd-b257-6c84d3861e1f",
         "label_type": "Удаление",
         "global_time": 4660.36066865921,
         "context": {
@@ -901,14 +1349,14 @@
           "player_id_fhm": "6985",
           "violation_type": "Блокировка",
           "start_time_sec": 1309,
-          "end_time_sec": 1314,
+          "end_time_sec": 1429,
           "event_time_sec": 1309
         }
       }
     ],
     "calculated_ranges": [
       {
-        "id": "4cb16984-98d8-437f-a8b2-5e4c65076d52",
+        "id": "a9cc5359-6cf1-4391-a82b-a21b64c1ea6a",
         "name": "Всё видео",
         "label_type": "Всё видео",
         "start_time": 0.0,
@@ -917,58 +1365,245 @@
         "context": null
       },
       {
-        "id": "f6c20a3d-fb73-43ab-a6d0-8f82884dd235",
+        "id": "bdd0f14a-f8cf-4162-8e4e-110ea9db850c",
         "name": "Удаление Буторин К. (Подножка)",
         "label_type": "Удаление",
         "start_time": 2036.7708926677708,
         "end_time": 2240.5991836614558,
         "source_label_ids": [],
         "context": {
-          "start_time_sec": 335,
           "end_time_sec": 455,
-          "player_id_fhm": "12120",
           "player_name": "Буторин К.",
+          "start_time_sec": 335,
+          "team": "s-team",
           "violation_type": "Подножка",
           "event_time_sec": 335,
-          "team": "s-team"
+          "player_id_fhm": "12120"
         }
       },
       {
-        "id": "42fd5324-6dc8-4e97-a807-71afda8cdc8c",
+        "id": "d345e060-ce37-4fa5-9c90-2aaf1c6ff25d",
         "name": "Удаление Дауров А. (Толчок на борт)",
         "label_type": "Удаление",
         "start_time": 2728.7453955432234,
         "end_time": 3508.8496335513705,
         "source_label_ids": [],
         "context": {
+          "start_time_sec": 860,
+          "event_time_sec": 860,
+          "player_id_fhm": "7480",
+          "team": "f-team",
           "player_name": "Дауров А.",
           "end_time_sec": 957,
-          "team": "f-team",
-          "event_time_sec": 860,
-          "start_time_sec": 860,
-          "player_id_fhm": "7480",
           "violation_type": "Толчок на борт"
         }
       },
       {
-        "id": "c97bfd49-0f9f-4fe6-a973-07669e3a1de6",
+        "id": "2e24bada-e040-4d24-a982-9154073686a0",
         "name": "Удаление Орлов А. (Удар клюшкой)",
         "label_type": "Удаление",
         "start_time": 3337.0129901597466,
         "end_time": 3522.941008192681,
         "source_label_ids": [],
         "context": {
-          "start_time_sec": 1055,
+          "end_time_sec": 1175,
           "violation_type": "Удар клюшкой",
           "player_id_fhm": "6977",
-          "end_time_sec": 1175,
-          "player_name": "Орлов А.",
+          "start_time_sec": 1055,
+          "team": "s-team",
           "event_time_sec": 1055,
+          "player_name": "Орлов А."
+        }
+      },
+      {
+        "id": "100ca05d-fcd7-4ea7-9258-12be443c11bd",
+        "name": "Удаление Козлов И. (Грубость)",
+        "label_type": "Удаление",
+        "start_time": 4660.36066865921,
+        "end_time": 4966.563932976824,
+        "source_label_ids": [],
+        "context": {
+          "end_time_sec": 1429,
+          "team": "f-team",
+          "start_time_sec": 1309,
+          "player_id_fhm": "12515",
+          "event_time_sec": 1309,
+          "violation_type": "Грубость",
+          "player_name": "Козлов И."
+        }
+      },
+      {
+        "id": "aa06e036-0193-4e3d-a7dd-0bf10af39db4",
+        "name": "Удаление Судьин М. (Подножка)",
+        "label_type": "Удаление",
+        "start_time": 4924.063932976824,
+        "end_time": 5075.040887267618,
+        "source_label_ids": [],
+        "context": {
+          "end_time_sec": 1529,
+          "player_name": "Судьин М.",
+          "start_time_sec": 1409,
+          "team": "f-team",
+          "event_time_sec": 1409,
+          "violation_type": "Подножка",
+          "player_id_fhm": "7499"
+        }
+      },
+      {
+        "id": "4236125e-6a5b-41bd-9105-6ddbacd786a1",
+        "name": "Удаление Широков Т. (Блокировка)",
+        "label_type": "Удаление",
+        "start_time": 4660.36066865921,
+        "end_time": 4966.563932976824,
+        "source_label_ids": [],
+        "context": {
+          "end_time_sec": 1429,
+          "player_id_fhm": "6985",
+          "violation_type": "Блокировка",
+          "player_name": "Широков Т.",
+          "start_time_sec": 1309,
+          "event_time_sec": 1309,
           "team": "s-team"
         }
       },
       {
-        "id": "dcbb8040-89b8-4828-bce7-0102ca99995b",
+        "id": "de328fa9-748d-4bf7-9c0e-c293b0605eda",
+        "name": "Удаление Филаретов К. (Грубость)",
+        "label_type": "Удаление",
+        "start_time": 5918.691217915022,
+        "end_time": 6083.319711065473,
+        "source_label_ids": [],
+        "context": {
+          "event_time_sec": 2230,
+          "player_name": "Филаретов К.",
+          "end_time_sec": 2350,
+          "team": "s-team",
+          "violation_type": "Грубость",
+          "player_id_fhm": "6983",
+          "start_time_sec": 2230
+        }
+      },
+      {
+        "id": "a2ed5c6e-97ad-4b2a-bca0-bd10463da125",
+        "name": "Удаление Левчук А. (Подножка)",
+        "label_type": "Удаление",
+        "start_time": 6090.691090059456,
+        "end_time": 6528.188714308145,
+        "source_label_ids": [],
+        "context": {
+          "player_name": "Левчук А.",
+          "end_time_sec": 2480,
+          "start_time_sec": 2360,
+          "violation_type": "Подножка",
+          "team": "s-team",
+          "event_time_sec": 2360,
+          "player_id_fhm": "5518"
+        }
+      },
+      {
+        "id": "8175073a-5705-4bec-8960-74f70cc6b80a",
+        "name": "Удаление Филаретов К. (Оскорбление судей и неспортивное поведение)",
+        "label_type": "Удаление",
+        "start_time": 6965.255381229988,
+        "end_time": 7157.35090291845,
+        "source_label_ids": [],
+        "context": {
+          "start_time_sec": 2811,
+          "event_time_sec": 2811,
+          "violation_type": "Оскорбление судей и неспортивное поведение",
+          "player_name": "Филаретов К.",
+          "team": "s-team",
+          "player_id_fhm": "6983",
+          "end_time_sec": 2931
+        }
+      },
+      {
+        "id": "81187b36-aedb-48bd-b25e-a6f467067ba1",
+        "name": "Удаление Костин В. (Неправильная атака)",
+        "label_type": "Удаление",
+        "start_time": 6965.255381229988,
+        "end_time": 7157.35090291845,
+        "source_label_ids": [],
+        "context": {
+          "start_time_sec": 2811,
+          "event_time_sec": 2811,
+          "violation_type": "Неправильная атака",
+          "player_id_fhm": "7485",
+          "team": "f-team",
+          "player_name": "Костин В.",
+          "end_time_sec": 2931
+        }
+      },
+      {
+        "id": "b4104da7-b5ec-4991-bd41-e136ab6be7c1",
+        "name": "Удаление Фендриков С. (Подножка)",
+        "label_type": "Удаление",
+        "start_time": 7389.970649405854,
+        "end_time": 7433.064601463512,
+        "source_label_ids": [],
+        "context": {
+          "end_time_sec": 3110,
+          "start_time_sec": 3100,
+          "event_time_sec": 3100,
+          "team": "f-team",
+          "player_id_fhm": "8405",
+          "violation_type": "Подножка",
+          "player_name": "Фендриков С."
+        }
+      },
+      {
+        "id": "a4fcf75b-ae98-46ea-85d5-9eecc478ffe0",
+        "name": "Удаление Вдовухин Н. (Толчок на борт)",
+        "label_type": "Удаление",
+        "start_time": 7522.460294822613,
+        "end_time": 7646.130397088718,
+        "source_label_ids": [],
+        "context": {
+          "player_name": "Вдовухин Н.",
+          "start_time_sec": 3164,
+          "team": "f-team",
+          "event_time_sec": 3164,
+          "player_id_fhm": "7475",
+          "end_time_sec": 3237,
+          "violation_type": "Толчок на борт"
+        }
+      },
+      {
+        "id": "17709e19-6ab8-42d5-b11e-086719ffa7aa",
+        "name": "Удаление Шинкин Д. (Подножка)",
+        "label_type": "Удаление",
+        "start_time": 7750.057819013132,
+        "end_time": 7855.615764827989,
+        "source_label_ids": [],
+        "context": {
+          "end_time_sec": 3361,
+          "event_time_sec": 3307,
+          "player_name": "Шинкин Д.",
+          "violation_type": "Подножка",
+          "team": "s-team",
+          "player_id_fhm": "6984",
+          "start_time_sec": 3307
+        }
+      },
+      {
+        "id": "b912de76-7d94-4dd4-b001-df5bb98cc207",
+        "name": "Удаление Фендриков С. (Удар ногой)",
+        "label_type": "Удаление",
+        "start_time": 8022.167595008743,
+        "end_time": 8315.990014118554,
+        "source_label_ids": [],
+        "context": {
+          "end_time_sec": 3750,
+          "start_time_sec": 3450,
+          "team": "f-team",
+          "event_time_sec": 3450,
+          "player_id_fhm": "8405",
+          "violation_type": "Удар ногой",
+          "player_name": "Фендриков С."
+        }
+      },
+      {
+        "id": "4a6d7647-5cdf-4211-b9b5-7b6cc4f9d780",
         "name": "Период 1",
         "label_type": "Сегмент",
         "start_time": 1592.4320085048676,
@@ -980,7 +1615,7 @@
         "context": null
       },
       {
-        "id": "518c16b0-4209-4eef-b9d8-c34ddbdce9ce",
+        "id": "70c6d4ff-e38f-485a-8122-8f6d9be4cfc6",
         "name": "Период 2",
         "label_type": "Сегмент",
         "start_time": 4536.2489602565765,
@@ -992,7 +1627,7 @@
         "context": null
       },
       {
-        "id": "ba61721a-5447-4f97-be6d-d071bd0545ec",
+        "id": "b7242e8c-685f-4541-8629-f78e0ed268ea",
         "name": "Период 3",
         "label_type": "Сегмент",
         "start_time": 6405.327563328149,
@@ -1004,7 +1639,7 @@
         "context": null
       },
       {
-        "id": "49ceb4e9-dd44-4344-afa1-979db5fb0b40",
+        "id": "6980ae43-e10d-4a37-b528-4927b68ac47a",
         "name": "Период 1. ЧИИ №1",
         "label_type": "ЧИИ",
         "start_time": 1592.4320085048676,
@@ -1016,7 +1651,7 @@
         "context": null
       },
       {
-        "id": "e9677467-2e81-4ab0-9aef-a59d9b426683",
+        "id": "d9928b4b-a735-496f-8b22-72cfc12fd650",
         "name": "Период 1. ЧИИ №2",
         "label_type": "ЧИИ",
         "start_time": 1998.1653330364002,
@@ -1028,7 +1663,7 @@
         "context": null
       },
       {
-        "id": "6bb2575f-bd42-4b27-9fb0-91fcff7fe546",
+        "id": "bc713805-3798-4698-b3c3-bff85937dc71",
         "name": "Период 1. ЧИИ №3",
         "label_type": "ЧИИ",
         "start_time": 2072.3329430509802,
@@ -1040,7 +1675,7 @@
         "context": null
       },
       {
-        "id": "7488b5f1-e359-423c-8c3c-ead4ca64a5aa",
+        "id": "331aab6b-08e8-4c89-9e4c-7a28fff4cb77",
         "name": "Период 1. ЧИИ №4",
         "label_type": "ЧИИ",
         "start_time": 2139.336852414126,
@@ -1052,7 +1687,7 @@
         "context": null
       },
       {
-        "id": "4a973b6f-763b-4650-a975-74374e6dbc19",
+        "id": "e240df39-9386-450b-af27-07494dc42432",
         "name": "Период 1. ЧИИ №5",
         "label_type": "ЧИИ",
         "start_time": 2173.2518583364435,
@@ -1064,7 +1699,7 @@
         "context": null
       },
       {
-        "id": "86fd17bd-b24b-42d0-90a2-a0e491291c74",
+        "id": "7480d3ea-e1c2-4232-9f46-a0913ccfa147",
         "name": "Период 1. ЧИИ №6",
         "label_type": "ЧИИ",
         "start_time": 2366.5323849744746,
@@ -1076,7 +1711,7 @@
         "context": null
       },
       {
-        "id": "cf7bcddc-ceb8-41cb-9806-11e144acde4c",
+        "id": "6b6d2409-890a-44bd-a818-0c28e9ce9b1e",
         "name": "Период 1. ЧИИ №7",
         "label_type": "ЧИИ",
         "start_time": 2547.953402258208,
@@ -1088,7 +1723,7 @@
         "context": null
       },
       {
-        "id": "620a86ff-f2e4-4667-b952-0bb6363ab52d",
+        "id": "236772f4-2a2e-4433-8448-cd95a5fa15de",
         "name": "Период 1. ЧИИ №8",
         "label_type": "ЧИИ",
         "start_time": 2630.5828009532165,
@@ -1100,7 +1735,7 @@
         "context": null
       },
       {
-        "id": "57a3bb64-e05b-4fed-9eb8-9347c304303e",
+        "id": "cccae2f2-fdd5-4f7a-b5f5-cd5c555f4e17",
         "name": "Период 1. ЧИИ №9",
         "label_type": "ЧИИ",
         "start_time": 3058.269773604518,
@@ -1112,7 +1747,7 @@
         "context": null
       },
       {
-        "id": "ddf58a47-7494-4642-92eb-efd147c5b7eb",
+        "id": "f79ca635-d75f-4172-9a85-a6873390a382",
         "name": "Период 1. ЧИИ №10",
         "label_type": "ЧИИ",
         "start_time": 3165.184590683551,
@@ -1124,7 +1759,7 @@
         "context": null
       },
       {
-        "id": "0b70f08c-7e97-4668-aa05-e12a12d4f912",
+        "id": "8e06cd89-e44e-4bf7-b9de-400e0ee43e6e",
         "name": "Период 2. ЧИИ №1",
         "label_type": "ЧИИ",
         "start_time": 4536.2489602565765,
@@ -1136,11 +1771,11 @@
         "context": null
       },
       {
-        "id": "5208f041-241b-48ef-99b4-4ce17a3db6d5",
+        "id": "33ae153f-d65c-44b5-8f0d-cc2306a2825a",
         "name": "Период 2. ЧИИ №2",
         "label_type": "ЧИИ",
-        "start_time": 4770.008683143683,
-        "end_time": 4811.495000594038,
+        "start_time": 4757.27021813828,
+        "end_time": 4770.008683143683,
         "source_label_ids": [
           "6bd449e1-af07-4fdd-9531-eed9a3f02088",
           "998806eb-d4d7-4d7b-9424-9031b66dcdff"
@@ -1148,11 +1783,11 @@
         "context": null
       },
       {
-        "id": "f71a44a7-39a1-4647-aea5-0f08e1d84f04",
+        "id": "41f4ab2a-0863-4f45-8e74-232125d36f5b",
         "name": "Период 2. ЧИИ №3",
         "label_type": "ЧИИ",
-        "start_time": 5122.952874035106,
-        "end_time": 5160.237766449556,
+        "start_time": 4811.495000594038,
+        "end_time": 4823.454750857454,
         "source_label_ids": [
           "6bd449e1-af07-4fdd-9531-eed9a3f02088",
           "998806eb-d4d7-4d7b-9424-9031b66dcdff"
@@ -1160,11 +1795,11 @@
         "context": null
       },
       {
-        "id": "b1c639d3-8122-460c-aef8-0b146f6bdf57",
+        "id": "2fde2b88-9fa3-4546-844e-cecdebb965cc",
         "name": "Период 2. ЧИИ №4",
         "label_type": "ЧИИ",
-        "start_time": 5348.1709569409495,
-        "end_time": 5371.278239960592,
+        "start_time": 4840.960444293123,
+        "end_time": 4924.063932976824,
         "source_label_ids": [
           "6bd449e1-af07-4fdd-9531-eed9a3f02088",
           "998806eb-d4d7-4d7b-9424-9031b66dcdff"
@@ -1172,10 +1807,70 @@
         "context": null
       },
       {
-        "id": "815d5fce-13aa-4171-8aa9-fe00437133e6",
+        "id": "560a8ba4-b645-47c0-8dea-a8f1a8499a23",
         "name": "Период 2. ЧИИ №5",
         "label_type": "ЧИИ",
-        "start_time": 5550.725768427368,
+        "start_time": 4954.063932976824,
+        "end_time": 5122.952874035106,
+        "source_label_ids": [
+          "6bd449e1-af07-4fdd-9531-eed9a3f02088",
+          "998806eb-d4d7-4d7b-9424-9031b66dcdff"
+        ],
+        "context": null
+      },
+      {
+        "id": "e400c7f1-38f7-4095-80e0-e7f6ce634924",
+        "name": "Период 2. ЧИИ №6",
+        "label_type": "ЧИИ",
+        "start_time": 5160.237766449556,
+        "end_time": 5348.1709569409495,
+        "source_label_ids": [
+          "6bd449e1-af07-4fdd-9531-eed9a3f02088",
+          "998806eb-d4d7-4d7b-9424-9031b66dcdff"
+        ],
+        "context": null
+      },
+      {
+        "id": "ab8d0d6d-ebef-4613-a4d4-f29e606576be",
+        "name": "Период 2. ЧИИ №7",
+        "label_type": "ЧИИ",
+        "start_time": 5371.278239960592,
+        "end_time": 5550.725768427368,
+        "source_label_ids": [
+          "6bd449e1-af07-4fdd-9531-eed9a3f02088",
+          "998806eb-d4d7-4d7b-9424-9031b66dcdff"
+        ],
+        "context": null
+      },
+      {
+        "id": "9f9c408b-4244-467c-bba5-db3abc1bfe7f",
+        "name": "Период 2. ЧИИ №8",
+        "label_type": "ЧИИ",
+        "start_time": 5577.493346749869,
+        "end_time": 5918.691217915022,
+        "source_label_ids": [
+          "6bd449e1-af07-4fdd-9531-eed9a3f02088",
+          "998806eb-d4d7-4d7b-9424-9031b66dcdff"
+        ],
+        "context": null
+      },
+      {
+        "id": "8ce1c602-23ff-4262-88ce-529034f69da7",
+        "name": "Период 2. ЧИИ №9",
+        "label_type": "ЧИИ",
+        "start_time": 5962.319711065473,
+        "end_time": 6090.691090059456,
+        "source_label_ids": [
+          "6bd449e1-af07-4fdd-9531-eed9a3f02088",
+          "998806eb-d4d7-4d7b-9424-9031b66dcdff"
+        ],
+        "context": null
+      },
+      {
+        "id": "c8f9a093-6918-49e7-915d-5ac02e683229",
+        "name": "Период 2. ЧИИ №10",
+        "label_type": "ЧИИ",
+        "start_time": 6124.359463453468,
         "end_time": 6166.692275328042,
         "source_label_ids": [
           "6bd449e1-af07-4fdd-9531-eed9a3f02088",
@@ -1184,11 +1879,11 @@
         "context": null
       },
       {
-        "id": "6791adb1-6038-4d92-9aed-97071102470d",
+        "id": "44d87f07-37bc-483c-bf2b-0bc91e185194",
         "name": "Период 3. ЧИИ №1",
         "label_type": "ЧИИ",
         "start_time": 6405.327563328149,
-        "end_time": 6618.590266140065,
+        "end_time": 6572.619472198793,
         "source_label_ids": [
           "924d4a5f-1698-4d6a-82c4-814364f7f064",
           "e01bf047-9a2b-4657-b2ff-1431d9c6aa42"
@@ -1196,11 +1891,11 @@
         "context": null
       },
       {
-        "id": "c0f152e1-ba48-4a6d-b12e-786af737ca1a",
+        "id": "84722450-23c8-42fa-9224-c8dece69f2db",
         "name": "Период 3. ЧИИ №2",
         "label_type": "ЧИИ",
-        "start_time": 6659.843430663372,
-        "end_time": 6682.512383849861,
+        "start_time": 6618.590266140065,
+        "end_time": 6659.843430663372,
         "source_label_ids": [
           "924d4a5f-1698-4d6a-82c4-814364f7f064",
           "e01bf047-9a2b-4657-b2ff-1431d9c6aa42"
@@ -1208,11 +1903,11 @@
         "context": null
       },
       {
-        "id": "3eef182f-a649-4634-97d3-ceab47a79184",
+        "id": "48e02f14-e3b5-4257-8e1f-0923ae8132dd",
         "name": "Период 3. ЧИИ №3",
         "label_type": "ЧИИ",
-        "start_time": 7306.7345858536655,
-        "end_time": 7345.741116687195,
+        "start_time": 6682.512383849861,
+        "end_time": 6965.255381229988,
         "source_label_ids": [
           "924d4a5f-1698-4d6a-82c4-814364f7f064",
           "e01bf047-9a2b-4657-b2ff-1431d9c6aa42"
@@ -1220,11 +1915,11 @@
         "context": null
       },
       {
-        "id": "60ca978a-4bf7-4c05-9455-9fd109caf98e",
+        "id": "08c1864d-4523-4da6-ab48-7f94debb4703",
         "name": "Период 3. ЧИИ №4",
         "label_type": "ЧИИ",
-        "start_time": 7433.064601463512,
-        "end_time": 7471.884939975549,
+        "start_time": 7011.3519254957355,
+        "end_time": 7058.35090291845,
         "source_label_ids": [
           "924d4a5f-1698-4d6a-82c4-814364f7f064",
           "e01bf047-9a2b-4657-b2ff-1431d9c6aa42"
@@ -1232,11 +1927,11 @@
         "context": null
       },
       {
-        "id": "bd187c1b-a539-4445-89e4-6c6a798e052c",
+        "id": "fb41de34-a2ae-4124-bcb1-fd5b608482d6",
         "name": "Период 3. ЧИИ №5",
         "label_type": "ЧИИ",
-        "start_time": 7646.130397088718,
-        "end_time": 7681.853150732108,
+        "start_time": 7084.35090291845,
+        "end_time": 7306.7345858536655,
         "source_label_ids": [
           "924d4a5f-1698-4d6a-82c4-814364f7f064",
           "e01bf047-9a2b-4657-b2ff-1431d9c6aa42"
@@ -1244,11 +1939,11 @@
         "context": null
       },
       {
-        "id": "6ee139d6-635d-4308-bbbd-3d1521b19edc",
+        "id": "feaed17b-a329-45b5-a968-3fcb78964b10",
         "name": "Период 3. ЧИИ №6",
         "label_type": "ЧИИ",
-        "start_time": 7855.615764827989,
-        "end_time": 7898.251339115977,
+        "start_time": 7345.741116687195,
+        "end_time": 7389.970649405854,
         "source_label_ids": [
           "924d4a5f-1698-4d6a-82c4-814364f7f064",
           "e01bf047-9a2b-4657-b2ff-1431d9c6aa42"
@@ -1256,10 +1951,94 @@
         "context": null
       },
       {
-        "id": "3ebda9ec-2a4b-41f7-9565-d92116b31c7a",
+        "id": "4870af51-cd2a-4e40-a65b-48339d7e4cb6",
         "name": "Период 3. ЧИИ №7",
         "label_type": "ЧИИ",
-        "start_time": 7938.011918053388,
+        "start_time": 7424.704135581391,
+        "end_time": 7433.064601463512,
+        "source_label_ids": [
+          "924d4a5f-1698-4d6a-82c4-814364f7f064",
+          "e01bf047-9a2b-4657-b2ff-1431d9c6aa42"
+        ],
+        "context": null
+      },
+      {
+        "id": "d0a59831-b66e-4fa0-88e8-0317a6d0a932",
+        "name": "Период 3. ЧИИ №8",
+        "label_type": "ЧИИ",
+        "start_time": 7471.884939975549,
+        "end_time": 7522.460294822613,
+        "source_label_ids": [
+          "924d4a5f-1698-4d6a-82c4-814364f7f064",
+          "e01bf047-9a2b-4657-b2ff-1431d9c6aa42"
+        ],
+        "context": null
+      },
+      {
+        "id": "c254ad53-223e-4dde-8cbd-60b18882649a",
+        "name": "Период 3. ЧИИ №9",
+        "label_type": "ЧИИ",
+        "start_time": 7556.240922311703,
+        "end_time": 7646.130397088718,
+        "source_label_ids": [
+          "924d4a5f-1698-4d6a-82c4-814364f7f064",
+          "e01bf047-9a2b-4657-b2ff-1431d9c6aa42"
+        ],
+        "context": null
+      },
+      {
+        "id": "0d019153-04bc-48e3-9807-b679cc81a9c1",
+        "name": "Период 3. ЧИИ №10",
+        "label_type": "ЧИИ",
+        "start_time": 7681.853150732108,
+        "end_time": 7750.057819013132,
+        "source_label_ids": [
+          "924d4a5f-1698-4d6a-82c4-814364f7f064",
+          "e01bf047-9a2b-4657-b2ff-1431d9c6aa42"
+        ],
+        "context": null
+      },
+      {
+        "id": "42f8c111-df70-42b9-9632-c73d47657227",
+        "name": "Период 3. ЧИИ №11",
+        "label_type": "ЧИИ",
+        "start_time": 7788.865082864298,
+        "end_time": 7855.615764827989,
+        "source_label_ids": [
+          "924d4a5f-1698-4d6a-82c4-814364f7f064",
+          "e01bf047-9a2b-4657-b2ff-1431d9c6aa42"
+        ],
+        "context": null
+      },
+      {
+        "id": "0f4b646b-5db3-4c89-bffd-c7dbf36f0d5e",
+        "name": "Период 3. ЧИИ №12",
+        "label_type": "ЧИИ",
+        "start_time": 7898.251339115977,
+        "end_time": 7938.011918053388,
+        "source_label_ids": [
+          "924d4a5f-1698-4d6a-82c4-814364f7f064",
+          "e01bf047-9a2b-4657-b2ff-1431d9c6aa42"
+        ],
+        "context": null
+      },
+      {
+        "id": "3ccf7ee5-993c-4056-8540-94227cbb2362",
+        "name": "Период 3. ЧИИ №13",
+        "label_type": "ЧИИ",
+        "start_time": 7975.958172472773,
+        "end_time": 8022.167595008743,
+        "source_label_ids": [
+          "924d4a5f-1698-4d6a-82c4-814364f7f064",
+          "e01bf047-9a2b-4657-b2ff-1431d9c6aa42"
+        ],
+        "context": null
+      },
+      {
+        "id": "a4444785-3730-4e0a-99ab-a67dad49257f",
+        "name": "Период 3. ЧИИ №14",
+        "label_type": "ЧИИ",
+        "start_time": 8082.065596727272,
         "end_time": 8315.990014118554,
         "source_label_ids": [
           "924d4a5f-1698-4d6a-82c4-814364f7f064",
@@ -1268,7 +2047,7 @@
         "context": null
       },
       {
-        "id": "fb97f741-ad15-47bb-aec9-4c7b23b0f5d2",
+        "id": "a4ebe47d-da5b-4f24-bdf8-a85d1e6b942f",
         "name": "0:0",
         "label_type": "Счёт",
         "start_time": 1592.4320085048676,
@@ -1277,7 +2056,7 @@
         "context": null
       },
       {
-        "id": "c84b6bb4-3eb4-4046-8988-86e35fa667ea",
+        "id": "b2f38fa8-dda8-40de-9a44-3295439c102a",
         "name": "0:1",
         "label_type": "Счёт",
         "start_time": 2583.310981155682,
@@ -1286,7 +2065,7 @@
         "context": null
       },
       {
-        "id": "202779f5-6957-4bf6-8bc3-2230dc9887da",
+        "id": "f2bf3942-5597-45fe-9d07-ec3ff7e47fab",
         "name": "0:2",
         "label_type": "Счёт",
         "start_time": 3124.1746770640666,
@@ -1295,7 +2074,7 @@
         "context": null
       },
       {
-        "id": "1de42b2c-7a09-498e-9b5a-ebf46b5c6379",
+        "id": "09b86448-ffdc-48cb-bf12-246104f9399f",
         "name": "0:2",
         "label_type": "Счёт",
         "start_time": 4536.2489602565765,
@@ -1304,7 +2083,7 @@
         "context": null
       },
       {
-        "id": "bc4ff16a-0d44-4d3a-bb87-2fa908eb14ab",
+        "id": "ed7deb8b-c413-4c7d-8bf1-99ccbb5feb51",
         "name": "1:2",
         "label_type": "Счёт",
         "start_time": 4770.008683143683,
@@ -1313,7 +2092,7 @@
         "context": null
       },
       {
-        "id": "3192c1eb-49ad-4704-8a3f-b15c4961e2dc",
+        "id": "a71fbeaf-f1fc-4dc8-a52f-57cac2978bd2",
         "name": "1:2",
         "label_type": "Счёт",
         "start_time": 6405.327563328149,
@@ -1322,7 +2101,7 @@
         "context": null
       },
       {
-        "id": "fead8c35-f53e-4115-a590-1395b561c4da",
+        "id": "ee3e76d4-da5c-47c0-86a1-f3ec90aec921",
         "name": "1:3",
         "label_type": "Счёт",
         "start_time": 6572.619472198793,
@@ -1331,7 +2110,7 @@
         "context": null
       },
       {
-        "id": "60e48e9b-7404-43a0-bef6-ca69b1e07695",
+        "id": "3d29f37a-fa04-454e-9eaa-2a00b6bf8a55",
         "name": "2:3",
         "label_type": "Счёт",
         "start_time": 7306.7345858536655,
@@ -1340,7 +2119,7 @@
         "context": null
       },
       {
-        "id": "7fbfb946-7a0e-4f85-8e0b-1ece1dc2a9c1",
+        "id": "69a79bdb-1547-4988-b45c-c45c77c93183",
         "name": "2:4",
         "label_type": "Счёт",
         "start_time": 7433.064601463512,
@@ -1349,7 +2128,7 @@
         "context": null
       },
       {
-        "id": "7021ee7f-d058-48af-a091-f2fb0ce1dfca",
+        "id": "f8ef3694-a879-4a5e-9464-b819767a1091",
         "name": "2:5",
         "label_type": "Счёт",
         "start_time": 7646.130397088718,
@@ -1358,7 +2137,7 @@
         "context": null
       },
       {
-        "id": "1c5fa227-39a1-4161-ac7b-5dc57ac4e5e7",
+        "id": "005cee51-7e23-42ce-a050-f2e2bfc00166",
         "name": "3:5",
         "label_type": "Счёт",
         "start_time": 7855.615764827989,
@@ -1367,7 +2146,7 @@
         "context": null
       },
       {
-        "id": "b9337beb-1ed6-4781-b7f3-d76cad6d9dfb",
+        "id": "78a2a45e-a052-4d1e-961d-1656e4021c5d",
         "name": "3:6",
         "label_type": "Счёт",
         "start_time": 7938.011918053388,
@@ -1376,7 +2155,7 @@
         "context": null
       },
       {
-        "id": "67e21994-ff7e-4cae-b58e-16d12aa6b802",
+        "id": "b87573db-a9db-48df-852e-72dc6dbf14e8",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 1592.4320085048676,
@@ -1387,7 +2166,7 @@
         }
       },
       {
-        "id": "570afc30-4912-4998-8b2a-2b282149378a",
+        "id": "030a4258-a91e-49bf-8347-82dfc803d383",
         "name": "5 на 4",
         "label_type": "game_mode",
         "start_time": 2036.7708926677708,
@@ -1405,7 +2184,7 @@
         }
       },
       {
-        "id": "76c92b6a-a24e-498b-9a44-8a0a6627639e",
+        "id": "97765fd9-2d67-4c3a-a5cf-adb97b378646",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 2240.5991836614558,
@@ -1416,7 +2195,7 @@
         }
       },
       {
-        "id": "fd63922f-c2c4-4605-9b00-48f154d091bd",
+        "id": "8f50ae33-5c20-4583-aa51-ed829c766f4e",
         "name": "4 на 5",
         "label_type": "game_mode",
         "start_time": 2728.7453955432234,
@@ -1434,7 +2213,7 @@
         }
       },
       {
-        "id": "e9b4c770-c076-4f1e-ae8b-cfb77bb320a1",
+        "id": "f1a99719-5b7e-4c5a-a1a3-e10bcd3fba00",
         "name": "4 на 4",
         "label_type": "game_mode",
         "start_time": 3337.0129901597466,
@@ -1458,7 +2237,7 @@
         }
       },
       {
-        "id": "d3b5afae-6a4b-423a-8c3c-a8c15e0ebc57",
+        "id": "5a2a1597-46af-4bb1-a1bb-f793cddc4886",
         "name": "5 на 4",
         "label_type": "game_mode",
         "start_time": 3508.8496335513705,
@@ -1476,7 +2255,7 @@
         }
       },
       {
-        "id": "fdc64c5f-1516-4146-bf1d-81b33a0b62c9",
+        "id": "6b726afd-b31e-4134-8add-525c7f9f2667",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 3522.941008192681,
@@ -1487,25 +2266,313 @@
         }
       },
       {
-        "id": "5cd2f1a1-995f-44c9-ad46-18788dbe3331",
+        "id": "185e755f-580a-4a6e-8b66-cb2810423161",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 4536.2489602565765,
-        "end_time": 6166.692275328042,
+        "end_time": 4660.36066865921,
         "source_label_ids": [],
         "context": {
           "active_penalties": []
         }
       },
       {
-        "id": "c8baa91b-897c-4298-a574-ae51b37494cc",
+        "id": "30c8b28a-6335-4886-a6aa-dc5835706949",
+        "name": "4 на 4",
+        "label_type": "game_mode",
+        "start_time": 4660.36066865921,
+        "end_time": 4924.063932976824,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": [
+            {
+              "team": "f-team",
+              "player_name": "Козлов И.",
+              "player_id_fhm": "12515",
+              "violation_type": "Грубость"
+            },
+            {
+              "team": "s-team",
+              "player_name": "Широков Т.",
+              "player_id_fhm": "6985",
+              "violation_type": "Блокировка"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ac615185-76a7-4ea7-bfa6-921aa896bc8d",
+        "name": "3 на 4",
+        "label_type": "game_mode",
+        "start_time": 4924.063932976824,
+        "end_time": 4966.563932976824,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": [
+            {
+              "team": "f-team",
+              "player_name": "Козлов И.",
+              "player_id_fhm": "12515",
+              "violation_type": "Грубость"
+            },
+            {
+              "team": "s-team",
+              "player_name": "Широков Т.",
+              "player_id_fhm": "6985",
+              "violation_type": "Блокировка"
+            },
+            {
+              "team": "f-team",
+              "player_name": "Судьин М.",
+              "player_id_fhm": "7499",
+              "violation_type": "Подножка"
+            }
+          ]
+        }
+      },
+      {
+        "id": "144b07b3-f2c5-472b-a4ec-b2a60f1eab60",
+        "name": "4 на 5",
+        "label_type": "game_mode",
+        "start_time": 4966.563932976824,
+        "end_time": 5075.040887267618,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": [
+            {
+              "team": "f-team",
+              "player_name": "Судьин М.",
+              "player_id_fhm": "7499",
+              "violation_type": "Подножка"
+            }
+          ]
+        }
+      },
+      {
+        "id": "bccd52cf-7864-41c0-ba5a-7834cfe553c4",
         "name": "5 на 5",
         "label_type": "game_mode",
-        "start_time": 6405.327563328149,
-        "end_time": 8315.990014118554,
+        "start_time": 5075.040887267618,
+        "end_time": 5918.691217915022,
         "source_label_ids": [],
         "context": {
           "active_penalties": []
+        }
+      },
+      {
+        "id": "a1460614-7434-405d-9fa4-943728bf2011",
+        "name": "5 на 4",
+        "label_type": "game_mode",
+        "start_time": 5918.691217915022,
+        "end_time": 6083.319711065473,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": [
+            {
+              "team": "s-team",
+              "player_name": "Филаретов К.",
+              "player_id_fhm": "6983",
+              "violation_type": "Грубость"
+            }
+          ]
+        }
+      },
+      {
+        "id": "8d7d8a94-4cd2-4cc8-9151-337cffab17d1",
+        "name": "5 на 5",
+        "label_type": "game_mode",
+        "start_time": 6083.319711065473,
+        "end_time": 6090.691090059456,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": []
+        }
+      },
+      {
+        "id": "161a1377-b8a5-424d-9890-65e7c523a748",
+        "name": "5 на 4",
+        "label_type": "game_mode",
+        "start_time": 6090.691090059456,
+        "end_time": 6166.692275328042,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": [
+            {
+              "team": "s-team",
+              "player_name": "Левчук А.",
+              "player_id_fhm": "5518",
+              "violation_type": "Подножка"
+            }
+          ]
+        }
+      },
+      {
+        "id": "989d8808-f62d-4c9e-8d52-e3f938d6fb46",
+        "name": "5 на 4",
+        "label_type": "game_mode",
+        "start_time": 6405.327563328149,
+        "end_time": 6528.188714308145,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": [
+            {
+              "team": "s-team",
+              "player_name": "Левчук А.",
+              "player_id_fhm": "5518",
+              "violation_type": "Подножка"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ab1d514f-f1b6-46e4-8dc0-e93bb3279ce0",
+        "name": "5 на 5",
+        "label_type": "game_mode",
+        "start_time": 6528.188714308145,
+        "end_time": 6965.255381229988,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": []
+        }
+      },
+      {
+        "id": "004d6d1c-92a7-4a27-a9b5-9421b66a4982",
+        "name": "4 на 4",
+        "label_type": "game_mode",
+        "start_time": 6965.255381229988,
+        "end_time": 7157.35090291845,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": [
+            {
+              "team": "s-team",
+              "player_name": "Филаретов К.",
+              "player_id_fhm": "6983",
+              "violation_type": "Оскорбление судей и неспортивное поведение"
+            },
+            {
+              "team": "f-team",
+              "player_name": "Костин В.",
+              "player_id_fhm": "7485",
+              "violation_type": "Неправильная атака"
+            }
+          ]
+        }
+      },
+      {
+        "id": "37fc7ef1-9516-4a3a-9a79-1a7a9e1d7b1a",
+        "name": "5 на 5",
+        "label_type": "game_mode",
+        "start_time": 7157.35090291845,
+        "end_time": 7389.970649405854,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": []
+        }
+      },
+      {
+        "id": "90fa674d-d6f5-4daf-ad3e-2e28342d4ead",
+        "name": "4 на 5",
+        "label_type": "game_mode",
+        "start_time": 7389.970649405854,
+        "end_time": 7433.064601463512,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": [
+            {
+              "team": "f-team",
+              "player_name": "Фендриков С.",
+              "player_id_fhm": "8405",
+              "violation_type": "Подножка"
+            }
+          ]
+        }
+      },
+      {
+        "id": "26650225-fcde-423d-bff6-dac00d18a6e0",
+        "name": "5 на 5",
+        "label_type": "game_mode",
+        "start_time": 7433.064601463512,
+        "end_time": 7522.460294822613,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": []
+        }
+      },
+      {
+        "id": "ea6d4796-df29-4e59-9c67-33eaee573277",
+        "name": "4 на 5",
+        "label_type": "game_mode",
+        "start_time": 7522.460294822613,
+        "end_time": 7646.130397088718,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": [
+            {
+              "team": "f-team",
+              "player_name": "Вдовухин Н.",
+              "player_id_fhm": "7475",
+              "violation_type": "Толчок на борт"
+            }
+          ]
+        }
+      },
+      {
+        "id": "6fd8a406-a518-4fde-b5ae-828a391a1430",
+        "name": "5 на 5",
+        "label_type": "game_mode",
+        "start_time": 7646.130397088718,
+        "end_time": 7750.057819013132,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": []
+        }
+      },
+      {
+        "id": "6edece13-e487-4cc2-b11f-00cfd7e553e5",
+        "name": "5 на 4",
+        "label_type": "game_mode",
+        "start_time": 7750.057819013132,
+        "end_time": 7855.615764827989,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": [
+            {
+              "team": "s-team",
+              "player_name": "Шинкин Д.",
+              "player_id_fhm": "6984",
+              "violation_type": "Подножка"
+            }
+          ]
+        }
+      },
+      {
+        "id": "d3b24274-c5d0-4345-9e49-c50435ce8448",
+        "name": "5 на 5",
+        "label_type": "game_mode",
+        "start_time": 7855.615764827989,
+        "end_time": 8022.167595008743,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": []
+        }
+      },
+      {
+        "id": "18abd932-e1ff-4345-a34e-b60eaa5979a3",
+        "name": "4 на 5",
+        "label_type": "game_mode",
+        "start_time": 8022.167595008743,
+        "end_time": 8315.990014118554,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": [
+            {
+              "team": "f-team",
+              "player_name": "Фендриков С.",
+              "player_id_fhm": "8405",
+              "violation_type": "Удар ногой"
+            }
+          ]
         }
       }
     ],
@@ -1824,7 +2891,7 @@
         "player_name": "Дауров А.",
         "player_id_fhm": "7480",
         "start_time_sec": 860,
-        "end_time_sec": 957,
+        "end_time_sec": 1160,
         "violation_type": "Толчок на борт"
       },
       {
@@ -1871,7 +2938,7 @@
         "player_name": "Широков Т.",
         "player_id_fhm": "6985",
         "start_time_sec": 1309,
-        "end_time_sec": 1314,
+        "end_time_sec": 1429,
         "violation_type": "Блокировка"
       },
       {
@@ -1988,8 +3055,8 @@
         "player_id_fhm": "9509",
         "f-pass": "Попков О.",
         "f-pass_id_fhm": "6979",
-        "s-pass": "N/A",
-        "s-pass_id_fhm": "N/A",
+        "s-pass": "Широков Т.",
+        "s-pass_id_fhm": "6985",
         "time_sec": 3237
       },
       {
@@ -2017,8 +3084,8 @@
         "team": "s-team",
         "player_name": "Карнаухов И.",
         "player_id_fhm": "4157",
-        "f-pass": "N/A",
-        "f-pass_id_fhm": "N/A",
+        "f-pass": "Филаретов К.",
+        "f-pass_id_fhm": "6983",
         "s-pass": "N/A",
         "s-pass_id_fhm": "N/A",
         "time_sec": 3402
