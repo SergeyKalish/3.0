@@ -2768,11 +2768,189 @@
         "context": {
           "period_name": "Период 1"
         }
+      },
+      {
+        "id": "357b65a7-e5c3-4f51-8847-cc42f39c12c0",
+        "label_type": "Смена",
+        "global_time": 3408.513836297237,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "346",
+              "name": "Крючков  Артем"
+            },
+            {
+              "id_fhm": "12121",
+              "name": "Крикунов Марк"
+            },
+            {
+              "id_fhm": "6978",
+              "name": "Пимкин Артём"
+            },
+            {
+              "id_fhm": "6983",
+              "name": "Филаретов Кирилл"
+            },
+            {
+              "id_fhm": "6984",
+              "name": "Шинкин Дмитрий"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "3e15473d-baa1-401b-a120-154a7df6435e",
+        "label_type": "Пауза",
+        "global_time": 3451.1251639453976,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "cec3002d-f85c-4e68-9ebf-b3cb09e140a7",
+        "label_type": "Пауза",
+        "global_time": 3478.2934275714956,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "47133ce7-f110-4d5a-a0ee-311291284fc1",
+        "label_type": "Смена",
+        "global_time": 3478.2934275714956,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "346",
+              "name": "Крючков  Артем"
+            },
+            {
+              "id_fhm": "9923",
+              "name": "Гончаров Марк"
+            },
+            {
+              "id_fhm": "6972",
+              "name": "Митин Павел"
+            },
+            {
+              "id_fhm": "5770",
+              "name": "Паршин Игорь"
+            },
+            {
+              "id_fhm": "6980",
+              "name": "Рахматуллин Тамерлан"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "312cedce-b8c6-470b-899d-f1c051259b17",
+        "label_type": "Смена",
+        "global_time": 3523.1164644805986,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "346",
+              "name": "Крючков  Артем"
+            },
+            {
+              "id_fhm": "9923",
+              "name": "Гончаров Марк"
+            },
+            {
+              "id_fhm": "4157",
+              "name": "Карнаухов Иван"
+            },
+            {
+              "id_fhm": "6972",
+              "name": "Митин Павел"
+            },
+            {
+              "id_fhm": "5770",
+              "name": "Паршин Игорь"
+            },
+            {
+              "id_fhm": "6980",
+              "name": "Рахматуллин Тамерлан"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "b2dfe516-0578-4d6a-a122-c0e748e2569d",
+        "label_type": "Смена",
+        "global_time": 3532.3201949207373,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "346",
+              "name": "Крючков  Артем"
+            },
+            {
+              "id_fhm": "8962",
+              "name": "Арнаут Иван"
+            },
+            {
+              "id_fhm": "4157",
+              "name": "Карнаухов Иван"
+            },
+            {
+              "id_fhm": "6972",
+              "name": "Митин Павел"
+            },
+            {
+              "id_fhm": "5770",
+              "name": "Паршин Игорь"
+            },
+            {
+              "id_fhm": "6980",
+              "name": "Рахматуллин Тамерлан"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "2beed633-5a24-4046-837f-934ff0ad98af",
+        "label_type": "Смена",
+        "global_time": 3533.611303290564,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "346",
+              "name": "Крючков  Артем"
+            },
+            {
+              "id_fhm": "8962",
+              "name": "Арнаут Иван"
+            },
+            {
+              "id_fhm": "4157",
+              "name": "Карнаухов Иван"
+            },
+            {
+              "id_fhm": "5518",
+              "name": "Левчук Алексей"
+            },
+            {
+              "id_fhm": "6972",
+              "name": "Митин Павел"
+            },
+            {
+              "id_fhm": "6980",
+              "name": "Рахматуллин Тамерлан"
+            }
+          ],
+          "period_name": "Период 1"
+        }
       }
     ],
     "calculated_ranges": [
       {
-        "id": "e60e39b8-2f3e-44b6-beb8-4a114a817d8e",
+        "id": "28eee8c0-744c-434a-a8e7-fceb4233d9d1",
         "name": "Всё видео",
         "label_type": "Всё видео",
         "start_time": 0.0,
@@ -2781,7 +2959,7 @@
         "context": null
       },
       {
-        "id": "761a0b43-286d-4cf0-a9e1-bd2c7977e350",
+        "id": "4a4e8016-271e-454c-9716-6b0a668cee3d",
         "name": "Удаление Буторин К. (Подножка)",
         "label_type": "Удаление",
         "start_time": 2036.7708926677708,
@@ -2798,7 +2976,7 @@
         }
       },
       {
-        "id": "2be0a840-ab03-44a1-ac24-b3da87f15528",
+        "id": "1030ab3c-bd1d-4743-ae23-d302de7618d8",
         "name": "Удаление Дауров А. (Толчок на борт)",
         "label_type": "Удаление",
         "start_time": 2728.7453955432234,
@@ -2815,7 +2993,7 @@
         }
       },
       {
-        "id": "a6e843e0-6fda-44f9-874e-bb3ab54e4368",
+        "id": "cbe87b5d-36be-4097-b89c-8841905a38f1",
         "name": "Удаление Орлов А. (Удар клюшкой)",
         "label_type": "Удаление",
         "start_time": 3337.0129901597466,
@@ -2832,7 +3010,7 @@
         }
       },
       {
-        "id": "fbbc25de-602e-4a9a-8ff2-b96da23ba054",
+        "id": "e14b4774-b11e-48d0-84f0-1bd81bd13f86",
         "name": "Удаление Козлов И. (Грубость)",
         "label_type": "Удаление",
         "start_time": 4660.36066865921,
@@ -2849,7 +3027,7 @@
         }
       },
       {
-        "id": "ad7c9906-e207-4eab-bc69-32556aa55342",
+        "id": "29b5b9ba-9d76-4130-83ed-3ec11eb9e725",
         "name": "Удаление Судьин М. (Подножка)",
         "label_type": "Удаление",
         "start_time": 4924.063932976824,
@@ -2866,7 +3044,7 @@
         }
       },
       {
-        "id": "cc339b6e-48bb-41d4-9c32-4b7908f6c02f",
+        "id": "97808768-ca07-4049-aa7a-85741b749c82",
         "name": "Удаление Широков Т. (Блокировка)",
         "label_type": "Удаление",
         "start_time": 4660.36066865921,
@@ -2883,7 +3061,7 @@
         }
       },
       {
-        "id": "e4de18fb-37d5-4444-b03d-011ebaf3fea7",
+        "id": "a059090a-fc8b-4416-b66f-36eea911f42d",
         "name": "Удаление Филаретов К. (Грубость)",
         "label_type": "Удаление",
         "start_time": 5918.691217915022,
@@ -2900,7 +3078,7 @@
         }
       },
       {
-        "id": "c1fd5a2f-eaa9-4211-9b4e-21b9c0376902",
+        "id": "13de1ed3-81cb-4889-9b84-34a359971db3",
         "name": "Удаление Левчук А. (Подножка)",
         "label_type": "Удаление",
         "start_time": 6090.691090059456,
@@ -2917,7 +3095,7 @@
         }
       },
       {
-        "id": "612fd90f-9697-4eb7-825a-f87479980ac0",
+        "id": "27da788a-0cc2-4875-a48b-a4604882828a",
         "name": "Удаление Филаретов К. (Оскорбление судей и неспортивное поведение)",
         "label_type": "Удаление",
         "start_time": 6965.255381229988,
@@ -2934,7 +3112,7 @@
         }
       },
       {
-        "id": "d0f2ccea-a230-4c18-8241-7ae0e4288941",
+        "id": "a30f2b15-e057-457f-98de-282b1a7e3991",
         "name": "Удаление Костин В. (Неправильная атака)",
         "label_type": "Удаление",
         "start_time": 6965.255381229988,
@@ -2951,7 +3129,7 @@
         }
       },
       {
-        "id": "e14f5d3b-c6d0-4d3f-88b6-3b851a1abf6a",
+        "id": "2bf63c9f-5cb1-4522-8d51-da0d3d0da304",
         "name": "Удаление Фендриков С. (Подножка)",
         "label_type": "Удаление",
         "start_time": 7389.970649405854,
@@ -2968,7 +3146,7 @@
         }
       },
       {
-        "id": "c76e5a79-a83a-4c0a-8894-f6d061f28a2b",
+        "id": "74826ab2-2082-4ae7-b6f7-8da4930039fd",
         "name": "Удаление Вдовухин Н. (Толчок на борт)",
         "label_type": "Удаление",
         "start_time": 7522.460294822613,
@@ -2985,7 +3163,7 @@
         }
       },
       {
-        "id": "20ef3d9d-5b7e-43c1-92e6-07dba119c88c",
+        "id": "0ca60d77-53b1-4e18-9c35-c35e5a73ffc2",
         "name": "Удаление Шинкин Д. (Подножка)",
         "label_type": "Удаление",
         "start_time": 7750.057819013132,
@@ -3002,7 +3180,7 @@
         }
       },
       {
-        "id": "968dfc64-892c-4e29-a5c1-b8d1c5904fdc",
+        "id": "86441290-2c58-4af9-98ee-1201d0c02a40",
         "name": "Удаление Фендриков С. (Удар ногой)",
         "label_type": "Удаление",
         "start_time": 8022.167595008743,
@@ -3019,7 +3197,7 @@
         }
       },
       {
-        "id": "0a387876-b0bd-441c-aa7e-07f0b956de06",
+        "id": "d50cb782-f6a4-4d9f-903c-a2e30158552b",
         "name": "Период 1",
         "label_type": "Сегмент",
         "start_time": 1592.4320085048676,
@@ -3031,7 +3209,7 @@
         "context": null
       },
       {
-        "id": "382b6741-9cb1-4ab6-8177-03356a82bbca",
+        "id": "52a026df-d4eb-44af-a0aa-0b176170f532",
         "name": "Период 2",
         "label_type": "Сегмент",
         "start_time": 4536.2489602565765,
@@ -3043,7 +3221,7 @@
         "context": null
       },
       {
-        "id": "86869112-c210-44b1-88e0-e24e15cad962",
+        "id": "59a88270-7a53-47bb-b100-c71abb80afbe",
         "name": "Период 3",
         "label_type": "Сегмент",
         "start_time": 6405.327563328149,
@@ -3055,7 +3233,7 @@
         "context": null
       },
       {
-        "id": "f2dabd51-484e-4c87-ac25-f313a7a5cfcc",
+        "id": "1c15230b-8c6f-4fed-b060-ff6829400a78",
         "name": "Период 1. ЧИИ №1",
         "label_type": "ЧИИ",
         "start_time": 1592.4320085048676,
@@ -3067,7 +3245,7 @@
         "context": null
       },
       {
-        "id": "fbbd8e46-9ce7-4cd9-bcba-d2a4445922c2",
+        "id": "6e25e37e-030b-47af-a6be-7a2341e8d4dd",
         "name": "Период 1. ЧИИ №2",
         "label_type": "ЧИИ",
         "start_time": 1770.238290058233,
@@ -3079,7 +3257,7 @@
         "context": null
       },
       {
-        "id": "683bb8eb-1690-4a13-af01-3eaa73b01386",
+        "id": "fcaa876a-16d9-4487-b6ab-52c01f14d254",
         "name": "Период 1. ЧИИ №3",
         "label_type": "ЧИИ",
         "start_time": 1902.2468091312207,
@@ -3091,7 +3269,7 @@
         "context": null
       },
       {
-        "id": "14d9198d-c1ed-487f-a2dc-72c52a9c0f8b",
+        "id": "414dafec-489c-4551-b100-4f06cdd77831",
         "name": "Период 1. ЧИИ №4",
         "label_type": "ЧИИ",
         "start_time": 1967.5405422511853,
@@ -3103,7 +3281,7 @@
         "context": null
       },
       {
-        "id": "4917754b-ee9c-40d1-ae0b-c1637c763e87",
+        "id": "c8709b6e-6184-4b2d-92c2-08812b14caeb",
         "name": "Период 1. ЧИИ №5",
         "label_type": "ЧИИ",
         "start_time": 1998.1653330364002,
@@ -3115,7 +3293,7 @@
         "context": null
       },
       {
-        "id": "bae26846-54a8-4224-8d7b-269c1db696b7",
+        "id": "2d4e4cfd-935a-42ad-846a-93ce29d9803f",
         "name": "Период 1. ЧИИ №6",
         "label_type": "ЧИИ",
         "start_time": 2072.3329430509802,
@@ -3127,7 +3305,7 @@
         "context": null
       },
       {
-        "id": "5a568db0-5e28-4dac-99f1-100e2090c7c4",
+        "id": "d9b22099-486d-430d-ac60-76e070778114",
         "name": "Период 1. ЧИИ №7",
         "label_type": "ЧИИ",
         "start_time": 2139.336852414126,
@@ -3139,7 +3317,7 @@
         "context": null
       },
       {
-        "id": "8786b48b-be91-45fc-8ec4-f9639aa5c4d0",
+        "id": "d57c94cd-39ce-4abe-a5dd-a5b8222c820b",
         "name": "Период 1. ЧИИ №8",
         "label_type": "ЧИИ",
         "start_time": 2173.2518583364435,
@@ -3151,7 +3329,7 @@
         "context": null
       },
       {
-        "id": "1217def9-4390-4e92-a233-6722d7274d06",
+        "id": "816a3f8d-52dd-4b39-9b5d-c0b5334093c9",
         "name": "Период 1. ЧИИ №9",
         "label_type": "ЧИИ",
         "start_time": 2366.5323849744746,
@@ -3163,7 +3341,7 @@
         "context": null
       },
       {
-        "id": "ad01027d-d1e0-4c62-9355-d138de817419",
+        "id": "c8213a55-4a63-4a69-b954-e41226e0df59",
         "name": "Период 1. ЧИИ №10",
         "label_type": "ЧИИ",
         "start_time": 2547.953402258208,
@@ -3175,7 +3353,7 @@
         "context": null
       },
       {
-        "id": "c3a8b742-695d-484b-a84d-d97fbb40b87a",
+        "id": "3f4666be-e9bb-41e9-a7d9-1c299b923939",
         "name": "Период 1. ЧИИ №11",
         "label_type": "ЧИИ",
         "start_time": 2630.5828009532165,
@@ -3187,7 +3365,7 @@
         "context": null
       },
       {
-        "id": "d5508f32-e356-4251-af86-2c42ca6a63f4",
+        "id": "5ede8082-b49f-4328-8a8a-055126a4c17f",
         "name": "Период 1. ЧИИ №12",
         "label_type": "ЧИИ",
         "start_time": 3058.269773604518,
@@ -3199,7 +3377,7 @@
         "context": null
       },
       {
-        "id": "ae4be075-1424-465d-b995-f1d12d10c235",
+        "id": "202c58ff-e53a-4808-9d84-404b2d147568",
         "name": "Период 1. ЧИИ №13",
         "label_type": "ЧИИ",
         "start_time": 3165.184590683551,
@@ -3211,7 +3389,7 @@
         "context": null
       },
       {
-        "id": "db24b9dd-8b95-4d83-86a0-be0d677f8e09",
+        "id": "bcd6dad8-4483-41ad-9940-2819fff0cc9e",
         "name": "Период 1. ЧИИ №14",
         "label_type": "ЧИИ",
         "start_time": 3324.0385558706234,
@@ -3223,10 +3401,22 @@
         "context": null
       },
       {
-        "id": "72064903-50e2-4a0d-8e4f-74c084d90f2d",
+        "id": "5c061f76-bde9-42b6-b466-76047fe24b58",
         "name": "Период 1. ЧИИ №15",
         "label_type": "ЧИИ",
         "start_time": 3372.805473108049,
+        "end_time": 3451.1251639453976,
+        "source_label_ids": [
+          "e136d395-073d-4a37-b613-8924358bbfcf",
+          "4ee189c6-35bf-460b-84e2-24d647c74162"
+        ],
+        "context": null
+      },
+      {
+        "id": "58ba4213-6b38-409e-bce5-2607b68bb864",
+        "name": "Период 1. ЧИИ №16",
+        "label_type": "ЧИИ",
+        "start_time": 3478.2934275714956,
         "end_time": 3546.690960407257,
         "source_label_ids": [
           "e136d395-073d-4a37-b613-8924358bbfcf",
@@ -3235,7 +3425,7 @@
         "context": null
       },
       {
-        "id": "5b07d119-e620-47b6-93f8-95cca2dbd6fb",
+        "id": "631a8d2a-de74-41f1-a2e1-4a697ae2f92f",
         "name": "Период 2. ЧИИ №1",
         "label_type": "ЧИИ",
         "start_time": 4536.2489602565765,
@@ -3247,7 +3437,7 @@
         "context": null
       },
       {
-        "id": "ad85475a-8e8a-4db4-bba2-7ed917f80ac9",
+        "id": "30c10f7b-8503-48db-b850-3311e0441b8e",
         "name": "Период 2. ЧИИ №2",
         "label_type": "ЧИИ",
         "start_time": 4757.27021813828,
@@ -3259,7 +3449,7 @@
         "context": null
       },
       {
-        "id": "5235dd51-0a78-49bb-99c8-b26288643b54",
+        "id": "9a5e83b6-2fbb-4ea0-ba2e-cb91725b3640",
         "name": "Период 2. ЧИИ №3",
         "label_type": "ЧИИ",
         "start_time": 4811.495000594038,
@@ -3271,7 +3461,7 @@
         "context": null
       },
       {
-        "id": "b811f116-aaf0-4f63-a669-1bf79882ea8b",
+        "id": "388203f6-d3cb-4575-a042-43188d3f3d28",
         "name": "Период 2. ЧИИ №4",
         "label_type": "ЧИИ",
         "start_time": 4840.960444293123,
@@ -3283,7 +3473,7 @@
         "context": null
       },
       {
-        "id": "d8c0f8f6-01dc-4b85-80ca-cea0fc9846f3",
+        "id": "110c8331-e8c9-421d-af50-fa7fa986dc7c",
         "name": "Период 2. ЧИИ №5",
         "label_type": "ЧИИ",
         "start_time": 4954.063932976824,
@@ -3295,7 +3485,7 @@
         "context": null
       },
       {
-        "id": "5a3a3170-f20e-4bfc-b3e1-0051a14c135a",
+        "id": "038f1980-db9a-448b-9835-331336165655",
         "name": "Период 2. ЧИИ №6",
         "label_type": "ЧИИ",
         "start_time": 5160.237766449556,
@@ -3307,7 +3497,7 @@
         "context": null
       },
       {
-        "id": "629fd624-a6aa-4675-818a-4e0b727d1067",
+        "id": "ac63aed3-e44e-4a8e-b059-dfb0c633ece3",
         "name": "Период 2. ЧИИ №7",
         "label_type": "ЧИИ",
         "start_time": 5371.278239960592,
@@ -3319,7 +3509,7 @@
         "context": null
       },
       {
-        "id": "f35f1d69-1de3-4db2-9c59-47fb061ff02f",
+        "id": "22f0e450-eefc-4e59-bd4d-79a2f93111a6",
         "name": "Период 2. ЧИИ №8",
         "label_type": "ЧИИ",
         "start_time": 5577.493346749869,
@@ -3331,7 +3521,7 @@
         "context": null
       },
       {
-        "id": "9dccbb55-9aec-484c-88bd-ea5c2421353a",
+        "id": "2a897aec-68c2-4092-b315-d3676c87321f",
         "name": "Период 2. ЧИИ №9",
         "label_type": "ЧИИ",
         "start_time": 5962.319711065473,
@@ -3343,7 +3533,7 @@
         "context": null
       },
       {
-        "id": "36cb8733-30a3-4eef-b420-6857e84009b0",
+        "id": "76aa13b5-127f-4f26-b9d5-f5f24287b9dc",
         "name": "Период 2. ЧИИ №10",
         "label_type": "ЧИИ",
         "start_time": 6124.359463453468,
@@ -3355,7 +3545,7 @@
         "context": null
       },
       {
-        "id": "db6d9509-f3e7-449b-8f5c-df872d6adbe7",
+        "id": "b5583a2f-fc3b-4c00-9539-432715014d2e",
         "name": "Период 3. ЧИИ №1",
         "label_type": "ЧИИ",
         "start_time": 6405.327563328149,
@@ -3367,7 +3557,7 @@
         "context": null
       },
       {
-        "id": "9ee9f1c7-862a-4ec8-a2ef-fa5b745ea37e",
+        "id": "d761a488-46c5-4995-b054-15c99ab9f75f",
         "name": "Период 3. ЧИИ №2",
         "label_type": "ЧИИ",
         "start_time": 6618.590266140065,
@@ -3379,7 +3569,7 @@
         "context": null
       },
       {
-        "id": "87bf6ec8-64c3-4a6e-85d8-6ea6336df3ae",
+        "id": "6d750b97-1970-4a6e-9eb3-417cfa33c815",
         "name": "Период 3. ЧИИ №3",
         "label_type": "ЧИИ",
         "start_time": 6682.512383849861,
@@ -3391,7 +3581,7 @@
         "context": null
       },
       {
-        "id": "50302adb-c17b-4799-91b5-1cb12e55a4d0",
+        "id": "c2598e2e-a478-400a-932a-afe5a64b79ae",
         "name": "Период 3. ЧИИ №4",
         "label_type": "ЧИИ",
         "start_time": 7011.3519254957355,
@@ -3403,7 +3593,7 @@
         "context": null
       },
       {
-        "id": "1100e92d-1900-4027-b2b1-eceafbe73602",
+        "id": "3d148f36-f46f-48e0-b089-798449f9794a",
         "name": "Период 3. ЧИИ №5",
         "label_type": "ЧИИ",
         "start_time": 7084.35090291845,
@@ -3415,7 +3605,7 @@
         "context": null
       },
       {
-        "id": "c366b17a-3f1c-4eef-ab22-0a8addca8a70",
+        "id": "a4b4aed9-5364-436a-acfb-81b3ee6ba560",
         "name": "Период 3. ЧИИ №6",
         "label_type": "ЧИИ",
         "start_time": 7345.741116687195,
@@ -3427,7 +3617,7 @@
         "context": null
       },
       {
-        "id": "c696dc60-51d1-4dca-9a3d-dfe2b364f644",
+        "id": "0f6da5ac-591e-4c3d-b91b-9b8c44b105b1",
         "name": "Период 3. ЧИИ №7",
         "label_type": "ЧИИ",
         "start_time": 7424.704135581391,
@@ -3439,7 +3629,7 @@
         "context": null
       },
       {
-        "id": "e5d022e6-4f5b-41a9-888d-42e9ba4bb815",
+        "id": "2796b795-2107-4aa1-8652-36b050c80436",
         "name": "Период 3. ЧИИ №8",
         "label_type": "ЧИИ",
         "start_time": 7471.884939975549,
@@ -3451,7 +3641,7 @@
         "context": null
       },
       {
-        "id": "b63f80ee-99dd-47a7-b2a8-dc4915548252",
+        "id": "3975a39b-4e97-47a6-b2bc-0eabdd02855e",
         "name": "Период 3. ЧИИ №9",
         "label_type": "ЧИИ",
         "start_time": 7556.240922311703,
@@ -3463,7 +3653,7 @@
         "context": null
       },
       {
-        "id": "236a3a43-7a6e-4196-9e5b-467c3b95d6b6",
+        "id": "86dd140c-1b61-4a13-be6b-60019cd00f55",
         "name": "Период 3. ЧИИ №10",
         "label_type": "ЧИИ",
         "start_time": 7681.853150732108,
@@ -3475,7 +3665,7 @@
         "context": null
       },
       {
-        "id": "f6f9f404-dea9-4003-b91a-c73cd41a9b32",
+        "id": "321d3bbc-048f-449d-9253-227bbf6be685",
         "name": "Период 3. ЧИИ №11",
         "label_type": "ЧИИ",
         "start_time": 7788.865082864298,
@@ -3487,7 +3677,7 @@
         "context": null
       },
       {
-        "id": "f19e384d-7d5d-49aa-9ada-abbb73db76e7",
+        "id": "afe3815f-6ca4-4d53-b68c-36639c10126e",
         "name": "Период 3. ЧИИ №12",
         "label_type": "ЧИИ",
         "start_time": 7898.251339115977,
@@ -3499,7 +3689,7 @@
         "context": null
       },
       {
-        "id": "18d5e909-d3d8-47d9-8934-8754d5f0f5d7",
+        "id": "5c496648-7843-4c12-913c-82a81735fa46",
         "name": "Период 3. ЧИИ №13",
         "label_type": "ЧИИ",
         "start_time": 7975.958172472773,
@@ -3511,7 +3701,7 @@
         "context": null
       },
       {
-        "id": "b6a9a8f7-4abd-4693-8813-d2fbe5fd8777",
+        "id": "76fa61cb-6755-44ab-878e-61ce88a1b65d",
         "name": "Период 3. ЧИИ №14",
         "label_type": "ЧИИ",
         "start_time": 8082.065596727272,
@@ -3523,7 +3713,7 @@
         "context": null
       },
       {
-        "id": "605f3e89-dbb0-4904-8f3d-9633d74cf96d",
+        "id": "2924a891-fbe6-432e-87ee-1fc6eaba4303",
         "name": "0:0",
         "label_type": "Счёт",
         "start_time": 1592.4320085048676,
@@ -3532,7 +3722,7 @@
         "context": null
       },
       {
-        "id": "03bf4083-df87-4695-949c-2eab2820e177",
+        "id": "0ca00b93-d538-4d0e-81ea-ed32cb75dbce",
         "name": "0:1",
         "label_type": "Счёт",
         "start_time": 2583.310981155682,
@@ -3541,7 +3731,7 @@
         "context": null
       },
       {
-        "id": "837449e3-a302-49d4-98dd-6710cffc2140",
+        "id": "cb8ea36b-71c1-4e39-b3de-30c44d4ebcee",
         "name": "0:2",
         "label_type": "Счёт",
         "start_time": 3124.1746770640666,
@@ -3550,7 +3740,7 @@
         "context": null
       },
       {
-        "id": "03709837-a027-4faf-83c5-a48a15d97821",
+        "id": "d9d11e1d-d72e-46b8-8c7b-ce9074b7add5",
         "name": "0:2",
         "label_type": "Счёт",
         "start_time": 4536.2489602565765,
@@ -3559,7 +3749,7 @@
         "context": null
       },
       {
-        "id": "294f54d1-d06b-49ff-9d3e-a40845bd81a1",
+        "id": "9ee9ebfc-c486-4bc4-bd26-8643d4b83fd4",
         "name": "1:2",
         "label_type": "Счёт",
         "start_time": 4770.008683143683,
@@ -3568,7 +3758,7 @@
         "context": null
       },
       {
-        "id": "cc6096b7-07b2-402f-b281-89e6448e5368",
+        "id": "25b3f89a-2074-42ee-bfd1-8a8182e46c45",
         "name": "1:2",
         "label_type": "Счёт",
         "start_time": 6405.327563328149,
@@ -3577,7 +3767,7 @@
         "context": null
       },
       {
-        "id": "f4d9cd82-93b9-4d16-881e-99df89950e7e",
+        "id": "38e5be88-6744-4a09-9633-0dba0719a8dd",
         "name": "1:3",
         "label_type": "Счёт",
         "start_time": 6572.619472198793,
@@ -3586,7 +3776,7 @@
         "context": null
       },
       {
-        "id": "9ef29dcc-d8c5-4a87-87d4-9fa2c047aec9",
+        "id": "89d05895-0ab0-4c6d-a30e-2bb0c5018d6c",
         "name": "2:3",
         "label_type": "Счёт",
         "start_time": 7306.7345858536655,
@@ -3595,7 +3785,7 @@
         "context": null
       },
       {
-        "id": "f80189e6-1bb3-4f60-bc40-630f57cf34ff",
+        "id": "29682d15-9b16-489c-9ec4-9d8c7fad30fb",
         "name": "2:4",
         "label_type": "Счёт",
         "start_time": 7433.064601463512,
@@ -3604,7 +3794,7 @@
         "context": null
       },
       {
-        "id": "be38c463-6565-43ef-b09f-0c5ef0344189",
+        "id": "773fa8cb-5e79-42af-820d-e6624b39358f",
         "name": "2:5",
         "label_type": "Счёт",
         "start_time": 7646.130397088718,
@@ -3613,7 +3803,7 @@
         "context": null
       },
       {
-        "id": "71e01642-0e88-479f-bb0c-d781cea77bbc",
+        "id": "49865aa1-593e-4e8e-a552-b60bde75fb21",
         "name": "3:5",
         "label_type": "Счёт",
         "start_time": 7855.615764827989,
@@ -3622,7 +3812,7 @@
         "context": null
       },
       {
-        "id": "2ff7cfea-2fb1-45ab-9382-134baee85e80",
+        "id": "c3652dce-1ff5-45c4-8041-3a5a91cc98f8",
         "name": "3:6",
         "label_type": "Счёт",
         "start_time": 7938.011918053388,
@@ -3631,7 +3821,7 @@
         "context": null
       },
       {
-        "id": "a934cefc-6801-42e8-982c-71be8e10f689",
+        "id": "ffef00f6-4e74-4bb3-aed2-788c77d998c0",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 1592.4320085048676,
@@ -3642,7 +3832,7 @@
         }
       },
       {
-        "id": "dbd1bbf7-52d7-4794-8360-1cfce33d3af6",
+        "id": "f8267e75-d1a1-40b0-a30d-5200bc74335f",
         "name": "5 на 4",
         "label_type": "game_mode",
         "start_time": 2036.7708926677708,
@@ -3660,7 +3850,7 @@
         }
       },
       {
-        "id": "3743a2f4-5d25-4aeb-8fec-5331af7af3d0",
+        "id": "077207a6-d867-48e8-ae72-f79ab52788bf",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 2240.5991836614558,
@@ -3671,7 +3861,7 @@
         }
       },
       {
-        "id": "53be99d8-88e4-4de5-8e49-69442028084b",
+        "id": "1de4678d-582b-4cc1-a0e7-b7ba00172b67",
         "name": "4 на 5",
         "label_type": "game_mode",
         "start_time": 2728.7453955432234,
@@ -3689,7 +3879,7 @@
         }
       },
       {
-        "id": "84980661-6f59-4f48-972b-ed337adda18d",
+        "id": "a91888c2-ce1c-47b0-a72e-e51944fb3992",
         "name": "4 на 4",
         "label_type": "game_mode",
         "start_time": 3337.0129901597466,
@@ -3713,7 +3903,7 @@
         }
       },
       {
-        "id": "31337e9b-b882-4906-9109-01e838175b48",
+        "id": "16a8e815-50f8-4665-bc8f-b8f6ecbf308a",
         "name": "5 на 4",
         "label_type": "game_mode",
         "start_time": 3508.8496335513705,
@@ -3731,7 +3921,7 @@
         }
       },
       {
-        "id": "36e5a329-5e23-4270-968a-efefd99df9d0",
+        "id": "d48ac34b-9747-420b-860c-f6bef7e77018",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 3522.941008192681,
@@ -3742,7 +3932,7 @@
         }
       },
       {
-        "id": "08a05e6e-c5c4-4541-b87d-d6b22738c082",
+        "id": "f6714e8a-f491-4938-ac13-fe3f039c8675",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 4536.2489602565765,
@@ -3753,7 +3943,7 @@
         }
       },
       {
-        "id": "cf41d2c4-fc94-4b3f-9ea7-8bcfa2853a43",
+        "id": "54647074-171b-4018-96eb-b64b6103e9b4",
         "name": "4 на 4",
         "label_type": "game_mode",
         "start_time": 4660.36066865921,
@@ -3777,7 +3967,7 @@
         }
       },
       {
-        "id": "d4334aa2-d8d7-42db-aa3d-fc7c53064be7",
+        "id": "78e3d2fe-a10b-4055-b93b-31d4a0d5ba64",
         "name": "3 на 4",
         "label_type": "game_mode",
         "start_time": 4924.063932976824,
@@ -3807,7 +3997,7 @@
         }
       },
       {
-        "id": "9d0b6712-ff5c-41cb-9a4b-e5f3736dd90c",
+        "id": "6cb5c3d5-044d-4db3-9c6d-d6d146d9c546",
         "name": "4 на 5",
         "label_type": "game_mode",
         "start_time": 4966.563932976824,
@@ -3825,7 +4015,7 @@
         }
       },
       {
-        "id": "1e736cb1-b381-4ff5-909d-2929e905af5f",
+        "id": "94cdb5d8-01fa-4d8a-910f-4ac90e621c0c",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 5075.040887267618,
@@ -3836,7 +4026,7 @@
         }
       },
       {
-        "id": "e32547c2-9c7f-4c07-9eca-2e8accbb4cf0",
+        "id": "b62666f6-bee6-4169-97c6-113a430f3461",
         "name": "5 на 4",
         "label_type": "game_mode",
         "start_time": 5918.691217915022,
@@ -3854,7 +4044,7 @@
         }
       },
       {
-        "id": "2cdca3ac-14e0-4dcf-aa23-b8f3ba4149df",
+        "id": "09b30c21-65fb-4010-b68b-ab8a0329d565",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 6083.319711065473,
@@ -3865,7 +4055,7 @@
         }
       },
       {
-        "id": "c1f325eb-dadb-467f-87aa-945ebfca2630",
+        "id": "9778d10f-3fa7-4c2c-a868-8cfd6760f287",
         "name": "5 на 4",
         "label_type": "game_mode",
         "start_time": 6090.691090059456,
@@ -3883,7 +4073,7 @@
         }
       },
       {
-        "id": "ee394bb5-81c9-426d-900f-6221146d825f",
+        "id": "3106119b-8a37-4d50-bd2c-1192268b0070",
         "name": "5 на 4",
         "label_type": "game_mode",
         "start_time": 6405.327563328149,
@@ -3901,7 +4091,7 @@
         }
       },
       {
-        "id": "7c6241f9-541d-4fdb-a03d-786a8799abf3",
+        "id": "d0c04b14-50c3-4c3a-bc03-7ce6f27275cb",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 6528.188714308145,
@@ -3912,7 +4102,7 @@
         }
       },
       {
-        "id": "38c8d78e-692f-4aa4-8d41-8e8ecda89c3a",
+        "id": "864941ae-fe81-4084-95c4-0e1fcbcd75d9",
         "name": "4 на 4",
         "label_type": "game_mode",
         "start_time": 6965.255381229988,
@@ -3936,7 +4126,7 @@
         }
       },
       {
-        "id": "38609d17-8b54-4bf6-b5b2-d3db5c79915b",
+        "id": "628750a3-6c84-401d-9680-e599eb157be1",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 7157.35090291845,
@@ -3947,7 +4137,7 @@
         }
       },
       {
-        "id": "046fa887-b449-48cb-b5cc-90fe811d54d9",
+        "id": "daee152e-06af-4fc5-a604-ccbde36c570b",
         "name": "4 на 5",
         "label_type": "game_mode",
         "start_time": 7389.970649405854,
@@ -3965,7 +4155,7 @@
         }
       },
       {
-        "id": "5fd619a0-009e-4d5f-84a9-838cba739947",
+        "id": "caae4ef5-9347-4bed-b752-c220cbc618d1",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 7433.064601463512,
@@ -3976,7 +4166,7 @@
         }
       },
       {
-        "id": "f473934d-9ba5-4666-b9ed-23e66e5b16c8",
+        "id": "70881fa0-67e6-427e-b0b4-26f7debe544b",
         "name": "4 на 5",
         "label_type": "game_mode",
         "start_time": 7522.460294822613,
@@ -3994,7 +4184,7 @@
         }
       },
       {
-        "id": "a945cc77-ea32-4652-a776-45338998e9b1",
+        "id": "9d2b205c-5470-4edd-b993-32fd5c37a4b7",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 7646.130397088718,
@@ -4005,7 +4195,7 @@
         }
       },
       {
-        "id": "bf955da4-4f5b-4aee-be74-f1b6c6400e60",
+        "id": "051fe2a4-4112-4c12-8a70-ec333d0846a9",
         "name": "5 на 4",
         "label_type": "game_mode",
         "start_time": 7750.057819013132,
@@ -4023,7 +4213,7 @@
         }
       },
       {
-        "id": "12322f44-c7bc-4c53-9272-d1be499abc18",
+        "id": "c40b2166-51b8-4a15-95bc-85ce1ba8d268",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 7855.615764827989,
@@ -4034,7 +4224,7 @@
         }
       },
       {
-        "id": "ec530a39-467f-45ee-9f68-beafebda5650",
+        "id": "a1a52ddc-7cf3-4086-bbbb-70a4d6d47f98",
         "name": "4 на 5",
         "label_type": "game_mode",
         "start_time": 8022.167595008743,
@@ -4095,6 +4285,11 @@
           {
             "number": 8,
             "start_time": 3324.0385558706234,
+            "end_time": 3408.513836297237
+          },
+          {
+            "number": 9,
+            "start_time": 3478.2934275714956,
             "end_time": 3546.690960407257
           }
         ]
@@ -4122,6 +4317,11 @@
             "number": 4,
             "start_time": 3058.269773604518,
             "end_time": 3165.184590683551
+          },
+          {
+            "number": 5,
+            "start_time": 3533.611303290564,
+            "end_time": 3546.690960407257
           }
         ]
       },
@@ -4148,6 +4348,11 @@
             "number": 4,
             "start_time": 3058.269773604518,
             "end_time": 3165.184590683551
+          },
+          {
+            "number": 5,
+            "start_time": 3532.3201949207373,
+            "end_time": 3546.690960407257
           }
         ]
       },
@@ -4189,6 +4394,11 @@
             "number": 7,
             "start_time": 3058.269773604518,
             "end_time": 3101.8376405497843
+          },
+          {
+            "number": 8,
+            "start_time": 3478.2934275714956,
+            "end_time": 3546.690960407257
           }
         ]
       },
@@ -4375,7 +4585,7 @@
           {
             "number": 5,
             "start_time": 3324.0385558706234,
-            "end_time": 3546.690960407257
+            "end_time": 3408.513836297237
           }
         ]
       },
@@ -4428,6 +4638,11 @@
             "number": 4,
             "start_time": 2689.6504779742436,
             "end_time": 3058.269773604518
+          },
+          {
+            "number": 5,
+            "start_time": 3408.513836297237,
+            "end_time": 3478.2934275714956
           }
         ]
       },
@@ -4454,6 +4669,11 @@
             "number": 4,
             "start_time": 2679.6504779742436,
             "end_time": 3058.269773604518
+          },
+          {
+            "number": 5,
+            "start_time": 3408.513836297237,
+            "end_time": 3478.2934275714956
           }
         ]
       },
@@ -4479,7 +4699,7 @@
           {
             "number": 4,
             "start_time": 3324.0385558706234,
-            "end_time": 3546.690960407257
+            "end_time": 3408.513836297237
           }
         ]
       },
@@ -4505,7 +4725,7 @@
           {
             "number": 4,
             "start_time": 3324.0385558706234,
-            "end_time": 3546.690960407257
+            "end_time": 3478.2934275714956
           }
         ]
       },
@@ -4531,7 +4751,7 @@
           {
             "number": 4,
             "start_time": 3324.0385558706234,
-            "end_time": 3546.690960407257
+            "end_time": 3478.2934275714956
           }
         ]
       },
@@ -4564,6 +4784,11 @@
             "number": 2,
             "start_time": 2366.5323849744746,
             "end_time": 2450.9732507295557
+          },
+          {
+            "number": 3,
+            "start_time": 3523.1164644805986,
+            "end_time": 3546.690960407257
           }
         ]
       },
@@ -4585,6 +4810,11 @@
             "number": 3,
             "start_time": 2703.1504779742436,
             "end_time": 3058.269773604518
+          },
+          {
+            "number": 4,
+            "start_time": 3478.2934275714956,
+            "end_time": 3532.3201949207373
           }
         ]
       },
@@ -4601,6 +4831,11 @@
             "number": 2,
             "start_time": 2703.1504779742436,
             "end_time": 3058.269773604518
+          },
+          {
+            "number": 3,
+            "start_time": 3478.2934275714956,
+            "end_time": 3533.611303290564
           }
         ]
       }
@@ -4613,41 +4848,46 @@
           {
             "number": 1,
             "start_time": 0.0,
-            "end_time": 26.9
+            "end_time": 27.5
           },
           {
             "number": 2,
-            "start_time": 119.0,
-            "end_time": 177.5
+            "start_time": 121.7,
+            "end_time": 181.5
           },
           {
             "number": 3,
-            "start_time": 231.7,
-            "end_time": 257.0
+            "start_time": 237.1,
+            "end_time": 262.9
           },
           {
             "number": 4,
-            "start_time": 423.5,
-            "end_time": 459.4
+            "start_time": 433.2,
+            "end_time": 469.9
           },
           {
             "number": 5,
-            "start_time": 548.9,
-            "end_time": 596.4
+            "start_time": 561.5,
+            "end_time": 610.1
           },
           {
             "number": 6,
-            "start_time": 668.4,
-            "end_time": 706.5
+            "start_time": 683.8,
+            "end_time": 722.8
           },
           {
             "number": 7,
-            "start_time": 838.9,
-            "end_time": 904.2
+            "start_time": 858.1,
+            "end_time": 924.9
           },
           {
             "number": 8,
-            "start_time": 1014.8,
+            "start_time": 1038.1,
+            "end_time": 1087.5
+          },
+          {
+            "number": 9,
+            "start_time": 1130.7,
             "end_time": 1200.0
           }
         ]
@@ -4659,22 +4899,27 @@
           {
             "number": 1,
             "start_time": 0.0,
-            "end_time": 100.0
+            "end_time": 102.3
           },
           {
             "number": 2,
-            "start_time": 324.9,
-            "end_time": 365.8
+            "start_time": 332.3,
+            "end_time": 374.2
           },
           {
             "number": 3,
-            "start_time": 632.6,
-            "end_time": 706.5
+            "start_time": 647.1,
+            "end_time": 722.8
           },
           {
             "number": 4,
-            "start_time": 838.9,
-            "end_time": 904.2
+            "start_time": 858.1,
+            "end_time": 924.9
+          },
+          {
+            "number": 5,
+            "start_time": 1186.7,
+            "end_time": 1200.0
           }
         ]
       },
@@ -4685,22 +4930,27 @@
           {
             "number": 1,
             "start_time": 0.0,
-            "end_time": 100.0
+            "end_time": 102.3
           },
           {
             "number": 2,
-            "start_time": 318.3,
-            "end_time": 365.8
+            "start_time": 325.6,
+            "end_time": 374.2
           },
           {
             "number": 3,
-            "start_time": 604.5,
-            "end_time": 698.8
+            "start_time": 618.4,
+            "end_time": 714.8
           },
           {
             "number": 4,
-            "start_time": 838.9,
-            "end_time": 904.2
+            "start_time": 858.1,
+            "end_time": 924.9
+          },
+          {
+            "number": 5,
+            "start_time": 1185.4,
+            "end_time": 1200.0
           }
         ]
       },
@@ -4711,37 +4961,42 @@
           {
             "number": 1,
             "start_time": 0.0,
-            "end_time": 103.2
+            "end_time": 105.5
           },
           {
             "number": 2,
-            "start_time": 231.7,
-            "end_time": 257.0
+            "start_time": 237.1,
+            "end_time": 262.9
           },
           {
             "number": 3,
-            "start_time": 324.9,
-            "end_time": 346.2
+            "start_time": 332.3,
+            "end_time": 354.1
           },
           {
             "number": 4,
-            "start_time": 423.5,
-            "end_time": 459.4
+            "start_time": 433.2,
+            "end_time": 469.9
           },
           {
             "number": 5,
-            "start_time": 668.4,
-            "end_time": 697.3
+            "start_time": 683.8,
+            "end_time": 713.3
           },
           {
             "number": 6,
-            "start_time": 741.6,
-            "end_time": 790.2
+            "start_time": 758.6,
+            "end_time": 808.3
           },
           {
             "number": 7,
-            "start_time": 838.9,
-            "end_time": 882.0
+            "start_time": 858.1,
+            "end_time": 902.3
+          },
+          {
+            "number": 8,
+            "start_time": 1130.7,
+            "end_time": 1200.0
           }
         ]
       },
@@ -4752,17 +5007,17 @@
           {
             "number": 1,
             "start_time": 0.0,
-            "end_time": 106.1
+            "end_time": 108.6
           },
           {
             "number": 2,
-            "start_time": 604.5,
-            "end_time": 679.4
+            "start_time": 618.4,
+            "end_time": 695.0
           },
           {
             "number": 3,
-            "start_time": 838.9,
-            "end_time": 904.2
+            "start_time": 858.1,
+            "end_time": 924.9
           }
         ]
       },
@@ -4793,28 +5048,28 @@
         "shifts": [
           {
             "number": 1,
-            "start_time": 26.9,
-            "end_time": 103.2
+            "start_time": 27.5,
+            "end_time": 105.5
           },
           {
             "number": 2,
-            "start_time": 257.0,
-            "end_time": 324.9
+            "start_time": 262.9,
+            "end_time": 332.3
           },
           {
             "number": 3,
-            "start_time": 459.4,
-            "end_time": 548.9
+            "start_time": 469.9,
+            "end_time": 561.5
           },
           {
             "number": 4,
-            "start_time": 706.5,
-            "end_time": 741.6
+            "start_time": 722.8,
+            "end_time": 758.6
           },
           {
             "number": 5,
-            "start_time": 904.2,
-            "end_time": 1014.8
+            "start_time": 924.9,
+            "end_time": 1038.1
           }
         ]
       },
@@ -4824,23 +5079,23 @@
         "shifts": [
           {
             "number": 1,
-            "start_time": 100.0,
-            "end_time": 217.4
+            "start_time": 102.3,
+            "end_time": 222.3
           },
           {
             "number": 2,
-            "start_time": 365.8,
-            "end_time": 435.9
+            "start_time": 374.2,
+            "end_time": 445.9
           },
           {
             "number": 3,
-            "start_time": 706.5,
-            "end_time": 741.6
+            "start_time": 722.8,
+            "end_time": 758.6
           },
           {
             "number": 4,
-            "start_time": 904.2,
-            "end_time": 1014.8
+            "start_time": 924.9,
+            "end_time": 1038.1
           }
         ]
       },
@@ -4850,23 +5105,23 @@
         "shifts": [
           {
             "number": 1,
-            "start_time": 100.0,
-            "end_time": 217.4
+            "start_time": 102.3,
+            "end_time": 222.3
           },
           {
             "number": 2,
-            "start_time": 365.8,
-            "end_time": 487.5
+            "start_time": 374.2,
+            "end_time": 498.7
           },
           {
             "number": 3,
-            "start_time": 698.8,
-            "end_time": 741.6
+            "start_time": 714.8,
+            "end_time": 758.6
           },
           {
             "number": 4,
-            "start_time": 904.2,
-            "end_time": 1014.8
+            "start_time": 924.9,
+            "end_time": 1038.1
           }
         ]
       },
@@ -4876,28 +5131,28 @@
         "shifts": [
           {
             "number": 1,
-            "start_time": 103.2,
-            "end_time": 119.0
+            "start_time": 105.5,
+            "end_time": 121.7
           },
           {
             "number": 2,
-            "start_time": 257.0,
-            "end_time": 324.9
+            "start_time": 262.9,
+            "end_time": 332.3
           },
           {
             "number": 3,
-            "start_time": 459.4,
-            "end_time": 548.9
+            "start_time": 469.9,
+            "end_time": 561.5
           },
           {
             "number": 4,
-            "start_time": 697.3,
-            "end_time": 741.6
+            "start_time": 713.3,
+            "end_time": 758.6
           },
           {
             "number": 5,
-            "start_time": 882.0,
-            "end_time": 1014.8
+            "start_time": 902.3,
+            "end_time": 1038.1
           }
         ]
       },
@@ -4907,28 +5162,28 @@
         "shifts": [
           {
             "number": 1,
-            "start_time": 103.2,
-            "end_time": 177.5
+            "start_time": 105.5,
+            "end_time": 181.5
           },
           {
             "number": 2,
-            "start_time": 324.9,
-            "end_time": 379.1
+            "start_time": 332.3,
+            "end_time": 387.8
           },
           {
             "number": 3,
-            "start_time": 548.9,
-            "end_time": 612.9
+            "start_time": 561.5,
+            "end_time": 626.9
           },
           {
             "number": 4,
-            "start_time": 741.6,
-            "end_time": 800.1
+            "start_time": 758.6,
+            "end_time": 818.5
           },
           {
             "number": 5,
-            "start_time": 1014.8,
-            "end_time": 1200.0
+            "start_time": 1038.1,
+            "end_time": 1087.5
           }
         ]
       },
@@ -4938,23 +5193,23 @@
         "shifts": [
           {
             "number": 1,
-            "start_time": 106.1,
-            "end_time": 221.3
+            "start_time": 108.6,
+            "end_time": 226.4
           },
           {
             "number": 2,
-            "start_time": 435.9,
-            "end_time": 487.5
+            "start_time": 445.9,
+            "end_time": 498.7
           },
           {
             "number": 3,
-            "start_time": 679.4,
-            "end_time": 741.6
+            "start_time": 695.0,
+            "end_time": 758.6
           },
           {
             "number": 4,
-            "start_time": 904.2,
-            "end_time": 1014.8
+            "start_time": 924.9,
+            "end_time": 1038.1
           }
         ]
       },
@@ -4964,23 +5219,28 @@
         "shifts": [
           {
             "number": 1,
-            "start_time": 177.5,
-            "end_time": 231.7
+            "start_time": 181.5,
+            "end_time": 237.1
           },
           {
             "number": 2,
-            "start_time": 379.1,
-            "end_time": 423.5
+            "start_time": 387.8,
+            "end_time": 433.2
           },
           {
             "number": 3,
-            "start_time": 612.9,
-            "end_time": 668.4
+            "start_time": 626.9,
+            "end_time": 683.8
           },
           {
             "number": 4,
-            "start_time": 800.1,
-            "end_time": 838.9
+            "start_time": 818.5,
+            "end_time": 858.1
+          },
+          {
+            "number": 5,
+            "start_time": 1087.5,
+            "end_time": 1130.7
           }
         ]
       },
@@ -4990,23 +5250,28 @@
         "shifts": [
           {
             "number": 1,
-            "start_time": 177.5,
-            "end_time": 231.7
+            "start_time": 181.5,
+            "end_time": 237.1
           },
           {
             "number": 2,
-            "start_time": 346.2,
-            "end_time": 423.5
+            "start_time": 354.1,
+            "end_time": 433.2
           },
           {
             "number": 3,
-            "start_time": 596.4,
-            "end_time": 668.4
+            "start_time": 610.1,
+            "end_time": 683.8
           },
           {
             "number": 4,
-            "start_time": 790.2,
-            "end_time": 838.9
+            "start_time": 808.3,
+            "end_time": 858.1
+          },
+          {
+            "number": 5,
+            "start_time": 1087.5,
+            "end_time": 1130.7
           }
         ]
       },
@@ -5016,23 +5281,23 @@
         "shifts": [
           {
             "number": 1,
-            "start_time": 217.4,
-            "end_time": 275.9
+            "start_time": 222.3,
+            "end_time": 282.2
           },
           {
             "number": 2,
-            "start_time": 487.5,
-            "end_time": 548.9
+            "start_time": 498.7,
+            "end_time": 561.5
           },
           {
             "number": 3,
-            "start_time": 741.6,
-            "end_time": 813.5
+            "start_time": 758.6,
+            "end_time": 832.2
           },
           {
             "number": 4,
-            "start_time": 1014.8,
-            "end_time": 1200.0
+            "start_time": 1038.1,
+            "end_time": 1087.5
           }
         ]
       },
@@ -5042,23 +5307,23 @@
         "shifts": [
           {
             "number": 1,
-            "start_time": 217.4,
-            "end_time": 275.9
+            "start_time": 222.3,
+            "end_time": 282.2
           },
           {
             "number": 2,
-            "start_time": 487.5,
-            "end_time": 548.9
+            "start_time": 498.7,
+            "end_time": 561.5
           },
           {
             "number": 3,
-            "start_time": 741.6,
-            "end_time": 813.5
+            "start_time": 758.6,
+            "end_time": 832.2
           },
           {
             "number": 4,
-            "start_time": 1014.8,
-            "end_time": 1200.0
+            "start_time": 1038.1,
+            "end_time": 1130.7
           }
         ]
       },
@@ -5068,23 +5333,23 @@
         "shifts": [
           {
             "number": 1,
-            "start_time": 221.3,
-            "end_time": 275.9
+            "start_time": 226.4,
+            "end_time": 282.2
           },
           {
             "number": 2,
-            "start_time": 446.3,
-            "end_time": 548.9
+            "start_time": 456.6,
+            "end_time": 561.5
           },
           {
             "number": 3,
-            "start_time": 741.6,
-            "end_time": 813.5
+            "start_time": 758.6,
+            "end_time": 832.2
           },
           {
             "number": 4,
-            "start_time": 1014.8,
-            "end_time": 1200.0
+            "start_time": 1038.1,
+            "end_time": 1130.7
           }
         ]
       },
@@ -5094,13 +5359,13 @@
         "shifts": [
           {
             "number": 1,
-            "start_time": 275.9,
-            "end_time": 324.9
+            "start_time": 282.2,
+            "end_time": 332.3
           },
           {
             "number": 2,
-            "start_time": 813.5,
-            "end_time": 838.9
+            "start_time": 832.2,
+            "end_time": 858.1
           }
         ]
       },
@@ -5110,13 +5375,18 @@
         "shifts": [
           {
             "number": 1,
-            "start_time": 275.9,
-            "end_time": 324.9
+            "start_time": 282.2,
+            "end_time": 332.3
           },
           {
             "number": 2,
-            "start_time": 548.9,
-            "end_time": 632.6
+            "start_time": 561.5,
+            "end_time": 647.1
+          },
+          {
+            "number": 3,
+            "start_time": 1176.1,
+            "end_time": 1200.0
           }
         ]
       },
@@ -5126,18 +5396,23 @@
         "shifts": [
           {
             "number": 1,
-            "start_time": 275.9,
-            "end_time": 318.3
+            "start_time": 282.2,
+            "end_time": 325.6
           },
           {
             "number": 2,
-            "start_time": 548.9,
-            "end_time": 604.5
+            "start_time": 561.5,
+            "end_time": 618.4
           },
           {
             "number": 3,
-            "start_time": 813.5,
-            "end_time": 838.9
+            "start_time": 832.2,
+            "end_time": 858.1
+          },
+          {
+            "number": 4,
+            "start_time": 1130.7,
+            "end_time": 1185.4
           }
         ]
       },
@@ -5147,13 +5422,18 @@
         "shifts": [
           {
             "number": 1,
-            "start_time": 548.9,
-            "end_time": 604.5
+            "start_time": 561.5,
+            "end_time": 618.4
           },
           {
             "number": 2,
-            "start_time": 813.5,
-            "end_time": 838.9
+            "start_time": 832.2,
+            "end_time": 858.1
+          },
+          {
+            "number": 3,
+            "start_time": 1130.7,
+            "end_time": 1186.7
           }
         ]
       }

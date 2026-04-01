@@ -19,6 +19,9 @@ class LineupModuleWidget(QWidget):
     Учитывает лимиты на количество игроков, основанные на game_modes.
     Учитывает активные персональные штрафы из game_modes.
     """
+    
+    # Сигнал эмитируется при любом действии пользователя на панели
+    userInteracted = pyqtSignal()
 
     def __init__(self, parent: Optional[QWidget] = None):
         super().__init__(parent)
@@ -137,6 +140,7 @@ class LineupModuleWidget(QWidget):
             Обработчик изменения состояния чекбокса "Показать смену слева...".
             state: Qt.Checked (2) или Qt.Unchecked (0)
             """
+            self.userInteracted.emit()
             self.main_window.video_player_widget.setFocus()
             if state == Qt.Checked:
                 # Чекбокс включён, пытаемся восстановить смену
@@ -236,6 +240,7 @@ class LineupModuleWidget(QWidget):
         Обработчик нажатия кнопки 'Выбрать' для строки пакета.
         package_name: Имя пакета (например, "1-я пара", "2-е звено").
         """
+        self.userInteracted.emit()
         # print(f"[DEBUG] _on_package_button_clicked called for '{package_name}'") # Для отладки
         # Получаем список пакетов и находим нужный
         packages_data = self.get_all_packages_for_display()
@@ -698,6 +703,7 @@ class LineupModuleWidget(QWidget):
         Назначает игроку принадлежность к пакету и позицию.
         Обновляет self._team_roster, self.project.match.rosters, self._occupied_positions.
         """
+        self.userInteracted.emit()
         # Найти игрока в self._team_roster и self.project.match.rosters[our_team_key]
         target_player_in_team_roster = None
         target_player_in_project_rosters = None
@@ -772,6 +778,7 @@ class LineupModuleWidget(QWidget):
         Исключает игрока из пакета (удаляет lineup_group и lineup_position).
         Обновляет self._team_roster, self.project.match.rosters, self._occupied_positions.
         """
+        self.userInteracted.emit()
         # Найти игрока в self._team_roster и self.project.match.rosters[our_team_key]
         target_player_in_team_roster = None
         target_player_in_project_rosters = None
@@ -850,6 +857,8 @@ class LineupModuleWidget(QWidget):
         Обработчик двойного клика по ячейке таблицы.
         Переключает чекбокс в строке, если клик НЕ по колонке чекбокса (1).
         """
+        self.userInteracted.emit()
+        
         # Проверяем, кликнули ли по колонке с чекбоксом
         if column == 1:
             # Если клик по чекбоксу, ничего не делаем, пусть стандартное поведение сработает
@@ -873,6 +882,8 @@ class LineupModuleWidget(QWidget):
         """
         Снимает все галочки, кроме вратарей.
         """
+        self.userInteracted.emit()
+        
         for player_id, checkbox in self._checkboxes.items():
             row = self._id_to_row.get(player_id)
             if row is not None:
@@ -1342,6 +1353,7 @@ class LineupModuleWidget(QWidget):
         """
         Обработчик изменения состояния чекбокса игрока.
         """
+        self.userInteracted.emit()
         self.main_window.video_player_widget.setFocus()
         # --- НОВОЕ: Проверка, происходило ли сейчас автоматическое восстановление ---
         # Если изменение произошло ВНУТРИ restore_from_context, не отключаем чекбокс "Показать смену слева..."

@@ -332,6 +332,10 @@ class MainWindow(QMainWindow):
         # 7. Сигнал от LabelsTreeWidget о выборе диапазона для воспроизведения -> переключение в плеере
         self.labels_tree_widget.rangeSelectedForPlayback.connect(self._select_range_in_selector_and_playback)
 
+        # --- НОВОЕ: Подключение сигнала от LineupModuleWidget ---
+        # При любом действии на панели Смена переключаем тип метки на "Смена"
+        self.lineup_module_widget.userInteracted.connect(self._on_lineup_module_interacted)
+
         # --- НОВОЕ: Подключения для TimelineWidget ---
         # 3.1. Сигнал от TimelineWidget для навигации плеера
         self.timeline_widget.globalTimeRequested.connect(self.go_to_time)
@@ -396,6 +400,12 @@ class MainWindow(QMainWindow):
         elif label_type == "Смена":
             self.stacked_r1.setCurrentWidget(self.lineup_module_widget)
         # Для "Сегмент", "Пауза" — НЕ МЕНЯЕМ R1 (остаётся как есть)
+
+    def _on_lineup_module_interacted(self):
+        """Обработчик любого действия на панели Смена. Переключает тип метки на 'Смена'."""
+        self.universal_label_editor_widget.set_current_label_type("Смена")
+        # Также переключаем R1 на панель Смена
+        self.stacked_r1.setCurrentWidget(self.lineup_module_widget)
 
 
     # --- Новые методы ---
