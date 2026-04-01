@@ -577,6 +577,19 @@ class MainWindow(QMainWindow):
                     f"Пожалуйста, отрегулируйте позицию плеера."
                 )
                 return  # Не устанавливаем метку
+            
+            # === НОВОЕ: Проверка — событие протокола должно быть выбрано ===
+            if not active_event:
+                QMessageBox.warning(
+                    self,
+                    "Событие не выбрано",
+                    f"Невозможно установить метку '{label_type}':\n\n"
+                    f"Сначала выберите событие из протокола двойным кликом по строке "
+                    f"в таблице событий (колонка 'Тип', 't1' или 't2').\n\n"
+                    f"Без выбранного события контекст метки не может быть заполнен."
+                )
+                return  # Не устанавливаем метку
+            # === КОНЕЦ НОВОГО ===
         # --- КОНЕЦ НОВОГО ---
 
         # --- Оригинальная логика для других меток (Гол, Удаление и т.д.) ---
@@ -606,23 +619,45 @@ class MainWindow(QMainWindow):
                 }
             # Очищаем после использования
             self.protocol_validation_widget._active_protocol_event = None
-        else:
-            print("[DEBUG] No active event or wrong label type — context remains empty.")
 
         # Создание метки для всех остальных типов
         new_label = GenericLabel(label_type=label_type, global_time=global_time, context=context)
         self.project.match.generic_labels.append(new_label)
 
+        # === НОВОЕ: Формирование подробного статусного сообщения ===
+        if label_type == "Гол":
+            player = context.get("player_name", "—")
+            team = context.get("team", "—")
+            f_pass = context.get("f-pass", "—")
+            s_pass = context.get("s-pass", "—")
+            assists = []
+            if f_pass and f_pass != "N/A":
+                assists.append(f"1-я передача: {f_pass}")
+            if s_pass and s_pass != "N/A":
+                assists.append(f"2-я передача: {s_pass}")
+            assists_str = " | ".join(assists) if assists else "без передач"
+            status_detail = f"Гол: {player} ({team}) — {assists_str}"
+        elif label_type == "Удаление":
+            player = context.get("player_name", "—")
+            team = context.get("team", "—")
+            violation = context.get("violation_type", "—")
+            start_sec = context.get("start_time_sec", 0)
+            end_sec = context.get("end_time_sec", 0)
+            duration_min = (end_sec - start_sec) // 60 if end_sec > start_sec else 0
+            status_detail = f"Удаление: {player} ({team}) — {violation} ({duration_min} мин)"
+        else:
+            status_detail = f"Метка '{label_type}' добавлена"
+        # === КОНЕЦ НОВОГО ===
+
         # Сохранение
         if self.project_file_path:
             try:
-                #from utils.project_utils import save_project_to_file
                 save_project_to_file(self.project, self.project_file_path)
-                self.status_label.setText(f"Метка '{label_type}' добавлена в {global_time:.1f}s. Проект сохранён.")
+                self.status_label.setText(f"{status_detail} в {global_time:.1f}s. Проект сохранён.")
             except Exception as e:
                 QMessageBox.warning(self, "Предупреждение", f"Не удалось сохранить проект: {str(e)}")
         else:
-            self.status_label.setText(f"Метка '{label_type}' добавлена в {global_time:.1f}s. Нет пути для сохранения.")
+            self.status_label.setText(f"{status_detail} в {global_time:.1f}s. Нет пути для сохранения.")
 
         # Обновление UI (для остальных типов)
         self.labels_tree_widget.update_tree(
@@ -634,8 +669,10 @@ class MainWindow(QMainWindow):
             self._save_project_callback
         )
 
-        # Вызов SMART (для остальных типов)
-        if self.auto_smart_checkbox.isChecked():
+        # Вызов SMART (для остальных типов, кроме "Гол" и "Удаление")
+        # Метки "Гол" и "Удаление" не влияют на calculated_ranges,
+        # поэтому SMART вызывать не нужно — это сохранит статусное сообщение с деталями
+        if self.auto_smart_checkbox.isChecked() and label_type not in ("Гол", "Удаление"):
             self.run_smart_analysis()
 
 
@@ -915,7 +952,7 @@ class MainWindow(QMainWindow):
         if self.project_file_path:
             try:
                 save_project_to_file(self.project, self.project_file_path)
-                self.status_label.setText("Проект сохранён (после работы SMART).")
+                # Сообщение об авто-сохранении убрано, чтобы не замещать более информативные сообщения
             except Exception as e:
                 QMessageBox.warning(self, "Предупреждение", f"Не удалось сохранить проект после SMART: {str(e)}")
 

@@ -71,6 +71,23 @@ class ProtocolValidationWidget(QWidget):
         event = self.events[row]
         event_type = "Гол" if event.get("type") == "goal" else "Удаление"
 
+        # === НОВОЕ: Двойной клик по колонке "Тип" (для "Гол" и "Удаление") ===
+        if column == 0:  # Тип
+            if event_type in ("Гол", "Удаление"):
+                # Сохраняем событие для context
+                self.main_window.set_active_protocol_event(dict(event))
+                # Устанавливаем тип метки
+                self.main_window.universal_label_editor_widget.set_current_label_type(event_type)
+                # Устанавливаем фокус на видеоплеер
+                self.main_window.video_player_widget.setFocus()
+                # Показываем статусное сообщение
+                self.main_window.status_label.setText(
+                    f"Выбран {event_type}: {event.get('player_name', '—')} — "
+                    f"установите метку вручную на нужном времени"
+                )
+            return
+        # === КОНЕЦ НОВОГО ===
+
         # Определяем протокольное время
         if column == 1:  # t1
             if event_type == "Гол":
