@@ -520,28 +520,118 @@ class MainWindow(QMainWindow):
             )
             self.project.match.generic_labels.append(new_label)
 
-            print(f"[DEBUG] Создана метка 'Смена' на {new_label.global_time:.2f} с {len(players_on_ice_data)} игроками: {[p['name'] for p in players_on_ice_data]}")
+            # Формируем строку с номерами игроков для статусного сообщения
+            # Используем данные из rosters (lineup_group/lineup_position) или role как fallback
+            def format_shift_numbers(players, roster_data):
+                # Сначала определяем вратаря (у него нет lineup_group/lineup_position)
+                goalie = None
+                skaters = []  # игроки не вратари
+                
+                for p in players:
+                    player_id = p['id_fhm']
+                    roster_info = roster_data.get(player_id, {})
+                    role = roster_info.get('role', '').lower()
+                    # Берём номер из rosters
+                    number = str(roster_info.get('number', 'N/A'))
+                    
+                    if 'вратарь' in role:
+                        goalie = number
+                    else:
+                        skaters.append((p, number))
+                
+                # Проверяем, есть ли у всех НЕ-вратарей заполненные lineup_group и lineup_position
+                all_skaters_have_lineup = all(
+                    roster_data.get(p[0]['id_fhm'], {}).get('lineup_group') and 
+                    roster_data.get(p[0]['id_fhm'], {}).get('lineup_position')
+                    for p in skaters
+                )
+                
+                forwards = []  # нападающие
+                defenders = []  # защитники
+                
+                for p, number in skaters:
+                    player_id = p['id_fhm']
+                    roster_info = roster_data.get(player_id, {})
+                    
+                    if all_skaters_have_lineup:
+                        # Используем lineup_group и lineup_position
+                        group = roster_info.get('lineup_group', '').lower()
+                        position = roster_info.get('lineup_position', '').lower()
+                        
+                        # "тройка" = нападающие, "пара" = защитники
+                        if 'тройка' in group:
+                            forwards.append((position, number))  # сохраняем позицию для сортировки
+                        elif 'пара' in group:
+                            defenders.append((position, number))
+                        else:
+                            # Если lineup_group не распознан, fallback на role
+                            role = roster_info.get('role', '').lower()
+                            if 'нападающий' in role:
+                                forwards.append(('', number))
+                            elif 'защитник' in role:
+                                defenders.append(('', number))
+                    else:
+                        # Fallback на role
+                        role = roster_info.get('role', '').lower()
+                        if 'нападающий' in role:
+                            forwards.append(('', number))  # пустая позиция - без сортировки
+                        elif 'защитник' in role:
+                            defenders.append(('', number))
+                
+                # Сортируем по позиции, если есть lineup данные
+                if all_skaters_have_lineup:
+                    # Порядок: Левый, Центр, Правый (или Левый, Правый для защитников)
+                    pos_order = {
+                        'левый': 0, 'left': 0,
+                        'центр': 1, 'center': 1, 'centre': 1,
+                        'правый': 2, 'right': 2
+                    }
+                    forwards.sort(key=lambda x: pos_order.get(x[0], 99))
+                    defenders.sort(key=lambda x: pos_order.get(x[0], 99))
+                    forwards = [num for _, num in forwards]
+                    defenders = [num for _, num in defenders]
+                else:
+                    forwards = [num for _, num in forwards]
+                    defenders = [num for _, num in defenders]
+                
+                # Формируем строку с разделителями
+                parts = []
+                if goalie:
+                    parts.append(goalie)
+                if forwards:
+                    parts.append(', '.join(forwards))
+                if defenders:
+                    parts.append(', '.join(defenders))
+                
+                return ' | '.join(parts) if parts else 'нет'
+            
+            # Создаём словарь rosters для быстрого доступа по id_fhm
+            roster_dict = {p['id_fhm']: p for p in our_team_roster}
+            numbers_str = format_shift_numbers(players_on_ice_data, roster_dict)
+            
+            print(f"[DEBUG] Создана метка 'Смена' на {new_label.global_time:.2f} с {len(players_on_ice_data)} игроками: {[p['name'] for p in players_on_ice_data]}, номера: {numbers_str}")
 
             # 6. Сохранить проект
             if self.project_file_path:
                 try:
                     #from utils.project_utils import save_project_to_file
                     save_project_to_file(self.project, self.project_file_path)
-                    self.status_label.setText(f"Метка '{label_type}' добавлена в {global_time:.1f}s. Проект сохранён.")
+                    self.status_label.setText(f"Смена ({numbers_str}) добавлена в {global_time:.1f}s. Проект сохранён.")
                 except Exception as e:
                     QMessageBox.warning(self, "Предупреждение", f"Не удалось сохранить проект: {str(e)}")
             else:
-                self.status_label.setText(f"Метка '{label_type}' добавлена в {global_time:.1f}s. Нет пути для сохранения.")
+                self.status_label.setText(f"Смена ({numbers_str}) добавлена в {global_time:.1f}s. Нет пути для сохранения.")
 
             # 7. Обновить UI
-            # Передаём все шесть аргументов в update_tree
+            # Передаём rosters для отображения номеров в метках "Смена"
             self.labels_tree_widget.update_tree(
                 self.project.match.generic_labels,
                 self.project.match.calculated_ranges,
                 self.project.match.generic_labels, # generic_labels_for_timeline
                 self.project.match.calculated_ranges, # calculated_ranges_for_timeline
                 self.video_player_widget,
-                self._save_project_callback
+                self._save_project_callback,
+                self.project.match.rosters
             )
 
             # 8. Вызвать SMART, если включён
@@ -666,7 +756,8 @@ class MainWindow(QMainWindow):
             self.project.match.generic_labels, # generic_labels_for_timeline
             self.project.match.calculated_ranges, # calculated_ranges_for_timeline
             self.video_player_widget,
-            self._save_project_callback
+            self._save_project_callback,
+            self.project.match.rosters
         )
 
         # Вызов SMART (для остальных типов, кроме "Гол" и "Удаление")
@@ -960,14 +1051,14 @@ class MainWindow(QMainWindow):
         self._update_range_selector()
 
         # 9. Обновить labels_tree_widget (опционально, так как метки не изменились, но обновим для консистентности)
-        # Передаём все шесть аргументов (player_shifts_ot пока не передаём)
         self.labels_tree_widget.update_tree(
             self.project.match.generic_labels,          # generic_labels
             self.project.match.calculated_ranges,       # calculated_ranges
             self.project.match.generic_labels,          # generic_labels_ref
             self.project.match.calculated_ranges,       # calculated_ranges_ref
             self.video_player_widget,                 # video_player_widget
-            self._save_project_callback               # save_callback
+            self._save_project_callback,              # save_callback
+            self.project.match.rosters
         )
         # --- НОВОЕ: Обновляем TimelineWidget ---
         if self.timeline_widget:

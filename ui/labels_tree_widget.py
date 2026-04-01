@@ -122,6 +122,7 @@ class LabelsTreeWidget(QWidget):
         self._calculated_ranges_ref = None # Ссылка на список calculated_ranges из MainWindow
         self._video_player_ref = None # Ссылка на VideoPlayerWidget
         self._save_callback = None # Ссылка на метод сохранения из MainWindow
+        self._rosters_ref = None # Ссылка на rosters из MainWindow
         # ---
 
         # --- Действия контекстного меню ---
@@ -144,7 +145,7 @@ class LabelsTreeWidget(QWidget):
         # --- Конец нового ---
 
 
-    def update_tree(self, generic_labels: List[GenericLabel], calculated_ranges: List[CalculatedRange], generic_labels_ref: List[GenericLabel], calculated_ranges_ref: List[CalculatedRange], video_player_widget, save_callback):
+    def update_tree(self, generic_labels: List[GenericLabel], calculated_ranges: List[CalculatedRange], generic_labels_ref: List[GenericLabel], calculated_ranges_ref: List[CalculatedRange], video_player_widget, save_callback, rosters_ref=None):
         """
         Обновляет содержимое QTreeWidget на основе списков GenericLabel и CalculatedRange.
         Группирует метки по label_type.
@@ -157,6 +158,7 @@ class LabelsTreeWidget(QWidget):
         self._calculated_ranges_ref = calculated_ranges_ref
         self._video_player_ref = video_player_widget
         self._save_callback = save_callback
+        self._rosters_ref = rosters_ref
 
         # --- Новое: Сохранить состояние развёрнутости перед очисткой ---
         self._save_expansion_state()
@@ -352,8 +354,102 @@ class LabelsTreeWidget(QWidget):
                                         # Форматирование времени в "мин:сек"
                                         formatted_time_min_sec = format_seconds_to_min_sec(int(label.global_time))
 
+                                        # === НОВОЕ: Для меток "Смена" формируем отображение номеров игроков ===
+                                        type_display = ""
+                                        if label_type == "Смена" and label.context and label.context.get("players_on_ice"):
+                                            players = label.context.get("players_on_ice", [])
+                                            
+                                            # Получаем rosters для поиска lineup данных
+                                            roster_dict = {}
+                                            if self._rosters_ref:
+                                                for team_key, team_roster in self._rosters_ref.items():
+                                                    for player in team_roster:
+                                                        roster_dict[player.get('id_fhm')] = player
+                                            
+                                            # Сначала определяем вратаря (у него нет lineup_group/lineup_position)
+                                            goalie = None
+                                            skaters = []  # игроки не вратари
+                                            
+                                            for p in players:
+                                                player_id = p.get('id_fhm')
+                                                roster_info = roster_dict.get(player_id, {})
+                                                role = roster_info.get('role', '').lower()
+                                                # Берём номер из rosters, а не из контекста метки
+                                                number = str(roster_info.get('number', 'N/A'))
+                                                
+                                                if 'вратарь' in role:
+                                                    goalie = number
+                                                else:
+                                                    skaters.append((p, number))
+                                            
+                                            # Проверяем, есть ли у всех НЕ-вратарей заполненные lineup_group и lineup_position
+                                            all_skaters_have_lineup = all(
+                                                roster_dict.get(p[0].get('id_fhm'), {}).get('lineup_group') and 
+                                                roster_dict.get(p[0].get('id_fhm'), {}).get('lineup_position')
+                                                for p in skaters
+                                            )
+                                            
+                                            forwards = []  # нападающие
+                                            defenders = []  # защитники
+                                            
+                                            for p, number in skaters:
+                                                player_id = p.get('id_fhm')
+                                                roster_info = roster_dict.get(player_id, {})
+                                                
+                                                if all_skaters_have_lineup:
+                                                    # Используем lineup_group и lineup_position
+                                                    group = roster_info.get('lineup_group', '').lower()
+                                                    position = roster_info.get('lineup_position', '').lower()
+                                                    
+                                                    # "тройка" = нападающие, "пара" = защитники
+                                                    if 'тройка' in group:
+                                                        forwards.append((position, number))
+                                                    elif 'пара' in group:
+                                                        defenders.append((position, number))
+                                                    else:
+                                                        # Если lineup_group не распознан, fallback на role
+                                                        role = roster_info.get('role', '').lower()
+                                                        if 'нападающий' in role:
+                                                            forwards.append(('', number))
+                                                        elif 'защитник' in role:
+                                                            defenders.append(('', number))
+                                                else:
+                                                    # Fallback на role
+                                                    role = roster_info.get('role', '').lower()
+                                                    if 'нападающий' in role:
+                                                        forwards.append(('', number))
+                                                    elif 'защитник' in role:
+                                                        defenders.append(('', number))
+                                            
+                                            # Сортируем по позиции, если есть lineup данные
+                                            if all_skaters_have_lineup:
+                                                # Порядок: Левый, Центр, Правый (или Левый, Правый для защитников)
+                                                pos_order = {
+                                                    'левый': 0, 'left': 0,
+                                                    'центр': 1, 'center': 1, 'centre': 1,
+                                                    'правый': 2, 'right': 2
+                                                }
+                                                forwards.sort(key=lambda x: pos_order.get(x[0], 99))
+                                                defenders.sort(key=lambda x: pos_order.get(x[0], 99))
+                                                forwards = [num for _, num in forwards]
+                                                defenders = [num for _, num in defenders]
+                                            else:
+                                                forwards = [num for _, num in forwards]
+                                                defenders = [num for _, num in defenders]
+                                            
+                                            # Формируем строку: вратарь | нападающие | защитники
+                                            parts = []
+                                            if goalie:
+                                                parts.append(goalie)
+                                            if forwards:
+                                                parts.append(', '.join(forwards))
+                                            if defenders:
+                                                parts.append(', '.join(defenders))
+                                            type_display = ' | '.join(parts)
+                                        # === КОНЕЦ НОВОГО ===
+
                                         child_item = QTreeWidgetItem(parent_item, [
-                                            "", # Тип уже в родительском элементе
+                                            type_display, # Для "Смена" - номера игроков, иначе пусто
                                             str(i + 1), # Порядковый номер (начинаем с 1)
                                             f"{formatted_time} ({formatted_time_min_sec})", # Время с округлением, разделителем и в "мин:сек"
                                             "" # Длительность для метки - пустая строка
