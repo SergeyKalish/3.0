@@ -427,7 +427,7 @@ class ReportStyles:
     GOAL_PEG_BASE_WIDTH: int = 8
     
     # Толщина пунктирной линии вверх от гола к графику смен
-    GOAL_DASHED_LINE_WIDTH: int = 4
+    GOAL_DASHED_LINE_WIDTH: int = 6
     
     # Пунктирная линия для голов: (3px линия, 5px пробел)
     GOAL_LINE_DASH: tuple = (10, 10)
@@ -1107,10 +1107,12 @@ class PlayerShiftMapReport:
 
     def _shorten_header(self, key: str) -> str:
         """Временные сокращения для заголовков."""
+        # Для листов "Период" используем "СП" вместо "СМ"
+        shifts_header = "СМ" if self.mode == 'game_on_sheet' else "СП"
         mapping = {
             "number": "№",
             "player": "Игрок",
-            "shifts_count": "СМ",
+            "shifts_count": shifts_header,
             "avg_shift": "СрСм",
             "total_time": "ВрМ",
             "period_time": "ВрП",

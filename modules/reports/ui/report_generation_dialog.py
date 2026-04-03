@@ -8,8 +8,8 @@ SORT_BY_EXIT_TIME = "by_exit_time"  # По времени выхода (теку
 SORT_BY_POSITION_BLOCKS = "by_position_blocks"  # По позициям (блоками)
 
 SORT_OPTIONS = {
-    SORT_BY_EXIT_TIME: "По времени выхода",
-    SORT_BY_POSITION_BLOCKS: "По позициям (блоками)"
+    SORT_BY_POSITION_BLOCKS: "По позициям (блоками)",
+    SORT_BY_EXIT_TIME: "По времени выхода"
 }
 
 

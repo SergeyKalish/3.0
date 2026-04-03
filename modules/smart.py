@@ -467,7 +467,36 @@ class SMARTProcessor:
         # --- КОНЕЦ НОВОГО ---
 
         # Проходим по меткам "Смена" в хронологическом порядке
+        current_period_idx = -1  # Индекс текущего периода для отслеживания переходов
+        
         for label in filtered_change_labels:
+            # Определяем, в каком периоде находится текущая метка
+            label_period_idx = -1
+            for idx, seg_range in enumerate(segment_ranges):
+                if seg_range.start_time <= label.global_time <= seg_range.end_time:
+                    label_period_idx = idx
+                    break
+            
+            # Если период изменился (и это не первая метка), сбрасываем состояние
+            # Это важно для случаев, когда игрок был на льду в конце периода
+            # и снова выходит на лёд в начале следующего периода
+            if current_period_idx != -1 and label_period_idx != -1 and label_period_idx != current_period_idx:
+                # Закрываем все открытые смены для предыдущего периода
+                prev_seg_range = segment_ranges[current_period_idx]
+                for player_id in list(player_entry_times.keys()):
+                    entry_time = player_entry_times[player_id]
+                    existing_info = player_shifts_result.get(player_id)
+                    if existing_info is not None:
+                        shift_number = len(existing_info.shifts) + 1
+                        shift_obj = PlayerShift(number=shift_number, start_time=entry_time, end_time=prev_seg_range.end_time)
+                        existing_info.shifts.append(shift_obj)
+                    del player_entry_times[player_id]
+                # Сбрасываем состояние игроков на льду
+                players_on_ice_before = set()
+            
+            if label_period_idx != -1:
+                current_period_idx = label_period_idx
+            
             # Получаем состав после изменения (только id_fhm)
             players_after_change_set = {player_info["id_fhm"] for player_info in label.context["players_on_ice"]}
             
