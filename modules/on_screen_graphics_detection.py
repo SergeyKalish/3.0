@@ -80,7 +80,8 @@ def detect_osg_events(
     preprocess_method: int = 0,  # Метод предобработки изображения (0-9 из предыдущего скрипта)
     skip_every_n: int = 1,  # Пропускать N-1 кадров между обрабатываемыми (1 = обрабатывать все)
     find_first_only: bool = False,  # <-- Новый параметр: искать только первое вхождение
-    progress_callback: Optional[Callable[[int, int], None]] = None  # Для отображения прогресса
+    progress_callback: Optional[Callable[[int, int], None]] = None,  # Для отображения прогресса
+    base_resolution: Tuple[int, int] = (1920, 1080)  # Базовое разрешение для которого задан ROI (FHD)
 ) -> List[Dict[str, Any]]:
     """
     Выполняет OCR на заданной области кадра в видео и ищет ключевые слова из event_type_map.
@@ -119,10 +120,26 @@ def detect_osg_events(
 
     fps = cap.get(cv2.CAP_PROP_FPS)
     total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    
     if fps <= 0:
         fps = 25.0  # fallback
 
-    x, y, w, h = roi["x"], roi["y"], roi["width"], roi["height"]
+    # === Масштабирование ROI под разрешение видео ===
+    base_width, base_height = base_resolution
+    scale_x = frame_width / base_width
+    scale_y = frame_height / base_height
+    
+    x = int(roi["x"] * scale_x)
+    y = int(roi["y"] * scale_y)
+    w = int(roi["width"] * scale_x)
+    h = int(roi["height"] * scale_y)
+    
+    print(f"[OSG] Разрешение видео: {frame_width}x{frame_height}, базовое: {base_width}x{base_height}")
+    print(f"[OSG] Масштаб: x={scale_x:.3f}, y={scale_y:.3f}")
+    print(f"[OSG] ROI после масштабирования: x={x}, y={y}, w={w}, h={h}")
+
 
     # === Определяем диапазоны поиска в кадрах ===
     if search_ranges is None:

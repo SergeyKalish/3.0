@@ -1216,7 +1216,8 @@ class PlayerShiftMapReport:
             # Среднее время смены в секундах
             if not period_shifts:
                 return self._format_table_value("0\"", "0\"")
-            total_duration = sum(s.duration for s in period_shifts)
+            # Округляем каждую смену как на графике, затем считаем среднее
+            total_duration = sum(int(s.duration) for s in period_shifts)
             avg_seconds = int(total_duration / len(period_shifts))
             return self._format_table_value(f"{avg_seconds}\"", "0\"")
         
@@ -1224,7 +1225,8 @@ class PlayerShiftMapReport:
             # Общее время в формате MM:SS
             if not period_shifts:
                 return self._format_table_value("0:00", "0:00")
-            total_seconds = int(sum(s.duration for s in period_shifts))
+            # Суммируем округленные значения как на графике
+            total_seconds = sum(int(s.duration) for s in period_shifts)
             minutes = total_seconds // 60
             seconds = total_seconds % 60
             return self._format_table_value(f"{minutes}:{seconds:02d}", "0:00")

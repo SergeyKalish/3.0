@@ -1,0 +1,954 @@
+{
+  "version": "4.0",
+  "video_path": "D:/Media/Матчи Созвездие 2014 сезона 25-26/30_тур_720p_2014_Динамо_2015_Созвездие_21_03_2026_fixed.mp4",
+  "match": {
+    "generic_labels": [
+      {
+        "id": "74cde820-f36e-453b-a806-59c013baf995",
+        "label_type": "Сегмент",
+        "global_time": 631.5999999999999,
+        "context": null
+      },
+      {
+        "id": "a8032de1-1e77-4380-adb1-fc2eca38b62f",
+        "label_type": "Сегмент",
+        "global_time": 2245.487686252594,
+        "context": null
+      },
+      {
+        "id": "fc95d787-6109-4642-b046-a8607b0d293e",
+        "label_type": "Сегмент",
+        "global_time": 3105.0229962825774,
+        "context": null
+      },
+      {
+        "id": "7c03b23e-b9be-46de-9bff-827bc2079f66",
+        "label_type": "Сегмент",
+        "global_time": 4926.010573196415,
+        "context": null
+      },
+      {
+        "id": "d2484a54-ed3d-4f15-a3cf-b69a1207ef31",
+        "label_type": "Сегмент",
+        "global_time": 5171.428807296066,
+        "context": null
+      },
+      {
+        "id": "ad6b7043-5bb3-4adf-baf4-bc848e610a98",
+        "label_type": "Сегмент",
+        "global_time": 7048.762804545669,
+        "context": null
+      },
+      {
+        "id": "fd73a552-51a6-4320-a59f-6daf22496b93",
+        "label_type": "Черн.OSD",
+        "global_time": 1587.2252980285027,
+        "context": {
+          "detected_text": "ГОЛ",
+          "confidence": 80.0
+        }
+      },
+      {
+        "id": "f0018533-9ae3-48d9-9ec6-38b71163c860",
+        "label_type": "Черн.OSD",
+        "global_time": 1839.6356821248723,
+        "context": {
+          "detected_text": "ГОЛ",
+          "confidence": 75.0
+        }
+      },
+      {
+        "id": "458d6211-e042-4ef6-9cc9-66c46f1f822d",
+        "label_type": "Черн.OSD",
+        "global_time": 3611.428573215285,
+        "context": {
+          "detected_text": "ГОЛ",
+          "confidence": 84.0
+        }
+      },
+      {
+        "id": "5e9165e8-75c0-43b6-a8e7-3d615c3d4ba8",
+        "label_type": "Черн.OSD",
+        "global_time": 3666.2308277655266,
+        "context": {
+          "detected_text": "ГОЛ",
+          "confidence": 78.0
+        }
+      },
+      {
+        "id": "9397434d-0bbc-45e9-9630-785ec96d19fc",
+        "label_type": "Черн.OSD",
+        "global_time": 3880.639648487641,
+        "context": {
+          "detected_text": "ГОЛ",
+          "confidence": 76.0
+        }
+      },
+      {
+        "id": "c5b6ac85-0cc0-461a-9d52-ee34bb509ae6",
+        "label_type": "Черн.OSD",
+        "global_time": 4414.661618010071,
+        "context": {
+          "detected_text": "ГОЛ",
+          "confidence": 88.0
+        }
+      },
+      {
+        "id": "a1047b7d-3bc5-4189-8e3a-755713aa6e3c",
+        "label_type": "Черн.OSD",
+        "global_time": 4538.266703090544,
+        "context": {
+          "detected_text": "ГОЛ",
+          "confidence": 82.0
+        }
+      },
+      {
+        "id": "b6f5206c-12b5-43f1-b21d-743439c6b096",
+        "label_type": "Черн.OSD",
+        "global_time": 5679.033633940032,
+        "context": {
+          "detected_text": "ГОЛ",
+          "confidence": 77.0
+        }
+      },
+      {
+        "id": "9830ed1c-df61-45f6-9045-9c4244517358",
+        "label_type": "Черн.OSD",
+        "global_time": 6097.450847513412,
+        "context": {
+          "detected_text": "ГОЛ",
+          "confidence": 77.0
+        }
+      },
+      {
+        "id": "3e092858-da8d-45d3-906e-80a44f5b0557",
+        "label_type": "Черн.OSD",
+        "global_time": 6376.262317743475,
+        "context": {
+          "detected_text": "ГОЛ",
+          "confidence": 80.0
+        }
+      },
+      {
+        "id": "86eb4b96-3d1d-4e48-8980-238520e2a600",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 865.5956103742224,
+        "context": null
+      },
+      {
+        "id": "38caad8c-d137-4fb7-b411-b98f3e6aad89",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 871.1958407662179,
+        "context": null
+      },
+      {
+        "id": "3d1cf7c1-716c-4528-8c96-af5e866f464d",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 1270.8122808807557,
+        "context": null
+      },
+      {
+        "id": "cc286ea7-ac22-4d50-aa5f-2fbcb0a8eb24",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 1276.412511272751,
+        "context": null
+      },
+      {
+        "id": "be3ccc7d-0cfe-4da9-a2f2-bb5c7967008e",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 1594.0255777902116,
+        "context": null
+      },
+      {
+        "id": "c6a08f41-8521-4dbc-b8bf-2d9cf9812ceb",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 1604.4260056610603,
+        "context": null
+      },
+      {
+        "id": "5a2abe7c-a55b-4d4d-8e08-6bc198742e00",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 1846.8359783431524,
+        "context": null
+      },
+      {
+        "id": "54d2e6d1-94e6-4b96-8747-0a74072701e7",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 1857.2364062140011,
+        "context": null
+      },
+      {
+        "id": "7abbf3ba-6d24-4857-b718-c19db079dcc0",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 3543.8257920547676,
+        "context": null
+      },
+      {
+        "id": "12612f52-8267-4bd1-9dc7-e7b3878b3637",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 3549.426022446763,
+        "context": null
+      },
+      {
+        "id": "a7371961-ee24-4a1a-bba7-d3354d636de3",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 3617.8288365204226,
+        "context": null
+      },
+      {
+        "id": "e5040d78-70c1-4a60-a7f5-721ff825fae5",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 3628.2292643912715,
+        "context": null
+      },
+      {
+        "id": "a29e023f-2357-4941-96de-14e39e4ff771",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 3673.4311239838066,
+        "context": null
+      },
+      {
+        "id": "53f8a2cf-dc7d-4ed8-a092-b56d8c20d212",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 3683.8315518546556,
+        "context": null
+      },
+      {
+        "id": "28005955-8c6f-47fe-a399-437e278eab6d",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 3801.8364065431324,
+        "context": null
+      },
+      {
+        "id": "8d7b3613-990c-486e-b43a-5e456a8fee88",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 3812.2368344139813,
+        "context": null
+      },
+      {
+        "id": "1bd040b4-6c98-4ded-898e-2e3e807de6e6",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 3889.4400105322056,
+        "context": null
+      },
+      {
+        "id": "b74fbeb6-b0e6-445a-aabb-8f88bba25a64",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 3899.840438403054,
+        "context": null
+      },
+      {
+        "id": "6e1ea823-99d9-4318-b665-7fb629e6bbbc",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 4421.061881315209,
+        "context": null
+      },
+      {
+        "id": "5928e59b-2430-4944-a771-dfc7a5226875",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 4431.462309186058,
+        "context": null
+      },
+      {
+        "id": "8cbbc32d-a91a-4bc0-a62d-5edc0891f0b7",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 4548.667130961393,
+        "context": null
+      },
+      {
+        "id": "b3ce340c-f322-4cc9-93e6-9e1db14cc01a",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 4559.067558832242,
+        "context": null
+      },
+      {
+        "id": "757a478b-a350-4626-be89-ead5a3045fa2",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 5503.0263930487445,
+        "context": null
+      },
+      {
+        "id": "946dde07-7e79-44eb-b5d0-d1534d8076d3",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 5508.226606984169,
+        "context": null
+      },
+      {
+        "id": "c8d8e438-db70-4d8b-bcb6-9a0f85977f8c",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 5686.233930158312,
+        "context": null
+      },
+      {
+        "id": "72521320-45ab-4157-9b32-73cd4497d71c",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 5696.634358029161,
+        "context": null
+      },
+      {
+        "id": "aa3db80a-d62d-4aa6-91a8-51158e68ed85",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 5897.842635684428,
+        "context": null
+      },
+      {
+        "id": "1bee8bb9-24f7-4711-b2c4-56ca68ee1e0f",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 5903.442866076424,
+        "context": null
+      },
+      {
+        "id": "18ac6bcb-6ecd-4383-bed0-b4a879e948c8",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 6106.251209557977,
+        "context": null
+      },
+      {
+        "id": "0802c57a-6499-44fd-beb1-98afe8917330",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 6116.651637428825,
+        "context": null
+      },
+      {
+        "id": "2861da3c-b694-4f78-b094-4abe6249a55a",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 6217.8558009413155,
+        "context": null
+      },
+      {
+        "id": "45a9007c-590d-4bbb-be70-80d944468eaf",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 6223.05601487674,
+        "context": null
+      },
+      {
+        "id": "6219aa33-7779-4b4b-b5f7-50fac83cf259",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 6382.662581048613,
+        "context": null
+      },
+      {
+        "id": "a842c37a-57af-4b1b-96b0-56a80328bd0d",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 6393.063008919461,
+        "context": null
+      },
+      {
+        "id": "e2538415-f4b7-4d5b-b44f-3dd8f3c66a2c",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 6845.081604844814,
+        "context": null
+      },
+      {
+        "id": "f07d6f9e-a12a-415c-a126-6cea397d4aae",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 6850.281818780239,
+        "context": null
+      },
+      {
+        "id": "0758f352-bcba-47e8-9177-fafb3898f476",
+        "label_type": "Пауза",
+        "global_time": 856.4573962628942,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "a75bc5d3-84a2-4232-82d0-442e573ce5d1",
+        "label_type": "Пауза",
+        "global_time": 887.4831654955475,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "cc50a19c-673f-4120-847e-055eadc75c6d",
+        "label_type": "Пауза",
+        "global_time": 1264.5555038326447,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "3d723dd0-e9e7-450d-b4f5-fc04301ac131",
+        "label_type": "Пауза",
+        "global_time": 1290.5555038326447,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "ab016497-b643-4b84-8ca1-bc46736322f3",
+        "label_type": "Пауза",
+        "global_time": 1581.1071060710285,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "3c3af0f1-c4fb-4fcf-97f2-d3761b3d264c",
+        "label_type": "Пауза",
+        "global_time": 1616.4260056610603,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "2f679d20-47e3-4f4a-a1ee-90ee8f19bbcf",
+        "label_type": "Пауза",
+        "global_time": 1832.8570529172623,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "11880073-2ef2-419e-a44f-96ddd5dba91d",
+        "label_type": "Пауза",
+        "global_time": 1867.8570529172623,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "d9f5fe4e-ca65-4857-953f-ec91be09b684",
+        "label_type": "Пауза",
+        "global_time": 3538.393087987538,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "97b41c26-6edc-49b3-b210-80b2e7ee26eb",
+        "label_type": "Пауза",
+        "global_time": 3561.4508711940152,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "9d35f1f6-3591-44f3-94ad-c254fe269aec",
+        "label_type": "Пауза",
+        "global_time": 3604.0337277295976,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "5f3e1a1d-46df-45f0-babe-f31f664ef618",
+        "label_type": "Пауза",
+        "global_time": 3643.2292643912715,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "2768c189-0150-46ca-aaf6-90af6e753c2c",
+        "label_type": "Пауза",
+        "global_time": 3663.1706735022944,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "94781a7a-501d-46b7-84af-f0772d36c125",
+        "label_type": "Пауза",
+        "global_time": 3756.8315518546556,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "bddec586-fe03-4947-9ebe-2be1b0d6c76b",
+        "label_type": "Пауза",
+        "global_time": 3793.708657338497,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "11280bf6-38b8-434e-ac94-573be59fe445",
+        "label_type": "Пауза",
+        "global_time": 3814.523800737834,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "03b1f9bc-a60c-412d-b7fe-0c73ff334d6b",
+        "label_type": "Пауза",
+        "global_time": 3876.646204044892,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "4c004c4d-fbf1-4082-9394-cf88b6929a11",
+        "label_type": "Пауза",
+        "global_time": 3926.840438403054,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "c074e65f-78bd-48a5-8536-e06a99455ce7",
+        "label_type": "Пауза",
+        "global_time": 4406.8654575505525,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "eb1d0989-e03a-486e-aca1-640c913d8f03",
+        "label_type": "Пауза",
+        "global_time": 4447.962309186058,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "33f61eb6-d765-4cba-9484-e1c854947664",
+        "label_type": "Пауза",
+        "global_time": 4531.628408632155,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "21cd4b9a-b0e8-4e92-89c8-12cde32ad8c0",
+        "label_type": "Пауза",
+        "global_time": 4574.067558832242,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "2bfe69c2-681f-4963-baed-4be19579c05a",
+        "label_type": "Пауза",
+        "global_time": 5496.793803088646,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "2abf6416-1566-48cd-806f-33907493ccc6",
+        "label_type": "Пауза",
+        "global_time": 5516.226606984169,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "41f48622-da2e-4c1c-9892-7e5ceea2cc9d",
+        "label_type": "Пауза",
+        "global_time": 5672.59336232405,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "8be37f00-9e23-4919-8651-ded6ec0144af",
+        "label_type": "Пауза",
+        "global_time": 5712.634358029161,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "275eaf2b-8cf2-4b1d-9b1a-ff3ab051fd89",
+        "label_type": "Пауза",
+        "global_time": 5889.809565835414,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "a3b44a41-9901-4c61-a5a9-e6997bf0d8c3",
+        "label_type": "Пауза",
+        "global_time": 5909.442866076424,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "3e962477-d39d-406f-bcce-f2d4bb88c70d",
+        "label_type": "Пауза",
+        "global_time": 6093.19243968222,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "635e5ee0-a525-4170-993d-993f30cec4b0",
+        "label_type": "Пауза",
+        "global_time": 6144.151637428825,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "99c30b9c-d4ea-452f-99f5-0b39750272cc",
+        "label_type": "Пауза",
+        "global_time": 6204.454189851609,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "0cf364e6-a92a-4863-9c56-0ed4e9e767eb",
+        "label_type": "Пауза",
+        "global_time": 6240.234548669236,
+        "context": {
+          "period_name": "Период 3"
+        }
+      }
+    ],
+    "calculated_ranges": [
+      {
+        "id": "bd890faf-6039-4bd8-b0f8-086e1f997aad",
+        "name": "Всё видео",
+        "label_type": "Всё видео",
+        "start_time": 0.0,
+        "end_time": 7292.22,
+        "source_label_ids": [],
+        "context": null
+      },
+      {
+        "id": "2c64c6ae-49d8-4c61-be93-ba0ccb814607",
+        "name": "Период 1",
+        "label_type": "Сегмент",
+        "start_time": 631.5999999999999,
+        "end_time": 2245.487686252594,
+        "source_label_ids": [
+          "74cde820-f36e-453b-a806-59c013baf995",
+          "a8032de1-1e77-4380-adb1-fc2eca38b62f"
+        ],
+        "context": null
+      },
+      {
+        "id": "32344ffe-7a3c-4939-bce0-d6b37b1f4601",
+        "name": "Период 2",
+        "label_type": "Сегмент",
+        "start_time": 3105.0229962825774,
+        "end_time": 4926.010573196415,
+        "source_label_ids": [
+          "fc95d787-6109-4642-b046-a8607b0d293e",
+          "7c03b23e-b9be-46de-9bff-827bc2079f66"
+        ],
+        "context": null
+      },
+      {
+        "id": "a87b0e14-5221-45fd-b6f6-d5aee0a09c39",
+        "name": "Период 3",
+        "label_type": "Сегмент",
+        "start_time": 5171.428807296066,
+        "end_time": 7048.762804545669,
+        "source_label_ids": [
+          "d2484a54-ed3d-4f15-a3cf-b69a1207ef31",
+          "ad6b7043-5bb3-4adf-baf4-bc848e610a98"
+        ],
+        "context": null
+      },
+      {
+        "id": "53602c6b-92c1-4f6b-9fe6-9b903f370581",
+        "name": "Период 1. ЧИИ №1",
+        "label_type": "ЧИИ",
+        "start_time": 631.5999999999999,
+        "end_time": 856.4573962628942,
+        "source_label_ids": [
+          "74cde820-f36e-453b-a806-59c013baf995",
+          "a8032de1-1e77-4380-adb1-fc2eca38b62f"
+        ],
+        "context": null
+      },
+      {
+        "id": "6f71e01e-e54b-4dda-b82d-9a989242fa54",
+        "name": "Период 1. ЧИИ №2",
+        "label_type": "ЧИИ",
+        "start_time": 887.4831654955475,
+        "end_time": 1264.5555038326447,
+        "source_label_ids": [
+          "74cde820-f36e-453b-a806-59c013baf995",
+          "a8032de1-1e77-4380-adb1-fc2eca38b62f"
+        ],
+        "context": null
+      },
+      {
+        "id": "3a65cd14-f376-45de-9c5c-5852ffa7f8f6",
+        "name": "Период 1. ЧИИ №3",
+        "label_type": "ЧИИ",
+        "start_time": 1290.5555038326447,
+        "end_time": 1581.1071060710285,
+        "source_label_ids": [
+          "74cde820-f36e-453b-a806-59c013baf995",
+          "a8032de1-1e77-4380-adb1-fc2eca38b62f"
+        ],
+        "context": null
+      },
+      {
+        "id": "310f910c-3f1b-47ff-a934-8001fb949b0a",
+        "name": "Период 1. ЧИИ №4",
+        "label_type": "ЧИИ",
+        "start_time": 1616.4260056610603,
+        "end_time": 1832.8570529172623,
+        "source_label_ids": [
+          "74cde820-f36e-453b-a806-59c013baf995",
+          "a8032de1-1e77-4380-adb1-fc2eca38b62f"
+        ],
+        "context": null
+      },
+      {
+        "id": "fc3f0739-9217-4723-a94d-1c4154e6b780",
+        "name": "Период 1. ЧИИ №5",
+        "label_type": "ЧИИ",
+        "start_time": 1867.8570529172623,
+        "end_time": 2245.487686252594,
+        "source_label_ids": [
+          "74cde820-f36e-453b-a806-59c013baf995",
+          "a8032de1-1e77-4380-adb1-fc2eca38b62f"
+        ],
+        "context": null
+      },
+      {
+        "id": "1b6f1c46-7d55-4687-93d9-8fe5f8c549bf",
+        "name": "Период 2. ЧИИ №1",
+        "label_type": "ЧИИ",
+        "start_time": 3105.0229962825774,
+        "end_time": 3538.393087987538,
+        "source_label_ids": [
+          "fc95d787-6109-4642-b046-a8607b0d293e",
+          "7c03b23e-b9be-46de-9bff-827bc2079f66"
+        ],
+        "context": null
+      },
+      {
+        "id": "8ac575d3-5b57-4753-a75a-be0035dfcb80",
+        "name": "Период 2. ЧИИ №2",
+        "label_type": "ЧИИ",
+        "start_time": 3561.4508711940152,
+        "end_time": 3604.0337277295976,
+        "source_label_ids": [
+          "fc95d787-6109-4642-b046-a8607b0d293e",
+          "7c03b23e-b9be-46de-9bff-827bc2079f66"
+        ],
+        "context": null
+      },
+      {
+        "id": "a9d4f565-2362-4f75-b3b4-7ab66b0f45fe",
+        "name": "Период 2. ЧИИ №3",
+        "label_type": "ЧИИ",
+        "start_time": 3643.2292643912715,
+        "end_time": 3663.1706735022944,
+        "source_label_ids": [
+          "fc95d787-6109-4642-b046-a8607b0d293e",
+          "7c03b23e-b9be-46de-9bff-827bc2079f66"
+        ],
+        "context": null
+      },
+      {
+        "id": "c95f6866-64f5-49f5-bfd6-97056ea9e940",
+        "name": "Период 2. ЧИИ №4",
+        "label_type": "ЧИИ",
+        "start_time": 3756.8315518546556,
+        "end_time": 3793.708657338497,
+        "source_label_ids": [
+          "fc95d787-6109-4642-b046-a8607b0d293e",
+          "7c03b23e-b9be-46de-9bff-827bc2079f66"
+        ],
+        "context": null
+      },
+      {
+        "id": "7f9e89ca-14cc-410a-8db8-d3c32f0c7eff",
+        "name": "Период 2. ЧИИ №5",
+        "label_type": "ЧИИ",
+        "start_time": 3814.523800737834,
+        "end_time": 3876.646204044892,
+        "source_label_ids": [
+          "fc95d787-6109-4642-b046-a8607b0d293e",
+          "7c03b23e-b9be-46de-9bff-827bc2079f66"
+        ],
+        "context": null
+      },
+      {
+        "id": "51d0bb06-a5ab-4796-8941-57e6ac5e1ad6",
+        "name": "Период 2. ЧИИ №6",
+        "label_type": "ЧИИ",
+        "start_time": 3926.840438403054,
+        "end_time": 4406.8654575505525,
+        "source_label_ids": [
+          "fc95d787-6109-4642-b046-a8607b0d293e",
+          "7c03b23e-b9be-46de-9bff-827bc2079f66"
+        ],
+        "context": null
+      },
+      {
+        "id": "0316c899-443e-453c-acdb-5cb0e8d7953e",
+        "name": "Период 2. ЧИИ №7",
+        "label_type": "ЧИИ",
+        "start_time": 4447.962309186058,
+        "end_time": 4531.628408632155,
+        "source_label_ids": [
+          "fc95d787-6109-4642-b046-a8607b0d293e",
+          "7c03b23e-b9be-46de-9bff-827bc2079f66"
+        ],
+        "context": null
+      },
+      {
+        "id": "febfa9c4-5201-4cc4-970c-1d681430429c",
+        "name": "Период 2. ЧИИ №8",
+        "label_type": "ЧИИ",
+        "start_time": 4574.067558832242,
+        "end_time": 4926.010573196415,
+        "source_label_ids": [
+          "fc95d787-6109-4642-b046-a8607b0d293e",
+          "7c03b23e-b9be-46de-9bff-827bc2079f66"
+        ],
+        "context": null
+      },
+      {
+        "id": "073b8bf7-cbb2-40b2-aae0-deb836a10de6",
+        "name": "Период 3. ЧИИ №1",
+        "label_type": "ЧИИ",
+        "start_time": 5171.428807296066,
+        "end_time": 5496.793803088646,
+        "source_label_ids": [
+          "d2484a54-ed3d-4f15-a3cf-b69a1207ef31",
+          "ad6b7043-5bb3-4adf-baf4-bc848e610a98"
+        ],
+        "context": null
+      },
+      {
+        "id": "33efb461-c9f4-491d-8e15-5b41b7520a02",
+        "name": "Период 3. ЧИИ №2",
+        "label_type": "ЧИИ",
+        "start_time": 5516.226606984169,
+        "end_time": 5672.59336232405,
+        "source_label_ids": [
+          "d2484a54-ed3d-4f15-a3cf-b69a1207ef31",
+          "ad6b7043-5bb3-4adf-baf4-bc848e610a98"
+        ],
+        "context": null
+      },
+      {
+        "id": "62125ed7-59bd-47b4-92ff-1159718b0860",
+        "name": "Период 3. ЧИИ №3",
+        "label_type": "ЧИИ",
+        "start_time": 5712.634358029161,
+        "end_time": 5889.809565835414,
+        "source_label_ids": [
+          "d2484a54-ed3d-4f15-a3cf-b69a1207ef31",
+          "ad6b7043-5bb3-4adf-baf4-bc848e610a98"
+        ],
+        "context": null
+      },
+      {
+        "id": "c984e2b5-3f8d-422d-968f-d42be7d91a37",
+        "name": "Период 3. ЧИИ №4",
+        "label_type": "ЧИИ",
+        "start_time": 5909.442866076424,
+        "end_time": 6093.19243968222,
+        "source_label_ids": [
+          "d2484a54-ed3d-4f15-a3cf-b69a1207ef31",
+          "ad6b7043-5bb3-4adf-baf4-bc848e610a98"
+        ],
+        "context": null
+      },
+      {
+        "id": "251a5783-d749-4da4-8c3f-cf9c531d935d",
+        "name": "Период 3. ЧИИ №5",
+        "label_type": "ЧИИ",
+        "start_time": 6144.151637428825,
+        "end_time": 6204.454189851609,
+        "source_label_ids": [
+          "d2484a54-ed3d-4f15-a3cf-b69a1207ef31",
+          "ad6b7043-5bb3-4adf-baf4-bc848e610a98"
+        ],
+        "context": null
+      },
+      {
+        "id": "40231ca2-4fb8-46bd-a1e9-c181cbb2e60a",
+        "name": "Период 3. ЧИИ №6",
+        "label_type": "ЧИИ",
+        "start_time": 6240.234548669236,
+        "end_time": 7048.762804545669,
+        "source_label_ids": [
+          "d2484a54-ed3d-4f15-a3cf-b69a1207ef31",
+          "ad6b7043-5bb3-4adf-baf4-bc848e610a98"
+        ],
+        "context": null
+      },
+      {
+        "id": "0055c773-e1e9-4861-9041-dbbfc7312748",
+        "name": "0:0",
+        "label_type": "Счёт",
+        "start_time": 631.5999999999999,
+        "end_time": 2245.487686252594,
+        "source_label_ids": [],
+        "context": null
+      },
+      {
+        "id": "1a3ace44-5ad9-4504-a519-d06d98821d17",
+        "name": "0:0",
+        "label_type": "Счёт",
+        "start_time": 3105.0229962825774,
+        "end_time": 4926.010573196415,
+        "source_label_ids": [],
+        "context": null
+      },
+      {
+        "id": "6a1e0766-92a2-434e-b070-1d44ff032278",
+        "name": "0:0",
+        "label_type": "Счёт",
+        "start_time": 5171.428807296066,
+        "end_time": 7048.762804545669,
+        "source_label_ids": [],
+        "context": null
+      },
+      {
+        "id": "68912c00-c8a0-4c7e-99be-1532b476ab63",
+        "name": "5 на 5",
+        "label_type": "game_mode",
+        "start_time": 631.5999999999999,
+        "end_time": 2245.487686252594,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": []
+        }
+      },
+      {
+        "id": "c484f6a3-8653-441b-b5b3-8123f5091774",
+        "name": "5 на 5",
+        "label_type": "game_mode",
+        "start_time": 3105.0229962825774,
+        "end_time": 4926.010573196415,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": []
+        }
+      },
+      {
+        "id": "90841991-55ab-4da1-bf7e-0bed1ede06da",
+        "name": "5 на 5",
+        "label_type": "game_mode",
+        "start_time": 5171.428807296066,
+        "end_time": 7048.762804545669,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": []
+        }
+      }
+    ],
+    "player_shifts": {},
+    "player_shifts_official_timer": {},
+    "match_id": null,
+    "teams": {},
+    "rosters": {},
+    "events": [],
+    "tournament_name": null,
+    "tour_number": null,
+    "match_date": null,
+    "match_time": null,
+    "venue_city": null,
+    "venue_arena": null,
+    "referees": []
+  }
+}

@@ -166,7 +166,7 @@ class VideoPlayerWidget(QWidget):
         super().__init__(parent)
         self.setFocusPolicy(Qt.StrongFocus)
         self.controller = VideoPlaybackController()
-        self.display_mode = "low"
+        self.display_mode = "high"
         self.timer = QTimer()
         self.timer.timeout.connect(self.playback_step)
 
