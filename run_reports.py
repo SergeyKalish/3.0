@@ -43,7 +43,7 @@ sys.path.insert(0, os.path.abspath('.'))
 
 from PyQt5.QtWidgets import QApplication, QFileDialog, QMessageBox
 from utils.helpers import load_project_from_file
-from modules.reports import PlayerShiftMapReport, ReportData
+from modules.reports import PlayerShiftMapReport, ReportData, SORT_BY_EXIT_TIME, SORT_BY_POSITION_BLOCKS
 from modules.reports.ui.report_generation_dialog import ReportGenerationDialog
 
 
@@ -66,16 +66,17 @@ def main():
         project = load_project_from_file(hkt_file_path)
         print(f"Проект загружен: {project.video_path}")
 
-        # === ДИАЛОГ ВЫБОРА РАЗМЕРА ЛИСТА ===
+        # === ДИАЛОГ ВЫБОРА ПАРАМЕТРОВ ОТЧЁТА ===
         dialog = ReportGenerationDialog()
         if dialog.exec_() != ReportGenerationDialog.Accepted:
             print("Генерация отчёта отменена пользователем.")
             return
-        selected_page_size = dialog.get_selected_params()
+        selected_page_size, selected_sort_order = dialog.get_selected_params()
         print(f"Выбран размер листа: {selected_page_size}")
+        print(f"Выбран порядок заполнения: {selected_sort_order}")
 
-        # Создание отчёта с новой архитектурой
-        report_data = ReportData(original_project=project)
+        # Создание отчёта с новой архитектурой и выбранной сортировкой
+        report_data = ReportData(original_project=project, sort_order=selected_sort_order)
         report_generator = PlayerShiftMapReport(page_size=selected_page_size)
         
         # Генерация ВСЕХ листов (новый метод generate_all)

@@ -8,6 +8,10 @@ from utils.helpers import convert_global_to_official_time # Импортируе
 # Константа для имени нашей команды
 OUR_TEAM_NAME = "Созвездие 2014"
 
+# Константы для типов сортировки
+SORT_BY_EXIT_TIME = "by_exit_time"  # По времени выхода (текущий)
+SORT_BY_POSITION_BLOCKS = "by_position_blocks"  # По позициям (блоками)
+
 @dataclass
 class PlayerShift:
     """
@@ -96,11 +100,13 @@ class ReportData:
     необходимых для генерации отчёта.
     """
 
-    def __init__(self, original_project):
+    def __init__(self, original_project, sort_order: str = SORT_BY_EXIT_TIME):
         """
         :param original_project: объект project, загруженный из .hkt
+        :param sort_order: тип сортировки игроков (SORT_BY_EXIT_TIME или SORT_BY_POSITION_BLOCKS)
         """
         self.original_project = original_project
+        self.sort_order = sort_order
         self.our_team_key: Optional[str] = None
         self.players_list: List[PlayerInfo] = []
         self.shifts_by_player_id: Dict[str, List[ShiftInfo]] = {}
@@ -112,6 +118,151 @@ class ReportData:
         self.active_penalties: List[Any] = [] # Пока сырые данные
         self.faceoffs: List[FaceoffInfo] = []
         self._extract_and_validate_data()
+
+    def _sort_players(self):
+        """
+        Сортирует список игроков в соответствии с выбранным типом сортировки.
+        """
+        if self.sort_order == SORT_BY_POSITION_BLOCKS:
+            self._sort_players_by_position_blocks()
+        else:
+            self._sort_players_by_exit_time()
+
+    def _sort_players_by_exit_time(self):
+        """
+        Сортировка "По времени выхода" (классическая).
+        1. Вратари первыми
+        2. По времени первой смены
+        3. Приоритет позиции (при равном времени)
+        4. Номер игрока
+        """
+        # Извлекаем время первой смены для каждого игрока
+        first_shift_times = {}
+        for player_info in self.players_list:
+            player_id = player_info.player_id
+            player_shifts = self.shifts_by_player_id.get(player_id, [])
+            if player_shifts:
+                first_shift_time = player_shifts[0].official_start
+            else:
+                first_shift_time = float('inf')
+            first_shift_times[player_id] = first_shift_time
+
+        def get_position_priority(role_str, group_str, position_str):
+            """Определяет приоритет позиции для сортировки."""
+            group_lower = group_str.lower()
+            pos_lower = position_str.lower()
+
+            is_defender_line = "пар" in group_lower
+            is_forward_line = "тро" in group_lower
+
+            is_center = 'центр' in pos_lower or 'ц' == pos_lower
+            is_left = 'лев' in pos_lower
+            is_right = 'прав' in pos_lower
+
+            if is_forward_line:
+                if is_center:
+                    return 0
+                elif is_left:
+                    return 1
+                elif is_right:
+                    return 2
+                else:
+                    return 999
+            elif is_defender_line:
+                if is_left:
+                    return 3
+                elif is_right:
+                    return 4
+                else:
+                    return 999
+            return 999
+
+        def get_sort_key(player_info):
+            is_goalie = 0 if player_info.role.lower().startswith('вратарь') else 1
+            fst = first_shift_times[player_info.player_id]
+            pos_prio = 999
+            if not player_info.role.lower().startswith('вратарь'):
+                pos_prio = get_position_priority(player_info.role, player_info.lineup_group, player_info.lineup_position)
+            return (is_goalie, fst, pos_prio, int(player_info.number) if player_info.number.isdigit() else float('inf'))
+
+        self.players_list.sort(key=get_sort_key)
+
+    def _sort_players_by_position_blocks(self):
+        """
+        Сортировка "По позициям (блоками)".
+        1. Вратари первыми
+        2. Нападающие (сортировка по времени первой смены внутри блока)
+        3. Защитники (сортировка по времени первой смены внутри блока)
+        4. Приоритет позиции (при равном времени)
+        5. Номер игрока
+        """
+        # Извлекаем время первой смены для каждого игрока
+        first_shift_times = {}
+        for player_info in self.players_list:
+            player_id = player_info.player_id
+            player_shifts = self.shifts_by_player_id.get(player_id, [])
+            if player_shifts:
+                first_shift_time = player_shifts[0].official_start
+            else:
+                first_shift_time = float('inf')
+            first_shift_times[player_id] = first_shift_time
+
+        def get_position_priority(role_str, group_str, position_str):
+            """Определяет приоритет позиции для сортировки."""
+            group_lower = group_str.lower()
+            pos_lower = position_str.lower()
+
+            is_defender_line = "пар" in group_lower
+            is_forward_line = "тро" in group_lower
+
+            is_center = 'центр' in pos_lower or 'ц' == pos_lower
+            is_left = 'лев' in pos_lower
+            is_right = 'прав' in pos_lower
+
+            if is_forward_line:
+                if is_center:
+                    return 0
+                elif is_left:
+                    return 1
+                elif is_right:
+                    return 2
+                else:
+                    return 999
+            elif is_defender_line:
+                if is_left:
+                    return 3
+                elif is_right:
+                    return 4
+                else:
+                    return 999
+            return 999
+
+        def get_player_type(player_info):
+            """Определяет тип игрока: вратарь, нападающий или защитник."""
+            role_lower = player_info.role.lower()
+            if role_lower.startswith('вратарь'):
+                return 0  # Вратарь
+            group_lower = player_info.lineup_group.lower()
+            if "тро" in group_lower:
+                return 1  # Нападающий
+            elif "пар" in group_lower:
+                return 2  # Защитник
+            # Если не определено, смотрим по роли
+            if 'нападающий' in role_lower:
+                return 1
+            elif 'защитник' in role_lower:
+                return 2
+            return 3  # Неизвестно - в конец
+
+        def get_sort_key(player_info):
+            player_type = get_player_type(player_info)
+            fst = first_shift_times[player_info.player_id]
+            pos_prio = 999
+            if player_type != 0:  # Не вратарь
+                pos_prio = get_position_priority(player_info.role, player_info.lineup_group, player_info.lineup_position)
+            return (player_type, fst, pos_prio, int(player_info.number) if player_info.number.isdigit() else float('inf'))
+
+        self.players_list.sort(key=get_sort_key)
 
     def _extract_and_validate_data(self):
         """
@@ -237,92 +388,10 @@ class ReportData:
             print(f"Найдены смены для {players_with_shifts_count} игроков из {len(self.players_list)}.")
         # --- КОНЕЦ НОВОГО ---
 
-        # --- НОВОЕ: Сортировка self.players_list по сложной логике (ПОСЛЕ извлечения self.shifts_by_player_id) ---
-        # 1. Извлекаем время первой смены для каждого игрока
-        first_shift_times = {}
-        for player_info in self.players_list:
-            player_id = player_info.player_id
-            player_shifts = self.shifts_by_player_id.get(player_id, [])
-            if player_shifts:
-                # Берём official_start первой смены (уже отсортированной)
-                first_shift_time = player_shifts[0].official_start
-            else:
-                # Если у игрока нет смен, ставим бесконечность, чтобы он был в конце
-                first_shift_time = float('inf')
-            first_shift_times[player_id] = first_shift_time
+        # --- НОВОЕ: Сортировка self.players_list по выбранному алгоритму ---
+        self._sort_players()
 
-        # 2. Определяем приоритет для сортировки внутри группы с одинаковым временем
-        def get_position_priority(role_str, group_str, position_str):
-            """
-            Определяет приоритет позиции для сортировки внутри группы с одинаковым временем первой смены.
-            """
-            # Приводим к нижнему регистру для гибкости
-            # role_lower = role_str.lower() # Не используется напрямую для приоритета, полагаемся на group_str
-            group_lower = group_str.lower()
-            pos_lower = position_str.lower()
-
-            # Проверяем тип группы (пара/тройка)
-            is_defender_line = "пар" in group_lower  # "пара", "пары", "парой" и т.д.
-            is_forward_line = "тро" in group_lower   # "тройка", "тройки", "тройкой" и т.д.
-
-            # Проверяем позицию
-            is_center = 'центр' in pos_lower or 'ц' == pos_lower
-            is_left = 'лев' in pos_lower
-            is_right = 'прав' in pos_lower
-
-            # Правила сортировки внутри "одинакового времени":
-            # 1. Центр (для нападающих)
-            # 2. Левый (нападающий или защитник)
-            # 3. Правый (нападающий или защитник)
-            # 4. Левый защитник (если нужно отличать от нападающего)
-            # 5. Правый защитник (если нужно отличать от нападающего)
-
-            # Если это тройка (нападающие)
-            if is_forward_line:
-                if is_center:
-                    return 0  # Центр первый
-                elif is_left:
-                    return 1  # Левый нападающий второй
-                elif is_right:
-                    return 2  # Правый нападающий третий
-                else:
-                    return 999 # Fallback для неузнанной позиции в тройке
-
-            # Если это пара (защитники)
-            elif is_defender_line:
-                if is_left:
-                    return 3  # Левый защитник четвёртый
-                elif is_right:
-                    return 4  # Правый защитник пятый
-                else:
-                    return 999 # Fallback для неузнанной позиции в паре
-
-            # Если группа не "пара" и не "тройка", или позиция не распознана
-            return 999
-
-
-        def get_sort_key(player_info):
-            # 1. Приоритет роли: Вратари (0), остальные (1)
-            is_goalie = 0 if player_info.role.lower().startswith('вратарь') else 1
-
-            # 2. Время первой смены (главный приоритет для не-вратарей)
-            fst = first_shift_times[player_info.player_id]
-
-            # 3. Приоритет позиции (Центр, Левый, Правый) - используется ТОЛЬКО если fst совпадает
-            pos_prio = 999 # Fallback
-            if not player_info.role.lower().startswith('вратарь'):
-                # Используем lineup_group и lineup_position для приоритета
-                pos_prio = get_position_priority(player_info.role, player_info.lineup_group, player_info.lineup_position)
-
-            # Кортеж для сортировки: (вратарь?, время_первой_смены, приоритет_позиции, номер_игрока)
-            # lineup_group НЕ используется как отдельное поле в сортировке, только для определения типа линии.
-            return (is_goalie, fst, pos_prio, int(player_info.number) if player_info.number.isdigit() else float('inf'))
-
-        # 3. Сортируем список игроков
-        # Используем новую функцию get_sort_key
-        self.players_list.sort(key=get_sort_key)
-
-        print(f"Извлечено и отсортировано {len(self.players_list)} игроков для отчёта.")
+        print(f"Извлечено и отсортировано {len(self.players_list)} игроков для отчёта (режим: {self.sort_order}).")
 
 
         # (остальной код метода без изменений: извлечение сегментов, голов, удалений и т.д.)

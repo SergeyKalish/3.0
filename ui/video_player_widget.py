@@ -233,7 +233,7 @@ class VideoPlayerWidget(QWidget):
             "Среднее (960×540 → 1440×810)",
             "Высокое (до 1440×810)"
         ])
-        self.quality_combo.setCurrentIndex(0)
+        self.quality_combo.setCurrentIndex(2)
         self.quality_combo.currentIndexChanged.connect(self.on_quality_changed)
         quality_layout.addWidget(self.quality_combo)
         layout.addLayout(quality_layout)
