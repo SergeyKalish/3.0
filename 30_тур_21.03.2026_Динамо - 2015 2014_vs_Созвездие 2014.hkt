@@ -600,11 +600,1735 @@
         "context": {
           "period_name": "Период 3"
         }
+      },
+      {
+        "id": "b0b16a49-48a7-4a58-98af-961e949c6236",
+        "label_type": "Гол",
+        "global_time": 1581.1071060710285,
+        "context": {
+          "team": "s-team",
+          "player_name": "Широков Т.",
+          "player_id_fhm": "6985",
+          "f-pass": "Флигинских В.",
+          "f-pass_id_fhm": "9509",
+          "s-pass": "N/A",
+          "s-pass_id_fhm": "N/A",
+          "event_time_sec": 709
+        }
+      },
+      {
+        "id": "3c48eabe-60a5-4e73-9f49-0415f82ff135",
+        "label_type": "Гол",
+        "global_time": 1832.8570529172623,
+        "context": {
+          "team": "f-team",
+          "player_name": "Мастеров И.",
+          "player_id_fhm": "7221",
+          "f-pass": "Гусев Ф.",
+          "f-pass_id_fhm": "5120",
+          "s-pass": "N/A",
+          "s-pass_id_fhm": "N/A",
+          "event_time_sec": 885
+        }
+      },
+      {
+        "id": "643456de-e81e-4d74-ad50-c7d59296b481",
+        "label_type": "Гол",
+        "global_time": 3604.0337277295976,
+        "context": {
+          "team": "s-team",
+          "player_name": "Широков Т.",
+          "player_id_fhm": "6985",
+          "f-pass": "Попков О.",
+          "f-pass_id_fhm": "6979",
+          "s-pass": "Флигинских В.",
+          "s-pass_id_fhm": "9509",
+          "event_time_sec": 1553
+        }
+      },
+      {
+        "id": "7f4cc8fa-382a-4a27-8323-b4ff957abdd2",
+        "label_type": "Гол",
+        "global_time": 3663.1706735022944,
+        "context": {
+          "team": "s-team",
+          "player_name": "Арнаут И.",
+          "player_id_fhm": "8962",
+          "f-pass": "Калиш И.",
+          "f-pass_id_fhm": "6971",
+          "s-pass": "Рахматуллин Т.",
+          "s-pass_id_fhm": "6980",
+          "event_time_sec": 1575
+        }
+      },
+      {
+        "id": "6270866f-44a3-4eaf-9221-5e4420ff6874",
+        "label_type": "Гол",
+        "global_time": 3876.646204044892,
+        "context": {
+          "team": "s-team",
+          "player_name": "Морозов И.",
+          "player_id_fhm": "7716",
+          "f-pass": "Пимкин А.",
+          "f-pass_id_fhm": "6978",
+          "s-pass": "Шинкин Д.",
+          "s-pass_id_fhm": "6984",
+          "event_time_sec": 1676
+        }
+      },
+      {
+        "id": "7029f0f5-803c-40f5-8dd6-8bcc2bb614a4",
+        "label_type": "Гол",
+        "global_time": 4406.8654575505525,
+        "context": {
+          "team": "f-team",
+          "player_name": "Козлов М.",
+          "player_id_fhm": "5125",
+          "f-pass": "Мингазов К.",
+          "f-pass_id_fhm": "5128",
+          "s-pass": "N/A",
+          "s-pass_id_fhm": "N/A",
+          "event_time_sec": 2035
+        }
+      },
+      {
+        "id": "3e7cd4a7-f55d-40dc-a62d-b18dd2f217cc",
+        "label_type": "Гол",
+        "global_time": 4531.628408632155,
+        "context": {
+          "team": "s-team",
+          "player_name": "Левчук А.",
+          "player_id_fhm": "5518",
+          "f-pass": "Шинкин Д.",
+          "f-pass_id_fhm": "6984",
+          "s-pass": "Морозов И.",
+          "s-pass_id_fhm": "7716",
+          "event_time_sec": 2101
+        }
+      },
+      {
+        "id": "18bf5515-e840-4d55-b4f8-cbf64bea5c6b",
+        "label_type": "Гол",
+        "global_time": 5672.59336232405,
+        "context": {
+          "team": "f-team",
+          "player_name": "Мингазов К.",
+          "player_id_fhm": "5128",
+          "f-pass": "Климов М.",
+          "f-pass_id_fhm": "5124",
+          "s-pass": "N/A",
+          "s-pass_id_fhm": "N/A",
+          "event_time_sec": 2772
+        }
+      },
+      {
+        "id": "58fa8358-888b-478f-bb22-ecdb42cb9be0",
+        "label_type": "Пауза",
+        "global_time": 6793.453387565722,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "610c659e-5e3e-4221-b81b-23d1368e597e",
+        "label_type": "Пауза",
+        "global_time": 6873.745637308011,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "ca4d84fe-eaa1-49c1-9320-f941cfb0dda7",
+        "label_type": "Гол",
+        "global_time": 6093.19243968222,
+        "context": {
+          "team": "s-team",
+          "player_name": "Морозов И.",
+          "player_id_fhm": "7716",
+          "f-pass": "Широков Т.",
+          "f-pass_id_fhm": "6985",
+          "s-pass": "Левчук А.",
+          "s-pass_id_fhm": "5518",
+          "event_time_sec": 3134
+        }
+      },
+      {
+        "id": "7b592ebb-9cd6-4829-a99c-f5014a0594bd",
+        "label_type": "Пауза",
+        "global_time": 6368.018781032739,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "546b6689-99a7-4000-9ec8-18607b93ae5f",
+        "label_type": "Пауза",
+        "global_time": 6410.639366378961,
+        "context": {
+          "period_name": "Период 3"
+        }
+      },
+      {
+        "id": "1acd7107-1203-42f7-b719-82d917bae168",
+        "label_type": "Гол",
+        "global_time": 6368.018781032739,
+        "context": {
+          "team": "s-team",
+          "player_name": "Левчук А.",
+          "player_id_fhm": "5518",
+          "f-pass": "Морозов И.",
+          "f-pass_id_fhm": "7716",
+          "s-pass": "N/A",
+          "s-pass_id_fhm": "N/A",
+          "event_time_sec": 3276
+        }
+      },
+      {
+        "id": "20f4202b-c75e-4e4b-ada0-916e37c35bd6",
+        "label_type": "Смена",
+        "global_time": 631.5999999999999,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "8962",
+              "name": "Арнаут Иван"
+            },
+            {
+              "id_fhm": "6971",
+              "name": "Калиш Иван"
+            },
+            {
+              "id_fhm": "6972",
+              "name": "Митин Павел"
+            },
+            {
+              "id_fhm": "6980",
+              "name": "Рахматуллин Тамерлан"
+            },
+            {
+              "id_fhm": "6982",
+              "name": "Силин Леонид"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "181ab0c8-e263-4492-a340-263baca639ae",
+        "label_type": "Пауза",
+        "global_time": 688.8353642927972,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "b1ea8ffa-9417-419d-963c-2b1793cf594e",
+        "label_type": "Пауза",
+        "global_time": 717.8353642927972,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "276795d1-ee2f-456f-a1bf-e7fecfd85384",
+        "label_type": "Смена",
+        "global_time": 654.7471733198271,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "8962",
+              "name": "Арнаут Иван"
+            },
+            {
+              "id_fhm": "9922",
+              "name": "Богомолов Ярослав"
+            },
+            {
+              "id_fhm": "6971",
+              "name": "Калиш Иван"
+            },
+            {
+              "id_fhm": "2553",
+              "name": "Нурмухаметов Дамир"
+            },
+            {
+              "id_fhm": "6982",
+              "name": "Силин Леонид"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "1e5ea112-3b91-4d98-b769-5769cfdc7095",
+        "label_type": "Смена",
+        "global_time": 717.8353642927972,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "9922",
+              "name": "Богомолов Ярослав"
+            },
+            {
+              "id_fhm": "2553",
+              "name": "Нурмухаметов Дамир"
+            },
+            {
+              "id_fhm": "6979",
+              "name": "Попков Олег"
+            },
+            {
+              "id_fhm": "9509",
+              "name": "Флигинских Владислав"
+            },
+            {
+              "id_fhm": "6985",
+              "name": "Широков Тимофей"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "969ec06e-36a2-4c45-af10-dd7e33e06958",
+        "label_type": "Смена",
+        "global_time": 782.4724889265865,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "2553",
+              "name": "Нурмухаметов Дамир"
+            },
+            {
+              "id_fhm": "6979",
+              "name": "Попков Олег"
+            },
+            {
+              "id_fhm": "6981",
+              "name": "Саморуков Никита"
+            },
+            {
+              "id_fhm": "9509",
+              "name": "Флигинских Владислав"
+            },
+            {
+              "id_fhm": "6985",
+              "name": "Широков Тимофей"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "9a688029-4c51-4524-87ba-f50736b1f2cc",
+        "label_type": "Смена",
+        "global_time": 787.9724889265865,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "5518",
+              "name": "Левчук Алексей"
+            },
+            {
+              "id_fhm": "2553",
+              "name": "Нурмухаметов Дамир"
+            },
+            {
+              "id_fhm": "6981",
+              "name": "Саморуков Никита"
+            },
+            {
+              "id_fhm": "9509",
+              "name": "Флигинских Владислав"
+            },
+            {
+              "id_fhm": "6984",
+              "name": "Шинкин Дмитрий"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "5204424b-b0c5-4b50-8e56-bdcae5d62df2",
+        "label_type": "Смена",
+        "global_time": 803.8855412947504,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "5518",
+              "name": "Левчук Алексей"
+            },
+            {
+              "id_fhm": "7716",
+              "name": "Морозов Илья"
+            },
+            {
+              "id_fhm": "2553",
+              "name": "Нурмухаметов Дамир"
+            },
+            {
+              "id_fhm": "6981",
+              "name": "Саморуков Никита"
+            },
+            {
+              "id_fhm": "6984",
+              "name": "Шинкин Дмитрий"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "2cc7d2bc-9ae9-492a-8b8c-e694715c9b6b",
+        "label_type": "Смена",
+        "global_time": 804.2581799313112,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "8963",
+              "name": "Волвенкин Андрей"
+            },
+            {
+              "id_fhm": "5518",
+              "name": "Левчук Алексей"
+            },
+            {
+              "id_fhm": "7716",
+              "name": "Морозов Илья"
+            },
+            {
+              "id_fhm": "6981",
+              "name": "Саморуков Никита"
+            },
+            {
+              "id_fhm": "6984",
+              "name": "Шинкин Дмитрий"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "fc306199-a1b1-4eda-9e32-f8884bc42164",
+        "label_type": "Смена",
+        "global_time": 887.4831654955475,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "12120",
+              "name": "Буторин Кирилл"
+            },
+            {
+              "id_fhm": "12121",
+              "name": "Крикунов Марк"
+            },
+            {
+              "id_fhm": "6977",
+              "name": "Орлов Андрей"
+            },
+            {
+              "id_fhm": "5770",
+              "name": "Паршин Игорь"
+            },
+            {
+              "id_fhm": "6978",
+              "name": "Пимкин Артём"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "aa221600-22e1-4668-8d72-1aa047e42a99",
+        "label_type": "Смена",
+        "global_time": 960.6380989481537,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "12120",
+              "name": "Буторин Кирилл"
+            },
+            {
+              "id_fhm": "6972",
+              "name": "Митин Павел"
+            },
+            {
+              "id_fhm": "6977",
+              "name": "Орлов Андрей"
+            },
+            {
+              "id_fhm": "5770",
+              "name": "Паршин Игорь"
+            },
+            {
+              "id_fhm": "6980",
+              "name": "Рахматуллин Тамерлан"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "ab7855c1-5c30-4813-821b-d7691a4d6e03",
+        "label_type": "Пауза",
+        "global_time": 997.0749075342743,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "7bc3e24b-3d55-4161-93e1-675cc19a67e8",
+        "label_type": "Пауза",
+        "global_time": 1021.5749075342742,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "d7342ca2-9a4c-444c-b048-d3aded324bb9",
+        "label_type": "Пауза",
+        "global_time": 1049.921184532794,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "705b9858-d064-4165-bbcc-ad6b1c4f7fe8",
+        "label_type": "Пауза",
+        "global_time": 1071.921184532794,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "7ed4e4ed-bb42-4070-8052-086b77fd0d98",
+        "label_type": "Смена",
+        "global_time": 1021.5749075342742,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "8962",
+              "name": "Арнаут Иван"
+            },
+            {
+              "id_fhm": "6971",
+              "name": "Калиш Иван"
+            },
+            {
+              "id_fhm": "6972",
+              "name": "Митин Павел"
+            },
+            {
+              "id_fhm": "6980",
+              "name": "Рахматуллин Тамерлан"
+            },
+            {
+              "id_fhm": "6982",
+              "name": "Силин Леонид"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "08dd232e-b2a0-4f7b-ac97-99bf33b67cf8",
+        "label_type": "Смена",
+        "global_time": 1071.921184532794,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "9922",
+              "name": "Богомолов Ярослав"
+            },
+            {
+              "id_fhm": "2553",
+              "name": "Нурмухаметов Дамир"
+            },
+            {
+              "id_fhm": "6979",
+              "name": "Попков Олег"
+            },
+            {
+              "id_fhm": "9509",
+              "name": "Флигинских Владислав"
+            },
+            {
+              "id_fhm": "6985",
+              "name": "Широков Тимофей"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "96dcc66b-4671-463c-9ed3-7b0b3d30825d",
+        "label_type": "Смена",
+        "global_time": 1150.8302245070067,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "9922",
+              "name": "Богомолов Ярослав"
+            },
+            {
+              "id_fhm": "5518",
+              "name": "Левчук Алексей"
+            },
+            {
+              "id_fhm": "7716",
+              "name": "Морозов Илья"
+            },
+            {
+              "id_fhm": "2553",
+              "name": "Нурмухаметов Дамир"
+            },
+            {
+              "id_fhm": "6979",
+              "name": "Попков Олег"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "537e5368-b839-4a47-9bce-a70a061722e1",
+        "label_type": "Смена",
+        "global_time": 1157.48919724718,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "8963",
+              "name": "Волвенкин Андрей"
+            },
+            {
+              "id_fhm": "5518",
+              "name": "Левчук Алексей"
+            },
+            {
+              "id_fhm": "7716",
+              "name": "Морозов Илья"
+            },
+            {
+              "id_fhm": "6979",
+              "name": "Попков Олег"
+            },
+            {
+              "id_fhm": "6981",
+              "name": "Саморуков Никита"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "0069d1f9-79ae-495e-9b30-5942231d564a",
+        "label_type": "Смена",
+        "global_time": 1161.5589830805388,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "8963",
+              "name": "Волвенкин Андрей"
+            },
+            {
+              "id_fhm": "5518",
+              "name": "Левчук Алексей"
+            },
+            {
+              "id_fhm": "7716",
+              "name": "Морозов Илья"
+            },
+            {
+              "id_fhm": "6981",
+              "name": "Саморуков Никита"
+            },
+            {
+              "id_fhm": "6984",
+              "name": "Шинкин Дмитрий"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "772b072a-f529-4938-9c13-7b113e682c8a",
+        "label_type": "Смена",
+        "global_time": 1230.2540543009368,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "8963",
+              "name": "Волвенкин Андрей"
+            },
+            {
+              "id_fhm": "5518",
+              "name": "Левчук Алексей"
+            },
+            {
+              "id_fhm": "7716",
+              "name": "Морозов Илья"
+            },
+            {
+              "id_fhm": "6978",
+              "name": "Пимкин Артём"
+            },
+            {
+              "id_fhm": "6984",
+              "name": "Шинкин Дмитрий"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "20d49c97-9dc7-4c04-8318-70dfb2470666",
+        "label_type": "Смена",
+        "global_time": 1244.4432198931304,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "12121",
+              "name": "Крикунов Марк"
+            },
+            {
+              "id_fhm": "5518",
+              "name": "Левчук Алексей"
+            },
+            {
+              "id_fhm": "7716",
+              "name": "Морозов Илья"
+            },
+            {
+              "id_fhm": "6978",
+              "name": "Пимкин Артём"
+            },
+            {
+              "id_fhm": "6984",
+              "name": "Шинкин Дмитрий"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "a04fd5c2-919a-4234-888a-662580ff2e6e",
+        "label_type": "Смена",
+        "global_time": 1257.417493574771,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "12120",
+              "name": "Буторин Кирилл"
+            },
+            {
+              "id_fhm": "12121",
+              "name": "Крикунов Марк"
+            },
+            {
+              "id_fhm": "7716",
+              "name": "Морозов Илья"
+            },
+            {
+              "id_fhm": "6978",
+              "name": "Пимкин Артём"
+            },
+            {
+              "id_fhm": "6984",
+              "name": "Шинкин Дмитрий"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "7529bfe4-dfb1-4f9e-8fbc-237cc0c69ed2",
+        "label_type": "Смена",
+        "global_time": 1290.5555038326447,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "12120",
+              "name": "Буторин Кирилл"
+            },
+            {
+              "id_fhm": "12121",
+              "name": "Крикунов Марк"
+            },
+            {
+              "id_fhm": "6977",
+              "name": "Орлов Андрей"
+            },
+            {
+              "id_fhm": "5770",
+              "name": "Паршин Игорь"
+            },
+            {
+              "id_fhm": "6978",
+              "name": "Пимкин Артём"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "19bf2d66-6653-49f1-b3c3-cf51cdf9b05b",
+        "label_type": "Пауза",
+        "global_time": 1325.924973952121,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "3eafa312-222d-48ab-b4e6-8ebad1cf66ad",
+        "label_type": "Пауза",
+        "global_time": 1356.7930796020692,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "49a48b4d-5073-449f-8d69-5c829d56b7d7",
+        "label_type": "Смена",
+        "global_time": 1356.7930796020692,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "8962",
+              "name": "Арнаут Иван"
+            },
+            {
+              "id_fhm": "6971",
+              "name": "Калиш Иван"
+            },
+            {
+              "id_fhm": "6972",
+              "name": "Митин Павел"
+            },
+            {
+              "id_fhm": "6980",
+              "name": "Рахматуллин Тамерлан"
+            },
+            {
+              "id_fhm": "6982",
+              "name": "Силин Леонид"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "8b047ea8-e15e-4f11-994c-909a6ed62374",
+        "label_type": "Смена",
+        "global_time": 1430.7799308174317,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "8962",
+              "name": "Арнаут Иван"
+            },
+            {
+              "id_fhm": "9922",
+              "name": "Богомолов Ярослав"
+            },
+            {
+              "id_fhm": "6971",
+              "name": "Калиш Иван"
+            },
+            {
+              "id_fhm": "2553",
+              "name": "Нурмухаметов Дамир"
+            },
+            {
+              "id_fhm": "6982",
+              "name": "Силин Леонид"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "a585dafc-1df9-443a-b15d-91eec2e7b3df",
+        "label_type": "Смена",
+        "global_time": 1454.7203559749787,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "8962",
+              "name": "Арнаут Иван"
+            },
+            {
+              "id_fhm": "9922",
+              "name": "Богомолов Ярослав"
+            },
+            {
+              "id_fhm": "2553",
+              "name": "Нурмухаметов Дамир"
+            },
+            {
+              "id_fhm": "6979",
+              "name": "Попков Олег"
+            },
+            {
+              "id_fhm": "6985",
+              "name": "Широков Тимофей"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "a5d08d99-60e2-471a-be74-cc1d42857ac9",
+        "label_type": "Пауза",
+        "global_time": 1458.9568171375458,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "211ff340-c850-4349-99b5-54752f9c1619",
+        "label_type": "Пауза",
+        "global_time": 1477.8299329155152,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "cc4bc2a9-4749-425a-9b6d-6825bcfab4fe",
+        "label_type": "Смена",
+        "global_time": 1477.8299329155152,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "9922",
+              "name": "Богомолов Ярослав"
+            },
+            {
+              "id_fhm": "2553",
+              "name": "Нурмухаметов Дамир"
+            },
+            {
+              "id_fhm": "6979",
+              "name": "Попков Олег"
+            },
+            {
+              "id_fhm": "9509",
+              "name": "Флигинских Владислав"
+            },
+            {
+              "id_fhm": "6985",
+              "name": "Широков Тимофей"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "d3d89a83-2e5f-4cca-bec8-11d299caa4e8",
+        "label_type": "Пауза",
+        "global_time": 1493.6063065403168,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "0ed074e4-5e35-4706-81a1-aa25212643ab",
+        "label_type": "Пауза",
+        "global_time": 1515.1063065403168,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "62b3960a-d682-42d2-b3bd-395bacb76550",
+        "label_type": "Пауза",
+        "global_time": 1534.1934366100495,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "9b1996ff-6e5e-483a-b569-99d6c31da826",
+        "label_type": "Пауза",
+        "global_time": 1567.0541455619996,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "033f68fd-075c-4ea7-ac38-a85270cac8fd",
+        "label_type": "Удаление",
+        "global_time": 1534.1934366100495,
+        "context": {
+          "team": "s-team",
+          "player_name": "Попков О.",
+          "player_id_fhm": "6979",
+          "violation_type": "Подножка",
+          "start_time_sec": 695,
+          "end_time_sec": 815,
+          "event_time_sec": 695
+        }
+      },
+      {
+        "id": "808882de-cee2-4a31-84a0-808d88fabe9b",
+        "label_type": "Удаление",
+        "global_time": 1766.279835302017,
+        "context": {
+          "team": "s-team",
+          "player_name": "Попков О.",
+          "player_id_fhm": "6979",
+          "violation_type": "Подножка",
+          "start_time_sec": 695,
+          "end_time_sec": 815,
+          "event_time_sec": 695
+        }
+      },
+      {
+        "id": "dfb32f0b-9b9e-4c72-a362-f5f6d1b100fd",
+        "label_type": "Пауза",
+        "global_time": 1647.896370231678,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "17c40e94-0015-4b9f-9432-28bfde36a616",
+        "label_type": "Пауза",
+        "global_time": 1666.396370231678,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "feea6a47-84ec-44bf-9fd0-720728809fed",
+        "label_type": "Пауза",
+        "global_time": 1728.2379301186104,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "ed4fb1cd-3a85-4c6a-b383-db84b3d2ab22",
+        "label_type": "Пауза",
+        "global_time": 1755.5421865578194,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "1231ff58-dea2-47e0-b710-52b8fb148718",
+        "label_type": "Пауза",
+        "global_time": 2039.4304457853043,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "5b2e130d-239f-4385-ad7a-59a7da4a9c88",
+        "label_type": "Пауза",
+        "global_time": 2071.3984671781263,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "0b8838fe-90b4-492f-9a46-f0a90cd2f0c0",
+        "label_type": "Пауза",
+        "global_time": 2129.7433341691694,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "d5d4c3e1-01ab-4555-b50a-1c44253b4d29",
+        "label_type": "Пауза",
+        "global_time": 2157.1164077470503,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "3d68fdf8-c29c-4505-8e0a-518d6534107c",
+        "label_type": "Удаление",
+        "global_time": 2039.4304457853043,
+        "context": {
+          "team": "f-team",
+          "player_name": "Белова В.",
+          "player_id_fhm": "385",
+          "violation_type": "Подножка",
+          "start_time_sec": 1054,
+          "end_time_sec": 1174,
+          "event_time_sec": 1054
+        }
+      },
+      {
+        "id": "c9ea6d01-505b-400c-9899-41c9bceed7ab",
+        "label_type": "Удаление",
+        "global_time": 2219.7002028176985,
+        "context": {
+          "team": "f-team",
+          "player_name": "Белова В.",
+          "player_id_fhm": "385",
+          "violation_type": "Подножка",
+          "start_time_sec": 1054,
+          "end_time_sec": 1174,
+          "event_time_sec": 1054
+        }
+      },
+      {
+        "id": "f695135f-baf7-49ae-9dfb-bcc1107d5c8b",
+        "label_type": "Смена",
+        "global_time": 1567.0541455619996,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "6972",
+              "name": "Митин Павел"
+            },
+            {
+              "id_fhm": "6980",
+              "name": "Рахматуллин Тамерлан"
+            },
+            {
+              "id_fhm": "9509",
+              "name": "Флигинских Владислав"
+            },
+            {
+              "id_fhm": "6985",
+              "name": "Широков Тимофей"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "e9132963-2b7b-4013-be15-3ae1b9844c72",
+        "label_type": "Смена",
+        "global_time": 1616.4260056610603,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "8963",
+              "name": "Волвенкин Андрей"
+            },
+            {
+              "id_fhm": "5518",
+              "name": "Левчук Алексей"
+            },
+            {
+              "id_fhm": "7716",
+              "name": "Морозов Илья"
+            },
+            {
+              "id_fhm": "6978",
+              "name": "Пимкин Артём"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "6411d070-9694-40c6-a1c8-8ade242c0ba9",
+        "label_type": "Смена",
+        "global_time": 1701.896370231678,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "9922",
+              "name": "Богомолов Ярослав"
+            },
+            {
+              "id_fhm": "5518",
+              "name": "Левчук Алексей"
+            },
+            {
+              "id_fhm": "7716",
+              "name": "Морозов Илья"
+            },
+            {
+              "id_fhm": "2553",
+              "name": "Нурмухаметов Дамир"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "2ccf9141-def0-4846-a44d-44b16dc70125",
+        "label_type": "Смена",
+        "global_time": 1755.5421865578194,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "9922",
+              "name": "Богомолов Ярослав"
+            },
+            {
+              "id_fhm": "2553",
+              "name": "Нурмухаметов Дамир"
+            },
+            {
+              "id_fhm": "6977",
+              "name": "Орлов Андрей"
+            },
+            {
+              "id_fhm": "5770",
+              "name": "Паршин Игорь"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "631e101d-3b1a-4793-bd44-446c395e1dae",
+        "label_type": "Смена",
+        "global_time": 1766.279835302017,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "9922",
+              "name": "Богомолов Ярослав"
+            },
+            {
+              "id_fhm": "2553",
+              "name": "Нурмухаметов Дамир"
+            },
+            {
+              "id_fhm": "6977",
+              "name": "Орлов Андрей"
+            },
+            {
+              "id_fhm": "5770",
+              "name": "Паршин Игорь"
+            },
+            {
+              "id_fhm": "6979",
+              "name": "Попков Олег"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "f431bb0e-a753-4458-aefd-5ac0d23b503b",
+        "label_type": "Смена",
+        "global_time": 1780.5550983730773,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "9922",
+              "name": "Богомолов Ярослав"
+            },
+            {
+              "id_fhm": "12120",
+              "name": "Буторин Кирилл"
+            },
+            {
+              "id_fhm": "2553",
+              "name": "Нурмухаметов Дамир"
+            },
+            {
+              "id_fhm": "6977",
+              "name": "Орлов Андрей"
+            },
+            {
+              "id_fhm": "5770",
+              "name": "Паршин Игорь"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "f1fc3e8a-542c-4f33-b806-294eb18a0b31",
+        "label_type": "Смена",
+        "global_time": 1781.0550983730773,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "9922",
+              "name": "Богомолов Ярослав"
+            },
+            {
+              "id_fhm": "12120",
+              "name": "Буторин Кирилл"
+            },
+            {
+              "id_fhm": "6977",
+              "name": "Орлов Андрей"
+            },
+            {
+              "id_fhm": "5770",
+              "name": "Паршин Игорь"
+            },
+            {
+              "id_fhm": "6981",
+              "name": "Саморуков Никита"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "ebc2847d-20a2-463c-8185-0142c2cd0b48",
+        "label_type": "Смена",
+        "global_time": 1801.259212571762,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "12120",
+              "name": "Буторин Кирилл"
+            },
+            {
+              "id_fhm": "8963",
+              "name": "Волвенкин Андрей"
+            },
+            {
+              "id_fhm": "6977",
+              "name": "Орлов Андрей"
+            },
+            {
+              "id_fhm": "5770",
+              "name": "Паршин Игорь"
+            },
+            {
+              "id_fhm": "6981",
+              "name": "Саморуков Никита"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "9063bd98-16fc-49c9-95c2-3e213a1e6dbb",
+        "label_type": "Смена",
+        "global_time": 1867.8570529172623,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "8962",
+              "name": "Арнаут Иван"
+            },
+            {
+              "id_fhm": "6971",
+              "name": "Калиш Иван"
+            },
+            {
+              "id_fhm": "12121",
+              "name": "Крикунов Марк"
+            },
+            {
+              "id_fhm": "6978",
+              "name": "Пимкин Артём"
+            },
+            {
+              "id_fhm": "6982",
+              "name": "Силин Леонид"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "2cfdb43f-381d-441d-ae35-19188cdb6de7",
+        "label_type": "Смена",
+        "global_time": 1938.4921227643692,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "8962",
+              "name": "Арнаут Иван"
+            },
+            {
+              "id_fhm": "6971",
+              "name": "Калиш Иван"
+            },
+            {
+              "id_fhm": "6972",
+              "name": "Митин Павел"
+            },
+            {
+              "id_fhm": "6980",
+              "name": "Рахматуллин Тамерлан"
+            },
+            {
+              "id_fhm": "6982",
+              "name": "Силин Леонид"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "eac0cf3c-d58d-4438-a4ca-27f80cb2028e",
+        "label_type": "Смена",
+        "global_time": 1962.455393667003,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "6971",
+              "name": "Калиш Иван"
+            },
+            {
+              "id_fhm": "6972",
+              "name": "Митин Павел"
+            },
+            {
+              "id_fhm": "6980",
+              "name": "Рахматуллин Тамерлан"
+            },
+            {
+              "id_fhm": "6982",
+              "name": "Силин Леонид"
+            },
+            {
+              "id_fhm": "9509",
+              "name": "Флигинских Владислав"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "c51a7284-cefb-46b3-b85d-25119b4d03b6",
+        "label_type": "Смена",
+        "global_time": 1979.3338371465409,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "6971",
+              "name": "Калиш Иван"
+            },
+            {
+              "id_fhm": "6972",
+              "name": "Митин Павел"
+            },
+            {
+              "id_fhm": "6980",
+              "name": "Рахматуллин Тамерлан"
+            },
+            {
+              "id_fhm": "9509",
+              "name": "Флигинских Владислав"
+            },
+            {
+              "id_fhm": "6985",
+              "name": "Широков Тимофей"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "58a1679d-1867-4c4c-a4cd-105730d2bdad",
+        "label_type": "Смена",
+        "global_time": 1986.5909746835434,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "9922",
+              "name": "Богомолов Ярослав"
+            },
+            {
+              "id_fhm": "6971",
+              "name": "Калиш Иван"
+            },
+            {
+              "id_fhm": "2553",
+              "name": "Нурмухаметов Дамир"
+            },
+            {
+              "id_fhm": "9509",
+              "name": "Флигинских Владислав"
+            },
+            {
+              "id_fhm": "6985",
+              "name": "Широков Тимофей"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "14461a1a-73eb-4687-ba81-7187a3e56b2d",
+        "label_type": "Смена",
+        "global_time": 2004.9036616037095,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "9922",
+              "name": "Богомолов Ярослав"
+            },
+            {
+              "id_fhm": "2553",
+              "name": "Нурмухаметов Дамир"
+            },
+            {
+              "id_fhm": "6979",
+              "name": "Попков Олег"
+            },
+            {
+              "id_fhm": "9509",
+              "name": "Флигинских Владислав"
+            },
+            {
+              "id_fhm": "6985",
+              "name": "Широков Тимофей"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "1a7a51f0-b693-4444-ace0-34f5f9af07b2",
+        "label_type": "Смена",
+        "global_time": 2120.8984671781263,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "8962",
+              "name": "Арнаут Иван"
+            },
+            {
+              "id_fhm": "9922",
+              "name": "Богомолов Ярослав"
+            },
+            {
+              "id_fhm": "2553",
+              "name": "Нурмухаметов Дамир"
+            },
+            {
+              "id_fhm": "6979",
+              "name": "Попков Олег"
+            },
+            {
+              "id_fhm": "9509",
+              "name": "Флигинских Владислав"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "e9bcf061-4a74-44cc-9682-e56d2b555ee2",
+        "label_type": "Смена",
+        "global_time": 2157.1164077470503,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "8962",
+              "name": "Арнаут Иван"
+            },
+            {
+              "id_fhm": "6972",
+              "name": "Митин Павел"
+            },
+            {
+              "id_fhm": "6979",
+              "name": "Попков Олег"
+            },
+            {
+              "id_fhm": "6980",
+              "name": "Рахматуллин Тамерлан"
+            },
+            {
+              "id_fhm": "9509",
+              "name": "Флигинских Владислав"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "601afff9-1e5d-4dbf-ab77-70e0fefce9c8",
+        "label_type": "Смена",
+        "global_time": 2175.248288507243,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "6976",
+              "name": "Новиков Павел"
+            },
+            {
+              "id_fhm": "8962",
+              "name": "Арнаут Иван"
+            },
+            {
+              "id_fhm": "5518",
+              "name": "Левчук Алексей"
+            },
+            {
+              "id_fhm": "6972",
+              "name": "Митин Павел"
+            },
+            {
+              "id_fhm": "6980",
+              "name": "Рахматуллин Тамерлан"
+            },
+            {
+              "id_fhm": "9509",
+              "name": "Флигинских Владислав"
+            }
+          ],
+          "period_name": "Период 1"
+        }
       }
     ],
     "calculated_ranges": [
       {
-        "id": "bd890faf-6039-4bd8-b0f8-086e1f997aad",
+        "id": "0507a029-dada-4fa4-ac3c-8fa7f6cb206d",
         "name": "Всё видео",
         "label_type": "Всё видео",
         "start_time": 0.0,
@@ -613,7 +2337,41 @@
         "context": null
       },
       {
-        "id": "2c64c6ae-49d8-4c61-be93-ba0ccb814607",
+        "id": "07e96ab0-080e-44dd-b9b4-2d73988d097b",
+        "name": "Удаление Попков О. (Подножка)",
+        "label_type": "Удаление",
+        "start_time": 1534.1934366100495,
+        "end_time": 1766.279835302017,
+        "source_label_ids": [],
+        "context": {
+          "start_time_sec": 695,
+          "player_id_fhm": "6979",
+          "end_time_sec": 815,
+          "team": "s-team",
+          "event_time_sec": 695,
+          "violation_type": "Подножка",
+          "player_name": "Попков О."
+        }
+      },
+      {
+        "id": "7c24e33c-3be4-4b87-a35a-a802b60daebd",
+        "name": "Удаление Белова В. (Подножка)",
+        "label_type": "Удаление",
+        "start_time": 2039.4304457853043,
+        "end_time": 2219.7002028176985,
+        "source_label_ids": [],
+        "context": {
+          "event_time_sec": 1054,
+          "player_id_fhm": "385",
+          "team": "f-team",
+          "start_time_sec": 1054,
+          "player_name": "Белова В.",
+          "end_time_sec": 1174,
+          "violation_type": "Подножка"
+        }
+      },
+      {
+        "id": "805e4f3f-2e57-4437-aa24-a45c04c0fe78",
         "name": "Период 1",
         "label_type": "Сегмент",
         "start_time": 631.5999999999999,
@@ -625,7 +2383,7 @@
         "context": null
       },
       {
-        "id": "32344ffe-7a3c-4939-bce0-d6b37b1f4601",
+        "id": "60555070-03c7-4a0a-8768-2a14dfc39a88",
         "name": "Период 2",
         "label_type": "Сегмент",
         "start_time": 3105.0229962825774,
@@ -637,7 +2395,7 @@
         "context": null
       },
       {
-        "id": "a87b0e14-5221-45fd-b6f6-d5aee0a09c39",
+        "id": "8b7e284d-6625-45b8-b3aa-28ec46c76e8e",
         "name": "Период 3",
         "label_type": "Сегмент",
         "start_time": 5171.428807296066,
@@ -649,10 +2407,22 @@
         "context": null
       },
       {
-        "id": "53602c6b-92c1-4f6b-9fe6-9b903f370581",
+        "id": "b97a7431-305b-4634-93ae-18f5fdb06095",
         "name": "Период 1. ЧИИ №1",
         "label_type": "ЧИИ",
         "start_time": 631.5999999999999,
+        "end_time": 688.8353642927972,
+        "source_label_ids": [
+          "74cde820-f36e-453b-a806-59c013baf995",
+          "a8032de1-1e77-4380-adb1-fc2eca38b62f"
+        ],
+        "context": null
+      },
+      {
+        "id": "e666a03b-0ba2-47b4-a243-f1a6df58cfd5",
+        "name": "Период 1. ЧИИ №2",
+        "label_type": "ЧИИ",
+        "start_time": 717.8353642927972,
         "end_time": 856.4573962628942,
         "source_label_ids": [
           "74cde820-f36e-453b-a806-59c013baf995",
@@ -661,10 +2431,34 @@
         "context": null
       },
       {
-        "id": "6f71e01e-e54b-4dda-b82d-9a989242fa54",
-        "name": "Период 1. ЧИИ №2",
+        "id": "0efd4580-71d8-439a-a880-24178ef39051",
+        "name": "Период 1. ЧИИ №3",
         "label_type": "ЧИИ",
         "start_time": 887.4831654955475,
+        "end_time": 997.0749075342743,
+        "source_label_ids": [
+          "74cde820-f36e-453b-a806-59c013baf995",
+          "a8032de1-1e77-4380-adb1-fc2eca38b62f"
+        ],
+        "context": null
+      },
+      {
+        "id": "68797b4b-d7bb-41b1-a027-d239949669e8",
+        "name": "Период 1. ЧИИ №4",
+        "label_type": "ЧИИ",
+        "start_time": 1021.5749075342742,
+        "end_time": 1049.921184532794,
+        "source_label_ids": [
+          "74cde820-f36e-453b-a806-59c013baf995",
+          "a8032de1-1e77-4380-adb1-fc2eca38b62f"
+        ],
+        "context": null
+      },
+      {
+        "id": "98440a36-d294-4bc3-9c46-4b76424e182e",
+        "name": "Период 1. ЧИИ №5",
+        "label_type": "ЧИИ",
+        "start_time": 1071.921184532794,
         "end_time": 1264.5555038326447,
         "source_label_ids": [
           "74cde820-f36e-453b-a806-59c013baf995",
@@ -673,10 +2467,58 @@
         "context": null
       },
       {
-        "id": "3a65cd14-f376-45de-9c5c-5852ffa7f8f6",
-        "name": "Период 1. ЧИИ №3",
+        "id": "8d5a8f41-73ce-4d49-a478-4a057282d554",
+        "name": "Период 1. ЧИИ №6",
         "label_type": "ЧИИ",
         "start_time": 1290.5555038326447,
+        "end_time": 1325.924973952121,
+        "source_label_ids": [
+          "74cde820-f36e-453b-a806-59c013baf995",
+          "a8032de1-1e77-4380-adb1-fc2eca38b62f"
+        ],
+        "context": null
+      },
+      {
+        "id": "5ea0fd22-6a50-45cd-9def-b7df4a3f11ad",
+        "name": "Период 1. ЧИИ №7",
+        "label_type": "ЧИИ",
+        "start_time": 1356.7930796020692,
+        "end_time": 1458.9568171375458,
+        "source_label_ids": [
+          "74cde820-f36e-453b-a806-59c013baf995",
+          "a8032de1-1e77-4380-adb1-fc2eca38b62f"
+        ],
+        "context": null
+      },
+      {
+        "id": "b875555d-6caa-44dd-8700-0d867c439dfd",
+        "name": "Период 1. ЧИИ №8",
+        "label_type": "ЧИИ",
+        "start_time": 1477.8299329155152,
+        "end_time": 1493.6063065403168,
+        "source_label_ids": [
+          "74cde820-f36e-453b-a806-59c013baf995",
+          "a8032de1-1e77-4380-adb1-fc2eca38b62f"
+        ],
+        "context": null
+      },
+      {
+        "id": "c9f45dec-d879-4e58-a3c0-cad3d2bb7068",
+        "name": "Период 1. ЧИИ №9",
+        "label_type": "ЧИИ",
+        "start_time": 1515.1063065403168,
+        "end_time": 1534.1934366100495,
+        "source_label_ids": [
+          "74cde820-f36e-453b-a806-59c013baf995",
+          "a8032de1-1e77-4380-adb1-fc2eca38b62f"
+        ],
+        "context": null
+      },
+      {
+        "id": "3ac4fcc6-ea4c-4e7a-b63f-7424e2aa109a",
+        "name": "Период 1. ЧИИ №10",
+        "label_type": "ЧИИ",
+        "start_time": 1567.0541455619996,
         "end_time": 1581.1071060710285,
         "source_label_ids": [
           "74cde820-f36e-453b-a806-59c013baf995",
@@ -685,10 +2527,34 @@
         "context": null
       },
       {
-        "id": "310f910c-3f1b-47ff-a934-8001fb949b0a",
-        "name": "Период 1. ЧИИ №4",
+        "id": "ee43af54-53a6-4fbb-91b5-8ae35ad63d76",
+        "name": "Период 1. ЧИИ №11",
         "label_type": "ЧИИ",
         "start_time": 1616.4260056610603,
+        "end_time": 1647.896370231678,
+        "source_label_ids": [
+          "74cde820-f36e-453b-a806-59c013baf995",
+          "a8032de1-1e77-4380-adb1-fc2eca38b62f"
+        ],
+        "context": null
+      },
+      {
+        "id": "12ec142d-a907-4e85-80fc-4fce5024d905",
+        "name": "Период 1. ЧИИ №12",
+        "label_type": "ЧИИ",
+        "start_time": 1666.396370231678,
+        "end_time": 1728.2379301186104,
+        "source_label_ids": [
+          "74cde820-f36e-453b-a806-59c013baf995",
+          "a8032de1-1e77-4380-adb1-fc2eca38b62f"
+        ],
+        "context": null
+      },
+      {
+        "id": "273acaff-ee2c-4d54-945b-e9fb090961cd",
+        "name": "Период 1. ЧИИ №13",
+        "label_type": "ЧИИ",
+        "start_time": 1755.5421865578194,
         "end_time": 1832.8570529172623,
         "source_label_ids": [
           "74cde820-f36e-453b-a806-59c013baf995",
@@ -697,10 +2563,34 @@
         "context": null
       },
       {
-        "id": "fc3f0739-9217-4723-a94d-1c4154e6b780",
-        "name": "Период 1. ЧИИ №5",
+        "id": "f0eabc0d-a92a-42c1-a023-9c5da55ead0e",
+        "name": "Период 1. ЧИИ №14",
         "label_type": "ЧИИ",
         "start_time": 1867.8570529172623,
+        "end_time": 2039.4304457853043,
+        "source_label_ids": [
+          "74cde820-f36e-453b-a806-59c013baf995",
+          "a8032de1-1e77-4380-adb1-fc2eca38b62f"
+        ],
+        "context": null
+      },
+      {
+        "id": "cc14b209-5c5d-4d41-8194-bb1e283f9db5",
+        "name": "Период 1. ЧИИ №15",
+        "label_type": "ЧИИ",
+        "start_time": 2071.3984671781263,
+        "end_time": 2129.7433341691694,
+        "source_label_ids": [
+          "74cde820-f36e-453b-a806-59c013baf995",
+          "a8032de1-1e77-4380-adb1-fc2eca38b62f"
+        ],
+        "context": null
+      },
+      {
+        "id": "63f83c4a-90be-4f38-9df5-d0accfeb71b2",
+        "name": "Период 1. ЧИИ №16",
+        "label_type": "ЧИИ",
+        "start_time": 2157.1164077470503,
         "end_time": 2245.487686252594,
         "source_label_ids": [
           "74cde820-f36e-453b-a806-59c013baf995",
@@ -709,7 +2599,7 @@
         "context": null
       },
       {
-        "id": "1b6f1c46-7d55-4687-93d9-8fe5f8c549bf",
+        "id": "d894b195-f371-440b-95c3-34966ae8d256",
         "name": "Период 2. ЧИИ №1",
         "label_type": "ЧИИ",
         "start_time": 3105.0229962825774,
@@ -721,7 +2611,7 @@
         "context": null
       },
       {
-        "id": "8ac575d3-5b57-4753-a75a-be0035dfcb80",
+        "id": "58a02cee-6ab1-4802-8439-8f985e006650",
         "name": "Период 2. ЧИИ №2",
         "label_type": "ЧИИ",
         "start_time": 3561.4508711940152,
@@ -733,7 +2623,7 @@
         "context": null
       },
       {
-        "id": "a9d4f565-2362-4f75-b3b4-7ab66b0f45fe",
+        "id": "7f42ac77-8a7c-4a34-9ac0-bccbde53873b",
         "name": "Период 2. ЧИИ №3",
         "label_type": "ЧИИ",
         "start_time": 3643.2292643912715,
@@ -745,7 +2635,7 @@
         "context": null
       },
       {
-        "id": "c95f6866-64f5-49f5-bfd6-97056ea9e940",
+        "id": "9715b3ba-b08c-4925-8721-ccc93ea75c51",
         "name": "Период 2. ЧИИ №4",
         "label_type": "ЧИИ",
         "start_time": 3756.8315518546556,
@@ -757,7 +2647,7 @@
         "context": null
       },
       {
-        "id": "7f9e89ca-14cc-410a-8db8-d3c32f0c7eff",
+        "id": "47942fc4-e2c6-4ca0-b4ba-0aee9be376e3",
         "name": "Период 2. ЧИИ №5",
         "label_type": "ЧИИ",
         "start_time": 3814.523800737834,
@@ -769,7 +2659,7 @@
         "context": null
       },
       {
-        "id": "51d0bb06-a5ab-4796-8941-57e6ac5e1ad6",
+        "id": "f0ad0c2a-75d7-4c10-802e-9b583c3c41e0",
         "name": "Период 2. ЧИИ №6",
         "label_type": "ЧИИ",
         "start_time": 3926.840438403054,
@@ -781,7 +2671,7 @@
         "context": null
       },
       {
-        "id": "0316c899-443e-453c-acdb-5cb0e8d7953e",
+        "id": "813d724e-29b6-45b5-bb76-d82cd193ee4c",
         "name": "Период 2. ЧИИ №7",
         "label_type": "ЧИИ",
         "start_time": 4447.962309186058,
@@ -793,7 +2683,7 @@
         "context": null
       },
       {
-        "id": "febfa9c4-5201-4cc4-970c-1d681430429c",
+        "id": "74c368a8-1cde-440a-8879-195b613e5fce",
         "name": "Период 2. ЧИИ №8",
         "label_type": "ЧИИ",
         "start_time": 4574.067558832242,
@@ -805,7 +2695,7 @@
         "context": null
       },
       {
-        "id": "073b8bf7-cbb2-40b2-aae0-deb836a10de6",
+        "id": "98bd3afc-be4c-4997-bc19-0f214ac793af",
         "name": "Период 3. ЧИИ №1",
         "label_type": "ЧИИ",
         "start_time": 5171.428807296066,
@@ -817,7 +2707,7 @@
         "context": null
       },
       {
-        "id": "33efb461-c9f4-491d-8e15-5b41b7520a02",
+        "id": "95ac0758-3b35-47eb-a883-9b61ef4cde00",
         "name": "Период 3. ЧИИ №2",
         "label_type": "ЧИИ",
         "start_time": 5516.226606984169,
@@ -829,7 +2719,7 @@
         "context": null
       },
       {
-        "id": "62125ed7-59bd-47b4-92ff-1159718b0860",
+        "id": "0c0d94c2-60c9-4c74-99c0-ea009c69ec6f",
         "name": "Период 3. ЧИИ №3",
         "label_type": "ЧИИ",
         "start_time": 5712.634358029161,
@@ -841,7 +2731,7 @@
         "context": null
       },
       {
-        "id": "c984e2b5-3f8d-422d-968f-d42be7d91a37",
+        "id": "c5f5db0b-95c2-4324-a127-1c768e777726",
         "name": "Период 3. ЧИИ №4",
         "label_type": "ЧИИ",
         "start_time": 5909.442866076424,
@@ -853,7 +2743,7 @@
         "context": null
       },
       {
-        "id": "251a5783-d749-4da4-8c3f-cf9c531d935d",
+        "id": "9eb64b01-7f1b-4fb8-99d5-0b73c770124f",
         "name": "Период 3. ЧИИ №5",
         "label_type": "ЧИИ",
         "start_time": 6144.151637428825,
@@ -865,10 +2755,34 @@
         "context": null
       },
       {
-        "id": "40231ca2-4fb8-46bd-a1e9-c181cbb2e60a",
+        "id": "dc0d49bc-5b1e-49f9-804a-8cbcb2ab1d88",
         "name": "Период 3. ЧИИ №6",
         "label_type": "ЧИИ",
         "start_time": 6240.234548669236,
+        "end_time": 6368.018781032739,
+        "source_label_ids": [
+          "d2484a54-ed3d-4f15-a3cf-b69a1207ef31",
+          "ad6b7043-5bb3-4adf-baf4-bc848e610a98"
+        ],
+        "context": null
+      },
+      {
+        "id": "e4c56419-6fd8-4c76-8e78-cc083027637e",
+        "name": "Период 3. ЧИИ №7",
+        "label_type": "ЧИИ",
+        "start_time": 6410.639366378961,
+        "end_time": 6793.453387565722,
+        "source_label_ids": [
+          "d2484a54-ed3d-4f15-a3cf-b69a1207ef31",
+          "ad6b7043-5bb3-4adf-baf4-bc848e610a98"
+        ],
+        "context": null
+      },
+      {
+        "id": "b97abe21-2938-475f-8a90-c1b6c02463f5",
+        "name": "Период 3. ЧИИ №8",
+        "label_type": "ЧИИ",
+        "start_time": 6873.745637308011,
         "end_time": 7048.762804545669,
         "source_label_ids": [
           "d2484a54-ed3d-4f15-a3cf-b69a1207ef31",
@@ -877,37 +2791,185 @@
         "context": null
       },
       {
-        "id": "0055c773-e1e9-4861-9041-dbbfc7312748",
+        "id": "4b995581-2b4e-44d6-bbaf-56aa728c79e5",
         "name": "0:0",
         "label_type": "Счёт",
         "start_time": 631.5999999999999,
+        "end_time": 1581.1071060710285,
+        "source_label_ids": [],
+        "context": null
+      },
+      {
+        "id": "11ec3607-ae8a-44a6-9ff2-30f00c15607b",
+        "name": "0:1",
+        "label_type": "Счёт",
+        "start_time": 1581.1071060710285,
+        "end_time": 1832.8570529172623,
+        "source_label_ids": [],
+        "context": null
+      },
+      {
+        "id": "866770dc-25e2-4373-9815-6b026e418bc4",
+        "name": "1:1",
+        "label_type": "Счёт",
+        "start_time": 1832.8570529172623,
         "end_time": 2245.487686252594,
         "source_label_ids": [],
         "context": null
       },
       {
-        "id": "1a3ace44-5ad9-4504-a519-d06d98821d17",
-        "name": "0:0",
+        "id": "8fa7cd8a-a89b-47eb-a511-a47676e239a4",
+        "name": "1:1",
         "label_type": "Счёт",
         "start_time": 3105.0229962825774,
+        "end_time": 3604.0337277295976,
+        "source_label_ids": [],
+        "context": null
+      },
+      {
+        "id": "f414c1e4-a0d7-4f44-ae6c-fb61149f735e",
+        "name": "1:2",
+        "label_type": "Счёт",
+        "start_time": 3604.0337277295976,
+        "end_time": 3663.1706735022944,
+        "source_label_ids": [],
+        "context": null
+      },
+      {
+        "id": "d1cfa74a-716b-424e-bdc5-353da254f301",
+        "name": "1:3",
+        "label_type": "Счёт",
+        "start_time": 3663.1706735022944,
+        "end_time": 3876.646204044892,
+        "source_label_ids": [],
+        "context": null
+      },
+      {
+        "id": "02fe04fd-794f-47ee-b00c-b315e3b19673",
+        "name": "1:4",
+        "label_type": "Счёт",
+        "start_time": 3876.646204044892,
+        "end_time": 4406.8654575505525,
+        "source_label_ids": [],
+        "context": null
+      },
+      {
+        "id": "98b00068-d948-49a0-8851-538e03f80f79",
+        "name": "2:4",
+        "label_type": "Счёт",
+        "start_time": 4406.8654575505525,
+        "end_time": 4531.628408632155,
+        "source_label_ids": [],
+        "context": null
+      },
+      {
+        "id": "68e788b9-95d8-4581-8f2f-fc6c94ab38e2",
+        "name": "2:5",
+        "label_type": "Счёт",
+        "start_time": 4531.628408632155,
         "end_time": 4926.010573196415,
         "source_label_ids": [],
         "context": null
       },
       {
-        "id": "6a1e0766-92a2-434e-b070-1d44ff032278",
-        "name": "0:0",
+        "id": "5cc20078-6f87-460d-8d35-836b80343783",
+        "name": "2:5",
         "label_type": "Счёт",
         "start_time": 5171.428807296066,
+        "end_time": 5672.59336232405,
+        "source_label_ids": [],
+        "context": null
+      },
+      {
+        "id": "0ff98924-dd4c-4800-8c93-b67e442501b8",
+        "name": "3:5",
+        "label_type": "Счёт",
+        "start_time": 5672.59336232405,
+        "end_time": 6093.19243968222,
+        "source_label_ids": [],
+        "context": null
+      },
+      {
+        "id": "504b6f11-3042-4abf-a2f1-8144a03df9d3",
+        "name": "3:6",
+        "label_type": "Счёт",
+        "start_time": 6093.19243968222,
+        "end_time": 6368.018781032739,
+        "source_label_ids": [],
+        "context": null
+      },
+      {
+        "id": "a852a886-e643-4627-9189-bd7b11037091",
+        "name": "3:7",
+        "label_type": "Счёт",
+        "start_time": 6368.018781032739,
         "end_time": 7048.762804545669,
         "source_label_ids": [],
         "context": null
       },
       {
-        "id": "68912c00-c8a0-4c7e-99be-1532b476ab63",
+        "id": "5b44d145-05d7-44de-886c-fefc94c21811",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 631.5999999999999,
+        "end_time": 1534.1934366100495,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": []
+        }
+      },
+      {
+        "id": "5b980f52-d523-40c2-b712-0697911f485d",
+        "name": "5 на 4",
+        "label_type": "game_mode",
+        "start_time": 1534.1934366100495,
+        "end_time": 1766.279835302017,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": [
+            {
+              "team": "s-team",
+              "player_name": "Попков О.",
+              "player_id_fhm": "6979",
+              "violation_type": "Подножка"
+            }
+          ]
+        }
+      },
+      {
+        "id": "bb1f69c7-bce7-4cfa-b252-dd1b5887d32d",
+        "name": "5 на 5",
+        "label_type": "game_mode",
+        "start_time": 1766.279835302017,
+        "end_time": 2039.4304457853043,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": []
+        }
+      },
+      {
+        "id": "a6a94aa2-4f35-4930-ab59-3144e9253b55",
+        "name": "4 на 5",
+        "label_type": "game_mode",
+        "start_time": 2039.4304457853043,
+        "end_time": 2219.7002028176985,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": [
+            {
+              "team": "f-team",
+              "player_name": "Белова В.",
+              "player_id_fhm": "385",
+              "violation_type": "Подножка"
+            }
+          ]
+        }
+      },
+      {
+        "id": "bff50345-e77d-4c28-ad94-50009a17d1a1",
+        "name": "5 на 5",
+        "label_type": "game_mode",
+        "start_time": 2219.7002028176985,
         "end_time": 2245.487686252594,
         "source_label_ids": [],
         "context": {
@@ -915,7 +2977,7 @@
         }
       },
       {
-        "id": "c484f6a3-8653-441b-b5b3-8123f5091774",
+        "id": "4fb94335-b4eb-4437-a69e-b5fecd9c2212",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 3105.0229962825774,
@@ -926,7 +2988,7 @@
         }
       },
       {
-        "id": "90841991-55ab-4da1-bf7e-0bed1ede06da",
+        "id": "ce348531-6d7a-46ee-91fd-4065dd81b110",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 5171.428807296066,
@@ -937,18 +2999,1621 @@
         }
       }
     ],
-    "player_shifts": {},
-    "player_shifts_official_timer": {},
-    "match_id": null,
-    "teams": {},
-    "rosters": {},
-    "events": [],
-    "tournament_name": null,
-    "tour_number": null,
-    "match_date": null,
-    "match_time": null,
-    "venue_city": null,
-    "venue_arena": null,
-    "referees": []
+    "player_shifts": {
+      "6971": {
+        "id_fhm": "6971",
+        "name": "Калиш Иван",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 631.5999999999999,
+            "end_time": 717.8353642927972
+          },
+          {
+            "number": 2,
+            "start_time": 1021.5749075342742,
+            "end_time": 1071.921184532794
+          },
+          {
+            "number": 3,
+            "start_time": 1356.7930796020692,
+            "end_time": 1454.7203559749787
+          },
+          {
+            "number": 4,
+            "start_time": 1867.8570529172623,
+            "end_time": 2004.9036616037095
+          }
+        ]
+      },
+      "6982": {
+        "id_fhm": "6982",
+        "name": "Силин Леонид",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 631.5999999999999,
+            "end_time": 717.8353642927972
+          },
+          {
+            "number": 2,
+            "start_time": 1021.5749075342742,
+            "end_time": 1071.921184532794
+          },
+          {
+            "number": 3,
+            "start_time": 1356.7930796020692,
+            "end_time": 1454.7203559749787
+          },
+          {
+            "number": 4,
+            "start_time": 1867.8570529172623,
+            "end_time": 1979.3338371465409
+          }
+        ]
+      },
+      "6972": {
+        "id_fhm": "6972",
+        "name": "Митин Павел",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 631.5999999999999,
+            "end_time": 654.7471733198271
+          },
+          {
+            "number": 2,
+            "start_time": 960.6380989481537,
+            "end_time": 1071.921184532794
+          },
+          {
+            "number": 3,
+            "start_time": 1356.7930796020692,
+            "end_time": 1430.7799308174317
+          },
+          {
+            "number": 4,
+            "start_time": 1567.0541455619996,
+            "end_time": 1616.4260056610603
+          },
+          {
+            "number": 5,
+            "start_time": 1938.4921227643692,
+            "end_time": 1986.5909746835434
+          },
+          {
+            "number": 6,
+            "start_time": 2157.1164077470503,
+            "end_time": 2245.487686252594
+          }
+        ]
+      },
+      "6976": {
+        "id_fhm": "6976",
+        "name": "Новиков Павел",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 631.5999999999999,
+            "end_time": 2245.487686252594
+          },
+          {
+            "number": 2,
+            "start_time": 3105.0229962825774,
+            "end_time": 4926.010573196415
+          },
+          {
+            "number": 3,
+            "start_time": 5171.428807296066,
+            "end_time": 7048.762804545669
+          }
+        ]
+      },
+      "8962": {
+        "id_fhm": "8962",
+        "name": "Арнаут Иван",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 631.5999999999999,
+            "end_time": 717.8353642927972
+          },
+          {
+            "number": 2,
+            "start_time": 1021.5749075342742,
+            "end_time": 1071.921184532794
+          },
+          {
+            "number": 3,
+            "start_time": 1356.7930796020692,
+            "end_time": 1477.8299329155152
+          },
+          {
+            "number": 4,
+            "start_time": 1867.8570529172623,
+            "end_time": 1962.455393667003
+          },
+          {
+            "number": 5,
+            "start_time": 2120.8984671781263,
+            "end_time": 2245.487686252594
+          }
+        ]
+      },
+      "6980": {
+        "id_fhm": "6980",
+        "name": "Рахматуллин Тамерлан",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 631.5999999999999,
+            "end_time": 654.7471733198271
+          },
+          {
+            "number": 2,
+            "start_time": 960.6380989481537,
+            "end_time": 1071.921184532794
+          },
+          {
+            "number": 3,
+            "start_time": 1356.7930796020692,
+            "end_time": 1430.7799308174317
+          },
+          {
+            "number": 4,
+            "start_time": 1567.0541455619996,
+            "end_time": 1616.4260056610603
+          },
+          {
+            "number": 5,
+            "start_time": 1938.4921227643692,
+            "end_time": 1986.5909746835434
+          },
+          {
+            "number": 6,
+            "start_time": 2157.1164077470503,
+            "end_time": 2245.487686252594
+          }
+        ]
+      },
+      "2553": {
+        "id_fhm": "2553",
+        "name": "Нурмухаметов Дамир",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 654.7471733198271,
+            "end_time": 804.2581799313112
+          },
+          {
+            "number": 2,
+            "start_time": 1071.921184532794,
+            "end_time": 1157.48919724718
+          },
+          {
+            "number": 3,
+            "start_time": 1430.7799308174317,
+            "end_time": 1567.0541455619996
+          },
+          {
+            "number": 4,
+            "start_time": 1701.896370231678,
+            "end_time": 1781.0550983730773
+          },
+          {
+            "number": 5,
+            "start_time": 1986.5909746835434,
+            "end_time": 2157.1164077470503
+          }
+        ]
+      },
+      "9922": {
+        "id_fhm": "9922",
+        "name": "Богомолов Ярослав",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 654.7471733198271,
+            "end_time": 782.4724889265865
+          },
+          {
+            "number": 2,
+            "start_time": 1071.921184532794,
+            "end_time": 1157.48919724718
+          },
+          {
+            "number": 3,
+            "start_time": 1430.7799308174317,
+            "end_time": 1567.0541455619996
+          },
+          {
+            "number": 4,
+            "start_time": 1701.896370231678,
+            "end_time": 1801.259212571762
+          },
+          {
+            "number": 5,
+            "start_time": 1986.5909746835434,
+            "end_time": 2157.1164077470503
+          }
+        ]
+      },
+      "6979": {
+        "id_fhm": "6979",
+        "name": "Попков Олег",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 717.8353642927972,
+            "end_time": 787.9724889265865
+          },
+          {
+            "number": 2,
+            "start_time": 1071.921184532794,
+            "end_time": 1161.5589830805388
+          },
+          {
+            "number": 3,
+            "start_time": 1454.7203559749787,
+            "end_time": 1567.0541455619996
+          },
+          {
+            "number": 4,
+            "start_time": 1766.279835302017,
+            "end_time": 1780.5550983730773
+          },
+          {
+            "number": 5,
+            "start_time": 2004.9036616037095,
+            "end_time": 2175.248288507243
+          }
+        ]
+      },
+      "9509": {
+        "id_fhm": "9509",
+        "name": "Флигинских Владислав",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 717.8353642927972,
+            "end_time": 803.8855412947504
+          },
+          {
+            "number": 2,
+            "start_time": 1071.921184532794,
+            "end_time": 1150.8302245070067
+          },
+          {
+            "number": 3,
+            "start_time": 1477.8299329155152,
+            "end_time": 1616.4260056610603
+          },
+          {
+            "number": 4,
+            "start_time": 1962.455393667003,
+            "end_time": 2245.487686252594
+          }
+        ]
+      },
+      "6985": {
+        "id_fhm": "6985",
+        "name": "Широков Тимофей",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 717.8353642927972,
+            "end_time": 787.9724889265865
+          },
+          {
+            "number": 2,
+            "start_time": 1071.921184532794,
+            "end_time": 1150.8302245070067
+          },
+          {
+            "number": 3,
+            "start_time": 1454.7203559749787,
+            "end_time": 1616.4260056610603
+          },
+          {
+            "number": 4,
+            "start_time": 1979.3338371465409,
+            "end_time": 2120.8984671781263
+          }
+        ]
+      },
+      "6981": {
+        "id_fhm": "6981",
+        "name": "Саморуков Никита",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 782.4724889265865,
+            "end_time": 887.4831654955475
+          },
+          {
+            "number": 2,
+            "start_time": 1157.48919724718,
+            "end_time": 1230.2540543009368
+          },
+          {
+            "number": 3,
+            "start_time": 1781.0550983730773,
+            "end_time": 1867.8570529172623
+          }
+        ]
+      },
+      "6984": {
+        "id_fhm": "6984",
+        "name": "Шинкин Дмитрий",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 787.9724889265865,
+            "end_time": 887.4831654955475
+          },
+          {
+            "number": 2,
+            "start_time": 1161.5589830805388,
+            "end_time": 1290.5555038326447
+          }
+        ]
+      },
+      "5518": {
+        "id_fhm": "5518",
+        "name": "Левчук Алексей",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 787.9724889265865,
+            "end_time": 887.4831654955475
+          },
+          {
+            "number": 2,
+            "start_time": 1150.8302245070067,
+            "end_time": 1257.417493574771
+          },
+          {
+            "number": 3,
+            "start_time": 1616.4260056610603,
+            "end_time": 1755.5421865578194
+          },
+          {
+            "number": 4,
+            "start_time": 2175.248288507243,
+            "end_time": 2245.487686252594
+          }
+        ]
+      },
+      "7716": {
+        "id_fhm": "7716",
+        "name": "Морозов Илья",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 803.8855412947504,
+            "end_time": 887.4831654955475
+          },
+          {
+            "number": 2,
+            "start_time": 1150.8302245070067,
+            "end_time": 1290.5555038326447
+          },
+          {
+            "number": 3,
+            "start_time": 1616.4260056610603,
+            "end_time": 1755.5421865578194
+          }
+        ]
+      },
+      "8963": {
+        "id_fhm": "8963",
+        "name": "Волвенкин Андрей",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 804.2581799313112,
+            "end_time": 887.4831654955475
+          },
+          {
+            "number": 2,
+            "start_time": 1157.48919724718,
+            "end_time": 1244.4432198931304
+          },
+          {
+            "number": 3,
+            "start_time": 1616.4260056610603,
+            "end_time": 1701.896370231678
+          },
+          {
+            "number": 4,
+            "start_time": 1801.259212571762,
+            "end_time": 1867.8570529172623
+          }
+        ]
+      },
+      "5770": {
+        "id_fhm": "5770",
+        "name": "Паршин Игорь",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 887.4831654955475,
+            "end_time": 1021.5749075342742
+          },
+          {
+            "number": 2,
+            "start_time": 1290.5555038326447,
+            "end_time": 1356.7930796020692
+          },
+          {
+            "number": 3,
+            "start_time": 1755.5421865578194,
+            "end_time": 1867.8570529172623
+          }
+        ]
+      },
+      "12120": {
+        "id_fhm": "12120",
+        "name": "Буторин Кирилл",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 887.4831654955475,
+            "end_time": 1021.5749075342742
+          },
+          {
+            "number": 2,
+            "start_time": 1257.417493574771,
+            "end_time": 1356.7930796020692
+          },
+          {
+            "number": 3,
+            "start_time": 1780.5550983730773,
+            "end_time": 1867.8570529172623
+          }
+        ]
+      },
+      "6977": {
+        "id_fhm": "6977",
+        "name": "Орлов Андрей",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 887.4831654955475,
+            "end_time": 1021.5749075342742
+          },
+          {
+            "number": 2,
+            "start_time": 1290.5555038326447,
+            "end_time": 1356.7930796020692
+          },
+          {
+            "number": 3,
+            "start_time": 1755.5421865578194,
+            "end_time": 1867.8570529172623
+          }
+        ]
+      },
+      "6978": {
+        "id_fhm": "6978",
+        "name": "Пимкин Артём",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 887.4831654955475,
+            "end_time": 960.6380989481537
+          },
+          {
+            "number": 2,
+            "start_time": 1230.2540543009368,
+            "end_time": 1356.7930796020692
+          },
+          {
+            "number": 3,
+            "start_time": 1616.4260056610603,
+            "end_time": 1701.896370231678
+          },
+          {
+            "number": 4,
+            "start_time": 1867.8570529172623,
+            "end_time": 1938.4921227643692
+          }
+        ]
+      },
+      "12121": {
+        "id_fhm": "12121",
+        "name": "Крикунов Марк",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 887.4831654955475,
+            "end_time": 960.6380989481537
+          },
+          {
+            "number": 2,
+            "start_time": 1244.4432198931304,
+            "end_time": 1356.7930796020692
+          },
+          {
+            "number": 3,
+            "start_time": 1867.8570529172623,
+            "end_time": 1938.4921227643692
+          }
+        ]
+      }
+    },
+    "player_shifts_official_timer": {
+      "6971": {
+        "id_fhm": "6971",
+        "name": "Калиш Иван",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 0.0,
+            "end_time": 57.1
+          },
+          {
+            "number": 2,
+            "start_time": 305.0,
+            "end_time": 333.3
+          },
+          {
+            "number": 3,
+            "start_time": 561.0,
+            "end_time": 658.7
+          },
+          {
+            "number": 4,
+            "start_time": 882.2,
+            "end_time": 1019.0
+          }
+        ]
+      },
+      "6982": {
+        "id_fhm": "6982",
+        "name": "Силин Леонид",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 0.0,
+            "end_time": 57.1
+          },
+          {
+            "number": 2,
+            "start_time": 305.0,
+            "end_time": 333.3
+          },
+          {
+            "number": 3,
+            "start_time": 561.0,
+            "end_time": 658.7
+          },
+          {
+            "number": 4,
+            "start_time": 882.2,
+            "end_time": 993.5
+          }
+        ]
+      },
+      "6972": {
+        "id_fhm": "6972",
+        "name": "Митин Павел",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 0.0,
+            "end_time": 23.1
+          },
+          {
+            "number": 2,
+            "start_time": 268.6,
+            "end_time": 333.3
+          },
+          {
+            "number": 3,
+            "start_time": 561.0,
+            "end_time": 634.8
+          },
+          {
+            "number": 4,
+            "start_time": 697.8,
+            "end_time": 711.8
+          },
+          {
+            "number": 5,
+            "start_time": 952.7,
+            "end_time": 1000.7
+          },
+          {
+            "number": 6,
+            "start_time": 1111.8,
+            "end_time": 1200.0
+          }
+        ]
+      },
+      "6976": {
+        "id_fhm": "6976",
+        "name": "Новиков Павел",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 0.0,
+            "end_time": 1200.0
+          },
+          {
+            "number": 2,
+            "start_time": 1200.0,
+            "end_time": 2400.0
+          },
+          {
+            "number": 3,
+            "start_time": 2400.0,
+            "end_time": 3600.0
+          }
+        ]
+      },
+      "8962": {
+        "id_fhm": "8962",
+        "name": "Арнаут Иван",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 0.0,
+            "end_time": 57.1
+          },
+          {
+            "number": 2,
+            "start_time": 305.0,
+            "end_time": 333.3
+          },
+          {
+            "number": 3,
+            "start_time": 561.0,
+            "end_time": 663.0
+          },
+          {
+            "number": 4,
+            "start_time": 882.2,
+            "end_time": 976.6
+          },
+          {
+            "number": 5,
+            "start_time": 1102.9,
+            "end_time": 1200.0
+          }
+        ]
+      },
+      "6980": {
+        "id_fhm": "6980",
+        "name": "Рахматуллин Тамерлан",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 0.0,
+            "end_time": 23.1
+          },
+          {
+            "number": 2,
+            "start_time": 268.6,
+            "end_time": 333.3
+          },
+          {
+            "number": 3,
+            "start_time": 561.0,
+            "end_time": 634.8
+          },
+          {
+            "number": 4,
+            "start_time": 697.8,
+            "end_time": 711.8
+          },
+          {
+            "number": 5,
+            "start_time": 952.7,
+            "end_time": 1000.7
+          },
+          {
+            "number": 6,
+            "start_time": 1111.8,
+            "end_time": 1200.0
+          }
+        ]
+      },
+      "2553": {
+        "id_fhm": "2553",
+        "name": "Нурмухаметов Дамир",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 23.1,
+            "end_time": 143.4
+          },
+          {
+            "number": 2,
+            "start_time": 333.3,
+            "end_time": 418.7
+          },
+          {
+            "number": 3,
+            "start_time": 634.8,
+            "end_time": 697.8
+          },
+          {
+            "number": 4,
+            "start_time": 778.7,
+            "end_time": 830.5
+          },
+          {
+            "number": 5,
+            "start_time": 1000.7,
+            "end_time": 1111.8
+          }
+        ]
+      },
+      "9922": {
+        "id_fhm": "9922",
+        "name": "Богомолов Ярослав",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 23.1,
+            "end_time": 121.7
+          },
+          {
+            "number": 2,
+            "start_time": 333.3,
+            "end_time": 418.7
+          },
+          {
+            "number": 3,
+            "start_time": 634.8,
+            "end_time": 697.8
+          },
+          {
+            "number": 4,
+            "start_time": 778.7,
+            "end_time": 850.6
+          },
+          {
+            "number": 5,
+            "start_time": 1000.7,
+            "end_time": 1111.8
+          }
+        ]
+      },
+      "6979": {
+        "id_fhm": "6979",
+        "name": "Попков Олег",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 57.1,
+            "end_time": 127.2
+          },
+          {
+            "number": 2,
+            "start_time": 333.3,
+            "end_time": 422.8
+          },
+          {
+            "number": 3,
+            "start_time": 658.7,
+            "end_time": 697.8
+          },
+          {
+            "number": 4,
+            "start_time": 815.7,
+            "end_time": 830.0
+          },
+          {
+            "number": 5,
+            "start_time": 1019.0,
+            "end_time": 1129.9
+          }
+        ]
+      },
+      "9509": {
+        "id_fhm": "9509",
+        "name": "Флигинских Владислав",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 57.1,
+            "end_time": 143.1
+          },
+          {
+            "number": 2,
+            "start_time": 333.3,
+            "end_time": 412.1
+          },
+          {
+            "number": 3,
+            "start_time": 663.0,
+            "end_time": 711.8
+          },
+          {
+            "number": 4,
+            "start_time": 976.6,
+            "end_time": 1200.0
+          }
+        ]
+      },
+      "6985": {
+        "id_fhm": "6985",
+        "name": "Широков Тимофей",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 57.1,
+            "end_time": 127.2
+          },
+          {
+            "number": 2,
+            "start_time": 333.3,
+            "end_time": 412.1
+          },
+          {
+            "number": 3,
+            "start_time": 658.7,
+            "end_time": 711.8
+          },
+          {
+            "number": 4,
+            "start_time": 993.5,
+            "end_time": 1102.9
+          }
+        ]
+      },
+      "6981": {
+        "id_fhm": "6981",
+        "name": "Саморуков Никита",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 121.7,
+            "end_time": 195.6
+          },
+          {
+            "number": 2,
+            "start_time": 418.7,
+            "end_time": 491.4
+          },
+          {
+            "number": 3,
+            "start_time": 830.5,
+            "end_time": 882.2
+          }
+        ]
+      },
+      "6984": {
+        "id_fhm": "6984",
+        "name": "Шинкин Дмитрий",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 127.2,
+            "end_time": 195.6
+          },
+          {
+            "number": 2,
+            "start_time": 422.8,
+            "end_time": 525.6
+          }
+        ]
+      },
+      "5518": {
+        "id_fhm": "5518",
+        "name": "Левчук Алексей",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 127.2,
+            "end_time": 195.6
+          },
+          {
+            "number": 2,
+            "start_time": 412.1,
+            "end_time": 518.5
+          },
+          {
+            "number": 3,
+            "start_time": 711.8,
+            "end_time": 805.0
+          },
+          {
+            "number": 4,
+            "start_time": 1129.9,
+            "end_time": 1200.0
+          }
+        ]
+      },
+      "7716": {
+        "id_fhm": "7716",
+        "name": "Морозов Илья",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 143.1,
+            "end_time": 195.6
+          },
+          {
+            "number": 2,
+            "start_time": 412.1,
+            "end_time": 525.6
+          },
+          {
+            "number": 3,
+            "start_time": 711.8,
+            "end_time": 805.0
+          }
+        ]
+      },
+      "8963": {
+        "id_fhm": "8963",
+        "name": "Волвенкин Андрей",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 143.4,
+            "end_time": 195.6
+          },
+          {
+            "number": 2,
+            "start_time": 418.7,
+            "end_time": 505.6
+          },
+          {
+            "number": 3,
+            "start_time": 711.8,
+            "end_time": 778.7
+          },
+          {
+            "number": 4,
+            "start_time": 850.6,
+            "end_time": 882.2
+          }
+        ]
+      },
+      "5770": {
+        "id_fhm": "5770",
+        "name": "Паршин Игорь",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 195.6,
+            "end_time": 305.0
+          },
+          {
+            "number": 2,
+            "start_time": 525.6,
+            "end_time": 561.0
+          },
+          {
+            "number": 3,
+            "start_time": 805.0,
+            "end_time": 882.2
+          }
+        ]
+      },
+      "12120": {
+        "id_fhm": "12120",
+        "name": "Буторин Кирилл",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 195.6,
+            "end_time": 305.0
+          },
+          {
+            "number": 2,
+            "start_time": 518.5,
+            "end_time": 561.0
+          },
+          {
+            "number": 3,
+            "start_time": 830.0,
+            "end_time": 882.2
+          }
+        ]
+      },
+      "6977": {
+        "id_fhm": "6977",
+        "name": "Орлов Андрей",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 195.6,
+            "end_time": 305.0
+          },
+          {
+            "number": 2,
+            "start_time": 525.6,
+            "end_time": 561.0
+          },
+          {
+            "number": 3,
+            "start_time": 805.0,
+            "end_time": 882.2
+          }
+        ]
+      },
+      "6978": {
+        "id_fhm": "6978",
+        "name": "Пимкин Артём",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 195.6,
+            "end_time": 268.6
+          },
+          {
+            "number": 2,
+            "start_time": 491.4,
+            "end_time": 561.0
+          },
+          {
+            "number": 3,
+            "start_time": 711.8,
+            "end_time": 778.7
+          },
+          {
+            "number": 4,
+            "start_time": 882.2,
+            "end_time": 952.7
+          }
+        ]
+      },
+      "12121": {
+        "id_fhm": "12121",
+        "name": "Крикунов Марк",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 195.6,
+            "end_time": 268.6
+          },
+          {
+            "number": 2,
+            "start_time": 505.6,
+            "end_time": 561.0
+          },
+          {
+            "number": 3,
+            "start_time": 882.2,
+            "end_time": 952.7
+          }
+        ]
+      }
+    },
+    "match_id": "10297",
+    "teams": {
+      "f-team": "Динамо - 2015 2014",
+      "f-team_id": 404,
+      "s-team": "Созвездие 2014",
+      "s-team_id": 301
+    },
+    "rosters": {
+      "f-team": [
+        {
+          "name": "Барбаев Егор",
+          "number": "21",
+          "role": "Вратарь",
+          "birth_date": "09.04.2015",
+          "id_fhm": "11902"
+        },
+        {
+          "name": "Белов Антон",
+          "number": "83",
+          "role": "Вратарь",
+          "birth_date": "16.12.2014",
+          "id_fhm": "5115"
+        },
+        {
+          "name": "Белова Вера",
+          "number": "38",
+          "role": "Защитник",
+          "birth_date": "16.12.2014",
+          "id_fhm": "385"
+        },
+        {
+          "name": "Вихарев Григорий",
+          "number": "19",
+          "role": "Защитник",
+          "birth_date": "12.03.2014",
+          "id_fhm": "4150"
+        },
+        {
+          "name": "Гусев Максим",
+          "number": "77",
+          "role": "Нападающий",
+          "birth_date": "16.09.2014",
+          "id_fhm": "5119"
+        },
+        {
+          "name": "Гусев Федор",
+          "number": "91",
+          "role": "Нападающий",
+          "birth_date": "03.04.2014",
+          "id_fhm": "5120"
+        },
+        {
+          "name": "Ильягуев Ифраим",
+          "number": "13",
+          "role": "Защитник",
+          "birth_date": "24.02.2014",
+          "id_fhm": "5122"
+        },
+        {
+          "name": "Климов Матвей",
+          "number": "27",
+          "role": "Защитник",
+          "birth_date": "09.09.2014",
+          "id_fhm": "5124"
+        },
+        {
+          "name": "Козлов Михаил",
+          "number": "10",
+          "role": "Защитник",
+          "birth_date": "29.04.2014",
+          "id_fhm": "5125"
+        },
+        {
+          "name": "Крылов Михаил",
+          "number": "29",
+          "role": "Защитник",
+          "birth_date": "29.05.2014",
+          "id_fhm": "6136"
+        },
+        {
+          "name": "Лагода Герман",
+          "number": "5",
+          "role": "Нападающий",
+          "birth_date": "06.09.2014",
+          "id_fhm": "7998"
+        },
+        {
+          "name": "Лапов Артём",
+          "number": "87",
+          "role": "Нападающий",
+          "birth_date": "26.09.2014",
+          "id_fhm": "11904"
+        },
+        {
+          "name": "Мастеров Иоанн",
+          "number": "52",
+          "role": "Нападающий",
+          "birth_date": "06.06.2014",
+          "id_fhm": "7221"
+        },
+        {
+          "name": "Мингазов Камиль",
+          "number": "11",
+          "role": "Нападающий",
+          "birth_date": "22.08.2014",
+          "id_fhm": "5128"
+        },
+        {
+          "name": "Свиридов Никита",
+          "number": "33",
+          "role": "Защитник",
+          "birth_date": "19.09.2014",
+          "id_fhm": "9134"
+        },
+        {
+          "name": "Скворцов Марк",
+          "number": "95",
+          "role": "Нападающий",
+          "birth_date": "17.04.2014",
+          "id_fhm": "5643"
+        },
+        {
+          "name": "Хажикаров Адам",
+          "number": "47",
+          "role": "Нападающий",
+          "birth_date": "07.09.2014",
+          "id_fhm": "11905"
+        },
+        {
+          "name": "Чуенков Игнатий",
+          "number": "71",
+          "role": "Нападающий",
+          "birth_date": "25.01.2014",
+          "id_fhm": "4169"
+        }
+      ],
+      "s-team": [
+        {
+          "name": "Крючков Артем",
+          "number": "50",
+          "role": "Вратарь",
+          "birth_date": "12.01.2015",
+          "id_fhm": "346"
+        },
+        {
+          "name": "Новиков Павел",
+          "number": "1",
+          "role": "Вратарь",
+          "birth_date": "27.01.2014",
+          "id_fhm": "6976"
+        },
+        {
+          "name": "Арнаут Иван",
+          "number": "77",
+          "role": "Нападающий",
+          "birth_date": "20.01.2014",
+          "id_fhm": "8962",
+          "lineup_group": "1-я тройка",
+          "lineup_position": "Центр"
+        },
+        {
+          "name": "Богомолов Ярослав",
+          "number": "88",
+          "role": "Защитник",
+          "birth_date": "30.07.2014",
+          "id_fhm": "9922",
+          "lineup_group": "2-я пара",
+          "lineup_position": "Правый"
+        },
+        {
+          "name": "Буторин Кирилл",
+          "number": "11",
+          "role": "Нападающий",
+          "birth_date": "14.01.2014",
+          "id_fhm": "12120",
+          "lineup_group": "4-я тройка",
+          "lineup_position": "Правый"
+        },
+        {
+          "name": "Волвенкин Андрей",
+          "number": "69",
+          "role": "Защитник",
+          "birth_date": "30.09.2014",
+          "id_fhm": "8963",
+          "lineup_group": "3-я пара",
+          "lineup_position": "Левый"
+        },
+        {
+          "name": "Калиш Иван",
+          "number": "54",
+          "role": "Нападающий",
+          "birth_date": "15.06.2014",
+          "id_fhm": "6971",
+          "lineup_group": "1-я тройка",
+          "lineup_position": "Левый"
+        },
+        {
+          "name": "Крикунов Марк",
+          "number": "97",
+          "role": "Защитник",
+          "birth_date": "10.01.2014",
+          "id_fhm": "12121",
+          "lineup_group": "4-я пара",
+          "lineup_position": "Левый"
+        },
+        {
+          "name": "Левчук Алексей",
+          "number": "28",
+          "role": "Нападающий",
+          "birth_date": "10.02.2014",
+          "id_fhm": "5518",
+          "lineup_group": "3-я тройка",
+          "lineup_position": "Правый"
+        },
+        {
+          "name": "Митин Павел",
+          "number": "3",
+          "role": "Защитник",
+          "birth_date": "03.12.2014",
+          "id_fhm": "6972",
+          "lineup_group": "1-я пара",
+          "lineup_position": "Левый"
+        },
+        {
+          "name": "Морозов Илья",
+          "number": "90",
+          "role": "Нападающий",
+          "birth_date": "01.01.2014",
+          "id_fhm": "7716",
+          "lineup_group": "3-я тройка",
+          "lineup_position": "Центр"
+        },
+        {
+          "name": "Нурмухаметов Дамир",
+          "number": "16",
+          "role": "Защитник",
+          "birth_date": "14.10.2014",
+          "id_fhm": "2553",
+          "lineup_group": "2-я пара",
+          "lineup_position": "Левый"
+        },
+        {
+          "name": "Орлов Андрей",
+          "number": "70",
+          "role": "Нападающий",
+          "birth_date": "18.07.2014",
+          "id_fhm": "6977",
+          "lineup_group": "4-я тройка",
+          "lineup_position": "Центр"
+        },
+        {
+          "name": "Паршин Игорь",
+          "number": "40",
+          "role": "Нападающий",
+          "birth_date": "17.03.2014",
+          "id_fhm": "5770",
+          "lineup_group": "4-я тройка",
+          "lineup_position": "Левый"
+        },
+        {
+          "name": "Пимкин Артём",
+          "number": "99",
+          "role": "Защитник",
+          "birth_date": "04.01.2014",
+          "id_fhm": "6978",
+          "lineup_group": "4-я пара",
+          "lineup_position": "Правый"
+        },
+        {
+          "name": "Попков Олег",
+          "number": "98",
+          "role": "Нападающий",
+          "birth_date": "03.10.2014",
+          "id_fhm": "6979",
+          "lineup_group": "2-я тройка",
+          "lineup_position": "Левый"
+        },
+        {
+          "name": "Рахматуллин Тамерлан",
+          "number": "13",
+          "role": "Защитник",
+          "birth_date": "19.07.2014",
+          "id_fhm": "6980",
+          "lineup_group": "1-я пара",
+          "lineup_position": "Правый"
+        },
+        {
+          "name": "Саморуков Никита",
+          "number": "18",
+          "role": "Защитник",
+          "birth_date": "05.06.2014",
+          "id_fhm": "6981",
+          "lineup_group": "3-я пара",
+          "lineup_position": "Правый"
+        },
+        {
+          "name": "Силин Леонид",
+          "number": "91",
+          "role": "Нападающий",
+          "birth_date": "25.06.2014",
+          "id_fhm": "6982",
+          "lineup_group": "1-я тройка",
+          "lineup_position": "Правый"
+        },
+        {
+          "name": "Флигинских Владислав",
+          "number": "17",
+          "role": "Нападающий",
+          "birth_date": "25.01.2014",
+          "id_fhm": "9509",
+          "lineup_group": "2-я тройка",
+          "lineup_position": "Центр"
+        },
+        {
+          "name": "Шинкин Дмитрий",
+          "number": "10",
+          "role": "Нападающий",
+          "birth_date": "15.08.2014",
+          "id_fhm": "6984",
+          "lineup_group": "3-я тройка",
+          "lineup_position": "Левый"
+        },
+        {
+          "name": "Широков Тимофей",
+          "number": "96",
+          "role": "Нападающий",
+          "birth_date": "12.09.2014",
+          "id_fhm": "6985",
+          "lineup_group": "2-я тройка",
+          "lineup_position": "Правый"
+        }
+      ]
+    },
+    "events": [
+      {
+        "type": "penalty",
+        "team": "s-team",
+        "player_name": "Попков О.",
+        "player_id_fhm": "6979",
+        "start_time_sec": 695,
+        "end_time_sec": 815,
+        "violation_type": "Подножка"
+      },
+      {
+        "type": "goal",
+        "team": "s-team",
+        "player_name": "Широков Т.",
+        "player_id_fhm": "6985",
+        "f-pass": "Флигинских В.",
+        "f-pass_id_fhm": "9509",
+        "s-pass": "N/A",
+        "s-pass_id_fhm": "N/A",
+        "time_sec": 709
+      },
+      {
+        "type": "goal",
+        "team": "f-team",
+        "player_name": "Мастеров И.",
+        "player_id_fhm": "7221",
+        "f-pass": "Гусев Ф.",
+        "f-pass_id_fhm": "5120",
+        "s-pass": "N/A",
+        "s-pass_id_fhm": "N/A",
+        "time_sec": 885
+      },
+      {
+        "type": "penalty",
+        "team": "f-team",
+        "player_name": "Белова В.",
+        "player_id_fhm": "385",
+        "start_time_sec": 1054,
+        "end_time_sec": 1174,
+        "violation_type": "Подножка"
+      },
+      {
+        "type": "penalty",
+        "team": "s-team",
+        "player_name": "Волвенкин А.",
+        "player_id_fhm": "8963",
+        "start_time_sec": 1292,
+        "end_time_sec": 1412,
+        "violation_type": "Подножка"
+      },
+      {
+        "type": "goal",
+        "team": "s-team",
+        "player_name": "Широков Т.",
+        "player_id_fhm": "6985",
+        "f-pass": "Попков О.",
+        "f-pass_id_fhm": "6979",
+        "s-pass": "Флигинских В.",
+        "s-pass_id_fhm": "9509",
+        "time_sec": 1553
+      },
+      {
+        "type": "goal",
+        "team": "s-team",
+        "player_name": "Арнаут И.",
+        "player_id_fhm": "8962",
+        "f-pass": "Калиш И.",
+        "f-pass_id_fhm": "6971",
+        "s-pass": "Рахматуллин Т.",
+        "s-pass_id_fhm": "6980",
+        "time_sec": 1575
+      },
+      {
+        "type": "goal",
+        "team": "s-team",
+        "player_name": "Морозов И.",
+        "player_id_fhm": "7716",
+        "f-pass": "Пимкин А.",
+        "f-pass_id_fhm": "6978",
+        "s-pass": "Шинкин Д.",
+        "s-pass_id_fhm": "6984",
+        "time_sec": 1676
+      },
+      {
+        "type": "goal",
+        "team": "f-team",
+        "player_name": "Козлов М.",
+        "player_id_fhm": "5125",
+        "f-pass": "Мингазов К.",
+        "f-pass_id_fhm": "5128",
+        "s-pass": "N/A",
+        "s-pass_id_fhm": "N/A",
+        "time_sec": 2035
+      },
+      {
+        "type": "goal",
+        "team": "s-team",
+        "player_name": "Левчук А.",
+        "player_id_fhm": "5518",
+        "f-pass": "Шинкин Д.",
+        "f-pass_id_fhm": "6984",
+        "s-pass": "Морозов И.",
+        "s-pass_id_fhm": "7716",
+        "time_sec": 2101
+      },
+      {
+        "type": "goal",
+        "team": "f-team",
+        "player_name": "Мингазов К.",
+        "player_id_fhm": "5128",
+        "f-pass": "Климов М.",
+        "f-pass_id_fhm": "5124",
+        "s-pass": "N/A",
+        "s-pass_id_fhm": "N/A",
+        "time_sec": 2772
+      },
+      {
+        "type": "goal",
+        "team": "s-team",
+        "player_name": "Морозов И.",
+        "player_id_fhm": "7716",
+        "f-pass": "Широков Т.",
+        "f-pass_id_fhm": "6985",
+        "s-pass": "Левчук А.",
+        "s-pass_id_fhm": "5518",
+        "time_sec": 3134
+      },
+      {
+        "type": "penalty",
+        "team": "s-team",
+        "player_name": "Арнаут И.",
+        "player_id_fhm": "8962",
+        "start_time_sec": 3267,
+        "end_time_sec": 3387,
+        "violation_type": "Удар клюшкой"
+      },
+      {
+        "type": "penalty",
+        "team": "f-team",
+        "player_name": "Лагода Г.",
+        "player_id_fhm": "7998",
+        "start_time_sec": 3267,
+        "end_time_sec": 3387,
+        "violation_type": "Грубость"
+      },
+      {
+        "type": "goal",
+        "team": "s-team",
+        "player_name": "Левчук А.",
+        "player_id_fhm": "5518",
+        "f-pass": "Морозов И.",
+        "f-pass_id_fhm": "7716",
+        "s-pass": "N/A",
+        "s-pass_id_fhm": "N/A",
+        "time_sec": 3276
+      },
+      {
+        "type": "penalty",
+        "team": "s-team",
+        "player_name": "Флигинских В.",
+        "player_id_fhm": "9509",
+        "start_time_sec": 3397,
+        "end_time_sec": 3517,
+        "violation_type": "Оскорбление судей и неспортивное поведение"
+      },
+      {
+        "type": "penalty",
+        "team": "f-team",
+        "player_name": "Ильягуев И.",
+        "player_id_fhm": "5122",
+        "start_time_sec": 3460,
+        "end_time_sec": 3580,
+        "violation_type": "Задержка соперника"
+      },
+      {
+        "type": "goal",
+        "team": "s-team",
+        "player_name": "Морозов И.",
+        "player_id_fhm": "7716",
+        "f-pass": "N/A",
+        "f-pass_id_fhm": "N/A",
+        "s-pass": "N/A",
+        "s-pass_id_fhm": "N/A",
+        "time_sec": 3460
+      }
+    ],
+    "tournament_name": "Первенство г. Москвы по хоккею 2014 г.р. 25/26",
+    "tour_number": "30",
+    "match_date": "2026-03-21",
+    "match_time": "17:15:00",
+    "venue_city": "Красногорск",
+    "venue_arena": "Рига Ice Land",
+    "referees": [
+      "Мамонтов М.С.",
+      "Харчевников И.А.",
+      "Худяков Е.К."
+    ]
   }
 }

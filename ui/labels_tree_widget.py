@@ -171,29 +171,48 @@ class LabelsTreeWidget(QWidget):
         # Восстанавливаем состояние
         project_info_parent_item.setExpanded("О проекте" in self._expanded_parent_items)
 
-        # Находим calculated_ranges с label_type == "ЧИИ_СУММА"
-        chi_sum_ranges = [cr for cr in calculated_ranges if cr.label_type == "ЧИИ_СУММА"]
-
-        # Заполняем узел "О проекте" дочерними элементами
-        for i, chi_sum_range in enumerate(chi_sum_ranges):
-            # Извлекаем суммарную длительность из end_time
-            sum_duration = chi_sum_range.end_time
+        # --- НОВОЕ: Расчёт суммы ЧИИ по периодам "на лету" ---
+        # Находим периоды (Сегменты с именами "Период 1", "Период 2", "Период 3")
+        periods = {}
+        for cr in calculated_ranges:
+            if cr.label_type == "Сегмент":
+                if cr.name == "Период 1":
+                    periods[1] = (cr.start_time, cr.end_time)
+                elif cr.name == "Период 2":
+                    periods[2] = (cr.start_time, cr.end_time)
+                elif cr.name == "Период 3":
+                    periods[3] = (cr.start_time, cr.end_time)
+        
+        # Находим все ЧИИ (Чистое игровое время)
+        chii_ranges = [cr for cr in calculated_ranges if cr.label_type == "ЧИИ"]
+        
+        # Считаем сумму ЧИИ для каждого периода
+        period_chii_sum = {1: 0.0, 2: 0.0, 3: 0.0}
+        for chii in chii_ranges:
+            chii_start = chii.start_time
+            chii_duration = chii.end_time - chii.start_time
+            
+            # Определяем, к какому периоду относится это ЧИИ (по времени начала)
+            for period_num, (period_start, period_end) in periods.items():
+                if period_start <= chii_start < period_end:
+                    period_chii_sum[period_num] += chii_duration
+                    break
+        
+        # Создаём дочерние элементы для П1.ЧИИ, П2.ЧИИ, П3.ЧИИ
+        for period_num in [1, 2, 3]:
+            sum_duration = period_chii_sum[period_num]
             # Форматирование длительности с пробелом-разделителем и в "мин:сек"
             formatted_duration = format_number_with_space_separator(sum_duration)
             formatted_duration_min_sec = format_seconds_to_min_sec(int(sum_duration))
-
+            
             child_item = QTreeWidgetItem(project_info_parent_item, [
-                chi_sum_range.name, # Имя (например, "ЧИИ Период 1")
-                "-", # №
-                "-", # Время (с)
-                f"{formatted_duration} ({formatted_duration_min_sec})" # Длительность
+                f"П{period_num}.ЧИИ",  # Тип
+                "-",  # №
+                "-",  # Время (с)
+                f"{formatted_duration} ({formatted_duration_min_sec})"  # Длительность
             ])
-            # --- Новое: Установка выравнивания по правому краю для числовых колонок ---
-            # В данном случае, колонка "Длительность" (index 3) содержит числа
-            child_item.setTextAlignment(3, Qt.AlignRight | Qt.AlignVCenter) # Длительность
-            # --- Конец нового ---
-            # Сохраняем индекс диапазона в списке как user data в первом столбце дочернего элемента
-            child_item.setData(4, 0, id(chi_sum_range)) # Используем id объекта как уникальный ключ
+            # Установка выравнивания по правому краю для колонки "Длительность"
+            child_item.setTextAlignment(3, Qt.AlignRight | Qt.AlignVCenter)
         # ---
 
         # --- Новое: Создаём статические узлы "ПX.Тип" ---
