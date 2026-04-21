@@ -140,6 +140,16 @@ def detect_osg_events(
     print(f"[OSG] Масштаб: x={scale_x:.3f}, y={scale_y:.3f}")
     print(f"[OSG] ROI после масштабирования: x={x}, y={y}, w={w}, h={h}")
 
+    # === Пытаемся инициализировать tesserocr (ускоренный OCR) ===
+    tesserocr_api = None
+    use_tesserocr = False
+    try:
+        from tesserocr import PyTessBaseAPI
+        tesserocr_api = PyTessBaseAPI(lang='rus', psm=6, oem=3)
+        use_tesserocr = True
+        print("[OSG] Используется tesserocr для ускорения OCR.")
+    except Exception as e:
+        print(f"[OSG] tesserocr недоступен ({e}), используется pytesseract (медленнее).")
 
     # === Определяем диапазоны поиска в кадрах ===
     if search_ranges is None:
@@ -208,11 +218,18 @@ def detect_osg_events(
             # === OCR ===
             pil_img_roi = Image.fromarray(processed_img)
             try:
-                config = '--psm 6 --oem 3 -l rus'
-                text = pytesseract.image_to_string(pil_img_roi, config=config).strip()
-                data = pytesseract.image_to_data(pil_img_roi, output_type=pytesseract.Output.DICT, config=config)
-                confidences = [conf for conf, word in zip(data['conf'], data['text']) if word.strip() != '']
-                avg_conf = sum(confidences) / len(confidences) if confidences else 0.0
+                if use_tesserocr and tesserocr_api is not None:
+                    tesserocr_api.SetImage(pil_img_roi)
+                    text = tesserocr_api.GetUTF8Text().strip()
+                    confidences = tesserocr_api.AllWordConfidences()
+                    avg_conf = sum(confidences) / len(confidences) if confidences else 0.0
+                else:
+                    config = '--psm 6 --oem 3 -l rus'
+                    data = pytesseract.image_to_data(pil_img_roi, output_type=pytesseract.Output.DICT, config=config)
+                    words = [word.strip() for word in data['text'] if word.strip()]
+                    text = ' '.join(words)
+                    confidences = [conf for conf, word in zip(data['conf'], data['text']) if word.strip()]
+                    avg_conf = sum(confidences) / len(confidences) if confidences else 0.0
             except Exception as e:
                 print(f"Ошибка при выполнении OCR на кадре {frame_index}: {e}")
                 frame_index += 1
@@ -249,6 +266,8 @@ def detect_osg_events(
                     # === Проверка find_first_only ===
                     if find_first_only:
                         cap.release()
+                        if tesserocr_api is not None:
+                            tesserocr_api.End()
                         if progress_callback:
                             progress_callback(processed_count, total_to_process)  # Завершаем прогресс
                         return results
@@ -256,4 +275,6 @@ def detect_osg_events(
             frame_index += 1
 
     cap.release()
+    if tesserocr_api is not None:
+        tesserocr_api.End()
     return results

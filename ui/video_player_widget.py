@@ -441,12 +441,12 @@ class VideoPlayerWidget(QWidget):
             self.toggle_reverse()
             # --- НОВОЕ: Проверка клавиш '8' и '9' ---
         elif event.key() == Qt.Key_8:
-            print("[DEBUG VideoPlayer] Нажата клавиша '8'.")
+            # print("[DEBUG VideoPlayer] Нажата клавиша '8'.")
             # Эмит сигнала о запросе "прилипания" к предыдущему элементу
             self.snapToPreviousRequested.emit()
             return # Выходим, чтобы не вызывать super().keyPressEvent()
         elif event.key() == Qt.Key_9:
-            print("[DEBUG VideoPlayer] Нажата клавиша '9'.")
+            # print("[DEBUG VideoPlayer] Нажата клавиша '9'.")
             # Эмит сигнала о запросе "прилипания" к следующему элементу
             self.snapToNextRequested.emit()
             return # Выходим, чтобы не вызывать super().keyPressEvent()

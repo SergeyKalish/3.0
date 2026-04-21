@@ -93,7 +93,7 @@ class MainWindow(QMainWindow):
     def _update_timeline_active_range(self, range_name: str):
         """Обновляет активный диапазон на TimelineWidget на основе выбранного имени в range_selector."""
         if not self.project or not self.project.match:
-            print("[DEBUG] _update_timeline_active_range: Нет активного проекта.")
+            # print("[DEBUG] _update_timeline_active_range: Нет активного проекта.")
             return
 
         # Найти выбранный CalculatedRange по имени
@@ -106,19 +106,19 @@ class MainWindow(QMainWindow):
         if selected_range:
             # Обновить TimelineWidget с новым активным диапазоном
             if self.timeline_widget:
-                 print(f"[DEBUG] _update_timeline_active_range: Обновление диапазона на {range_name} ({selected_range.start_time:.3f} - {selected_range.end_time:.3f})")
+                 # print(f"[DEBUG] _update_timeline_active_range: Обновление диапазона на {range_name} ({selected_range.start_time:.3f} - {selected_range.end_time:.3f})")
                  self.timeline_widget.update_active_range(selected_range.start_time, selected_range.end_time, selected_range.name)
         else:
             # Если имя не найдено в calculated_ranges (например, "Всё видео" до первого SMART),
             # можно установить глобальный диапазон (0, total_duration), если он известен.
             # Пока просто выведем сообщение.
-            print(f"[DEBUG] _update_timeline_active_range: Диапазон '{range_name}' не найден в calculated_ranges.")
+            # print(f"[DEBUG] _update_timeline_active_range: Диапазон '{range_name}' не найден в calculated_ranges.")
             # Попробуем найти диапазон с label_type "Всё видео", если имя не совпадает
             if range_name == "Всё видео":
                  all_video_range = next((cr for cr in self.project.match.calculated_ranges if cr.label_type == "Всё видео"), None)
                  if all_video_range:
                       if self.timeline_widget:
-                           print(f"[DEBUG] _update_timeline_active_range: Обновление на 'Всё видео' ({all_video_range.start_time:.3f} - {all_video_range.end_time:.3f})")
+                           # print(f"[DEBUG] _update_timeline_active_range: Обновление на 'Всё видео' ({all_video_range.start_time:.3f} - {all_video_range.end_time:.3f})")
                            self.timeline_widget.update_active_range(all_video_range.start_time, all_video_range.end_time, all_video_range.name)
             # Или, если точная логика неизвестна, можно установить (0, 0) или пропустить.
             # В реальном проекте, "Всё видео" всегда должен быть в calculated_ranges после run_smart_analysis.
@@ -417,29 +417,31 @@ class MainWindow(QMainWindow):
         # --- НОВОЕ: Обработчики для '8' и '9' ---
     def handle_snap_to_previous(self):
         """Обработчик сигнала от VideoPlayerWidget о нажатии клавиши '8'."""
-        print("[DEBUG MainWindow] handle_snap_to_previous вызван.")
+        # print("[DEBUG MainWindow] handle_snap_to_previous вызван.")
         # Вызываем МЕТОД TimelineWidget (_find_closest_element_time) для поиска элемента слева
         # и получения времени
         # TimelineWidget использует self.current_global_time как точку отсчёта
         target_time = self.timeline_widget._find_closest_element_time("left") # Вызов напрямую
         if target_time is not None:
-            print(f"[DEBUG MainWindow] handle_snap_to_previous: Переход к времени {target_time:.3f}s.")
+            # print(f"[DEBUG MainWindow] handle_snap_to_previous: Переход к времени {target_time:.3f}s.")
             self.go_to_time(target_time)
         else:
-            print("[DEBUG MainWindow] handle_snap_to_previous: Элемент слева не найден.")
+            # print("[DEBUG MainWindow] handle_snap_to_previous: Элемент слева не найден.")
+            pass
 
     def handle_snap_to_next(self):
         """Обработчик сигнала от VideoPlayerWidget о нажатии клавиши '9'."""
-        print("[DEBUG MainWindow] handle_snap_to_next вызван.")
+        # print("[DEBUG MainWindow] handle_snap_to_next вызван.")
         # Вызываем МЕТОД TimelineWidget (_find_closest_element_time) для поиска элемента справа
         # и получения времени
         # TimelineWidget использует self.current_global_time как точку отсчёта
         target_time = self.timeline_widget._find_closest_element_time("right") # Вызов напрямую
         if target_time is not None:
-            print(f"[DEBUG MainWindow] handle_snap_to_next: Переход к времени {target_time:.3f}s.")
+            # print(f"[DEBUG MainWindow] handle_snap_to_next: Переход к времени {target_time:.3f}s.")
             self.go_to_time(target_time)
         else:
-            print("[DEBUG MainWindow] handle_snap_to_next: Элемент справа не найден.")
+            # print("[DEBUG MainWindow] handle_snap_to_next: Элемент справа не найден.")
+            pass
     # --- Конец НОВОГО ---
     
     def on_label_requested_from_editor(self, label_type: str):
@@ -454,7 +456,7 @@ class MainWindow(QMainWindow):
         active_event = None
         if hasattr(self, 'protocol_validation_widget'):
             active_event = self._active_protocol_event
-        print(f"[DEBUG] label_type='{label_type}', active_event exists: {active_event is not None}")
+        # print(f"[DEBUG] label_type='{label_type}', active_event exists: {active_event is not None}")
 
         # --- НОВОЕ: Обработка метки "Смена" ---
         if label_type == "Смена":
@@ -619,7 +621,7 @@ class MainWindow(QMainWindow):
             roster_dict = {p['id_fhm']: p for p in our_team_roster}
             numbers_str = format_shift_numbers(players_on_ice_data, roster_dict)
             
-            print(f"[DEBUG] Создана метка 'Смена' на {new_label.global_time:.2f} с {len(players_on_ice_data)} игроками: {[p['name'] for p in players_on_ice_data]}, номера: {numbers_str}")
+            # print(f"[DEBUG] Создана метка 'Смена' на {new_label.global_time:.2f} с {len(players_on_ice_data)} игроками: {[p['name'] for p in players_on_ice_data]}, номера: {numbers_str}")
 
             # 6. Сохранить проект
             if self.project_file_path:
@@ -695,7 +697,7 @@ class MainWindow(QMainWindow):
         # --- Оригинальная логика для других меток (Гол, Удаление и т.д.) ---
         context = {}
         if label_type in ("Гол", "Удаление") and active_event:
-            print(f"[DEBUG] Filling context from event: {active_event.get('player_name', 'N/A')}")
+            # print(f"[DEBUG] Filling context from event: {active_event.get('player_name', 'N/A')}")
             if label_type == "Гол":
                 context = {
                     "team": active_event.get("team"),
@@ -815,7 +817,7 @@ class MainWindow(QMainWindow):
         all_video_range = next((cr for cr in self.project.match.calculated_ranges if cr.label_type == "Всё видео"), None)
         if all_video_range:
             if self.timeline_widget:
-                 print(f"[DEBUG] MainWindow.open_project: Установка активного диапазона 'Всё видео' ({all_video_range.start_time:.3f} - {all_video_range.end_time:.3f}) для TimelineWidget.")
+                 # print(f"[DEBUG] MainWindow.open_project: Установка активного диапазона 'Всё видео' ({all_video_range.start_time:.3f} - {all_video_range.end_time:.3f}) для TimelineWidget.")
                  # Это вызовет redraw и установит правильный масштаб
                  self.timeline_widget.update_active_range(all_video_range.start_time, all_video_range.end_time, all_video_range.name)
 
@@ -893,7 +895,7 @@ class MainWindow(QMainWindow):
         """
         # Проверяем, существуют ли необходимые данные
         if not hasattr(self.project, 'match') or not hasattr(self.project.match, 'rosters') or not hasattr(self.project.match, 'teams'):
-            print("[DEBUG] _update_lineup_widget_with_team_roster: rosters или teams отсутствуют в project.match.")
+            # print("[DEBUG] _update_lineup_widget_with_team_roster: rosters или teams отсутствуют в project.match.")
             self.lineup_module_widget.set_team_roster([]) # Очищаем виджет, если данных нет
             return
 
@@ -906,7 +908,7 @@ class MainWindow(QMainWindow):
                 break
 
         if our_team_key is None:
-            print(f"[DEBUG] _update_lineup_widget_with_team_roster: Команда 'Созвездие 2014' не найдена в teams: {self.project.match.teams}")
+            # print(f"[DEBUG] _update_lineup_widget_with_team_roster: Команда 'Созвездие 2014' не найдена в teams: {self.project.match.teams}")
             self.lineup_module_widget.set_team_roster([]) # Очищаем виджет, если команда не найдена
             # --- НОВОЕ: Убедимся, что виджет знает, что наша команда неопределена ---
             self.lineup_module_widget.set_our_team_key(None)
@@ -920,10 +922,10 @@ class MainWindow(QMainWindow):
         self.lineup_module_widget.set_team_roster(our_team_roster)
         # --- НОВОЕ: Передаём ключ нашей команды в LineupModuleWidget ---
         self.lineup_module_widget.set_our_team_key(our_team_key)
-        print(f"[DEBUG MW] Our team key determined: {our_team_key}")
+        # print(f"[DEBUG MW] Our team key determined: {our_team_key}")
         # --- КОНЕЦ НОВОГО ---
 
-        print(f"[DEBUG] _update_lineup_widget_with_team_roster: Установлен состав для {our_team_key}, {len(our_team_roster)} игроков.")
+        # print(f"[DEBUG] _update_lineup_widget_with_team_roster: Установлен состав для {our_team_key}, {len(our_team_roster)} игроков.")
 
 
     def add_to_recent_projects(self, path: str):

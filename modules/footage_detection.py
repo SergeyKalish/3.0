@@ -116,30 +116,17 @@ def find_video_template(
             if not ret:
                 break
 
+            current_time_sec = frame_index / fps
+
             # Пропускаем кадры, если skip_every_n > 1
             if (frame_index - start_frame) % skip_every_n != 0:
                 frame_index += 1
-                # --- ИСПРАВЛЕНО: увеличиваем processed_count и вызываем progress_callback ---
-                processed_count += 1
-                if progress_callback:
-                    progress_callback(processed_count, total_to_process)
                 continue
 
-            current_time_sec = frame_index / fps
-
-            # === НОВОЕ: Проверка дебаунсинга ===
+            # === Проверка дебаунсинга ===
             if current_time_sec < next_allowed_time_sec:
                 frame_index += 1
-                # --- ИСПРАВЛЕНО: увеличиваем processed_count и вызываем progress_callback ---
-                processed_count += 1
-                if progress_callback:
-                    progress_callback(processed_count, total_to_process)
                 continue
-
-            # --- ИСПРАВЛЕНО: увеличиваем processed_count и вызываем progress_callback ПЕРЕД анализом ---
-            processed_count += 1
-            if progress_callback:
-                progress_callback(processed_count, total_to_process)
 
             # Обрабатываем кадр
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -153,14 +140,6 @@ def find_video_template(
                 next_allowed_time_sec = current_time_sec + debounce_seconds
 
             frame_index += 1
-
-        # Пропускаем оставшиеся кадры в диапазоне (если skip_every_n > 1)
-        remaining = end_frame - frame_index
-        if remaining > 0:
-            cap.set(cv2.CAP_PROP_POS_FRAMES, end_frame)
-            processed_count += (remaining + skip_every_n - 1) // skip_every_n
-            if progress_callback:
-                progress_callback(processed_count, total_to_process)
 
     cap.release()
     return results

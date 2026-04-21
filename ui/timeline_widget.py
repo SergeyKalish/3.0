@@ -289,8 +289,8 @@ class TimelineView(QGraphicsView):
             # Эмитируем сигнал навигации через TimelineWidget
             timeline_widget.globalTimeRequested.emit(calculated_global_time)
         else:
-            pass#print(f"[DEBUG] TimelineView.mousePressEvent: Клик на X={x_scene}, вычислено глобальное время {calculated_global_time:.3f}s. Вне активного диапазона ({active_start} - {active_end}). Игнорируем.")
-
+            # pass#print(f"[DEBUG] TimelineView.mousePressEvent: Клик на X={x_scene}, вычислено глобальное время {calculated_global_time:.3f}s. Вне активного диапазона ({active_start} - {active_end}). Игнорируем.")
+            pass
 
 class TimelineScene(QGraphicsScene):
     """QGraphicsScene для отображения элементов шкалы и индикатора времени."""
@@ -318,7 +318,7 @@ class TimelineScene(QGraphicsScene):
     def update_time_indicator_position(self):
         """Обновляет позицию индикатора текущего времени без перерисовки других элементов."""
         if not self.timeline_widget:
-            print("[DEBUG] TimelineScene.update_time_indicator_position(): timeline_widget не установлена.")
+            # print("[DEBUG] TimelineScene.update_time_indicator_position(): timeline_widget не установлена.")
             return
 
         current_time = self.timeline_widget.current_global_time
@@ -348,8 +348,8 @@ class TimelineScene(QGraphicsScene):
             self.current_time_indicator.setLine(x_pos, 0, x_pos, 100)
             #print(f"[DEBUG] TimelineScene.update_time_indicator_position(): Индикатор времени установлен на x={x_pos} для времени {current_time}.")
         else:
-            pass#print(f"[DEBUG] TimelineScene.update_time_indicator_position(): Невозможно вычислить позицию индикатора. view_width: {view_width}, active_duration: {active_duration}")
-
+            # pass#print(f"[DEBUG] TimelineScene.update_time_indicator_position(): Невозможно вычислить позицию индикатора. view_width: {view_width}, active_duration: {active_duration}")
+            pass
 
     def redraw(self):
         """Перерисовывает сцену: удаляет старые элементы (TimelineLabel, TimelineRange), добавляет новые на основе данных, фильтров и масштаба.
@@ -361,7 +361,7 @@ class TimelineScene(QGraphicsScene):
 
         # Проверяем, находится ли текущее время в активном диапазоне (для отладки, можно убрать)
         if not self.timeline_widget:
-            print("[DEBUG] TimelineScene.redraw(): timeline_widget не установлена.")
+            # print("[DEBUG] TimelineScene.redraw(): timeline_widget не установлена.")
             return
 
         # current_time = self.timeline_widget.current_global_time # Убираем, не нужно для отрисовки элементов
@@ -412,8 +412,8 @@ class TimelineScene(QGraphicsScene):
                     self.timeline_items_generic[label.id] = timeline_label
                     #print(f"[DEBUG] TimelineScene.redraw(): Добавлен TimelineLabel для {label_type} в {label.global_time}s (id: {label.id}) на x={x_pos}")
                 else:
-                    pass#print(f"[DEBUG] TimelineScene.redraw(): TimelineLabel для {label.label_type} в {label.global_time}s вне активного диапазона ({active_start} - {active_end}). Пропущен.")
-
+                    # pass#print(f"[DEBUG] TimelineScene.redraw(): TimelineLabel для {label.label_type} в {label.global_time}s вне активного диапазона ({active_start} - {active_end}). Пропущен.")
+                    pass
 
         # 4. Добавляем TimelineRange на сцену, если его тип не отфильтрован и он пересекается с диапазоном
         for range_obj in calculated_ranges:
@@ -432,8 +432,8 @@ class TimelineScene(QGraphicsScene):
                     self.timeline_items_calculated[range_obj.id] = timeline_range
                     #print(f"[DEBUG] TimelineScene.redraw(): Добавлен TimelineRange для {range_type} ({range_obj.start_time}s - {range_obj.end_time}s, id: {range_obj.id}) на x={x_start} - {x_end}")
                 else:
-                    pass#print(f"[DEBUG] TimelineScene.redraw(): TimelineRange для {range_obj.label_type} ({range_obj.start_time}s - {range_obj.end_time}s) не пересекается с активным диапазоном ({active_start} - {active_end}). Пропущен.")
-
+                    # pass#print(f"[DEBUG] TimelineScene.redraw(): TimelineRange для {range_obj.label_type} ({range_obj.start_time}s - {range_obj.end_time}s) не пересекается с активным диапазоном ({active_start} - {active_end}). Пропущен.")
+                    pass
 
 
 # --- Основной класс TimelineWidget ---
@@ -596,13 +596,13 @@ class TimelineWidget(QWidget):
             if label_type in self.filter_checkboxes_generic:
                 # Если чекбокс с таким label_type был и есть, восстанавливаем его состояние
                 self.filter_checkboxes_generic[label_type].setChecked(was_checked)
-                print(f"[DEBUG] _create_filter_checkboxes: восстановлено состояние для GenericLabel: {label_type} (checked={was_checked})")
+                # print(f"[DEBUG] _create_filter_checkboxes: восстановлено состояние для GenericLabel: {label_type} (checked={was_checked})")
 
         for label_type, was_checked in old_states_calculated.items():
             if label_type in self.filter_checkboxes_calculated:
                 # Если чекбокс с таким label_type был и есть, восстанавливаем его состояние
                 self.filter_checkboxes_calculated[label_type].setChecked(was_checked)
-                print(f"[DEBUG] _create_filter_checkboxes: восстановлено состояние для CalculatedRange: {label_type} (checked={was_checked})")
+                # print(f"[DEBUG] _create_filter_checkboxes: восстановлено состояние для CalculatedRange: {label_type} (checked={was_checked})")
         # --- КОНЕЦ НОВОГО ---
 
 
@@ -697,23 +697,25 @@ class TimelineWidget(QWidget):
         """Обработка нажатия клавиш 8 и 9 для 'прилипания'."""
         key = event.key()
         if key == Qt.Key_8: # Клавиша 8
-            print("[DEBUG] TimelineWidget.keyPressEvent: Нажата клавиша 8 (влево).") # Изменили подпись
+            # print("[DEBUG] TimelineWidget.keyPressEvent: Нажата клавиша 8 (влево).") # Изменили подпись
             # --- ИСПРАВЛЕНО: ищем СЛЕВА от current_time ---
             target_time = self._find_closest_element_time("left") # Было "right", стало "left"
             if target_time is not None:
                 #print(f"[DEBUG] TimelineWidget.keyPressEvent: Прилипание к времени {target_time:.3f}s по клавише 8.")
                 self.globalTimeRequested.emit(target_time)
             else:
-                print("[DEBUG] TimelineWidget.keyPressEvent: Не найдено время для 'прилипания' по клавише 8.")
+                # print("[DEBUG] TimelineWidget.keyPressEvent: Не найдено время для 'прилипания' по клавише 8.")
+                pass
         elif key == Qt.Key_9: # Клавиша 9
-            print("[DEBUG] TimelineWidget.keyPressEvent: Нажата клавиша 9 (вправо).") # Изменили подпись
+            # print("[DEBUG] TimelineWidget.keyPressEvent: Нажата клавиша 9 (вправо).") # Изменили подпись
             # --- ИСПРАВЛЕНО: ищем СПРАВА от current_time ---
             target_time = self._find_closest_element_time("right") # Было "left", стало "right"
             if target_time is not None:
                 #print(f"[DEBUG] TimelineWidget.keyPressEvent: Прилипание к времени {target_time:.3f}s по клавише 9.")
                 self.globalTimeRequested.emit(target_time)
             else:
-                print("[DEBUG] TimelineWidget.keyPressEvent: Не найдено время для 'прилипания' по клавише 9.")
+                # print("[DEBUG] TimelineWidget.keyPressEvent: Не найдено время для 'прилипания' по клавише 9.")
+                pass
         else:
             # Вызов родительской реализации для других клавиш
             super().keyPressEvent(event)

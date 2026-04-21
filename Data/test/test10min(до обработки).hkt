@@ -1,0 +1,88 @@
+{
+  "version": "4.0",
+  "video_path": "D:/Media/Матчи Созвездие 2014 сезона 25-26/Тесты/Тест на 10 мин.mp4",
+  "match": {
+    "generic_labels": [
+      {
+        "id": "a274c379-8028-4358-abe4-c89b31d0cf84",
+        "label_type": "Сегмент",
+        "global_time": 0.0,
+        "context": null
+      },
+      {
+        "id": "924d8b45-8954-4994-91c3-60d6df117e00",
+        "label_type": "Сегмент",
+        "global_time": 599.96,
+        "context": null
+      }
+    ],
+    "calculated_ranges": [
+      {
+        "id": "40cf7961-c0c4-4b4d-9bc6-ec2480ebaa0b",
+        "name": "Всё видео",
+        "label_type": "Всё видео",
+        "start_time": 0.0,
+        "end_time": 599.96,
+        "source_label_ids": [],
+        "context": null
+      },
+      {
+        "id": "901f9b79-9ea1-4a2c-bae7-971ed79ae016",
+        "name": "Период 1",
+        "label_type": "Сегмент",
+        "start_time": 0.0,
+        "end_time": 599.96,
+        "source_label_ids": [
+          "a274c379-8028-4358-abe4-c89b31d0cf84",
+          "924d8b45-8954-4994-91c3-60d6df117e00"
+        ],
+        "context": null
+      },
+      {
+        "id": "16eaa904-d559-4b24-8396-d7e5085e7aef",
+        "name": "Период 1. ЧИИ №1",
+        "label_type": "ЧИИ",
+        "start_time": 0.0,
+        "end_time": 599.96,
+        "source_label_ids": [
+          "a274c379-8028-4358-abe4-c89b31d0cf84",
+          "924d8b45-8954-4994-91c3-60d6df117e00"
+        ],
+        "context": null
+      },
+      {
+        "id": "02e09a71-2a38-43f0-9af2-88757ce2f632",
+        "name": "0:0",
+        "label_type": "Счёт",
+        "start_time": 0.0,
+        "end_time": 599.96,
+        "source_label_ids": [],
+        "context": null
+      },
+      {
+        "id": "8f5c1e38-4bf6-4517-ac31-0544371ff5e9",
+        "name": "5 на 5",
+        "label_type": "game_mode",
+        "start_time": 0.0,
+        "end_time": 599.96,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": []
+        }
+      }
+    ],
+    "player_shifts": {},
+    "player_shifts_official_timer": {},
+    "match_id": null,
+    "teams": {},
+    "rosters": {},
+    "events": [],
+    "tournament_name": null,
+    "tour_number": null,
+    "match_date": null,
+    "match_time": null,
+    "venue_city": null,
+    "venue_arena": null,
+    "referees": []
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "version": "4.0",
+  "video_path": "D:/Media/Матчи Созвездие 2014 сезона 25-26/Тесты/Тест на 10 мин.mp4",
+  "match": {
+    "generic_labels": [
+      {
+        "id": "a274c379-8028-4358-abe4-c89b31d0cf84",
+        "label_type": "Сегмент",
+        "global_time": 0.0,
+        "context": null
+      },
+      {
+        "id": "924d8b45-8954-4994-91c3-60d6df117e00",
+        "label_type": "Сегмент",
+        "global_time": 599.96,
+        "context": null
+      },
+      {
+        "id": "22c7af0d-d015-4fac-9b5a-db127398b9a6",
+        "label_type": "Черн.OSD",
+        "global_time": 49.99833327777593,
+        "context": {
+          "detected_text": "ГОЛ",
+          "confidence": 86.0
+        }
+      },
+      {
+        "id": "c4c82341-7523-47dd-b761-5c9efd295bca",
+        "label_type": "Черн.OSD",
+        "global_time": 157.99473315777195,
+        "context": {
+          "detected_text": "ГОЛ",
+          "confidence": 74.0
+        }
+      },
+      {
+        "id": "8e1b924e-4bfa-41c0-84c1-094424ff28d4",
+        "label_type": "Черн.OSD",
+        "global_time": 353.98819960665355,
+        "context": {
+          "detected_text": "ГОЛ",
+          "confidence": 90.0
+        }
+      },
+      {
+        "id": "dec330a2-f268-4ba2-b2da-2b9983edfce4",
+        "label_type": "Черн.OSD",
+        "global_time": 409.9863328777626,
+        "context": {
+          "detected_text": "ГОЛ",
+          "confidence": 91.0
+        }
+      },
+      {
+        "id": "54683cc3-9a63-4f5c-ab2b-62db504a2870",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 61.19795993199774,
+        "context": null
+      },
+      {
+        "id": "2fe9fae2-749b-4a0e-9304-29d82633dd32",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 79.19735991199707,
+        "context": null
+      },
+      {
+        "id": "14310a28-73ca-4511-bf98-c3f04e7923f8",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 171.19429314310477,
+        "context": null
+      },
+      {
+        "id": "4a20fffa-0df7-4f07-8dc1-2b63fd9bc230",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 191.19362645421515,
+        "context": null
+      },
+      {
+        "id": "bee9834f-0e11-4a01-8abd-f08255dbd662",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 322.38925297509917,
+        "context": null
+      },
+      {
+        "id": "eb4cebd6-dd82-495a-b0fc-7ab1be05106e",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 337.9887329577653,
+        "context": null
+      },
+      {
+        "id": "ca1e34e3-6b0f-41d8-ab34-4e844421c508",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 363.5878795959866,
+        "context": null
+      },
+      {
+        "id": "2f083e0e-584c-45f2-a6df-488846637822",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 381.1872929097637,
+        "context": null
+      },
+      {
+        "id": "9d8913c2-1d0e-4d17-88a5-1d64c84da914",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 419.9859995333178,
+        "context": null
+      },
+      {
+        "id": "50e68639-c7b3-42f3-9ee0-86c52aa87494",
+        "label_type": "Черн.FOOTAGE",
+        "global_time": 435.9854661822061,
+        "context": null
+      }
+    ],
+    "calculated_ranges": [
+      {
+        "id": "40cf7961-c0c4-4b4d-9bc6-ec2480ebaa0b",
+        "name": "Всё видео",
+        "label_type": "Всё видео",
+        "start_time": 0.0,
+        "end_time": 599.96,
+        "source_label_ids": [],
+        "context": null
+      },
+      {
+        "id": "901f9b79-9ea1-4a2c-bae7-971ed79ae016",
+        "name": "Период 1",
+        "label_type": "Сегмент",
+        "start_time": 0.0,
+        "end_time": 599.96,
+        "source_label_ids": [
+          "a274c379-8028-4358-abe4-c89b31d0cf84",
+          "924d8b45-8954-4994-91c3-60d6df117e00"
+        ],
+        "context": null
+      },
+      {
+        "id": "16eaa904-d559-4b24-8396-d7e5085e7aef",
+        "name": "Период 1. ЧИИ №1",
+        "label_type": "ЧИИ",
+        "start_time": 0.0,
+        "end_time": 599.96,
+        "source_label_ids": [
+          "a274c379-8028-4358-abe4-c89b31d0cf84",
+          "924d8b45-8954-4994-91c3-60d6df117e00"
+        ],
+        "context": null
+      },
+      {
+        "id": "02e09a71-2a38-43f0-9af2-88757ce2f632",
+        "name": "0:0",
+        "label_type": "Счёт",
+        "start_time": 0.0,
+        "end_time": 599.96,
+        "source_label_ids": [],
+        "context": null
+      },
+      {
+        "id": "8f5c1e38-4bf6-4517-ac31-0544371ff5e9",
+        "name": "5 на 5",
+        "label_type": "game_mode",
+        "start_time": 0.0,
+        "end_time": 599.96,
+        "source_label_ids": [],
+        "context": {
+          "active_penalties": []
+        }
+      }
+    ],
+    "player_shifts": {},
+    "player_shifts_official_timer": {},
+    "match_id": null,
+    "teams": {},
+    "rosters": {},
+    "events": [],
+    "tournament_name": null,
+    "tour_number": null,
+    "match_date": null,
+    "match_time": null,
+    "venue_city": null,
+    "venue_arena": null,
+    "referees": []
+  }
+}

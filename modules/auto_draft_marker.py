@@ -47,7 +47,7 @@ def simple_progress_callback(current: int, total: int):
 
     bar_length = 40
     filled_length = int(bar_length * current // total)
-    bar = '█' * filled_length + '-' * (bar_length - filled_length)
+    bar = '#' * filled_length + '-' * (bar_length - filled_length)
     # Используем print с end='', чтобы обновлять строку
     print(f'\r[auto_draft_marker] Прогресс: |{bar}| {percent}% ({current}/{total})', end='', flush=True)
     if current == total:
@@ -242,6 +242,7 @@ def process_project(
     """
     Основная функция обработки проекта.
     """
+    start_time = time.time()
     print(f"[auto_draft_marker] Начинаю обработку проекта: {os.path.basename(hkt_file_path)}")
     # 1. Загрузка проекта
     project = load_project(hkt_file_path)
@@ -258,25 +259,39 @@ def process_project(
     remove_existing_draft_labels(project)
 
     # 4. Вызов анализа
-    # --- OSG ---
-    osg_results = run_osg_detection(
-        video_path=project.video_path,
-        search_ranges=search_ranges,
-        roi=osg_params.get("roi", {"x": 151, "y": 92, "width": 91, "height": 34}),
-        event_type_map=osg_params.get("event_type_map", {"ГОЛ": "Goal"}), # <-- Сокращённый event_type_map
-        params=analysis_params,
-        progress_callback=simple_progress_callback
-    )
-    converted_osg_labels = convert_osg_results_to_labels(osg_results)
+    # Пробуем объединённый проход (одно чтение видео = быстрее)
+    try:
+        from modules.combined_detection import run_combined_detection
+        osg_results, footage_results = run_combined_detection(
+            video_path=project.video_path,
+            search_ranges=search_ranges,
+            template_png_path=template_png_path,
+            roi=osg_params.get("roi", {"x": 151, "y": 92, "width": 91, "height": 34}),
+            event_type_map=osg_params.get("event_type_map", {"ГОЛ": "Goal"}),
+            analysis_params=analysis_params,
+            progress_callback=simple_progress_callback
+        )
+    except Exception as e:
+        print(f"[auto_draft_marker] Объединённый проход не удался ({e}), fallback на последовательный.")
+        # --- OSG ---
+        osg_results = run_osg_detection(
+            video_path=project.video_path,
+            search_ranges=search_ranges,
+            roi=osg_params.get("roi", {"x": 151, "y": 92, "width": 91, "height": 34}),
+            event_type_map=osg_params.get("event_type_map", {"ГОЛ": "Goal"}),
+            params=analysis_params,
+            progress_callback=simple_progress_callback
+        )
+        # --- Footage ---
+        footage_results = run_footage_detection(
+            video_path=project.video_path,
+            template_png_path=template_png_path,
+            search_ranges=search_ranges,
+            params=analysis_params,
+            progress_callback=simple_progress_callback
+        )
 
-    # --- Footage ---
-    footage_results = run_footage_detection(
-        video_path=project.video_path,
-        template_png_path=template_png_path,
-        search_ranges=search_ranges,
-        params=analysis_params,
-        progress_callback=simple_progress_callback
-    )
+    converted_osg_labels = convert_osg_results_to_labels(osg_results)
     converted_footage_labels = convert_footage_results_to_labels(footage_results)
 
     # 5. Добавление новых меток
@@ -286,10 +301,11 @@ def process_project(
 
     # 6. Сохранение проекта
     success = save_project(project, hkt_file_path)
+    elapsed = time.time() - start_time
     if success:
-        print(f"[auto_draft_marker] Обработка проекта {os.path.basename(hkt_file_path)} завершена успешно.")
+        print(f"[auto_draft_marker] Обработка проекта {os.path.basename(hkt_file_path)} завершена успешно. Время: {elapsed:.2f} сек.")
     else:
-        print(f"[auto_draft_marker] Обработка проекта {os.path.basename(hkt_file_path)} завершена с ошибкой сохранения.")
+        print(f"[auto_draft_marker] Обработка проекта {os.path.basename(hkt_file_path)} завершена с ошибкой сохранения. Время: {elapsed:.2f} сек.")
     return success
 
 
@@ -402,6 +418,59 @@ class ParamsDialog(QDialog):
         return params
 
 
+def batch_process(
+    folder_path: str,
+    template_png_path: str,
+    osg_params: Dict[str, Any],
+    analysis_params: Dict[str, Any]
+) -> None:
+    """
+    Пакетная обработка всех .hkt файлов в указанной папке.
+    """
+    hkt_files = sorted([
+        os.path.join(folder_path, f)
+        for f in os.listdir(folder_path)
+        if f.lower().endswith('.hkt')
+    ])
+
+    if not hkt_files:
+        print(f"[auto_draft_marker] В папке '{folder_path}' не найдено .hkt файлов.")
+        QMessageBox.warning(None, "Предупреждение", "В выбранной папке не найдено .hkt файлов.")
+        return
+
+    total_files = len(hkt_files)
+    print(f"[auto_draft_marker] Найдено {total_files} .hkt файлов для обработки.")
+    print("=" * 60)
+
+    overall_start = time.time()
+    success_count = 0
+    fail_count = 0
+
+    for idx, hkt_path in enumerate(hkt_files, start=1):
+        print(f"\n[auto_draft_marker] === Файл {idx}/{total_files}: {os.path.basename(hkt_path)} ===")
+        success = process_project(hkt_path, template_png_path, osg_params, analysis_params)
+        if success:
+            success_count += 1
+        else:
+            fail_count += 1
+
+    overall_elapsed = time.time() - overall_start
+    print("\n" + "=" * 60)
+    print(f"[auto_draft_marker] Пакетная обработка завершена.")
+    print(f"[auto_draft_marker] Всего файлов: {total_files} | Успешно: {success_count} | Ошибок: {fail_count}")
+    print(f"[auto_draft_marker] Общее время: {overall_elapsed:.2f} сек ({overall_elapsed/60:.2f} мин)")
+    print("=" * 60)
+
+    QMessageBox.information(
+        None,
+        "Пакетная обработка завершена",
+        f"Обработано файлов: {total_files}\n"
+        f"Успешно: {success_count}\n"
+        f"Ошибок: {fail_count}\n\n"
+        f"Общее время: {overall_elapsed/60:.2f} мин"
+    )
+
+
 def main_interactive():
     """
     Интерактивная точка входа для ручного тестирования.
@@ -410,19 +479,43 @@ def main_interactive():
     # Инициализируем QApplication для QFileDialog и ParamsDialog
     app = QApplication(sys.argv) if not QApplication.instance() else QApplication.instance()
 
-    # 1. Выбор .hkt файла
-    hkt_path, _ = QFileDialog.getOpenFileName(None, "Выберите файл проекта (.hkt)", "", "Файлы проектов (*.hkt)")
-    if not hkt_path:
-        print("Не выбран .hkt файл. Завершение.")
+    # 0. Выбор режима: один файл или папка
+    reply = QMessageBox.question(
+        None,
+        "Режим обработки",
+        "Обработать один файл или папку с файлами?",
+        QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel,
+        QMessageBox.Yes
+    )
+    if reply == QMessageBox.Cancel:
+        print("Оператор отменил выбор. Завершение.")
         return
-    print(f"Выбран проект: {os.path.basename(hkt_path)}")
+
+    batch_mode = (reply == QMessageBox.No)  # No = "Папка" (вторая кнопка)
+
+    hkt_path = None
+    folder_path = None
+
+    if batch_mode:
+        # --- ПАКЕТНЫЙ РЕЖИМ ---
+        folder_path = QFileDialog.getExistingDirectory(None, "Выберите папку с .hkt файлами")
+        if not folder_path:
+            print("Не выбрана папка. Завершение.")
+            return
+        print(f"Выбрана папка: {folder_path}")
+    else:
+        # --- ОДИН ФАЙЛ ---
+        hkt_path, _ = QFileDialog.getOpenFileName(None, "Выберите файл проекта (.hkt)", "", "Файлы проектов (*.hkt)")
+        if not hkt_path:
+            print("Не выбран .hkt файл. Завершение.")
+            return
+        print(f"Выбран проект: {os.path.basename(hkt_path)}")
 
     # 2. Выбор PNG шаблона футажа
-    # --- ИСПОЛЬЗУЕМ ШАБЛОН ПО УМОЛЧАНИЮ ---
     default_template_path = r"c:\code\3.0\data\league_logo_footage.png"
     if os.path.exists(default_template_path):
         reply = QMessageBox.information(None, "Шаблон футажа", f"Найден шаблон по умолчанию:\n{default_template_path}\n\nИспользовать его?", QMessageBox.Yes | QMessageBox.No)
-        use_default = reply == QMessageBox.Yes # <-- Исправлено
+        use_default = reply == QMessageBox.Yes
 
         if use_default:
             png_path = default_template_path
@@ -434,21 +527,20 @@ def main_interactive():
                 return
             print(f"Выбран шаблон футажа: {os.path.basename(png_path)}")
     else:
-        # Если шаблон по умолчанию не найден, просим выбрать
         png_path, _ = QFileDialog.getOpenFileName(None, "Выберите PNG-шаблон футажа", "", "PNG файлы (*.png)")
         if not png_path:
             print("Не выбран PNG-шаблон футажа. Завершение.")
             return
         print(f"Выбран шаблон футажа: {os.path.basename(png_path)}")
 
-    # 3. Параметры OSG (теперь только "ГОЛ")
+    # 3. Параметры OSG
     osg_params = {
-        "roi": {"x": 151, "y": 92, "width": 91, "height": 34}, # Пример ROI
-        "event_type_map": {"ГОЛ": "Goal"} # <-- Сокращённый event_type_map
+        "roi": {"x": 151, "y": 92, "width": 91, "height": 34},
+        "event_type_map": {"ГОЛ": "Goal"}
     }
     print(f"Используемые параметры OSG (ROI, event_type_map): {osg_params}")
 
-    # 4. Диалог ввода параметров анализа
+    # 4. Диалог ввода параметров анализа (один раз для всех)
     params_dialog = ParamsDialog()
     if params_dialog.exec_() != QDialog.Accepted:
         print("Оператор отменил ввод параметров. Завершение.")
@@ -458,13 +550,14 @@ def main_interactive():
     print(f"Получены параметры анализа: {analysis_params}")
 
     # 5. Запуск процесса
-    success = process_project(hkt_path, png_path, osg_params, analysis_params)
-
-    # 6. Результат
-    if success:
-        QMessageBox.information(None, "Успех", f"Обработка проекта '{os.path.basename(hkt_path)}' завершена.\nЧерновые метки добавлены.")
+    if batch_mode:
+        batch_process(folder_path, png_path, osg_params, analysis_params)
     else:
-        QMessageBox.critical(None, "Ошибка", f"Обработка проекта '{os.path.basename(hkt_path)}' завершена с ошибкой.")
+        success = process_project(hkt_path, png_path, osg_params, analysis_params)
+        if success:
+            QMessageBox.information(None, "Успех", f"Обработка проекта '{os.path.basename(hkt_path)}' завершена.\nЧерновые метки добавлены.")
+        else:
+            QMessageBox.critical(None, "Ошибка", f"Обработка проекта '{os.path.basename(hkt_path)}' завершена с ошибкой.")
 
 
 def main():

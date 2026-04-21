@@ -768,10 +768,10 @@ class LineupModuleWidget(QWidget):
         if hasattr(self, '_save_project_callback') and callable(self._save_project_callback):
             self._save_project_callback()
        
-        print(f"[DEBUG] Assign: Updated {player_id} -> {group_name} ({position})")
-        print(f"[DEBUG] Player in _team_roster now: {target_player_in_team_roster}")
-        print(f"[DEBUG] Player in project.rosters now: {target_player_in_project_rosters}")
-        print(f"[DEBUG] _occupied_positions after assign: {self._occupied_positions}")
+        # print(f"[DEBUG] Assign: Updated {player_id} -> {group_name} ({position})")
+        # print(f"[DEBUG] Player in _team_roster now: {target_player_in_team_roster}")
+        # print(f"[DEBUG] Player in project.rosters now: {target_player_in_project_rosters}")
+        # print(f"[DEBUG] _occupied_positions after assign: {self._occupied_positions}")
 
     def remove_player_from_group_in_roster(self, player_id: str):
         """
@@ -839,10 +839,10 @@ class LineupModuleWidget(QWidget):
             self._save_project_callback()
         # print(f"[DEBUG] Removed player {player_id} from group. _occupied_positions: {self._occupied_positions}") # Для отладки
         # В remove_player_from_group_in_roster, после удаления
-        print(f"[DEBUG] Remove: Cleared assignment for {player_id}")
-        print(f"[DEBUG] Player in _team_roster now: {target_player_in_team_roster}")
-        print(f"[DEBUG] Player in project.rosters now: {target_player_in_project_rosters}")
-        print(f"[DEBUG] _occupied_positions after remove: {self._occupied_positions}")
+        # print(f"[DEBUG] Remove: Cleared assignment for {player_id}")
+        # print(f"[DEBUG] Player in _team_roster now: {target_player_in_team_roster}")
+        # print(f"[DEBUG] Player in project.rosters now: {target_player_in_project_rosters}")
+        # print(f"[DEBUG] _occupied_positions after remove: {self._occupied_positions}")
 
     def set_our_team_key(self, team_key: str):
         """
@@ -1114,7 +1114,7 @@ class LineupModuleWidget(QWidget):
         # После заполнения таблицы, обновляем ограничения
         self._update_checkbox_states()
 
-        print(f"[DEBUG] Set_team_roster ВЫЗВАН") # Для отладки
+        # print(f"[DEBUG] Set_team_roster ВЫЗВАН") # Для отладки
 
     # --- НОВОЕ: Метод для установки ссылки на MainWindow ---
     def set_main_window(self, main_window):
@@ -1169,7 +1169,7 @@ class LineupModuleWidget(QWidget):
         # --- КОНЕЦ НОВОГО ---
 
         self._update_checkbox_states()
-        print(f"[DEBUG LUM] Received time: {global_time}, ranges count: {len(calculated_ranges)}, our team key: {self._our_team_key}")
+        #print(f"[DEBUG LUM] Received time: {global_time}, ranges count: {len(calculated_ranges)}, our team key: {self._our_team_key}")
 
     def _update_checkbox_states(self):
         """

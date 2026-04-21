@@ -4812,7 +4812,7 @@
     ],
     "calculated_ranges": [
       {
-        "id": "1d36689f-a1f0-4898-95ca-0248fa492102",
+        "id": "57191d47-8827-4958-ba09-e60d631a4516",
         "name": "Всё видео",
         "label_type": "Всё видео",
         "start_time": 0.0,
@@ -4821,24 +4821,24 @@
         "context": null
       },
       {
-        "id": "2406cc1b-c97b-4a1f-ae4d-4babe5934ad7",
+        "id": "478f03f7-0650-4dcb-ac32-a0a64e24d4df",
         "name": "Удаление Арнаут И. (Неправильная атака)",
         "label_type": "Удаление",
         "start_time": 2446.8379202208453,
         "end_time": 2617.9508503279617,
         "source_label_ids": [],
         "context": {
-          "player_name": "Арнаут И.",
-          "team": "s-team",
-          "end_time_sec": 514,
-          "violation_type": "Неправильная атака",
           "start_time_sec": 394,
-          "player_id_fhm": "8962",
-          "event_time_sec": 394
+          "event_time_sec": 394,
+          "violation_type": "Неправильная атака",
+          "end_time_sec": 514,
+          "team": "s-team",
+          "player_name": "Арнаут И.",
+          "player_id_fhm": "8962"
         }
       },
       {
-        "id": "6ee85c6d-d41b-4d0b-8a03-b2d37af86e48",
+        "id": "5b3d5852-87fc-4e72-8f8e-eeaeb9385387",
         "name": "Удаление Кадочкина М. (Задержка клюшкой)",
         "label_type": "Удаление",
         "start_time": 2899.2261262474294,
@@ -4846,67 +4846,67 @@
         "source_label_ids": [],
         "context": {
           "team": "f-team",
-          "end_time_sec": 866,
-          "event_time_sec": 746,
-          "player_id_fhm": "3469",
-          "player_name": "Кадочкина М.",
+          "violation_type": "Задержка клюшкой",
           "start_time_sec": 746,
-          "violation_type": "Задержка клюшкой"
+          "player_name": "Кадочкина М.",
+          "player_id_fhm": "3469",
+          "event_time_sec": 746,
+          "end_time_sec": 866
         }
       },
       {
-        "id": "3a1aad5e-fe5c-4854-a6fc-8d2c8deb019e",
+        "id": "6afaf990-ca14-40bb-8f78-1617c9edbacc",
         "name": "Удаление Орлов А. (Подножка)",
         "label_type": "Удаление",
         "start_time": 5724.978838756603,
         "end_time": 5877.702637116464,
         "source_label_ids": [],
         "context": {
-          "player_name": "Орлов А.",
-          "team": "s-team",
+          "end_time_sec": 2148,
           "violation_type": "Подножка",
           "start_time_sec": 2062,
-          "player_id_fhm": "6977",
           "event_time_sec": 2062,
-          "end_time_sec": 2148
+          "team": "s-team",
+          "player_name": "Орлов А.",
+          "player_id_fhm": "6977"
         }
       },
       {
-        "id": "5a91c59a-9c89-4884-abdb-e9c637fcfbad",
+        "id": "77c5279f-4d8d-4b34-8fe6-c8fd2d6f357a",
         "name": "Удаление Левчук А. (Неправильная атака)",
         "label_type": "Удаление",
         "start_time": 6585.082061052322,
         "end_time": 6757.609683125103,
         "source_label_ids": [],
         "context": {
-          "team": "s-team",
-          "end_time_sec": 2674,
-          "violation_type": "Неправильная атака",
-          "start_time_sec": 2554,
           "player_name": "Левчук А.",
-          "player_id_fhm": "5518",
-          "event_time_sec": 2554
+          "start_time_sec": 2554,
+          "event_time_sec": 2554,
+          "violation_type": "Неправильная атака",
+          "end_time_sec": 2674,
+          "team": "s-team",
+          "player_id_fhm": "5518"
         }
       },
       {
-        "id": "4d3b6319-b845-4dda-bb9b-c7f1d366a3ad",
+        "id": "4ed00b9c-988d-4ff3-869f-94dc74dba8fc",
         "name": "Удаление Левин И. (Подножка)",
         "label_type": "Удаление",
         "start_time": 7347.828206835104,
         "end_time": 7410.020109091117,
         "source_label_ids": [],
         "context": {
-          "start_time_sec": 3021,
           "team": "f-team",
+          "player_id_fhm": "6453",
           "violation_type": "Подножка",
           "player_name": "Левин И.",
           "event_time_sec": 3021,
-          "player_id_fhm": "6453",
-          "end_time_sec": 3052
+          "end_time_sec": 3052,
+          "start_time_sec": 3021
         }
       },
       {
-        "id": "4190a5e4-3e9c-4c82-a58a-4d28bcedffd9",
+        "id": "56d62ed7-5e59-45da-96e5-7861a9327cb0",
         "name": "Удаление Артемов Р. (Задержка соперника)",
         "label_type": "Удаление",
         "start_time": 7739.323659772279,
@@ -4914,33 +4914,33 @@
         "source_label_ids": [],
         "context": {
           "team": "f-team",
-          "player_name": "Артемов Р.",
-          "end_time_sec": 3352,
           "start_time_sec": 3232,
-          "violation_type": "Задержка соперника",
           "event_time_sec": 3232,
-          "player_id_fhm": "5507"
+          "player_id_fhm": "5507",
+          "end_time_sec": 3352,
+          "player_name": "Артемов Р.",
+          "violation_type": "Задержка соперника"
         }
       },
       {
-        "id": "5d6472c1-37e1-47ae-af8f-3253f5f2c6dc",
+        "id": "72ba610e-9e75-4206-b49b-13b89a9ffd08",
         "name": "Удаление Гончаров М. (Задержка клюшкой)",
         "label_type": "Удаление",
         "start_time": 8290.59773901401,
         "end_time": 8316.317673921585,
         "source_label_ids": [],
         "context": {
-          "event_time_sec": 3576,
           "player_name": "Гончаров М.",
-          "team": "s-team",
           "start_time_sec": 3576,
-          "end_time_sec": 3696,
+          "event_time_sec": 3576,
           "player_id_fhm": "9923",
-          "violation_type": "Задержка клюшкой"
+          "violation_type": "Задержка клюшкой",
+          "team": "s-team",
+          "end_time_sec": 3696
         }
       },
       {
-        "id": "8b1ed5bc-13b0-4102-ae98-caf311bba15f",
+        "id": "5f5b4f16-3d9d-494f-a15b-280f6a3b4851",
         "name": "Период 1",
         "label_type": "Сегмент",
         "start_time": 1913.0,
@@ -4952,7 +4952,7 @@
         "context": null
       },
       {
-        "id": "05d89abf-ef4e-4a4f-8b23-ce91e593eafc",
+        "id": "af6aa85a-77b3-4f25-be0d-e2b5734abd40",
         "name": "Период 2",
         "label_type": "Сегмент",
         "start_time": 4574.67334485054,
@@ -4964,7 +4964,7 @@
         "context": null
       },
       {
-        "id": "5e911b4e-271f-4b2b-8e50-1a96e5ec6f6e",
+        "id": "3c5dc4ac-44d1-46dc-a506-03ae12444105",
         "name": "Период 3",
         "label_type": "Сегмент",
         "start_time": 6412.331823825836,
@@ -4976,7 +4976,7 @@
         "context": null
       },
       {
-        "id": "0027b5e1-1e5b-4877-92f9-f84a4905317d",
+        "id": "ba538132-0b53-4223-8505-07d6f06f3aa3",
         "name": "Период 1. ЧИИ №1",
         "label_type": "ЧИИ",
         "start_time": 1913.0,
@@ -4988,7 +4988,7 @@
         "context": null
       },
       {
-        "id": "e6de0375-f14c-4c35-ad0d-f67f656eb47d",
+        "id": "729c6893-9261-4d2d-a2a9-1b0f29ae93ec",
         "name": "Период 1. ЧИИ №2",
         "label_type": "ЧИИ",
         "start_time": 2040.112638950348,
@@ -5000,7 +5000,7 @@
         "context": null
       },
       {
-        "id": "c5c077da-0a2f-49f1-ae94-b281aaaf48ff",
+        "id": "f6481580-cc79-49bd-983b-4e24ae82f89d",
         "name": "Период 1. ЧИИ №3",
         "label_type": "ЧИИ",
         "start_time": 2117.0912896540885,
@@ -5012,7 +5012,7 @@
         "context": null
       },
       {
-        "id": "0f13fa73-c82b-417a-abfd-2a639c7e05dc",
+        "id": "9c181160-72d3-4357-b061-648cf4bd9d92",
         "name": "Период 1. ЧИИ №4",
         "label_type": "ЧИИ",
         "start_time": 2192.2931136829493,
@@ -5024,7 +5024,7 @@
         "context": null
       },
       {
-        "id": "ee814618-1fae-486e-b6bf-e3233b8254a3",
+        "id": "272ca7a9-1b3f-4867-a101-5c68445dbfd7",
         "name": "Период 1. ЧИИ №5",
         "label_type": "ЧИИ",
         "start_time": 2248.5176997882954,
@@ -5036,7 +5036,7 @@
         "context": null
       },
       {
-        "id": "e9aac7a9-0767-4637-84c3-8b892f4d2bf5",
+        "id": "197f7343-0a9b-4572-acf1-4e7718cf4a44",
         "name": "Период 1. ЧИИ №6",
         "label_type": "ЧИИ",
         "start_time": 2421.998479044439,
@@ -5048,7 +5048,7 @@
         "context": null
       },
       {
-        "id": "2593439c-0d17-4b42-aeb2-fb8711ccf6ac",
+        "id": "78144971-30dd-48db-80f9-67833bbd4a97",
         "name": "Период 1. ЧИИ №7",
         "label_type": "ЧИИ",
         "start_time": 2477.2058236820326,
@@ -5060,7 +5060,7 @@
         "context": null
       },
       {
-        "id": "ec13aa73-7ad3-40f8-a964-cc85b1bb4220",
+        "id": "fd9d78c8-61ac-43d9-817d-cce1be1f12f8",
         "name": "Период 1. ЧИИ №8",
         "label_type": "ЧИИ",
         "start_time": 2504.471040747844,
@@ -5072,7 +5072,7 @@
         "context": null
       },
       {
-        "id": "d4190e71-4100-4ddc-a636-b91306ddc501",
+        "id": "d33d367a-0195-438c-a6d2-8f8d7029aaad",
         "name": "Период 1. ЧИИ №9",
         "label_type": "ЧИИ",
         "start_time": 2737.4061050374426,
@@ -5084,7 +5084,7 @@
         "context": null
       },
       {
-        "id": "04c8217c-e23a-410c-8a4e-ac6b14007bd9",
+        "id": "70e5125e-d936-4e0d-bdee-2eb092291d0b",
         "name": "Период 1. ЧИИ №10",
         "label_type": "ЧИИ",
         "start_time": 2830.3543684227093,
@@ -5096,7 +5096,7 @@
         "context": null
       },
       {
-        "id": "9adcc291-880d-4737-a880-c1bc3b7af771",
+        "id": "4360c8d0-0489-4da8-bfdd-c7ab22c23220",
         "name": "Период 1. ЧИИ №11",
         "label_type": "ЧИИ",
         "start_time": 2945.111130819091,
@@ -5108,7 +5108,7 @@
         "context": null
       },
       {
-        "id": "fc21f96d-09f5-48da-acc4-5cff001acadb",
+        "id": "351f1fcb-d216-4237-bd0d-adb433c675b1",
         "name": "Период 1. ЧИИ №12",
         "label_type": "ЧИИ",
         "start_time": 3266.297871742019,
@@ -5120,7 +5120,7 @@
         "context": null
       },
       {
-        "id": "7e1d7557-f9e6-45aa-b622-2f2e74505294",
+        "id": "7a51d6fe-7488-4998-adb9-2ff3019fee7a",
         "name": "Период 1. ЧИИ №13",
         "label_type": "ЧИИ",
         "start_time": 3388.3259907338675,
@@ -5132,7 +5132,7 @@
         "context": null
       },
       {
-        "id": "967adb4e-f14a-4297-8714-1c76a6ab320a",
+        "id": "75006465-c071-4623-9163-f83ea2a25319",
         "name": "Период 1. ЧИИ №14",
         "label_type": "ЧИИ",
         "start_time": 3413.193214282757,
@@ -5144,7 +5144,7 @@
         "context": null
       },
       {
-        "id": "5e3090c3-5181-499c-ad57-a71ce1bcb1e9",
+        "id": "8673de0a-2612-4157-b8bb-6bec028094cc",
         "name": "Период 2. ЧИИ №1",
         "label_type": "ЧИИ",
         "start_time": 4574.67334485054,
@@ -5156,7 +5156,7 @@
         "context": null
       },
       {
-        "id": "fca3af3b-5310-45c6-b484-a04a0a7ca6e8",
+        "id": "74833161-54ac-41f2-bbb7-eb8e8837ec1b",
         "name": "Период 2. ЧИИ №2",
         "label_type": "ЧИИ",
         "start_time": 4670.816359137138,
@@ -5168,7 +5168,7 @@
         "context": null
       },
       {
-        "id": "5c7ce5b5-ba65-400b-98ef-5b281fa903ec",
+        "id": "f254eee3-f6ea-4a03-85bb-0beb824fd0a9",
         "name": "Период 2. ЧИИ №3",
         "label_type": "ЧИИ",
         "start_time": 4911.359823225579,
@@ -5180,7 +5180,7 @@
         "context": null
       },
       {
-        "id": "73c38827-86d1-4888-92f6-65333315c8d0",
+        "id": "9e5b744c-84f5-4af3-9918-e33b55d8e7ac",
         "name": "Период 2. ЧИИ №4",
         "label_type": "ЧИИ",
         "start_time": 4980.54475420818,
@@ -5192,7 +5192,7 @@
         "context": null
       },
       {
-        "id": "20088460-304c-4b0b-a611-379c39fb01ac",
+        "id": "43d08bcc-45b4-4e17-8e64-a324ce002a6c",
         "name": "Период 2. ЧИИ №5",
         "label_type": "ЧИИ",
         "start_time": 5073.7450252996305,
@@ -5204,7 +5204,7 @@
         "context": null
       },
       {
-        "id": "c207f3e1-5d38-4e21-945e-557838f869a0",
+        "id": "91d376b1-1865-4e01-9cce-8eb59e924a2d",
         "name": "Период 2. ЧИИ №6",
         "label_type": "ЧИИ",
         "start_time": 5159.957562445236,
@@ -5216,7 +5216,7 @@
         "context": null
       },
       {
-        "id": "57ae4445-7851-44a3-a620-de13a00c4c51",
+        "id": "99715b39-831f-4d3b-aa0b-f4ee28e493ba",
         "name": "Период 2. ЧИИ №7",
         "label_type": "ЧИИ",
         "start_time": 5249.411553858353,
@@ -5228,7 +5228,7 @@
         "context": null
       },
       {
-        "id": "6c56929e-263c-41d5-8cfa-c3cb5352541c",
+        "id": "7d453125-a705-46ea-889e-6dd1e8ac9d42",
         "name": "Период 2. ЧИИ №8",
         "label_type": "ЧИИ",
         "start_time": 5283.811334847046,
@@ -5240,7 +5240,7 @@
         "context": null
       },
       {
-        "id": "581d9e30-36f7-4a58-8252-029705e63c39",
+        "id": "73ef6f0b-4107-4fb3-9c6e-39509ae8c6ce",
         "name": "Период 2. ЧИИ №9",
         "label_type": "ЧИИ",
         "start_time": 5430.191528004519,
@@ -5252,7 +5252,7 @@
         "context": null
       },
       {
-        "id": "fa6e7a27-31cd-42a5-bbe1-db5740982c24",
+        "id": "552936a1-203a-4731-a991-ecdee927c15e",
         "name": "Период 2. ЧИИ №10",
         "label_type": "ЧИИ",
         "start_time": 5480.249596041552,
@@ -5264,7 +5264,7 @@
         "context": null
       },
       {
-        "id": "d13212da-7445-4eb8-8894-ff71ec9bd448",
+        "id": "3acca97c-b9ce-43cb-b99a-7ee09f443bb7",
         "name": "Период 2. ЧИИ №11",
         "label_type": "ЧИИ",
         "start_time": 5650.141804054302,
@@ -5276,7 +5276,7 @@
         "context": null
       },
       {
-        "id": "c34ccccd-cca0-42dd-a7bb-ce6e5139828b",
+        "id": "86b75b62-6e61-4299-879e-5a83c8aee746",
         "name": "Период 2. ЧИИ №12",
         "label_type": "ЧИИ",
         "start_time": 5762.183245494884,
@@ -5288,7 +5288,7 @@
         "context": null
       },
       {
-        "id": "da8a7d9c-5588-4319-8e9a-86d66cf739f9",
+        "id": "ba0d7813-773a-4aab-8d89-9bf40ae61f06",
         "name": "Период 2. ЧИИ №13",
         "label_type": "ЧИИ",
         "start_time": 5848.501783315721,
@@ -5300,7 +5300,7 @@
         "context": null
       },
       {
-        "id": "f04b7b6e-27a4-4ecf-a757-5b6c016578a2",
+        "id": "e763cce4-fc5a-4048-940a-18d2192d16bc",
         "name": "Период 2. ЧИИ №14",
         "label_type": "ЧИИ",
         "start_time": 5919.603374489833,
@@ -5312,7 +5312,7 @@
         "context": null
       },
       {
-        "id": "7898d880-6869-4ea9-8a0a-74671297a1d6",
+        "id": "b4d7ce8f-55a9-4a77-bff2-7451f42c5ff0",
         "name": "Период 2. ЧИИ №15",
         "label_type": "ЧИИ",
         "start_time": 5989.216445693065,
@@ -5324,7 +5324,7 @@
         "context": null
       },
       {
-        "id": "7ac52d55-3094-41c2-bc8a-fa6125e1bfc4",
+        "id": "71a6b5b1-1b89-42e2-800f-5ef9b50f03e7",
         "name": "Период 3. ЧИИ №1",
         "label_type": "ЧИИ",
         "start_time": 6412.331823825836,
@@ -5336,7 +5336,7 @@
         "context": null
       },
       {
-        "id": "d27b2b33-e544-42ef-bc29-c781f9be0bd5",
+        "id": "1d4c0e4e-d730-431d-8f4a-70658b70d7cd",
         "name": "Период 3. ЧИИ №2",
         "label_type": "ЧИИ",
         "start_time": 6444.421855306625,
@@ -5348,7 +5348,7 @@
         "context": null
       },
       {
-        "id": "1ef65506-4f95-4686-a06f-78666bfc2d0f",
+        "id": "821437fa-f4cd-4408-bf80-d8c070149d94",
         "name": "Период 3. ЧИИ №3",
         "label_type": "ЧИИ",
         "start_time": 6616.462398529053,
@@ -5360,7 +5360,7 @@
         "context": null
       },
       {
-        "id": "eb06a2b7-b8bd-44ce-aa9e-2060df04b613",
+        "id": "98def029-b556-4227-9d34-f733fda55fb5",
         "name": "Период 3. ЧИИ №4",
         "label_type": "ЧИИ",
         "start_time": 6669.025106668472,
@@ -5372,7 +5372,7 @@
         "context": null
       },
       {
-        "id": "8f636103-5678-4489-9d4a-8a83704e222f",
+        "id": "2ee1b488-0ba8-4b4c-963b-61293049fbc7",
         "name": "Период 3. ЧИИ №5",
         "label_type": "ЧИИ",
         "start_time": 6800.024826233511,
@@ -5384,7 +5384,7 @@
         "context": null
       },
       {
-        "id": "f02d022e-b827-4b23-906e-e1856cda3ddf",
+        "id": "6300d45e-8cbb-41ac-83e5-e45467ee1dac",
         "name": "Период 3. ЧИИ №6",
         "label_type": "ЧИИ",
         "start_time": 6933.988374124502,
@@ -5396,7 +5396,7 @@
         "context": null
       },
       {
-        "id": "44854a41-caff-4063-b5d3-5ad78673546b",
+        "id": "9fca230d-d9bc-45e3-8aae-4cbd2ffa359c",
         "name": "Период 3. ЧИИ №7",
         "label_type": "ЧИИ",
         "start_time": 7016.630007251658,
@@ -5408,7 +5408,7 @@
         "context": null
       },
       {
-        "id": "a05d3d6a-5192-4a64-90ec-49a83c393660",
+        "id": "1db977ed-ea3b-4eea-8631-1e354da03cc1",
         "name": "Период 3. ЧИИ №8",
         "label_type": "ЧИИ",
         "start_time": 7100.5581527709965,
@@ -5420,7 +5420,7 @@
         "context": null
       },
       {
-        "id": "09df56f8-9cea-4f99-89de-972d75a0d1b7",
+        "id": "57c06f56-786c-4003-92aa-1e773f011f5c",
         "name": "Период 3. ЧИИ №9",
         "label_type": "ЧИИ",
         "start_time": 7272.054685926438,
@@ -5432,7 +5432,7 @@
         "context": null
       },
       {
-        "id": "60aae099-1fab-461f-abe2-0c3e5516a1dd",
+        "id": "d31b4b39-5bda-4d46-931a-c962bbacec5a",
         "name": "Период 3. ЧИИ №10",
         "label_type": "ЧИИ",
         "start_time": 7339.5380213359085,
@@ -5444,7 +5444,7 @@
         "context": null
       },
       {
-        "id": "46a23f57-4357-4298-8193-109cac5e670d",
+        "id": "7a194ab3-6692-4ff4-81f4-c7aa28b55c99",
         "name": "Период 3. ЧИИ №11",
         "label_type": "ЧИИ",
         "start_time": 7378.252826128318,
@@ -5456,7 +5456,7 @@
         "context": null
       },
       {
-        "id": "81f523cf-a0aa-4371-a0b5-2bdce8574879",
+        "id": "4781a7a2-8214-44bc-a0de-172e55c2afff",
         "name": "Период 3. ЧИИ №12",
         "label_type": "ЧИИ",
         "start_time": 7452.140728272357,
@@ -5468,7 +5468,7 @@
         "context": null
       },
       {
-        "id": "4fb300ff-fc34-4676-a3e9-5f098088e790",
+        "id": "74496086-be8f-46ec-9426-66d1b37be4a8",
         "name": "Период 3. ЧИИ №13",
         "label_type": "ЧИИ",
         "start_time": 7599.276960299384,
@@ -5480,7 +5480,7 @@
         "context": null
       },
       {
-        "id": "ca8a54fa-8289-432e-9165-587966fd1711",
+        "id": "8f8d0eb8-20bd-4e73-aa4b-7623e6d1ef41",
         "name": "Период 3. ЧИИ №14",
         "label_type": "ЧИИ",
         "start_time": 7646.111441109549,
@@ -5492,7 +5492,7 @@
         "context": null
       },
       {
-        "id": "ac9521da-8d85-4597-a9c6-90c2375e8ecd",
+        "id": "5d3b2fd0-182d-4eb4-8ac3-f662bc4b3107",
         "name": "Период 3. ЧИИ №15",
         "label_type": "ЧИИ",
         "start_time": 7705.946666068436,
@@ -5504,7 +5504,7 @@
         "context": null
       },
       {
-        "id": "284068ea-e202-4465-a2e7-dc6942896f41",
+        "id": "89eb8d6b-2888-4f83-a668-2bbbf606759f",
         "name": "Период 3. ЧИИ №16",
         "label_type": "ЧИИ",
         "start_time": 7766.823659772279,
@@ -5516,7 +5516,7 @@
         "context": null
       },
       {
-        "id": "8490194b-aeb6-4da9-bd3a-436ca7273537",
+        "id": "8301a11c-b430-45c4-94ce-531a11f5a9f9",
         "name": "Период 3. ЧИИ №17",
         "label_type": "ЧИИ",
         "start_time": 7831.2176364582,
@@ -5528,7 +5528,7 @@
         "context": null
       },
       {
-        "id": "2a0406af-5fe7-4dfd-8eba-d02bf6f8a89a",
+        "id": "a4e4e117-dbab-4b65-ae16-394e20ba0d3d",
         "name": "Период 3. ЧИИ №18",
         "label_type": "ЧИИ",
         "start_time": 8145.135157458109,
@@ -5540,7 +5540,7 @@
         "context": null
       },
       {
-        "id": "087a5fb3-77b6-4af8-9d49-c8065ebbc0c8",
+        "id": "ac3de6a8-99fe-47fd-be3c-f892a4db9ba6",
         "name": "Период 3. ЧИИ №19",
         "label_type": "ЧИИ",
         "start_time": 8229.292080050318,
@@ -5552,7 +5552,7 @@
         "context": null
       },
       {
-        "id": "dccbc923-78f1-4159-861e-c9fe60bdb231",
+        "id": "443bcac3-d34d-4a1e-8515-43ea9d2bc6e4",
         "name": "Период 3. ЧИИ №20",
         "label_type": "ЧИИ",
         "start_time": 8290.59773901401,
@@ -5564,7 +5564,7 @@
         "context": null
       },
       {
-        "id": "e1072209-1571-40ea-8bba-c5ef11ae531f",
+        "id": "f7308da0-0e4a-42f0-ae4d-2e0e60a3d948",
         "name": "0:0",
         "label_type": "Счёт",
         "start_time": 1913.0,
@@ -5573,7 +5573,7 @@
         "context": null
       },
       {
-        "id": "1a135bad-e42c-492e-a76a-6d57191cdfa1",
+        "id": "edef2ce7-9803-4529-a410-8e1df31053f0",
         "name": "0:0",
         "label_type": "Счёт",
         "start_time": 4574.67334485054,
@@ -5582,7 +5582,7 @@
         "context": null
       },
       {
-        "id": "f9be3f2a-00db-4e70-9943-92029c0fca0e",
+        "id": "9764087b-b4c0-4f5d-a2fe-103b966e7e5e",
         "name": "1:0",
         "label_type": "Счёт",
         "start_time": 5877.702637116464,
@@ -5591,7 +5591,7 @@
         "context": null
       },
       {
-        "id": "b7e981ca-f27a-4f24-a71c-29c42c363958",
+        "id": "cd3fb60e-5cc5-4a7a-929c-d20293784c87",
         "name": "1:0",
         "label_type": "Счёт",
         "start_time": 6412.331823825836,
@@ -5600,7 +5600,7 @@
         "context": null
       },
       {
-        "id": "2a1c75d9-f292-431a-bcea-b59a7f607f96",
+        "id": "0478a35c-476f-4c84-b29d-f77ccb99a792",
         "name": "2:0",
         "label_type": "Счёт",
         "start_time": 6757.609683125103,
@@ -5609,7 +5609,7 @@
         "context": null
       },
       {
-        "id": "8523fbd7-86ce-4b6c-b78a-8e3b4ed87688",
+        "id": "0564f915-eae7-4fce-b686-ac187825494d",
         "name": "2:1",
         "label_type": "Счёт",
         "start_time": 6894.294710295326,
@@ -5618,7 +5618,7 @@
         "context": null
       },
       {
-        "id": "5a11bd74-19e3-4aac-a313-aecfcb254563",
+        "id": "43716366-0da1-4919-b2d7-46ea70f5767f",
         "name": "3:1",
         "label_type": "Счёт",
         "start_time": 6971.134065471627,
@@ -5627,7 +5627,7 @@
         "context": null
       },
       {
-        "id": "2be4f2a5-b958-4c14-ae1b-1a31003caabe",
+        "id": "ce64ca2c-fe0d-483d-ae61-fc47db1fedf3",
         "name": "3:2",
         "label_type": "Счёт",
         "start_time": 7306.686258888245,
@@ -5636,7 +5636,7 @@
         "context": null
       },
       {
-        "id": "e2e085e5-f8b7-4f0c-a36d-a3bde95cda1b",
+        "id": "baa66f34-d6ff-4197-b185-ade0dcd73345",
         "name": "3:3",
         "label_type": "Счёт",
         "start_time": 7410.020109091117,
@@ -5645,7 +5645,7 @@
         "context": null
       },
       {
-        "id": "88f62af4-2219-44da-a495-d6cafa13e96a",
+        "id": "471a5603-878f-4b76-839f-3f8ad8a893b1",
         "name": "4:3",
         "label_type": "Счёт",
         "start_time": 7609.611441109549,
@@ -5654,7 +5654,7 @@
         "context": null
       },
       {
-        "id": "3089f098-aeca-463b-8b6b-e61bb32a2a87",
+        "id": "b6cae787-2aaa-4a7b-976d-1d3449f94965",
         "name": "5:3",
         "label_type": "Счёт",
         "start_time": 7664.547455857168,
@@ -5663,7 +5663,7 @@
         "context": null
       },
       {
-        "id": "65d507aa-227c-4d60-b888-6a6aeaaca459",
+        "id": "e45f4da6-5fe1-4bbc-a0cd-28f98f2a45a5",
         "name": "6:3",
         "label_type": "Счёт",
         "start_time": 8184.883560816569,
@@ -5672,7 +5672,7 @@
         "context": null
       },
       {
-        "id": "a144d5f7-9367-4bff-8252-5d6af179f848",
+        "id": "fb139df5-0464-4222-b75a-32520922c243",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 1913.0,
@@ -5683,7 +5683,7 @@
         }
       },
       {
-        "id": "b673af00-ef1c-414f-b70c-c08787214d07",
+        "id": "a6b2b024-9c01-4e98-b9c8-d9f92dc837ec",
         "name": "5 на 4",
         "label_type": "game_mode",
         "start_time": 2446.8379202208453,
@@ -5701,7 +5701,7 @@
         }
       },
       {
-        "id": "108ff4b8-b023-4134-9312-6cd46511512c",
+        "id": "3a644924-6aca-46bd-8b86-506c63cd8eb2",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 2617.9508503279617,
@@ -5712,7 +5712,7 @@
         }
       },
       {
-        "id": "e614a011-a122-4762-bd25-e79540e3d40b",
+        "id": "ddc5e075-7793-4eef-a316-616756001919",
         "name": "4 на 5",
         "label_type": "game_mode",
         "start_time": 2899.2261262474294,
@@ -5730,7 +5730,7 @@
         }
       },
       {
-        "id": "050a516a-ddd3-443e-91c8-22b10b455f9c",
+        "id": "e1efedd2-3542-439d-97d7-198dfb176fc9",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 3070.763053654047,
@@ -5741,7 +5741,7 @@
         }
       },
       {
-        "id": "8a5b0853-9ff4-412c-a261-ce16a109f237",
+        "id": "d80f213d-3f91-462b-bd2f-0d6575332d7b",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 4574.67334485054,
@@ -5752,7 +5752,7 @@
         }
       },
       {
-        "id": "d4be988a-a2c1-4a55-9194-e2743e025883",
+        "id": "19466030-2473-431a-bd23-3057aefb29c3",
         "name": "5 на 4",
         "label_type": "game_mode",
         "start_time": 5724.978838756603,
@@ -5770,7 +5770,7 @@
         }
       },
       {
-        "id": "09928059-eec2-4c13-99c0-7a0dae4f029c",
+        "id": "c11f927d-821b-49d9-a69e-4e8cbc957991",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 5877.702637116464,
@@ -5781,7 +5781,7 @@
         }
       },
       {
-        "id": "302c7f0d-5d87-4396-a2d4-7ffdf7f1202e",
+        "id": "00884e4c-df81-49c6-8e7f-839fbfcfc09e",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 6412.331823825836,
@@ -5792,7 +5792,7 @@
         }
       },
       {
-        "id": "5967627d-b0b6-4b60-9de1-b1dc3b4633b3",
+        "id": "33f43fca-f50d-426e-9f36-8aaac5866c76",
         "name": "5 на 4",
         "label_type": "game_mode",
         "start_time": 6585.082061052322,
@@ -5810,7 +5810,7 @@
         }
       },
       {
-        "id": "fc8f3a29-0d58-42ea-9134-c9973f84926c",
+        "id": "5ea8effb-fcfb-447a-9fde-e4d7e93f8a96",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 6757.609683125103,
@@ -5821,7 +5821,7 @@
         }
       },
       {
-        "id": "b036ea2d-0eca-4cd4-99bf-765565f90816",
+        "id": "ee22a740-0952-4d15-ac05-f54fc7f465f8",
         "name": "4 на 5",
         "label_type": "game_mode",
         "start_time": 7347.828206835104,
@@ -5839,7 +5839,7 @@
         }
       },
       {
-        "id": "ff780ed3-f6ea-42eb-8f94-3e61fcd20110",
+        "id": "06485426-91dc-40b4-bed0-2c7679916413",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 7410.020109091117,
@@ -5850,7 +5850,7 @@
         }
       },
       {
-        "id": "7de96275-4352-40cb-8f24-0efe250b8378",
+        "id": "0baa8b9d-a9c6-420a-949e-6aff412842f1",
         "name": "4 на 5",
         "label_type": "game_mode",
         "start_time": 7739.323659772279,
@@ -5868,7 +5868,7 @@
         }
       },
       {
-        "id": "08212b41-48b9-49eb-b162-c7c0d4db35af",
+        "id": "aa38d8b7-49e0-4fd2-a6fd-737a13973b3a",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 7913.880676994986,
@@ -5879,7 +5879,7 @@
         }
       },
       {
-        "id": "1344e285-024c-4784-b323-0590a332055c",
+        "id": "5b2b4200-fd71-4e53-94ac-b33aa6f461d2",
         "name": "5 на 4",
         "label_type": "game_mode",
         "start_time": 8290.59773901401,
@@ -5979,72 +5979,6 @@
           }
         ]
       },
-      "6979": {
-        "id_fhm": "6979",
-        "name": "Попков Олег",
-        "shifts": [
-          {
-            "number": 1,
-            "start_time": 1913.0,
-            "end_time": 1985.2653902552795
-          },
-          {
-            "number": 2,
-            "start_time": 2248.5176997882954,
-            "end_time": 2354.433766284808
-          },
-          {
-            "number": 3,
-            "start_time": 2655.638501485341,
-            "end_time": 2737.4061050374426
-          },
-          {
-            "number": 4,
-            "start_time": 2945.111130819091,
-            "end_time": 3018.99869028386
-          },
-          {
-            "number": 5,
-            "start_time": 3351.809547205381,
-            "end_time": 3388.3259907338675
-          },
-          {
-            "number": 6,
-            "start_time": 4574.67334485054,
-            "end_time": 4670.816359137138
-          },
-          {
-            "number": 7,
-            "start_time": 4980.54475420818,
-            "end_time": 5073.7450252996305
-          },
-          {
-            "number": 8,
-            "start_time": 5249.411553858353,
-            "end_time": 5370.59542322023
-          },
-          {
-            "number": 9,
-            "start_time": 5989.216445693065,
-            "end_time": 6077.46873913448
-          },
-          {
-            "number": 10,
-            "start_time": 7016.630007251658,
-            "end_time": 7100.5581527709965
-          },
-          {
-            "number": 11,
-            "start_time": 7569.661495627325,
-            "end_time": 7646.111441109549
-          },
-          {
-            "number": 12,
-            "start_time": 8015.582064501566,
-            "end_time": 8145.135157458109
-          }
-        ]
-      },
       "5518": {
         "id_fhm": "5518",
         "name": "Левчук Алексей",
@@ -6123,6 +6057,93 @@
             "number": 15,
             "start_time": 8145.135157458109,
             "end_time": 8229.292080050318
+          }
+        ]
+      },
+      "6976": {
+        "id_fhm": "6976",
+        "name": "Новиков П.",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 1913.0,
+            "end_time": 3469.17334485054
+          },
+          {
+            "number": 2,
+            "start_time": 4574.67334485054,
+            "end_time": 6201.831823825836
+          },
+          {
+            "number": 3,
+            "start_time": 6412.331823825836,
+            "end_time": 7705.946666068436
+          }
+        ]
+      },
+      "6979": {
+        "id_fhm": "6979",
+        "name": "Попков Олег",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 1913.0,
+            "end_time": 1985.2653902552795
+          },
+          {
+            "number": 2,
+            "start_time": 2248.5176997882954,
+            "end_time": 2354.433766284808
+          },
+          {
+            "number": 3,
+            "start_time": 2655.638501485341,
+            "end_time": 2737.4061050374426
+          },
+          {
+            "number": 4,
+            "start_time": 2945.111130819091,
+            "end_time": 3018.99869028386
+          },
+          {
+            "number": 5,
+            "start_time": 3351.809547205381,
+            "end_time": 3388.3259907338675
+          },
+          {
+            "number": 6,
+            "start_time": 4574.67334485054,
+            "end_time": 4670.816359137138
+          },
+          {
+            "number": 7,
+            "start_time": 4980.54475420818,
+            "end_time": 5073.7450252996305
+          },
+          {
+            "number": 8,
+            "start_time": 5249.411553858353,
+            "end_time": 5370.59542322023
+          },
+          {
+            "number": 9,
+            "start_time": 5989.216445693065,
+            "end_time": 6077.46873913448
+          },
+          {
+            "number": 10,
+            "start_time": 7016.630007251658,
+            "end_time": 7100.5581527709965
+          },
+          {
+            "number": 11,
+            "start_time": 7569.661495627325,
+            "end_time": 7646.111441109549
+          },
+          {
+            "number": 12,
+            "start_time": 8015.582064501566,
+            "end_time": 8145.135157458109
           }
         ]
       },
@@ -6308,27 +6329,6 @@
           }
         ]
       },
-      "6976": {
-        "id_fhm": "6976",
-        "name": "Новиков П.",
-        "shifts": [
-          {
-            "number": 1,
-            "start_time": 1913.0,
-            "end_time": 3469.17334485054
-          },
-          {
-            "number": 2,
-            "start_time": 4574.67334485054,
-            "end_time": 6201.831823825836
-          },
-          {
-            "number": 3,
-            "start_time": 6412.331823825836,
-            "end_time": 7705.946666068436
-          }
-        ]
-      },
       "6971": {
         "id_fhm": "6971",
         "name": "Калиш Иван",
@@ -6356,7 +6356,7 @@
           {
             "number": 5,
             "start_time": 3388.3259907338675,
-            "end_time": 4574.67334485054
+            "end_time": 3469.17334485054
           },
           {
             "number": 6,
@@ -6381,7 +6381,7 @@
           {
             "number": 10,
             "start_time": 6077.46873913448,
-            "end_time": 6412.331823825836
+            "end_time": 6201.831823825836
           },
           {
             "number": 11,
@@ -6432,7 +6432,7 @@
           {
             "number": 5,
             "start_time": 3388.3259907338675,
-            "end_time": 4574.67334485054
+            "end_time": 3469.17334485054
           },
           {
             "number": 6,
@@ -6452,7 +6452,7 @@
           {
             "number": 9,
             "start_time": 6112.367583376576,
-            "end_time": 6412.331823825836
+            "end_time": 6201.831823825836
           },
           {
             "number": 10,
@@ -6472,173 +6472,6 @@
           {
             "number": 13,
             "start_time": 7916.357920323089,
-            "end_time": 8145.135157458109
-          }
-        ]
-      },
-      "8963": {
-        "id_fhm": "8963",
-        "name": "Волвенкин Андрей",
-        "shifts": [
-          {
-            "number": 1,
-            "start_time": 2012.863765575714,
-            "end_time": 2117.0912896540885
-          },
-          {
-            "number": 2,
-            "start_time": 2323.3296476992214,
-            "end_time": 2477.2058236820326
-          },
-          {
-            "number": 3,
-            "start_time": 2608.247970767794,
-            "end_time": 2666.453594730501
-          },
-          {
-            "number": 4,
-            "start_time": 2737.4061050374426,
-            "end_time": 2830.3543684227093
-          },
-          {
-            "number": 5,
-            "start_time": 3014.680404103364,
-            "end_time": 3131.332736886109
-          },
-          {
-            "number": 6,
-            "start_time": 3311.3873841957375,
-            "end_time": 4574.67334485054
-          },
-          {
-            "number": 7,
-            "start_time": 4670.816359137138,
-            "end_time": 4727.316359137138
-          },
-          {
-            "number": 8,
-            "start_time": 5073.7450252996305,
-            "end_time": 5159.957562445236
-          },
-          {
-            "number": 9,
-            "start_time": 5361.811334847046,
-            "end_time": 5650.141804054302
-          },
-          {
-            "number": 10,
-            "start_time": 5848.501783315721,
-            "end_time": 5919.603374489833
-          },
-          {
-            "number": 11,
-            "start_time": 6157.155745846434,
-            "end_time": 6412.331823825836
-          },
-          {
-            "number": 12,
-            "start_time": 6508.256936248983,
-            "end_time": 6616.462398529053
-          },
-          {
-            "number": 13,
-            "start_time": 6800.024826233511,
-            "end_time": 6933.988374124502
-          },
-          {
-            "number": 14,
-            "start_time": 7100.5581527709965,
-            "end_time": 7272.054685926438
-          },
-          {
-            "number": 15,
-            "start_time": 7452.140728272357,
-            "end_time": 7558.627663649478
-          },
-          {
-            "number": 16,
-            "start_time": 7705.946666068436,
-            "end_time": 7766.823659772279
-          },
-          {
-            "number": 17,
-            "start_time": 7855.096294132989,
-            "end_time": 7927.880676994986
-          }
-        ]
-      },
-      "8962": {
-        "id_fhm": "8962",
-        "name": "Арнаут Иван",
-        "shifts": [
-          {
-            "number": 1,
-            "start_time": 2012.863765575714,
-            "end_time": 2117.0912896540885
-          },
-          {
-            "number": 2,
-            "start_time": 2421.998479044439,
-            "end_time": 2477.2058236820326
-          },
-          {
-            "number": 3,
-            "start_time": 2737.4061050374426,
-            "end_time": 2830.3543684227093
-          },
-          {
-            "number": 4,
-            "start_time": 3050.3600458269966,
-            "end_time": 3144.0030058985603
-          },
-          {
-            "number": 5,
-            "start_time": 3388.3259907338675,
-            "end_time": 4574.67334485054
-          },
-          {
-            "number": 6,
-            "start_time": 4670.816359137138,
-            "end_time": 4803.909557198127
-          },
-          {
-            "number": 7,
-            "start_time": 5073.7450252996305,
-            "end_time": 5159.957562445236
-          },
-          {
-            "number": 8,
-            "start_time": 5358.811334847046,
-            "end_time": 5558.640675797443
-          },
-          {
-            "number": 9,
-            "start_time": 5848.501783315721,
-            "end_time": 5919.603374489833
-          },
-          {
-            "number": 10,
-            "start_time": 6101.465184551884,
-            "end_time": 6412.331823825836
-          },
-          {
-            "number": 11,
-            "start_time": 6616.462398529053,
-            "end_time": 6720.053917366216
-          },
-          {
-            "number": 12,
-            "start_time": 6933.988374124502,
-            "end_time": 7016.630007251658
-          },
-          {
-            "number": 13,
-            "start_time": 7452.140728272357,
-            "end_time": 7599.276960299384
-          },
-          {
-            "number": 14,
-            "start_time": 7995.146544943517,
             "end_time": 8145.135157458109
           }
         ]
@@ -6675,7 +6508,7 @@
           {
             "number": 6,
             "start_time": 3311.3873841957375,
-            "end_time": 4574.67334485054
+            "end_time": 3469.17334485054
           },
           {
             "number": 7,
@@ -6700,7 +6533,7 @@
           {
             "number": 11,
             "start_time": 6182.3392913882035,
-            "end_time": 6412.331823825836
+            "end_time": 6201.831823825836
           },
           {
             "number": 12,
@@ -6739,110 +6572,170 @@
           }
         ]
       },
-      "6985": {
-        "id_fhm": "6985",
-        "name": "Широков Тимофей",
+      "8962": {
+        "id_fhm": "8962",
+        "name": "Арнаут Иван",
         "shifts": [
           {
             "number": 1,
-            "start_time": 2117.0912896540885,
-            "end_time": 2192.2931136829493
+            "start_time": 2012.863765575714,
+            "end_time": 2117.0912896540885
           },
           {
             "number": 2,
-            "start_time": 2830.3543684227093,
-            "end_time": 2945.111130819091
+            "start_time": 2421.998479044439,
+            "end_time": 2477.2058236820326
           },
           {
             "number": 3,
-            "start_time": 3144.0030058985603,
-            "end_time": 3226.926884091462
+            "start_time": 2737.4061050374426,
+            "end_time": 2830.3543684227093
           },
           {
             "number": 4,
-            "start_time": 4814.947601650794,
-            "end_time": 4872.710636232932
+            "start_time": 3050.3600458269966,
+            "end_time": 3144.0030058985603
           },
           {
             "number": 5,
-            "start_time": 5159.957562445236,
-            "end_time": 5249.411553858353
+            "start_time": 3388.3259907338675,
+            "end_time": 3469.17334485054
           },
           {
             "number": 6,
-            "start_time": 5558.640675797443,
-            "end_time": 5762.183245494884
+            "start_time": 4670.816359137138,
+            "end_time": 4803.909557198127
           },
           {
             "number": 7,
-            "start_time": 5919.603374489833,
-            "end_time": 5989.216445693065
+            "start_time": 5073.7450252996305,
+            "end_time": 5159.957562445236
           },
           {
             "number": 8,
-            "start_time": 7016.630007251658,
-            "end_time": 7100.5581527709965
+            "start_time": 5358.811334847046,
+            "end_time": 5558.640675797443
           },
           {
             "number": 9,
-            "start_time": 7599.276960299384,
-            "end_time": 7646.111441109549
-          }
-        ]
-      },
-      "6977": {
-        "id_fhm": "6977",
-        "name": "Орлов Андрей",
-        "shifts": [
-          {
-            "number": 1,
-            "start_time": 2117.0912896540885,
-            "end_time": 2192.2931136829493
-          },
-          {
-            "number": 2,
-            "start_time": 2559.499160230325,
-            "end_time": 2655.638501485341
-          },
-          {
-            "number": 3,
-            "start_time": 2830.3543684227093,
-            "end_time": 2945.111130819091
-          },
-          {
-            "number": 4,
-            "start_time": 3110.605602896775,
-            "end_time": 3190.680897868241
-          },
-          {
-            "number": 5,
-            "start_time": 4759.909557198127,
-            "end_time": 4872.710636232932
-          },
-          {
-            "number": 6,
-            "start_time": 5159.957562445236,
-            "end_time": 5249.411553858353
-          },
-          {
-            "number": 7,
-            "start_time": 5538.8351099634,
-            "end_time": 5762.183245494884
-          },
-          {
-            "number": 8,
-            "start_time": 5919.603374489833,
-            "end_time": 5989.216445693065
-          },
-          {
-            "number": 9,
-            "start_time": 7016.630007251658,
-            "end_time": 7100.5581527709965
+            "start_time": 5848.501783315721,
+            "end_time": 5919.603374489833
           },
           {
             "number": 10,
-            "start_time": 7599.276960299384,
-            "end_time": 7646.111441109549
+            "start_time": 6101.465184551884,
+            "end_time": 6201.831823825836
+          },
+          {
+            "number": 11,
+            "start_time": 6616.462398529053,
+            "end_time": 6720.053917366216
+          },
+          {
+            "number": 12,
+            "start_time": 6933.988374124502,
+            "end_time": 7016.630007251658
+          },
+          {
+            "number": 13,
+            "start_time": 7452.140728272357,
+            "end_time": 7599.276960299384
+          },
+          {
+            "number": 14,
+            "start_time": 7995.146544943517,
+            "end_time": 8145.135157458109
+          }
+        ]
+      },
+      "8963": {
+        "id_fhm": "8963",
+        "name": "Волвенкин Андрей",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 2012.863765575714,
+            "end_time": 2117.0912896540885
+          },
+          {
+            "number": 2,
+            "start_time": 2323.3296476992214,
+            "end_time": 2477.2058236820326
+          },
+          {
+            "number": 3,
+            "start_time": 2608.247970767794,
+            "end_time": 2666.453594730501
+          },
+          {
+            "number": 4,
+            "start_time": 2737.4061050374426,
+            "end_time": 2830.3543684227093
+          },
+          {
+            "number": 5,
+            "start_time": 3014.680404103364,
+            "end_time": 3131.332736886109
+          },
+          {
+            "number": 6,
+            "start_time": 3311.3873841957375,
+            "end_time": 3469.17334485054
+          },
+          {
+            "number": 7,
+            "start_time": 4670.816359137138,
+            "end_time": 4727.316359137138
+          },
+          {
+            "number": 8,
+            "start_time": 5073.7450252996305,
+            "end_time": 5159.957562445236
+          },
+          {
+            "number": 9,
+            "start_time": 5361.811334847046,
+            "end_time": 5650.141804054302
+          },
+          {
+            "number": 10,
+            "start_time": 5848.501783315721,
+            "end_time": 5919.603374489833
+          },
+          {
+            "number": 11,
+            "start_time": 6157.155745846434,
+            "end_time": 6201.831823825836
+          },
+          {
+            "number": 12,
+            "start_time": 6508.256936248983,
+            "end_time": 6616.462398529053
+          },
+          {
+            "number": 13,
+            "start_time": 6800.024826233511,
+            "end_time": 6933.988374124502
+          },
+          {
+            "number": 14,
+            "start_time": 7100.5581527709965,
+            "end_time": 7272.054685926438
+          },
+          {
+            "number": 15,
+            "start_time": 7452.140728272357,
+            "end_time": 7558.627663649478
+          },
+          {
+            "number": 16,
+            "start_time": 7705.946666068436,
+            "end_time": 7766.823659772279
+          },
+          {
+            "number": 17,
+            "start_time": 7855.096294132989,
+            "end_time": 7927.880676994986
           }
         ]
       },
@@ -6909,6 +6802,128 @@
             "number": 12,
             "start_time": 7927.880676994986,
             "end_time": 8043.294644228738
+          }
+        ]
+      },
+      "6981": {
+        "id_fhm": "6981",
+        "name": "Саморуков Никита",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 2117.0912896540885,
+            "end_time": 2192.2931136829493
+          },
+          {
+            "number": 2,
+            "start_time": 2477.2058236820326,
+            "end_time": 2559.499160230325
+          },
+          {
+            "number": 3,
+            "start_time": 2830.3543684227093,
+            "end_time": 2945.111130819091
+          },
+          {
+            "number": 4,
+            "start_time": 3131.332736886109,
+            "end_time": 3180.180897868241
+          },
+          {
+            "number": 5,
+            "start_time": 4727.316359137138,
+            "end_time": 4812.947601650794
+          },
+          {
+            "number": 6,
+            "start_time": 5159.957562445236,
+            "end_time": 5249.411553858353
+          },
+          {
+            "number": 7,
+            "start_time": 5550.671420731526,
+            "end_time": 5762.183245494884
+          },
+          {
+            "number": 8,
+            "start_time": 5919.603374489833,
+            "end_time": 5989.216445693065
+          },
+          {
+            "number": 9,
+            "start_time": 6616.462398529053,
+            "end_time": 6685.525106668472
+          },
+          {
+            "number": 10,
+            "start_time": 7272.054685926438,
+            "end_time": 7378.252826128318
+          },
+          {
+            "number": 11,
+            "start_time": 7558.627663649478,
+            "end_time": 7646.111441109549
+          },
+          {
+            "number": 12,
+            "start_time": 7927.880676994986,
+            "end_time": 8043.294644228738
+          }
+        ]
+      },
+      "6977": {
+        "id_fhm": "6977",
+        "name": "Орлов Андрей",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 2117.0912896540885,
+            "end_time": 2192.2931136829493
+          },
+          {
+            "number": 2,
+            "start_time": 2559.499160230325,
+            "end_time": 2655.638501485341
+          },
+          {
+            "number": 3,
+            "start_time": 2830.3543684227093,
+            "end_time": 2945.111130819091
+          },
+          {
+            "number": 4,
+            "start_time": 3110.605602896775,
+            "end_time": 3190.680897868241
+          },
+          {
+            "number": 5,
+            "start_time": 4759.909557198127,
+            "end_time": 4872.710636232932
+          },
+          {
+            "number": 6,
+            "start_time": 5159.957562445236,
+            "end_time": 5249.411553858353
+          },
+          {
+            "number": 7,
+            "start_time": 5538.8351099634,
+            "end_time": 5762.183245494884
+          },
+          {
+            "number": 8,
+            "start_time": 5919.603374489833,
+            "end_time": 5989.216445693065
+          },
+          {
+            "number": 9,
+            "start_time": 7016.630007251658,
+            "end_time": 7100.5581527709965
+          },
+          {
+            "number": 10,
+            "start_time": 7599.276960299384,
+            "end_time": 7646.111441109549
           }
         ]
       },
@@ -6983,9 +6998,9 @@
           }
         ]
       },
-      "6981": {
-        "id_fhm": "6981",
-        "name": "Саморуков Никита",
+      "6985": {
+        "id_fhm": "6985",
+        "name": "Широков Тимофей",
         "shifts": [
           {
             "number": 1,
@@ -6994,64 +7009,49 @@
           },
           {
             "number": 2,
-            "start_time": 2477.2058236820326,
-            "end_time": 2559.499160230325
-          },
-          {
-            "number": 3,
             "start_time": 2830.3543684227093,
             "end_time": 2945.111130819091
           },
           {
+            "number": 3,
+            "start_time": 3144.0030058985603,
+            "end_time": 3226.926884091462
+          },
+          {
             "number": 4,
-            "start_time": 3131.332736886109,
-            "end_time": 3180.180897868241
+            "start_time": 4814.947601650794,
+            "end_time": 4872.710636232932
           },
           {
             "number": 5,
-            "start_time": 4727.316359137138,
-            "end_time": 4812.947601650794
-          },
-          {
-            "number": 6,
             "start_time": 5159.957562445236,
             "end_time": 5249.411553858353
           },
           {
-            "number": 7,
-            "start_time": 5550.671420731526,
+            "number": 6,
+            "start_time": 5558.640675797443,
             "end_time": 5762.183245494884
           },
           {
-            "number": 8,
+            "number": 7,
             "start_time": 5919.603374489833,
             "end_time": 5989.216445693065
           },
           {
+            "number": 8,
+            "start_time": 7016.630007251658,
+            "end_time": 7100.5581527709965
+          },
+          {
             "number": 9,
-            "start_time": 6616.462398529053,
-            "end_time": 6685.525106668472
-          },
-          {
-            "number": 10,
-            "start_time": 7272.054685926438,
-            "end_time": 7378.252826128318
-          },
-          {
-            "number": 11,
-            "start_time": 7558.627663649478,
+            "start_time": 7599.276960299384,
             "end_time": 7646.111441109549
-          },
-          {
-            "number": 12,
-            "start_time": 7927.880676994986,
-            "end_time": 8043.294644228738
           }
         ]
       },
-      "4157": {
-        "id_fhm": "4157",
-        "name": "Карнаухов Иван",
+      "5770": {
+        "id_fhm": "5770",
+        "name": "Паршин Игорь",
         "shifts": [
           {
             "number": 1,
@@ -7060,8 +7060,8 @@
           },
           {
             "number": 2,
-            "start_time": 3190.680897868241,
-            "end_time": 3351.809547205381
+            "start_time": 3226.926884091462,
+            "end_time": 3309.248597641401
           },
           {
             "number": 3,
@@ -7126,9 +7126,9 @@
           }
         ]
       },
-      "5770": {
-        "id_fhm": "5770",
-        "name": "Паршин Игорь",
+      "4157": {
+        "id_fhm": "4157",
+        "name": "Карнаухов Иван",
         "shifts": [
           {
             "number": 1,
@@ -7137,8 +7137,8 @@
           },
           {
             "number": 2,
-            "start_time": 3226.926884091462,
-            "end_time": 3309.248597641401
+            "start_time": 3190.680897868241,
+            "end_time": 3351.809547205381
           },
           {
             "number": 3,
@@ -7328,72 +7328,6 @@
           }
         ]
       },
-      "6979": {
-        "id_fhm": "6979",
-        "name": "Попков Олег",
-        "shifts": [
-          {
-            "number": 1,
-            "start_time": 0.0,
-            "end_time": 71.9
-          },
-          {
-            "number": 2,
-            "start_time": 251.1,
-            "end_time": 356.5
-          },
-          {
-            "number": 3,
-            "start_time": 552.6,
-            "end_time": 604.1
-          },
-          {
-            "number": 4,
-            "start_time": 743.1,
-            "end_time": 816.6
-          },
-          {
-            "number": 5,
-            "start_time": 1121.9,
-            "end_time": 1135.3
-          },
-          {
-            "number": 6,
-            "start_time": 1200.0,
-            "end_time": 1276.9
-          },
-          {
-            "number": 7,
-            "start_time": 1524.9,
-            "end_time": 1594.3
-          },
-          {
-            "number": 8,
-            "start_time": 1723.1,
-            "end_time": 1826.0
-          },
-          {
-            "number": 9,
-            "start_time": 2188.0,
-            "end_time": 2276.0
-          },
-          {
-            "number": 10,
-            "start_time": 2799.6,
-            "end_time": 2861.9
-          },
-          {
-            "number": 11,
-            "start_time": 3167.7,
-            "end_time": 3180.8
-          },
-          {
-            "number": 12,
-            "start_time": 3456.3,
-            "end_time": 3504.3
-          }
-        ]
-      },
       "5518": {
         "id_fhm": "5518",
         "name": "Левчук Алексей",
@@ -7472,6 +7406,93 @@
             "number": 15,
             "start_time": 3504.3,
             "end_time": 3543.6
+          }
+        ]
+      },
+      "6976": {
+        "id_fhm": "6976",
+        "name": "Новиков П.",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 0.0,
+            "end_time": 1200.0
+          },
+          {
+            "number": 2,
+            "start_time": 1200.0,
+            "end_time": 2400.0
+          },
+          {
+            "number": 3,
+            "start_time": 2400.0,
+            "end_time": 3199.0
+          }
+        ]
+      },
+      "6979": {
+        "id_fhm": "6979",
+        "name": "Попков Олег",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 0.0,
+            "end_time": 71.9
+          },
+          {
+            "number": 2,
+            "start_time": 251.1,
+            "end_time": 356.5
+          },
+          {
+            "number": 3,
+            "start_time": 552.6,
+            "end_time": 604.1
+          },
+          {
+            "number": 4,
+            "start_time": 743.1,
+            "end_time": 816.6
+          },
+          {
+            "number": 5,
+            "start_time": 1121.9,
+            "end_time": 1135.3
+          },
+          {
+            "number": 6,
+            "start_time": 1200.0,
+            "end_time": 1276.9
+          },
+          {
+            "number": 7,
+            "start_time": 1524.9,
+            "end_time": 1594.3
+          },
+          {
+            "number": 8,
+            "start_time": 1723.1,
+            "end_time": 1826.0
+          },
+          {
+            "number": 9,
+            "start_time": 2188.0,
+            "end_time": 2276.0
+          },
+          {
+            "number": 10,
+            "start_time": 2799.6,
+            "end_time": 2861.9
+          },
+          {
+            "number": 11,
+            "start_time": 3167.7,
+            "end_time": 3180.8
+          },
+          {
+            "number": 12,
+            "start_time": 3456.3,
+            "end_time": 3504.3
           }
         ]
       },
@@ -7657,27 +7678,6 @@
           }
         ]
       },
-      "6976": {
-        "id_fhm": "6976",
-        "name": "Новиков П.",
-        "shifts": [
-          {
-            "number": 1,
-            "start_time": 0.0,
-            "end_time": 1200.0
-          },
-          {
-            "number": 2,
-            "start_time": 1200.0,
-            "end_time": 2400.0
-          },
-          {
-            "number": 3,
-            "start_time": 2400.0,
-            "end_time": 3199.0
-          }
-        ]
-      },
       "6971": {
         "id_fhm": "6971",
         "name": "Калиш Иван",
@@ -7825,173 +7825,6 @@
           }
         ]
       },
-      "8963": {
-        "id_fhm": "8963",
-        "name": "Волвенкин Андрей",
-        "shifts": [
-          {
-            "number": 1,
-            "start_time": 99.4,
-            "end_time": 158.8
-          },
-          {
-            "number": 2,
-            "start_time": 325.6,
-            "end_time": 392.4
-          },
-          {
-            "number": 3,
-            "start_time": 505.4,
-            "end_time": 563.4
-          },
-          {
-            "number": 4,
-            "start_time": 604.1,
-            "end_time": 673.8
-          },
-          {
-            "number": 5,
-            "start_time": 812.3,
-            "end_time": 928.4
-          },
-          {
-            "number": 6,
-            "start_time": 1081.7,
-            "end_time": 1200.0
-          },
-          {
-            "number": 7,
-            "start_time": 1276.9,
-            "end_time": 1333.2
-          },
-          {
-            "number": 8,
-            "start_time": 1594.3,
-            "end_time": 1657.9
-          },
-          {
-            "number": 9,
-            "start_time": 1817.2,
-            "end_time": 1985.6
-          },
-          {
-            "number": 10,
-            "start_time": 2116.4,
-            "end_time": 2145.5
-          },
-          {
-            "number": 11,
-            "start_time": 2355.5,
-            "end_time": 2400.0
-          },
-          {
-            "number": 12,
-            "start_time": 2476.6,
-            "end_time": 2552.6
-          },
-          {
-            "number": 13,
-            "start_time": 2669.7,
-            "end_time": 2762.9
-          },
-          {
-            "number": 14,
-            "start_time": 2861.9,
-            "end_time": 2977.6
-          },
-          {
-            "number": 15,
-            "start_time": 3051.5,
-            "end_time": 3156.8
-          },
-          {
-            "number": 16,
-            "start_time": 3199.0,
-            "end_time": 3232.0
-          },
-          {
-            "number": 17,
-            "start_time": 3297.6,
-            "end_time": 3369.6
-          }
-        ]
-      },
-      "8962": {
-        "id_fhm": "8962",
-        "name": "Арнаут Иван",
-        "shifts": [
-          {
-            "number": 1,
-            "start_time": 99.4,
-            "end_time": 158.8
-          },
-          {
-            "number": 2,
-            "start_time": 367.4,
-            "end_time": 392.4
-          },
-          {
-            "number": 3,
-            "start_time": 604.1,
-            "end_time": 673.8
-          },
-          {
-            "number": 4,
-            "start_time": 847.8,
-            "end_time": 941.0
-          },
-          {
-            "number": 5,
-            "start_time": 1135.3,
-            "end_time": 1200.0
-          },
-          {
-            "number": 6,
-            "start_time": 1276.9,
-            "end_time": 1409.6
-          },
-          {
-            "number": 7,
-            "start_time": 1594.3,
-            "end_time": 1657.9
-          },
-          {
-            "number": 8,
-            "start_time": 1814.2,
-            "end_time": 1956.3
-          },
-          {
-            "number": 9,
-            "start_time": 2116.4,
-            "end_time": 2145.5
-          },
-          {
-            "number": 10,
-            "start_time": 2299.9,
-            "end_time": 2400.0
-          },
-          {
-            "number": 11,
-            "start_time": 2552.6,
-            "end_time": 2632.5
-          },
-          {
-            "number": 12,
-            "start_time": 2762.9,
-            "end_time": 2799.6
-          },
-          {
-            "number": 13,
-            "start_time": 3051.5,
-            "end_time": 3170.6
-          },
-          {
-            "number": 14,
-            "start_time": 3436.1,
-            "end_time": 3504.3
-          }
-        ]
-      },
       "8964": {
         "id_fhm": "8964",
         "name": "Волчков Степан",
@@ -8088,110 +7921,170 @@
           }
         ]
       },
-      "6985": {
-        "id_fhm": "6985",
-        "name": "Широков Тимофей",
+      "8962": {
+        "id_fhm": "8962",
+        "name": "Арнаут Иван",
         "shifts": [
           {
             "number": 1,
-            "start_time": 158.8,
-            "end_time": 211.1
+            "start_time": 99.4,
+            "end_time": 158.8
           },
           {
             "number": 2,
-            "start_time": 673.8,
-            "end_time": 743.1
+            "start_time": 367.4,
+            "end_time": 392.4
           },
           {
             "number": 3,
-            "start_time": 941.0,
-            "end_time": 1023.5
+            "start_time": 604.1,
+            "end_time": 673.8
           },
           {
             "number": 4,
-            "start_time": 1420.6,
-            "end_time": 1478.2
+            "start_time": 847.8,
+            "end_time": 941.0
           },
           {
             "number": 5,
-            "start_time": 1657.9,
-            "end_time": 1723.1
+            "start_time": 1135.3,
+            "end_time": 1200.0
           },
           {
             "number": 6,
-            "start_time": 1956.3,
-            "end_time": 2060.3
+            "start_time": 1276.9,
+            "end_time": 1409.6
           },
           {
             "number": 7,
-            "start_time": 2145.5,
-            "end_time": 2188.0
+            "start_time": 1594.3,
+            "end_time": 1657.9
           },
           {
             "number": 8,
-            "start_time": 2799.6,
-            "end_time": 2861.9
+            "start_time": 1814.2,
+            "end_time": 1956.3
           },
           {
             "number": 9,
-            "start_time": 3170.6,
-            "end_time": 3180.8
-          }
-        ]
-      },
-      "6977": {
-        "id_fhm": "6977",
-        "name": "Орлов Андрей",
-        "shifts": [
-          {
-            "number": 1,
-            "start_time": 158.8,
-            "end_time": 211.1
-          },
-          {
-            "number": 2,
-            "start_time": 456.9,
-            "end_time": 552.6
-          },
-          {
-            "number": 3,
-            "start_time": 673.8,
-            "end_time": 743.1
-          },
-          {
-            "number": 4,
-            "start_time": 907.8,
-            "end_time": 987.4
-          },
-          {
-            "number": 5,
-            "start_time": 1365.7,
-            "end_time": 1478.2
-          },
-          {
-            "number": 6,
-            "start_time": 1657.9,
-            "end_time": 1723.1
-          },
-          {
-            "number": 7,
-            "start_time": 1936.5,
-            "end_time": 2060.3
-          },
-          {
-            "number": 8,
-            "start_time": 2145.5,
-            "end_time": 2188.0
-          },
-          {
-            "number": 9,
-            "start_time": 2799.6,
-            "end_time": 2861.9
+            "start_time": 2116.4,
+            "end_time": 2145.5
           },
           {
             "number": 10,
-            "start_time": 3170.6,
-            "end_time": 3180.8
+            "start_time": 2299.9,
+            "end_time": 2400.0
+          },
+          {
+            "number": 11,
+            "start_time": 2552.6,
+            "end_time": 2632.5
+          },
+          {
+            "number": 12,
+            "start_time": 2762.9,
+            "end_time": 2799.6
+          },
+          {
+            "number": 13,
+            "start_time": 3051.5,
+            "end_time": 3170.6
+          },
+          {
+            "number": 14,
+            "start_time": 3436.1,
+            "end_time": 3504.3
+          }
+        ]
+      },
+      "8963": {
+        "id_fhm": "8963",
+        "name": "Волвенкин Андрей",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 99.4,
+            "end_time": 158.8
+          },
+          {
+            "number": 2,
+            "start_time": 325.6,
+            "end_time": 392.4
+          },
+          {
+            "number": 3,
+            "start_time": 505.4,
+            "end_time": 563.4
+          },
+          {
+            "number": 4,
+            "start_time": 604.1,
+            "end_time": 673.8
+          },
+          {
+            "number": 5,
+            "start_time": 812.3,
+            "end_time": 928.4
+          },
+          {
+            "number": 6,
+            "start_time": 1081.7,
+            "end_time": 1200.0
+          },
+          {
+            "number": 7,
+            "start_time": 1276.9,
+            "end_time": 1333.2
+          },
+          {
+            "number": 8,
+            "start_time": 1594.3,
+            "end_time": 1657.9
+          },
+          {
+            "number": 9,
+            "start_time": 1817.2,
+            "end_time": 1985.6
+          },
+          {
+            "number": 10,
+            "start_time": 2116.4,
+            "end_time": 2145.5
+          },
+          {
+            "number": 11,
+            "start_time": 2355.5,
+            "end_time": 2400.0
+          },
+          {
+            "number": 12,
+            "start_time": 2476.6,
+            "end_time": 2552.6
+          },
+          {
+            "number": 13,
+            "start_time": 2669.7,
+            "end_time": 2762.9
+          },
+          {
+            "number": 14,
+            "start_time": 2861.9,
+            "end_time": 2977.6
+          },
+          {
+            "number": 15,
+            "start_time": 3051.5,
+            "end_time": 3156.8
+          },
+          {
+            "number": 16,
+            "start_time": 3199.0,
+            "end_time": 3232.0
+          },
+          {
+            "number": 17,
+            "start_time": 3297.6,
+            "end_time": 3369.6
           }
         ]
       },
@@ -8258,6 +8151,128 @@
             "number": 12,
             "start_time": 3369.6,
             "end_time": 3483.7
+          }
+        ]
+      },
+      "6981": {
+        "id_fhm": "6981",
+        "name": "Саморуков Никита",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 158.8,
+            "end_time": 211.1
+          },
+          {
+            "number": 2,
+            "start_time": 392.4,
+            "end_time": 456.9
+          },
+          {
+            "number": 3,
+            "start_time": 673.8,
+            "end_time": 743.1
+          },
+          {
+            "number": 4,
+            "start_time": 928.4,
+            "end_time": 977.0
+          },
+          {
+            "number": 5,
+            "start_time": 1333.2,
+            "end_time": 1418.6
+          },
+          {
+            "number": 6,
+            "start_time": 1657.9,
+            "end_time": 1723.1
+          },
+          {
+            "number": 7,
+            "start_time": 1948.3,
+            "end_time": 2060.3
+          },
+          {
+            "number": 8,
+            "start_time": 2145.5,
+            "end_time": 2188.0
+          },
+          {
+            "number": 9,
+            "start_time": 2552.6,
+            "end_time": 2598.4
+          },
+          {
+            "number": 10,
+            "start_time": 2977.6,
+            "end_time": 3020.1
+          },
+          {
+            "number": 11,
+            "start_time": 3156.8,
+            "end_time": 3180.8
+          },
+          {
+            "number": 12,
+            "start_time": 3369.6,
+            "end_time": 3483.7
+          }
+        ]
+      },
+      "6977": {
+        "id_fhm": "6977",
+        "name": "Орлов Андрей",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 158.8,
+            "end_time": 211.1
+          },
+          {
+            "number": 2,
+            "start_time": 456.9,
+            "end_time": 552.6
+          },
+          {
+            "number": 3,
+            "start_time": 673.8,
+            "end_time": 743.1
+          },
+          {
+            "number": 4,
+            "start_time": 907.8,
+            "end_time": 987.4
+          },
+          {
+            "number": 5,
+            "start_time": 1365.7,
+            "end_time": 1478.2
+          },
+          {
+            "number": 6,
+            "start_time": 1657.9,
+            "end_time": 1723.1
+          },
+          {
+            "number": 7,
+            "start_time": 1936.5,
+            "end_time": 2060.3
+          },
+          {
+            "number": 8,
+            "start_time": 2145.5,
+            "end_time": 2188.0
+          },
+          {
+            "number": 9,
+            "start_time": 2799.6,
+            "end_time": 2861.9
+          },
+          {
+            "number": 10,
+            "start_time": 3170.6,
+            "end_time": 3180.8
           }
         ]
       },
@@ -8332,9 +8347,9 @@
           }
         ]
       },
-      "6981": {
-        "id_fhm": "6981",
-        "name": "Саморуков Никита",
+      "6985": {
+        "id_fhm": "6985",
+        "name": "Широков Тимофей",
         "shifts": [
           {
             "number": 1,
@@ -8343,64 +8358,49 @@
           },
           {
             "number": 2,
-            "start_time": 392.4,
-            "end_time": 456.9
-          },
-          {
-            "number": 3,
             "start_time": 673.8,
             "end_time": 743.1
           },
           {
+            "number": 3,
+            "start_time": 941.0,
+            "end_time": 1023.5
+          },
+          {
             "number": 4,
-            "start_time": 928.4,
-            "end_time": 977.0
+            "start_time": 1420.6,
+            "end_time": 1478.2
           },
           {
             "number": 5,
-            "start_time": 1333.2,
-            "end_time": 1418.6
-          },
-          {
-            "number": 6,
             "start_time": 1657.9,
             "end_time": 1723.1
           },
           {
-            "number": 7,
-            "start_time": 1948.3,
+            "number": 6,
+            "start_time": 1956.3,
             "end_time": 2060.3
           },
           {
-            "number": 8,
+            "number": 7,
             "start_time": 2145.5,
             "end_time": 2188.0
           },
           {
+            "number": 8,
+            "start_time": 2799.6,
+            "end_time": 2861.9
+          },
+          {
             "number": 9,
-            "start_time": 2552.6,
-            "end_time": 2598.4
-          },
-          {
-            "number": 10,
-            "start_time": 2977.6,
-            "end_time": 3020.1
-          },
-          {
-            "number": 11,
-            "start_time": 3156.8,
+            "start_time": 3170.6,
             "end_time": 3180.8
-          },
-          {
-            "number": 12,
-            "start_time": 3369.6,
-            "end_time": 3483.7
           }
         ]
       },
-      "4157": {
-        "id_fhm": "4157",
-        "name": "Карнаухов Иван",
+      "5770": {
+        "id_fhm": "5770",
+        "name": "Паршин Игорь",
         "shifts": [
           {
             "number": 1,
@@ -8409,8 +8409,8 @@
           },
           {
             "number": 2,
-            "start_time": 987.4,
-            "end_time": 1121.9
+            "start_time": 1023.5,
+            "end_time": 1079.6
           },
           {
             "number": 3,
@@ -8475,9 +8475,9 @@
           }
         ]
       },
-      "5770": {
-        "id_fhm": "5770",
-        "name": "Паршин Игорь",
+      "4157": {
+        "id_fhm": "4157",
+        "name": "Карнаухов Иван",
         "shifts": [
           {
             "number": 1,
@@ -8486,8 +8486,8 @@
           },
           {
             "number": 2,
-            "start_time": 1023.5,
-            "end_time": 1079.6
+            "start_time": 987.4,
+            "end_time": 1121.9
           },
           {
             "number": 3,
