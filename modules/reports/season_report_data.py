@@ -245,6 +245,7 @@ class SeasonMatchRow:
     penalties: int
     on_ice_gf: int
     on_ice_ga: int
+    on_ice_diff: int = 0
 
 
 @dataclass
@@ -316,6 +317,9 @@ class PlayerSeasonSummary:
 
     def total_on_ice_ga(self) -> int:
         return sum(m.on_ice_ga for m in self.matches)
+
+    def total_on_ice_diff(self) -> int:
+        return sum(m.on_ice_diff for m in self.matches)
 
 
 # =============================================================================
@@ -435,6 +439,7 @@ class SeasonReportDataCollector:
                     penalties=penalties,
                     on_ice_gf=on_ice_gf,
                     on_ice_ga=on_ice_ga,
+                    on_ice_diff=on_ice_gf - on_ice_ga,
                 )
                 summary.matches.append(row)
 

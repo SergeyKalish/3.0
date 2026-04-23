@@ -31,22 +31,43 @@ CONTENT_W = WIDTH_PX - MARGIN_LEFT - MARGIN_RIGHT
 CENTER_X = WIDTH_PX // 2
 
 # =============================================================================
+# ЗОНЫ ЛИСТА
+# =============================================================================
+HEADER_ZONE_HEIGHT = int(HEIGHT_PX * 0.12)    # 12%
+FOOTER_ZONE_HEIGHT = int(HEIGHT_PX * 0.08)    # 8%
+
+HEADER_ZONE_TOP = MARGIN_TOP
+HEADER_ZONE_BOTTOM = HEADER_ZONE_TOP + HEADER_ZONE_HEIGHT
+
+FOOTER_ZONE_BOTTOM = HEIGHT_PX - MARGIN_BOTTOM
+FOOTER_ZONE_TOP = FOOTER_ZONE_BOTTOM - FOOTER_ZONE_HEIGHT
+
+TABLE_ZONE_TOP = HEADER_ZONE_BOTTOM
+TABLE_ZONE_BOTTOM = FOOTER_ZONE_TOP
+TABLE_ZONE_HEIGHT = TABLE_ZONE_BOTTOM - TABLE_ZONE_TOP
+
+MAX_TABLE_ROWS = 34 + 1 + 1  # матчи + итог + заголовок
+ROW_HEIGHT = TABLE_ZONE_HEIGHT // MAX_TABLE_ROWS
+
+# =============================================================================
 # СТИЛИ
 # =============================================================================
 FONT_FAMILY_PRIMARY = "arial.ttf"
 FONT_FAMILY_FALLBACK = "tahoma.ttf"
 
-HEADER_PHOTO_SIZE_PX = 320
+COLOR_OUR_TEAM = "#1410F3"
+COLOR_PHOTO_OUTLINE = "#888888"
+
+HEADER_PHOTO_SIZE_PX = 370
 HEADER_NAME_FONT_SIZE_PT = 26
-HEADER_INFO_FONT_SIZE_PT = 11
-HEADER_INFO_LINE_SPACING_PX = 26
+HEADER_INFO_FONT_SIZE_PT = 12
+HEADER_INFO_LINE_SPACING_PX = 55
 
 TABLE_FONT_SIZE_PT = 8
 TABLE_HEADER_FONT_SIZE_PT = 7
 TABLE_MIN_FONT_SIZE_PT = 6
 TABLE_CELL_PADDING_X = 4
 TABLE_CELL_PADDING_Y = 2
-TABLE_HEADER_HEIGHT_RATIO = 1.5
 TABLE_GRID_COLOR = "#9B9B9B"
 TABLE_OUTLINE_COLOR = "#000000"
 TABLE_HEADER_BG = "#EEEEEE"
@@ -65,26 +86,41 @@ TABLE_HIDE_ZERO_VALUES = True
 # =============================================================================
 # КОЛОНКИ ТАБЛИЦЫ
 # =============================================================================
-# (key, header_text, width_px, align)
-TABLE_COLUMNS = [
-    ("tour", "№ тура", 110, "center"),
-    ("logo", "", 100, "center"),
-    ("opponent", "Соперник", 480, "left"),
-    ("dg", "Д/Г", 90, "center"),
-    ("vp", "В/П", 90, "center"),
-    ("sm", "СМ", 90, "center"),
-    ("srsm", "СрСм", 100, "center"),
-    ("vrm", "ВрМ", 110, "center"),
-    ("b", "Б", 100, "center"),
-    ("m", "М", 100, "center"),
-    ("g", "Г", 80, "center"),
-    ("p", "П", 80, "center"),
-    ("o", "О", 80, "center"),
-    ("pm", "+/-", 90, "center"),
-    ("sh", "Ш", 90, "center"),
-    ("gf", "On-Ice\nGF", 110, "center"),
-    ("ga", "On-Ice\nGA", 110, "center"),
+_BASE_TABLE_COLUMNS = [
+    ("row_num", "№\nп/п", 90, "center"),
+    ("tour", "№\nтура", 100, "center"),
+    ("logo", "", 90, "center"),
+    ("opponent", "Соперник", 440, "left"),
+    ("dg", "Д/Г", 80, "center"),
+    ("vp", "В/П", 80, "center"),
+    ("sm", "СМ", 80, "center"),
+    ("srsm", "СрСм", 90, "center"),
+    ("vrm", "ВрМ", 120, "center"),
+    ("b", "Б", 120, "center"),
+    ("m", "М", 120, "center"),
+    ("g", "Г", 70, "center"),
+    ("p", "П", 70, "center"),
+    ("o", "О", 70, "center"),
+    ("pm", "+/-", 80, "center"),
+    ("sh", "Ш", 80, "center"),
+    ("gf", "On-Ice\nGF", 100, "center"),
+    ("ga", "On-Ice\nGA", 100, "center"),
+    ("total_diff", "Total\n+/-", 100, "center"),
 ]
+
+_base_total = sum(c[2] for c in _BASE_TABLE_COLUMNS)
+_extra = CONTENT_W - _base_total
+
+TABLE_COLUMNS = []
+_running_extra = 0
+for i, (key, header, w, align) in enumerate(_BASE_TABLE_COLUMNS):
+    if i < len(_BASE_TABLE_COLUMNS) - 1:
+        add = round(_extra * w / _base_total)
+    else:
+        add = _extra - _running_extra
+    new_w = w + add
+    TABLE_COLUMNS.append((key, header, new_w, align))
+    _running_extra += add
 
 TABLE_COL_KEYS = [c[0] for c in TABLE_COLUMNS]
 TABLE_COL_WIDTHS = [c[2] for c in TABLE_COLUMNS]
@@ -97,8 +133,6 @@ TABLE_X = MARGIN_LEFT + (CONTENT_W - TABLE_TOTAL_WIDTH) // 2
 # ЛЕГЕНДА
 # =============================================================================
 LEGEND_ITEMS = [
-    ("№ тура", "Номер тура"),
-    ("Соперник", "Название команды соперника"),
     ("Д/Г", "Домашняя / Гостевая игра"),
     ("В/П", "Победа / Поражение"),
     ("СМ", "Количество смен в матче"),
@@ -113,6 +147,7 @@ LEGEND_ITEMS = [
     ("Ш", "Штрафные минуты"),
     ("On-Ice GF", "Голы команды на льду (любые ситуации)"),
     ("On-Ice GA", "Голы соперника на льду (любые ситуации)"),
+    ("Total +/-", "Плюс/минус (любые ситуации)"),
 ]
 
 
@@ -157,51 +192,89 @@ class PlayerSeasonReportGenerator:
         draw = ImageDraw.Draw(img)
 
         # === ШАПКА ===
-        header_bottom = self._draw_header(img, draw, summary, season_name, player_db)
+        self._draw_header(img, draw, summary, season_name, player_db)
 
         # === ТАБЛИЦА ===
-        table_bottom = self._draw_table(img, draw, summary, header_bottom)
+        self._draw_table(img, draw, summary, TABLE_ZONE_TOP, season_name)
+
+        # === РАЗДЕЛИТЕЛЬНАЯ ЛИНИЯ ===
+        draw.line(
+            [(CONTENT_X, TABLE_ZONE_BOTTOM), (CONTENT_X + CONTENT_W, TABLE_ZONE_BOTTOM)],
+            fill="#000000", width=2
+        )
 
         # === ЛЕГЕНДА ===
-        self._draw_legend(draw, table_bottom)
+        self._draw_legend(draw, FOOTER_ZONE_TOP)
 
         return img
+
+    def _draw_debug_zones(self, draw: ImageDraw):
+        """Временные красные линии для отладки границ зон и полей."""
+        red = "#FF0000"
+        # Поля (content area)
+        draw.rectangle(
+            [CONTENT_X, MARGIN_TOP, CONTENT_X + CONTENT_W, HEIGHT_PX - MARGIN_BOTTOM],
+            outline=red, width=2
+        )
+        # Граница шапки
+        draw.line([(CONTENT_X, HEADER_ZONE_BOTTOM), (CONTENT_X + CONTENT_W, HEADER_ZONE_BOTTOM)], fill=red, width=2)
+        # Граница подвала
+        draw.line([(CONTENT_X, FOOTER_ZONE_TOP), (CONTENT_X + CONTENT_W, FOOTER_ZONE_TOP)], fill=red, width=2)
+        # Центральная вертикальная линия content area
+        draw.line([(CENTER_X, MARGIN_TOP), (CENTER_X, HEIGHT_PX - MARGIN_BOTTOM)], fill=red, width=1)
 
     # -------------------------------------------------------------------------
     # ШАПКА
     # -------------------------------------------------------------------------
     def _draw_header(self, img: Image.Image, draw: ImageDraw,
                      summary: PlayerSeasonSummary, season_name: str,
-                     player_db: Dict[str, dict]) -> int:
-        current_y = MARGIN_TOP
+                     player_db: Dict[str, dict]):
+        db = player_db.get(summary.player_id, {})
+        full_name = db.get('name', summary.player_full_name or summary.player_name)
 
-        # --- ФОТО ---
+        photo_size = HEADER_PHOTO_SIZE_PX
+        photo_x = MARGIN_LEFT + 30
+        photo_y = MARGIN_TOP + 30
+
         photo_path = self._find_photo(summary.player_id, summary.player_number, player_db)
-        photo_x = CENTER_X - HEADER_PHOTO_SIZE_PX // 2
         if photo_path and os.path.exists(photo_path):
             try:
-                photo = Image.open(photo_path)
-                photo = photo.resize((HEADER_PHOTO_SIZE_PX, HEADER_PHOTO_SIZE_PX), Image.Resampling.LANCZOS)
-                if photo.mode == 'RGBA':
-                    img.paste(photo, (photo_x, current_y), photo)
-                else:
-                    img.paste(photo, (photo_x, current_y))
+                self._draw_circular_photo(img, photo_path, photo_x, photo_y, photo_size)
             except Exception:
-                self._draw_photo_placeholder(draw, photo_x, current_y)
+                self._draw_photo_placeholder(draw, photo_x, photo_y, photo_size)
         else:
-            self._draw_photo_placeholder(draw, photo_x, current_y)
+            self._draw_photo_placeholder(draw, photo_x, photo_y, photo_size)
 
-        current_y += HEADER_PHOTO_SIZE_PX + 15
+        # Текстовый блок справа от фото
+        text_x = photo_x + photo_size + 40
+        text_y = photo_y
+        text_max_w = CONTENT_X + CONTENT_W - text_x - 20
 
-        # --- ФИО ---
-        name_text = summary.player_full_name or summary.player_name
-        font_name = self._get_font(HEADER_NAME_FONT_SIZE_PT, bold=True)
-        tw, th = self._measure_text(name_text, HEADER_NAME_FONT_SIZE_PT, bold=True)
-        draw.text((CENTER_X - tw // 2, current_y), name_text, fill="#000000", font=font_name)
-        current_y += th + 20
+        # ФИО
+        font_fio = self._get_font(HEADER_NAME_FONT_SIZE_PT, bold=True)
+        fio_w, _ = self._measure_text(full_name, HEADER_NAME_FONT_SIZE_PT, bold=True)
+        # Фиксированная высота строки на основе метрик шрифта (не зависит от содержимого текста)
+        try:
+            ascent, descent = font_fio.getmetrics()
+            fio_h = ascent + descent
+        except Exception:
+            _, fio_h = self._measure_text("Ay", HEADER_NAME_FONT_SIZE_PT, bold=True)
 
-        # --- ИНФО-БЛОК (две колонки) ---
-        db = player_db.get(summary.player_id, {})
+        if fio_w <= text_max_w:
+            draw.text((text_x, text_y), full_name, fill="#000000", font=font_fio)
+            text_y += fio_h + 40
+        else:
+            parts = full_name.split(' ', 1)
+            surname = parts[0]
+            rest = parts[1] if len(parts) > 1 else ""
+            draw.text((text_x, text_y), surname, fill="#000000", font=font_fio)
+            if rest:
+                draw.text((text_x, text_y + fio_h + 5), rest, fill="#000000", font=font_fio)
+            text_y += fio_h * 2 + 15 + 40
+
+        font_info = self._get_font(HEADER_INFO_FONT_SIZE_PT)
+        line_h = HEADER_INFO_LINE_SPACING_PX
+
         bd = db.get('birthdate', '')
         if bd:
             try:
@@ -210,51 +283,37 @@ class PlayerSeasonReportGenerator:
             except Exception:
                 pass
 
-        left_lines = ["Команда: Созвездие 2014"]
-        right_lines = [
-            f"Рост: {db.get('height', '—')} см",
-            f"Вес: {db.get('weight', '—')} кг",
-            f"Хват: {db.get('hand', '—') or '—'}",
+        lines = [
             f"Дата рождения: {bd or '—'}",
+            f"Команда: «Созвездие 2014» | Игровой номер: {summary.player_number}",
+            f"Амплуа: {summary.player_role}",
+            f"Рост: {db.get('height', '—')} см | Вес: {db.get('weight', '—')} кг | Хват: {db.get('hand', '—') or '—'}",
         ]
 
-        font_info = self._get_font(HEADER_INFO_FONT_SIZE_PT)
-        col_w = 500
-        gap = 40
-        block_w = col_w * 2 + gap
-        left_x = CENTER_X - block_w // 2
-        right_x = left_x + col_w + gap
+        for line in lines:
+            draw.text((text_x, text_y), line, fill="#000000", font=font_info)
+            text_y += line_h
 
-        for i, line in enumerate(left_lines):
-            draw.text((left_x, current_y + i * HEADER_INFO_LINE_SPACING_PX), line, fill="#000000", font=font_info)
-        for i, line in enumerate(right_lines):
-            draw.text((right_x, current_y + i * HEADER_INFO_LINE_SPACING_PX), line, fill="#000000", font=font_info)
+    def _draw_circular_photo(self, img: Image.Image, photo_path: str, x: int, y: int, size: int):
+        photo = Image.open(photo_path).resize((size, size), Image.Resampling.LANCZOS)
+        mask = Image.new('L', (size, size), 0)
+        draw_mask = ImageDraw.Draw(mask)
+        draw_mask.ellipse((0, 0, size, size), fill=255)
+        photo_rgba = photo.convert('RGBA')
+        output = Image.new('RGBA', (size, size), (0, 0, 0, 0))
+        output.paste(photo_rgba, (0, 0), mask)
+        img.paste(output, (x, y), output)
+        # Синий контур
+        draw = ImageDraw.Draw(img)
+        draw.ellipse([x, y, x + size, y + size], outline=COLOR_PHOTO_OUTLINE, width=5)
 
-        current_y += max(len(left_lines), len(right_lines)) * HEADER_INFO_LINE_SPACING_PX + 15
-
-        # --- СЕЗОН (отдельная строка по центру, с уменьшением шрифта при необходимости) ---
-        season_text = f"Сезон: {season_name}"
-        season_font_size = HEADER_INFO_FONT_SIZE_PT
-        min_font = 8.0
-        while season_font_size >= min_font:
-            stw, sth = self._measure_text(season_text, season_font_size)
-            if stw <= CONTENT_W:
-                break
-            season_font_size -= 0.5
-        season_font = self._get_font(season_font_size)
-        draw.text((CENTER_X - int(stw) // 2, current_y), season_text, fill="#555555", font=season_font)
-        current_y += int(sth) + 20
-
-        return current_y
-
-    def _draw_photo_placeholder(self, draw: ImageDraw, x: int, y: int):
-        draw.rectangle([x, y, x + HEADER_PHOTO_SIZE_PX, y + HEADER_PHOTO_SIZE_PX],
-                       outline="#AAAAAA", width=2)
-        # Крест-накрест
-        draw.line([(x, y), (x + HEADER_PHOTO_SIZE_PX, y + HEADER_PHOTO_SIZE_PX)],
-                  fill="#CCCCCC", width=2)
-        draw.line([(x + HEADER_PHOTO_SIZE_PX, y), (x, y + HEADER_PHOTO_SIZE_PX)],
-                  fill="#CCCCCC", width=2)
+    def _draw_photo_placeholder(self, draw: ImageDraw, x: int, y: int, size: int):
+        draw.ellipse([x, y, x + size, y + size], outline=COLOR_PHOTO_OUTLINE, width=5)
+        # Внутренний серый кружок
+        inner_margin = 20
+        draw.ellipse([x + inner_margin, y + inner_margin,
+                      x + size - inner_margin, y + size - inner_margin],
+                     outline="#CCCCCC", width=2)
 
     def _find_photo(self, player_id: str, number: str, player_db: Dict[str, dict]) -> str:
         photo_dir = os.path.join('Data', 'player_photos')
@@ -277,22 +336,23 @@ class PlayerSeasonReportGenerator:
     # ТАБЛИЦА
     # -------------------------------------------------------------------------
     def _draw_table(self, img: Image.Image, draw: ImageDraw,
-                    summary: PlayerSeasonSummary, start_y: int) -> int:
+                    summary: PlayerSeasonSummary, table_zone_top: int, season_name: str):
+        TOURNAMENT_NAME_HEIGHT = 50
+
+        # --- НАЗВАНИЕ ТУРНИРА ---
+        font_tournament = self._get_font(LEGEND_TITLE_FONT_SIZE_PT, bold=True)
+        tw, th = self._measure_text(season_name, LEGEND_TITLE_FONT_SIZE_PT, bold=True)
+        tx = TABLE_X + (TABLE_TOTAL_WIDTH - tw) // 2
+        ty = table_zone_top + 10
+        draw.text((tx, ty), season_name, fill="#000000", font=font_tournament)
+
+        table_top = ty + th + 20
         num_matches = len(summary.matches)
-        total_data_rows = num_matches + 1  # +1 итоговая строка
-
-        # Динамический расчёт высоты строк
-        space_after_header = HEIGHT_PX - start_y - MARGIN_BOTTOM
-        legend_height = int(space_after_header * 0.22)
-        available_table_height = space_after_header - legend_height - 20  # 20 px зазор
-
-        header_height = int(40 * TABLE_HEADER_HEIGHT_RATIO)
-        row_height = (available_table_height - header_height) // max(total_data_rows, 1)
-        if row_height < 28:
-            row_height = 28
-
-        table_height = header_height + row_height * total_data_rows
-        table_y = start_y
+        # Динамический расчёт высоты строки: при большом количестве матчей уменьшаем,
+        # при малом — оставляем стандартную ROW_HEIGHT
+        available_height = TABLE_ZONE_BOTTOM - table_top
+        row_height = min(ROW_HEIGHT, available_height // (num_matches + 2))
+        header_height = row_height
 
         x_offsets = []
         cx = TABLE_X
@@ -302,33 +362,43 @@ class PlayerSeasonReportGenerator:
 
         # --- ЗАГОЛОВОК ---
         for i, (key, header_text, width, align) in enumerate(TABLE_COLUMNS):
-            x = x_offsets[i]
-            self._draw_table_cell(draw, x, table_y, width, header_height,
-                                  header_text, TABLE_HEADER_FONT_SIZE_PT,
-                                  bg=TABLE_HEADER_BG, text_color=TABLE_HEADER_TEXT_COLOR,
-                                  align=align, is_header=True)
+            if i == 2:
+                # Объединённая ячейка для logo + opponent
+                merged_width = TABLE_COL_WIDTHS[2] + TABLE_COL_WIDTHS[3]
+                self._draw_table_cell(draw, x_offsets[2], table_top, merged_width, header_height,
+                                      "Соперник", TABLE_HEADER_FONT_SIZE_PT,
+                                      bg=TABLE_HEADER_BG, text_color=TABLE_HEADER_TEXT_COLOR,
+                                      align="center", is_header=True)
+            elif i == 3:
+                continue
+            else:
+                x = x_offsets[i]
+                self._draw_table_cell(draw, x, table_top, width, header_height,
+                                      header_text, TABLE_HEADER_FONT_SIZE_PT,
+                                      bg=TABLE_HEADER_BG, text_color=TABLE_HEADER_TEXT_COLOR,
+                                      align=align, is_header=True)
 
         # --- СТРОКИ МАТЧЕЙ ---
         for row_idx, match in enumerate(summary.matches):
-            y = table_y + header_height + row_idx * row_height
+            y = table_top + header_height + row_idx * row_height
             bg = TABLE_ALTERNATING_ROW_BG if (row_idx % 2 == 1) else "#FFFFFF"
-            self._draw_match_row(img, draw, match, x_offsets, y, row_height, bg)
+            self._draw_match_row(img, draw, match, row_idx, x_offsets, y, row_height, bg)
 
         # --- ИТОГОВАЯ СТРОКА ---
-        total_y = table_y + header_height + num_matches * row_height
+        total_y = table_top + header_height + num_matches * row_height
         self._draw_totals_row(draw, summary, x_offsets, total_y, row_height)
 
         # --- ВНЕШНЯЯ РАМКА ---
-        draw.rectangle([TABLE_X, table_y, TABLE_X + TABLE_TOTAL_WIDTH, table_y + table_height],
+        table_height = header_height + (num_matches + 1) * row_height
+        draw.rectangle([TABLE_X, table_top, TABLE_X + TABLE_TOTAL_WIDTH, table_top + table_height],
                        outline=TABLE_OUTLINE_COLOR, width=2)
 
-        return total_y + row_height + 10
-
     def _draw_match_row(self, img: Image.Image, draw: ImageDraw, match: SeasonMatchRow,
-                        x_offsets: List[int], y: int, h: int, bg: str):
+                        row_idx: int, x_offsets: List[int], y: int, h: int, bg: str):
         values = [
+            str(row_idx + 1),           # № п/п
             match.tour_number,
-            "",  # logo — рисуем отдельно
+            "",                         # logo
             match.opponent_name,
             match.home_away,
             match.result,
@@ -340,10 +410,11 @@ class PlayerSeasonReportGenerator:
             self._fmt_int(match.goals),
             self._fmt_int(match.assists),
             self._fmt_int(match.points),
-            self._fmt_pm(match.plus_minus),
+            self._fmt_pm(match.plus_minus, is_total=False),
             self._fmt_int(match.penalties),
             self._fmt_int(match.on_ice_gf),
             self._fmt_int(match.on_ice_ga),
+            self._fmt_pm_total(match.on_ice_diff, is_total=False),
         ]
 
         for i, val in enumerate(values):
@@ -352,7 +423,6 @@ class PlayerSeasonReportGenerator:
             align = TABLE_COL_ALIGNS[i]
 
             if TABLE_COLUMNS[i][0] == "logo":
-                # Рисуем логотип соперника
                 self._draw_opponent_logo(img, draw, match.opponent_logo_path, x, y, w, h)
             else:
                 self._draw_table_cell(draw, x, y, w, h, val, TABLE_FONT_SIZE_PT,
@@ -368,29 +438,33 @@ class PlayerSeasonReportGenerator:
         avg_sec = summary.avg_shift_seconds()
 
         values = [
-            "ИТОГО",
-            "",
-            "",
-            "",
+            "",                         # № п/п
+            "",                         # № тура
+            "",                         # logo
+            "ИТОГО",                    # Соперник
+            "",                         # Д/Г
             f"{wins}/{losses}",
             str(summary.total_shifts()),
-            f'{avg_sec}"',
+            f'{avg_sec}"' if avg_sec else "",
             _fmt_time(summary.total_time_seconds()),
             _fmt_time(summary.total_pp_seconds()),
             _fmt_time(summary.total_pk_seconds()),
             str(summary.total_goals()),
             str(summary.total_assists()),
             str(summary.total_points()),
-            self._fmt_pm(summary.total_plus_minus()),
+            self._fmt_pm(summary.total_plus_minus(), is_total=True),
             str(summary.total_penalties()),
             str(summary.total_on_ice_gf()),
             str(summary.total_on_ice_ga()),
+            self._fmt_pm_total(summary.total_on_ice_diff(), is_total=True),
         ]
 
         for i, val in enumerate(values):
             x = x_offsets[i]
             w = TABLE_COL_WIDTHS[i]
             align = TABLE_COL_ALIGNS[i]
+            if i == 3:
+                align = "right"
             self._draw_table_cell(draw, x, y, w, h, val, TABLE_FONT_SIZE_PT,
                                   bg=TOTAL_ROW_BG, align=align, bold=True)
 
@@ -406,7 +480,6 @@ class PlayerSeasonReportGenerator:
 
         font = self._get_font(font_size, bold=bold)
 
-        # Для многострочного текста (заголовки с \n)
         lines = str(text).split('\n')
         line_heights = []
         line_widths = []
@@ -418,7 +491,6 @@ class PlayerSeasonReportGenerator:
         total_text_h = sum(line_heights) + (len(lines) - 1) * 2
         max_text_w = max(line_widths) if line_widths else 0
 
-        # Y: центрируем блок по высоте
         text_y = y + (h - total_text_h) // 2
 
         for line, lw, lh in zip(lines, line_widths, line_heights):
@@ -433,13 +505,11 @@ class PlayerSeasonReportGenerator:
 
     def _draw_opponent_logo(self, img: Image.Image, draw: ImageDraw, logo_path: str,
                             x: int, y: int, w: int, h: int):
-        # Фон ячейки
         draw.rectangle([x, y, x + w, y + h], fill="#FFFFFF", outline=TABLE_GRID_COLOR, width=1)
         if not logo_path or not os.path.exists(logo_path):
             return
         try:
             logo = Image.open(logo_path)
-            # Масштабируем с сохранением пропорций, вписываем в ячейку с padding
             max_w = w - 8
             max_h = h - 8
             logo.thumbnail((max_w, max_h), Image.Resampling.LANCZOS)
@@ -458,36 +528,48 @@ class PlayerSeasonReportGenerator:
             return ""
         return str(val)
 
-    def _fmt_pm(self, val: int) -> str:
-        if TABLE_HIDE_ZERO_VALUES and val == 0:
-            return ""
+    def _fmt_pm(self, val: int, is_total: bool = False) -> str:
+        if val == 0:
+            return "0" if is_total else ""
+        return f"{val:+d}"
+
+    def _fmt_pm_total(self, val: int, is_total: bool = False) -> str:
+        if val == 0:
+            return "0" if is_total else ""
         return f"{val:+d}"
 
     # -------------------------------------------------------------------------
     # ЛЕГЕНДА
     # -------------------------------------------------------------------------
-    def _draw_legend(self, draw: ImageDraw, start_y: int):
+    def _draw_legend(self, draw: ImageDraw, footer_zone_top: int):
         font_title = self._get_font(LEGEND_TITLE_FONT_SIZE_PT, bold=True)
         font_text = self._get_font(LEGEND_FONT_SIZE_PT)
 
+        y = footer_zone_top + 10
+
         title = "Обозначения таблицы:"
         tw, th = self._measure_text(title, LEGEND_TITLE_FONT_SIZE_PT, bold=True)
-        draw.text((TABLE_X, start_y), title, fill="#000000", font=font_title)
-        y = start_y + th + 10
+        draw.text((CONTENT_X, y), title, fill="#000000", font=font_title)
+        y += th + 10
 
-        # Две колонки
-        col_w = (TABLE_TOTAL_WIDTH - 20) // 2
-        mid_x = TABLE_X + col_w + 20
-        items_per_col = (len(LEGEND_ITEMS) + 1) // 2
-        line_h = 28
+        avail_w = CONTENT_W - 40
+        col1_w = int(avail_w * 0.28)
+        col2_w = int(avail_w * 0.28)
+        col3_w = avail_w - col1_w - col2_w
+        col_xs = [CONTENT_X, CONTENT_X + col1_w + 20, CONTENT_X + col1_w + 20 + col2_w + 20]
+        col_ws = [col1_w, col2_w, col3_w]
+        row_h = 40
 
-        for i, (abbr, desc) in enumerate(LEGEND_ITEMS):
-            if i < items_per_col:
-                ix, iy = TABLE_X, y + i * line_h
-            else:
-                ix, iy = mid_x, y + (i - items_per_col) * line_h
+        for col_idx in range(3):
+            cy = y
+            start_idx = col_idx * 5
+            end_idx = start_idx + 5
+            for item_idx in range(start_idx, end_idx):
+                abbr, desc = LEGEND_ITEMS[item_idx]
+                abbr_text = f"{abbr}:"
 
-            abbr_text = f"{abbr}:"
-            draw.text((ix, iy), abbr_text, fill="#1640F8", font=font_text)
-            abbr_w, _ = self._measure_text(abbr_text, LEGEND_FONT_SIZE_PT)
-            draw.text((ix + abbr_w + 5, iy), desc, fill="#333333", font=font_text)
+                ix = col_xs[col_idx]
+                draw.text((ix, cy), abbr_text, fill="#1640F8", font=font_text)
+                abbr_w, _ = self._measure_text(abbr_text, LEGEND_FONT_SIZE_PT)
+                draw.text((ix + abbr_w + 5, cy), desc, fill="#333333", font=font_text)
+                cy += row_h
