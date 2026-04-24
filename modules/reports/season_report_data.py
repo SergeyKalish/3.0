@@ -96,6 +96,9 @@ def calculate_player_plus_minus(report_data: ReportData, player_id: str) -> int:
 
     for goal in report_data.goals:
         goal_time = goal.official_time
+        # Буллит не влияет на +/- ни у кого
+        if goal.context.get("is_penalty_shot"):
+            continue
         even = False
         for gm in game_modes:
             try:
@@ -212,9 +215,21 @@ def calculate_on_ice_gf_ga(report_data: ReportData, player_id: str) -> Tuple[int
 
     for goal in report_data.goals:
         gt = goal.official_time
+        team = goal.context.get('team', '')
+        is_our_goal = (team == report_data.our_team_key)
+        is_penalty_shot = goal.context.get("is_penalty_shot", False)
+
+        if is_penalty_shot:
+            if is_our_goal:
+                # Только автору забитого буллита добавляем on-ice GF
+                if goal.context.get('player_id_fhm') == player_id:
+                    gf += 1
+            # Пропущенный буллит — on-ice GA никому не начисляется
+            continue
+
         on_ice = any(shift.official_start < gt <= shift.official_end for shift in shifts)
         if on_ice:
-            if goal.context.get('team', '') == report_data.our_team_key:
+            if is_our_goal:
                 gf += 1
             else:
                 ga += 1

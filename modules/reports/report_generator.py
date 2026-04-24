@@ -1557,6 +1557,10 @@ class PlayerShiftMapReport:
                 return False
         
         for goal in report_data.goals:
+            # Буллит не влияет на +/- ни у кого
+            if goal.context.get("is_penalty_shot"):
+                continue
+
             # Проверяем попадание в период (если нужно)
             if period_index is not None and self.mode != 'game_on_sheet':
                 seg = report_data.segments_info[period_index]
@@ -2530,7 +2534,11 @@ class PlayerShiftMapReport:
                 if draw_plus_minus and not is_goalie:
                     for goal in report_data.goals:
                         goal_time = goal.official_time
-                        
+
+                        # Буллит не влияет на +/- индикаторы
+                        if goal.context.get("is_penalty_shot"):
+                            continue
+
                         # Гол должен быть внутри смены, но НЕ в начале
                         # (shift_start < goal_time <= shift_end)
                         if not (shift_info.official_start < goal_time <= shift_info.official_end):
@@ -2978,6 +2986,8 @@ class PlayerShiftMapReport:
                 player_number = goal.context.get('player_number', '')
 
             author_text = player_name  # Только имя без номера
+            if goal.context.get("is_penalty_shot"):
+                author_text += " [Б]"
 
             text_bbox = draw.textbbox((0, 0), author_text, font=font)
             text_w = text_bbox[2] - text_bbox[0]

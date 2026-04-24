@@ -133,6 +133,10 @@ class LabelsTreeWidget(QWidget):
         # Добавим действие для диапазонов
         self.jump_to_range_action = QAction("Перейти к диапазону", self)
         self.jump_to_range_action.triggered.connect(self._on_jump_to_range_requested)
+        # Действие для тоггла буллита
+        self.toggle_penalty_shot_action = QAction("Это буллит", self)
+        self.toggle_penalty_shot_action.setCheckable(True)
+        self.toggle_penalty_shot_action.triggered.connect(self._on_toggle_penalty_shot)
         # ---
 
         # --- Новое: Атрибуты для хранения состояния развёрнутости ---
@@ -643,6 +647,10 @@ class LabelsTreeWidget(QWidget):
                             # Это метка - показываем действия для метки
                             menu.addAction(self.edit_action)
                             menu.addAction(self.delete_action)
+                            if label.label_type == "Гол":
+                                is_penalty = label.context.get("is_penalty_shot", False) if label.context else False
+                                self.toggle_penalty_shot_action.setChecked(is_penalty)
+                                menu.addAction(self.toggle_penalty_shot_action)
                             menu.exec_(self.labels_tree.viewport().mapToGlobal(position))
                             return # Выходим после показа меню для метки
                 if self._calculated_ranges_ref:
@@ -732,6 +740,33 @@ class LabelsTreeWidget(QWidget):
                     # Эмитируем сигнал для выбора диапазона в плеере
                     self.rangeSelectedForPlayback.emit(calc_range.name)
                     break # Нашли и вызвали сигнал, выходим из цикла
+
+    def _on_toggle_penalty_shot(self):
+        """Обработчик действия 'Это буллит' из контекстного меню."""
+        if not hasattr(self, '_current_context_item') or not self._current_context_item:
+            return
+
+        item = self._current_context_item
+        label_obj_id = self._get_obj_id_from_item(item)
+        if label_obj_id is not None and self._generic_labels_ref:
+            for label in self._generic_labels_ref:
+                if id(label) == label_obj_id:
+                    if label.label_type == "Гол":
+                        if not label.context:
+                            label.context = {}
+                        label.context["is_penalty_shot"] = not label.context.get("is_penalty_shot", False)
+                        self.update_tree(
+                            self._generic_labels_ref,
+                            self._calculated_ranges_ref,
+                            self._generic_labels_ref,
+                            self._calculated_ranges_ref,
+                            self._video_player_ref,
+                            self._save_callback,
+                            self._rosters_ref
+                        )
+                        if self._save_callback:
+                            self._save_callback()
+                    break
 
     def _update_column_widths(self):
         """Вспомогательный метод для установки ширины колонок (опционально)."""
