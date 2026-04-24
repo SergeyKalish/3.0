@@ -19,6 +19,8 @@ from ui.protocol_validation_widget import ProtocolValidationWidget
 from ui.timeline_widget import TimelineWidget # Импортируем TimelineWidget
 # - Конец новых импортов -
 from ui.lineup_module_widget import LineupModuleWidget
+from modules.reports import PlayerShiftMapReport, ReportData, SORT_BY_POSITION_BLOCKS
+from ui.report_viewer_window import ReportViewerWindow
 # --- Конец новых импортов ---
 from typing import Dict, Any
 from PyQt5.QtWidgets import QStackedWidget
@@ -78,6 +80,7 @@ class MainWindow(QMainWindow):
         self.labels_tree_widget = LabelsTreeWidget()
         # SMART
         self.smart_processor = SMARTProcessor()
+        self.report_1_button = QPushButton("Отчет №1")
         self.run_smart_button = QPushButton("Запустить SMART")
         self.auto_smart_checkbox = QCheckBox("Автоматический вызов SMART")
         # --- Конец новых компонентов ---
@@ -268,6 +271,7 @@ class MainWindow(QMainWindow):
         # --- Новое: Добавляем LabelsTreeWidget и элементы SMART в R2_widget ---
         # Создаём QVBoxLayout для R2_widget
         R2_layout = QVBoxLayout(self.R2_widget)
+        R2_layout.addWidget(self.report_1_button)
         R2_layout.addWidget(self.run_smart_button)
         R2_layout.addWidget(self.auto_smart_checkbox)
         R2_layout.addWidget(self.labels_tree_widget) # LabelsTreeWidget внизу R2
@@ -331,6 +335,8 @@ class MainWindow(QMainWindow):
         self.auto_smart_checkbox.stateChanged.connect(self.on_auto_smart_toggled)
         # 7. Сигнал от LabelsTreeWidget о выборе диапазона для воспроизведения -> переключение в плеере
         self.labels_tree_widget.rangeSelectedForPlayback.connect(self._select_range_in_selector_and_playback)
+        # 8. Сигнал от кнопки Отчет №1 -> генерация отчёта
+        self.report_1_button.clicked.connect(self.on_report_1_clicked)
 
         # --- НОВОЕ: Подключение сигнала от LineupModuleWidget ---
         # При любом действии на панели Смена переключаем тип метки на "Смена"
@@ -1139,5 +1145,92 @@ class MainWindow(QMainWindow):
         """Инициализирует ProtocolValidationWidget данными из match.events, если они есть."""
         if hasattr(self, 'protocol_validation_widget') and self.project.match.events:
             self.protocol_validation_widget.set_events(self.project.match.events)
-        
+
+    def _generate_report_1(self, mode_text: str):
+        """
+        Генерирует изображение отчёта №1 для указанного режима.
+
+        :param mode_text: строка режима ('Всё видео', 'Период 1' и т.д.)
+        :return: кортеж (PIL.Image, window_title)
+        :raises ValueError: если период не найден
+        """
+        report_data = ReportData(
+            original_project=self.project,
+            sort_order=SORT_BY_POSITION_BLOCKS
+        )
+        report_generator = PlayerShiftMapReport(page_size='A4')
+
+        if mode_text == "Всё видео":
+            sheet_image = report_generator.generate_single(
+                report_data,
+                mode='game_on_sheet'
+            )
+            window_title = "Отчёт №1 — Матч"
+        else:
+            period_num = int(mode_text.split()[-1])
+            period_index = period_num - 1
+
+            if period_index >= len(report_data.segments_info):
+                raise ValueError(
+                    f"Период {period_num} не найден в данных проекта. "
+                    f"Доступно периодов: {len(report_data.segments_info)}."
+                )
+
+            sheet_image = report_generator.generate_single(
+                report_data,
+                mode='period_on_sheet',
+                period_index=period_index
+            )
+            window_title = f"Отчёт №1 — Период {period_num}"
+
+        return sheet_image, window_title
+
+    def on_report_1_clicked(self):
+        """
+        Обработчик нажатия кнопки 'Отчет №1'.
+        Генерирует отчёт в зависимости от текущего выбранного режима воспроизведения.
+        """
+        # 1. Проверка, что проект загружен
+        if not self.project or not self.project.match:
+            QMessageBox.warning(self, "Предупреждение", "Сначала откройте или создайте проект.")
+            return
+
+        # 2. Определение текущего режима из range_selector
+        range_selector = self.universal_label_editor_widget.get_range_selector()
+        current_mode_text = range_selector.currentText()
+
+        # 3. Проверка допустимости режима
+        allowed_modes = {"Всё видео", "Период 1", "Период 2", "Период 3"}
+        if current_mode_text not in allowed_modes:
+            QMessageBox.warning(
+                self,
+                "Недопустимый режим",
+                f"Для генерации отчёта №1 необходимо выбрать один из доступных режимов:\n"
+                f"'Всё видео', 'Период 1', 'Период 2' или 'Период 3'.\n\n"
+                f"Текущий режим: '{current_mode_text}'"
+            )
+            return
+
+        # 4. Генерация и открытие окна
+        try:
+            sheet_image, window_title = self._generate_report_1(current_mode_text)
+
+            viewer = ReportViewerWindow(
+                pil_image=sheet_image,
+                title=window_title,
+                refresh_callback=lambda: self._generate_report_1(current_mode_text),
+                parent=self
+            )
+            viewer.show()
+            self.status_label.setText(f"Отчёт №1 сгенерирован: {window_title}")
+
+        except Exception as e:
+            QMessageBox.critical(
+                self,
+                "Ошибка генерации отчёта",
+                f"Не удалось сгенерировать отчёт №1:\n{str(e)}"
+            )
+            import traceback
+            traceback.print_exc()
+
 # Конец содержимого файла: ui/main_window.py

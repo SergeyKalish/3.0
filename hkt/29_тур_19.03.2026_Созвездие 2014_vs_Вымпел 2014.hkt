@@ -1,6 +1,6 @@
 {
   "version": "4.0",
-  "video_path": "D:/Media/Матчи Созвездие 2014 сезона 25-26/29_тур_720p_2014_Созвездие_Вымпел_19_03_2026_fixed.mp4",
+  "video_path": "D:/Media/Матчи Созвездие 2014 сезона 25-26/29_тур_1080p_2014_Созвездие_Вымпел_19_03_2026.mp4",
   "match": {
     "generic_labels": [
       {
@@ -45,7 +45,7 @@
         "global_time": 1774.3495084042286,
         "context": {
           "detected_text": "гол",
-          "confidence": 77.0
+          "confidence": 77
         }
       },
       {
@@ -54,7 +54,7 @@
         "global_time": 2280.775055424339,
         "context": {
           "detected_text": "гол",
-          "confidence": 71.0
+          "confidence": 71
         }
       },
       {
@@ -63,7 +63,7 @@
         "global_time": 2522.3872437340915,
         "context": {
           "detected_text": "гол",
-          "confidence": 73.0
+          "confidence": 73
         }
       },
       {
@@ -72,7 +72,7 @@
         "global_time": 4617.212918801165,
         "context": {
           "detected_text": "гол",
-          "confidence": 78.0
+          "confidence": 78
         }
       },
       {
@@ -81,7 +81,7 @@
         "global_time": 5196.442138457658,
         "context": {
           "detected_text": "гол",
-          "confidence": 74.0
+          "confidence": 74
         }
       },
       {
@@ -90,7 +90,7 @@
         "global_time": 5309.647849205439,
         "context": {
           "detected_text": "гол",
-          "confidence": 77.0
+          "confidence": 77
         }
       },
       {
@@ -99,7 +99,7 @@
         "global_time": 5834.474324474306,
         "context": {
           "detected_text": "гол",
-          "confidence": 74.0
+          "confidence": 74
         }
       },
       {
@@ -108,7 +108,7 @@
         "global_time": 7214.62394716687,
         "context": {
           "detected_text": "гол",
-          "confidence": 76.0
+          "confidence": 76
         }
       },
       {
@@ -117,7 +117,7 @@
         "global_time": 7457.436196014584,
         "context": {
           "detected_text": "гол",
-          "confidence": 70.0
+          "confidence": 70
         }
       },
       {
@@ -126,7 +126,7 @@
         "global_time": 7665.04666908207,
         "context": {
           "detected_text": "гол",
-          "confidence": 75.0
+          "confidence": 75
         }
       },
       {
@@ -368,11 +368,189 @@
         "label_type": "Черн.FOOTAGE",
         "global_time": 7687.847819303355,
         "context": null
+      },
+      {
+        "id": "88ef518c-1b9c-4828-8b3e-81f1ebe8ad9c",
+        "label_type": "Смена",
+        "global_time": 1425.9328466415404,
+        "context": {
+          "players_on_ice": [
+            {
+              "id_fhm": "9507",
+              "name": "Никонов Владислав"
+            },
+            {
+              "id_fhm": "8962",
+              "name": "Арнаут Иван"
+            },
+            {
+              "id_fhm": "6971",
+              "name": "Калиш Иван"
+            },
+            {
+              "id_fhm": "5518",
+              "name": "Левчук Алексей"
+            },
+            {
+              "id_fhm": "6972",
+              "name": "Митин Павел"
+            },
+            {
+              "id_fhm": "6980",
+              "name": "Рахматуллин Тамерлан"
+            }
+          ],
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "81f67dac-932e-4e78-a126-a9bd13500a17",
+        "label_type": "Пауза",
+        "global_time": 1454.9780902177672,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "5e81a4ff-e49e-488a-88cc-6c9bb589bfb4",
+        "label_type": "Пауза",
+        "global_time": 1475.4927527145594,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "63fe0d0a-cc63-4096-a68d-e8f6eab048f9",
+        "label_type": "Пауза",
+        "global_time": 1767.9081272835451,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "198c53d6-53c0-4f23-961c-dc32f2b473ff",
+        "label_type": "Пауза",
+        "global_time": 1802.3825058688856,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "96d5beb0-3667-4896-bf80-f1b07ffbc08b",
+        "label_type": "Пауза",
+        "global_time": 2099.409219385491,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "7c408504-fb32-40d0-bd72-105c1e8b21a0",
+        "label_type": "Пауза",
+        "global_time": 2121.840476375195,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "8dd7b2ad-1d36-4ccc-b57b-552ee166fbf4",
+        "label_type": "Пауза",
+        "global_time": 2271.0809727350497,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "0520b325-ab0d-4070-bd94-6909f33dfe12",
+        "label_type": "Пауза",
+        "global_time": 2307.4763267215485,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "2343ccc2-5a33-4d7d-af29-3a4f2212cb94",
+        "label_type": "Пауза",
+        "global_time": 2517.1217017037566,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "67c07c5b-3006-4b94-a835-2d1ee2a857bf",
+        "label_type": "Пауза",
+        "global_time": 2560.688293058772,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "ff61d4ab-407d-4d1d-a94d-086950b344e7",
+        "label_type": "Пауза",
+        "global_time": 2687.68901803374,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "7edf81b7-19a9-4140-84a8-5ce5b6a531a7",
+        "label_type": "Пауза",
+        "global_time": 2709.2962437111605,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "89c19f82-a9ed-4a95-a2d0-3355d7e630d1",
+        "label_type": "Пауза",
+        "global_time": 2816.4949980231063,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "97179ddc-1903-4db7-984f-ff332d9be967",
+        "label_type": "Пауза",
+        "global_time": 2835.1028423490566,
+        "context": {
+          "period_name": "Период 1"
+        }
+      },
+      {
+        "id": "98282598-3526-4fc0-83a1-1e06edb88381",
+        "label_type": "Пауза",
+        "global_time": 4610.9356926392065,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "16e43677-927d-4678-9e0b-3ed84888eaf3",
+        "label_type": "Пауза",
+        "global_time": 4648.51406902245,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "35236323-6611-4e74-bad4-328a7ba87b3a",
+        "label_type": "Пауза",
+        "global_time": 5050.388566470506,
+        "context": {
+          "period_name": "Период 2"
+        }
+      },
+      {
+        "id": "65d3a0c1-0f24-4eac-9b13-62e03cf550f6",
+        "label_type": "Пауза",
+        "global_time": 5219.466962695482,
+        "context": {
+          "period_name": "Период 2"
+        }
       }
     ],
     "calculated_ranges": [
       {
-        "id": "fda0ceff-414b-4df5-9094-9f1d7f8193f9",
+        "id": "a482c25f-2e49-4bac-9fd6-803cb71d49d5",
         "name": "Всё видео",
         "label_type": "Всё видео",
         "start_time": 0.0,
@@ -381,7 +559,7 @@
         "context": null
       },
       {
-        "id": "0b295772-99e4-4598-b4f8-6b20487aa176",
+        "id": "5e59f438-2bfb-470d-bcef-c353a0f6dd43",
         "name": "Период 1",
         "label_type": "Сегмент",
         "start_time": 1425.9328466415404,
@@ -393,7 +571,7 @@
         "context": null
       },
       {
-        "id": "3102f363-2a18-4c99-9855-7c2738b52a35",
+        "id": "38e5303f-9b90-4c4d-a37c-73bbcef6edf6",
         "name": "Период 2",
         "label_type": "Сегмент",
         "start_time": 4229.603966759003,
@@ -405,7 +583,7 @@
         "context": null
       },
       {
-        "id": "74fd4281-c686-4410-8d7d-71bbcf62d5ca",
+        "id": "64819138-cfd0-4ea8-bfac-82708a0c6a13",
         "name": "Период 3",
         "label_type": "Сегмент",
         "start_time": 6268.983780716212,
@@ -417,10 +595,94 @@
         "context": null
       },
       {
-        "id": "8354bf67-a879-4b59-ad26-082c87db670a",
+        "id": "dc4f580f-0c59-4bee-bfc9-92475e5beaf5",
         "name": "Период 1. ЧИИ №1",
         "label_type": "ЧИИ",
         "start_time": 1425.9328466415404,
+        "end_time": 1454.9780902177672,
+        "source_label_ids": [
+          "5229cb61-34e8-44a8-98a8-2376e17a0338",
+          "0c1f5718-74b8-4fa1-b970-0027097278de"
+        ],
+        "context": null
+      },
+      {
+        "id": "c82583c3-9a30-4d1f-897c-0606fdb897c1",
+        "name": "Период 1. ЧИИ №2",
+        "label_type": "ЧИИ",
+        "start_time": 1475.4927527145594,
+        "end_time": 1767.9081272835451,
+        "source_label_ids": [
+          "5229cb61-34e8-44a8-98a8-2376e17a0338",
+          "0c1f5718-74b8-4fa1-b970-0027097278de"
+        ],
+        "context": null
+      },
+      {
+        "id": "18dd3949-c529-42bf-9e8f-c99309d534c0",
+        "name": "Период 1. ЧИИ №3",
+        "label_type": "ЧИИ",
+        "start_time": 1802.3825058688856,
+        "end_time": 2099.409219385491,
+        "source_label_ids": [
+          "5229cb61-34e8-44a8-98a8-2376e17a0338",
+          "0c1f5718-74b8-4fa1-b970-0027097278de"
+        ],
+        "context": null
+      },
+      {
+        "id": "584eee37-9738-4177-afae-877fbfcd0c68",
+        "name": "Период 1. ЧИИ №4",
+        "label_type": "ЧИИ",
+        "start_time": 2121.840476375195,
+        "end_time": 2271.0809727350497,
+        "source_label_ids": [
+          "5229cb61-34e8-44a8-98a8-2376e17a0338",
+          "0c1f5718-74b8-4fa1-b970-0027097278de"
+        ],
+        "context": null
+      },
+      {
+        "id": "9278b2a8-3cac-49ff-b56f-a1da2a9ef7a1",
+        "name": "Период 1. ЧИИ №5",
+        "label_type": "ЧИИ",
+        "start_time": 2307.4763267215485,
+        "end_time": 2517.1217017037566,
+        "source_label_ids": [
+          "5229cb61-34e8-44a8-98a8-2376e17a0338",
+          "0c1f5718-74b8-4fa1-b970-0027097278de"
+        ],
+        "context": null
+      },
+      {
+        "id": "7dac48ed-c9cf-41e1-b94a-dce18fbca846",
+        "name": "Период 1. ЧИИ №6",
+        "label_type": "ЧИИ",
+        "start_time": 2560.688293058772,
+        "end_time": 2687.68901803374,
+        "source_label_ids": [
+          "5229cb61-34e8-44a8-98a8-2376e17a0338",
+          "0c1f5718-74b8-4fa1-b970-0027097278de"
+        ],
+        "context": null
+      },
+      {
+        "id": "a16121db-3645-4a95-bbd0-aba48bd803d5",
+        "name": "Период 1. ЧИИ №7",
+        "label_type": "ЧИИ",
+        "start_time": 2709.2962437111605,
+        "end_time": 2816.4949980231063,
+        "source_label_ids": [
+          "5229cb61-34e8-44a8-98a8-2376e17a0338",
+          "0c1f5718-74b8-4fa1-b970-0027097278de"
+        ],
+        "context": null
+      },
+      {
+        "id": "6bfe2232-c799-4d99-a025-ccbbdb13c8df",
+        "name": "Период 1. ЧИИ №8",
+        "label_type": "ЧИИ",
+        "start_time": 2835.1028423490566,
         "end_time": 3153.9954111576044,
         "source_label_ids": [
           "5229cb61-34e8-44a8-98a8-2376e17a0338",
@@ -429,10 +691,34 @@
         "context": null
       },
       {
-        "id": "4ad1c1b7-e20e-4e0e-9bb4-faa21ddfe326",
+        "id": "d05ebc6e-6dde-4f20-a54d-8e07a7efa377",
         "name": "Период 2. ЧИИ №1",
         "label_type": "ЧИИ",
         "start_time": 4229.603966759003,
+        "end_time": 4610.9356926392065,
+        "source_label_ids": [
+          "6643489c-0294-4a99-b4d1-9d8194be2f70",
+          "ba81f153-fa74-4c46-8de6-82218f625d6f"
+        ],
+        "context": null
+      },
+      {
+        "id": "e9985bac-120d-4719-95fa-2d4c1c7a42d0",
+        "name": "Период 2. ЧИИ №2",
+        "label_type": "ЧИИ",
+        "start_time": 4648.51406902245,
+        "end_time": 5050.388566470506,
+        "source_label_ids": [
+          "6643489c-0294-4a99-b4d1-9d8194be2f70",
+          "ba81f153-fa74-4c46-8de6-82218f625d6f"
+        ],
+        "context": null
+      },
+      {
+        "id": "f5a81431-88c4-446d-b22c-fc0408663d16",
+        "name": "Период 2. ЧИИ №3",
+        "label_type": "ЧИИ",
+        "start_time": 5219.466962695482,
         "end_time": 6012.483780716212,
         "source_label_ids": [
           "6643489c-0294-4a99-b4d1-9d8194be2f70",
@@ -441,7 +727,7 @@
         "context": null
       },
       {
-        "id": "4fb033a1-f992-49b8-a2d6-c7307da46381",
+        "id": "b0784c73-562e-499b-a3c0-5665b1822e17",
         "name": "Период 3. ЧИИ №1",
         "label_type": "ЧИИ",
         "start_time": 6268.983780716212,
@@ -453,7 +739,7 @@
         "context": null
       },
       {
-        "id": "2a1691c9-1b45-4c73-afbc-9e36722ff377",
+        "id": "a121c700-bda1-42b1-9b6c-6374f5fddd56",
         "name": "0:0",
         "label_type": "Счёт",
         "start_time": 1425.9328466415404,
@@ -462,7 +748,7 @@
         "context": null
       },
       {
-        "id": "59265b6e-c43f-4f2c-9c80-e50879fecd61",
+        "id": "1735a1e4-04f3-4553-b62d-8ef42ff8cfac",
         "name": "0:0",
         "label_type": "Счёт",
         "start_time": 4229.603966759003,
@@ -471,7 +757,7 @@
         "context": null
       },
       {
-        "id": "570b7256-3a50-470f-aedf-11e85d00a1d4",
+        "id": "a7d0dce6-7f55-4049-afb5-920c53d47b0c",
         "name": "0:0",
         "label_type": "Счёт",
         "start_time": 6268.983780716212,
@@ -480,7 +766,7 @@
         "context": null
       },
       {
-        "id": "7e3d2295-2d91-4abd-b30f-8429c3e9a898",
+        "id": "dd7767dc-0b4a-4d8c-b41f-4828d772c349",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 1425.9328466415404,
@@ -491,7 +777,7 @@
         }
       },
       {
-        "id": "7010bc4f-c0a8-4766-9314-3b2ada1a073a",
+        "id": "00c426f9-5b5d-4cca-b09f-dd293e52cd02",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 4229.603966759003,
@@ -502,7 +788,7 @@
         }
       },
       {
-        "id": "dc7acf3c-8e15-41be-9d42-3b6b760263fd",
+        "id": "7b65d235-da0c-45c8-a403-b1ed1e0c7259",
         "name": "5 на 5",
         "label_type": "game_mode",
         "start_time": 6268.983780716212,
@@ -513,18 +799,698 @@
         }
       }
     ],
-    "player_shifts": {},
-    "player_shifts_official_timer": {},
-    "match_id": null,
-    "teams": {},
-    "rosters": {},
-    "events": [],
-    "tournament_name": null,
-    "tour_number": null,
-    "match_date": null,
-    "match_time": null,
-    "venue_city": null,
-    "venue_arena": null,
-    "referees": []
+    "player_shifts": {
+      "6971": {
+        "id_fhm": "6971",
+        "name": "Калиш Иван",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 1425.9328466415404,
+            "end_time": 3153.9954111576044
+          }
+        ]
+      },
+      "8962": {
+        "id_fhm": "8962",
+        "name": "Арнаут Иван",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 1425.9328466415404,
+            "end_time": 3153.9954111576044
+          }
+        ]
+      },
+      "9507": {
+        "id_fhm": "9507",
+        "name": "Никонов Владислав",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 1425.9328466415404,
+            "end_time": 3153.9954111576044
+          },
+          {
+            "number": 2,
+            "start_time": 4229.603966759003,
+            "end_time": 6012.483780716212
+          },
+          {
+            "number": 3,
+            "start_time": 6268.983780716212,
+            "end_time": 8158.2390333159265
+          }
+        ]
+      },
+      "6980": {
+        "id_fhm": "6980",
+        "name": "Рахматуллин Тамерлан",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 1425.9328466415404,
+            "end_time": 3153.9954111576044
+          }
+        ]
+      },
+      "6972": {
+        "id_fhm": "6972",
+        "name": "Митин Павел",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 1425.9328466415404,
+            "end_time": 3153.9954111576044
+          }
+        ]
+      },
+      "5518": {
+        "id_fhm": "5518",
+        "name": "Левчук Алексей",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 1425.9328466415404,
+            "end_time": 3153.9954111576044
+          }
+        ]
+      }
+    },
+    "player_shifts_official_timer": {
+      "6971": {
+        "id_fhm": "6971",
+        "name": "Калиш Иван",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 0.0,
+            "end_time": 1200.0
+          }
+        ]
+      },
+      "8962": {
+        "id_fhm": "8962",
+        "name": "Арнаут Иван",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 0.0,
+            "end_time": 1200.0
+          }
+        ]
+      },
+      "9507": {
+        "id_fhm": "9507",
+        "name": "Никонов Владислав",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 0.0,
+            "end_time": 1200.0
+          },
+          {
+            "number": 2,
+            "start_time": 1200.0,
+            "end_time": 2400.0
+          },
+          {
+            "number": 3,
+            "start_time": 2400.0,
+            "end_time": 3600.0
+          }
+        ]
+      },
+      "6980": {
+        "id_fhm": "6980",
+        "name": "Рахматуллин Тамерлан",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 0.0,
+            "end_time": 1200.0
+          }
+        ]
+      },
+      "6972": {
+        "id_fhm": "6972",
+        "name": "Митин Павел",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 0.0,
+            "end_time": 1200.0
+          }
+        ]
+      },
+      "5518": {
+        "id_fhm": "5518",
+        "name": "Левчук Алексей",
+        "shifts": [
+          {
+            "number": 1,
+            "start_time": 0.0,
+            "end_time": 1200.0
+          }
+        ]
+      }
+    },
+    "match_id": "10287",
+    "teams": {
+      "f-team": "Созвездие 2014",
+      "f-team_id": 301,
+      "s-team": "Вымпел 2014",
+      "s-team_id": 298
+    },
+    "rosters": {
+      "f-team": [
+        {
+          "name": "Крючков Артем",
+          "number": "50",
+          "role": "Вратарь",
+          "birth_date": "12.01.2015",
+          "id_fhm": "346"
+        },
+        {
+          "name": "Никонов Владислав",
+          "number": "20",
+          "role": "Вратарь",
+          "birth_date": "23.05.2014",
+          "id_fhm": "9507"
+        },
+        {
+          "name": "Арнаут Иван",
+          "number": "77",
+          "role": "Нападающий",
+          "birth_date": "20.01.2014",
+          "id_fhm": "8962",
+          "lineup_group": "1-я тройка",
+          "lineup_position": "Центр"
+        },
+        {
+          "name": "Богомолов Ярослав",
+          "number": "88",
+          "role": "Защитник",
+          "birth_date": "30.07.2014",
+          "id_fhm": "9922"
+        },
+        {
+          "name": "Волвенкин Андрей",
+          "number": "69",
+          "role": "Защитник",
+          "birth_date": "30.09.2014",
+          "id_fhm": "8963"
+        },
+        {
+          "name": "Волчков Степан",
+          "number": "86",
+          "role": "Защитник",
+          "birth_date": "07.05.2014",
+          "id_fhm": "8964"
+        },
+        {
+          "name": "Гончаров Марк",
+          "number": "7",
+          "role": "Нападающий",
+          "birth_date": "30.09.2014",
+          "id_fhm": "9923"
+        },
+        {
+          "name": "Калиш Иван",
+          "number": "54",
+          "role": "Нападающий",
+          "birth_date": "15.06.2014",
+          "id_fhm": "6971"
+        },
+        {
+          "name": "Карнаухов Иван",
+          "number": "23",
+          "role": "Нападающий",
+          "birth_date": "23.07.2014",
+          "id_fhm": "4157"
+        },
+        {
+          "name": "Крикунов Марк",
+          "number": "97",
+          "role": "Защитник",
+          "birth_date": "10.01.2014",
+          "id_fhm": "12121"
+        },
+        {
+          "name": "Левчук Алексей",
+          "number": "28",
+          "role": "Нападающий",
+          "birth_date": "10.02.2014",
+          "id_fhm": "5518",
+          "lineup_group": "1-я тройка",
+          "lineup_position": "Правый"
+        },
+        {
+          "name": "Митин Павел",
+          "number": "3",
+          "role": "Защитник",
+          "birth_date": "03.12.2014",
+          "id_fhm": "6972",
+          "lineup_group": "1-я пара",
+          "lineup_position": "Левый"
+        },
+        {
+          "name": "Нурмухаметов Дамир",
+          "number": "16",
+          "role": "Защитник",
+          "birth_date": "14.10.2014",
+          "id_fhm": "2553"
+        },
+        {
+          "name": "Орлов Андрей",
+          "number": "70",
+          "role": "Нападающий",
+          "birth_date": "18.07.2014",
+          "id_fhm": "6977"
+        },
+        {
+          "name": "Пимкин Артём",
+          "number": "99",
+          "role": "Защитник",
+          "birth_date": "04.01.2014",
+          "id_fhm": "6978"
+        },
+        {
+          "name": "Попков Олег",
+          "number": "98",
+          "role": "Нападающий",
+          "birth_date": "03.10.2014",
+          "id_fhm": "6979"
+        },
+        {
+          "name": "Рахматуллин Тамерлан",
+          "number": "13",
+          "role": "Защитник",
+          "birth_date": "19.07.2014",
+          "id_fhm": "6980",
+          "lineup_group": "1-я пара",
+          "lineup_position": "Правый"
+        },
+        {
+          "name": "Силин Леонид",
+          "number": "91",
+          "role": "Нападающий",
+          "birth_date": "25.06.2014",
+          "id_fhm": "6982"
+        },
+        {
+          "name": "Филаретов Кирилл",
+          "number": "47",
+          "role": "Нападающий",
+          "birth_date": "10.08.2014",
+          "id_fhm": "6983"
+        },
+        {
+          "name": "Флигинских Владислав",
+          "number": "17",
+          "role": "Нападающий",
+          "birth_date": "25.01.2014",
+          "id_fhm": "9509"
+        },
+        {
+          "name": "Шинкин Дмитрий",
+          "number": "10",
+          "role": "Нападающий",
+          "birth_date": "15.08.2014",
+          "id_fhm": "6984",
+          "lineup_group": "1-я тройка",
+          "lineup_position": "Левый"
+        },
+        {
+          "name": "Широков Тимофей",
+          "number": "96",
+          "role": "Нападающий",
+          "birth_date": "12.09.2014",
+          "id_fhm": "6985"
+        }
+      ],
+      "s-team": [
+        {
+          "name": "Лукианов Руслан",
+          "number": "1",
+          "role": "Вратарь",
+          "birth_date": "10.02.2014",
+          "id_fhm": "3199"
+        },
+        {
+          "name": "Речиц Михаил",
+          "number": "20",
+          "role": "Вратарь",
+          "birth_date": "29.09.2014",
+          "id_fhm": "3202"
+        },
+        {
+          "name": "Ахмеров Айрат",
+          "number": "25",
+          "role": "Защитник",
+          "birth_date": "16.05.2014",
+          "id_fhm": "3183"
+        },
+        {
+          "name": "Богданов Марк",
+          "number": "9",
+          "role": "Нападающий",
+          "birth_date": "18.04.2014",
+          "id_fhm": "3184"
+        },
+        {
+          "name": "Воробьев Евгений",
+          "number": "17",
+          "role": "Нападающий",
+          "birth_date": "20.07.2014",
+          "id_fhm": "8612"
+        },
+        {
+          "name": "Ежелев Дмитрий",
+          "number": "14",
+          "role": "Нападающий",
+          "birth_date": "05.06.2014",
+          "id_fhm": "3210"
+        },
+        {
+          "name": "Конаков Артемий",
+          "number": "10",
+          "role": "Нападающий",
+          "birth_date": "26.02.2014",
+          "id_fhm": "11784"
+        },
+        {
+          "name": "Кондаков Владимир",
+          "number": "3",
+          "role": "Защитник",
+          "birth_date": "10.11.2014",
+          "id_fhm": "3191"
+        },
+        {
+          "name": "Коровин Мирон",
+          "number": "4",
+          "role": "Защитник",
+          "birth_date": "06.01.2014",
+          "id_fhm": "8613"
+        },
+        {
+          "name": "Коротков Александр",
+          "number": "2",
+          "role": "Защитник",
+          "birth_date": "09.02.2014",
+          "id_fhm": "8614"
+        },
+        {
+          "name": "Корсанин Семен",
+          "number": "24",
+          "role": "Нападающий",
+          "birth_date": "21.01.2014",
+          "id_fhm": "3192"
+        },
+        {
+          "name": "Кулаков Данила",
+          "number": "27",
+          "role": "Защитник",
+          "birth_date": "20.11.2014",
+          "id_fhm": "3194"
+        },
+        {
+          "name": "Куц Валерий",
+          "number": "8",
+          "role": "Нападающий",
+          "birth_date": "06.11.2014",
+          "id_fhm": "3195"
+        },
+        {
+          "name": "Леонов Ярослав",
+          "number": "21",
+          "role": "Нападающий",
+          "birth_date": "21.05.2014",
+          "id_fhm": "3198"
+        },
+        {
+          "name": "Николаев Даниил",
+          "number": "5",
+          "role": "Защитник",
+          "birth_date": "17.09.2014",
+          "id_fhm": "3200"
+        },
+        {
+          "name": "Новиков Глеб",
+          "number": "16",
+          "role": "Нападающий",
+          "birth_date": "19.03.2014",
+          "id_fhm": "6457"
+        },
+        {
+          "name": "Новиков Матвей",
+          "number": "26",
+          "role": "Нападающий",
+          "birth_date": "19.03.2014",
+          "id_fhm": "6458"
+        },
+        {
+          "name": "Пересадин Егор",
+          "number": "7",
+          "role": "Нападающий",
+          "birth_date": "24.04.2014",
+          "id_fhm": "3168"
+        },
+        {
+          "name": "Сидоров Глеб",
+          "number": "19",
+          "role": "Защитник",
+          "birth_date": "19.10.2014",
+          "id_fhm": "6462"
+        },
+        {
+          "name": "Федоров Егор",
+          "number": "22",
+          "role": "Нападающий",
+          "birth_date": "22.05.2014",
+          "id_fhm": "3206"
+        },
+        {
+          "name": "Хайруллин Камиль",
+          "number": "11",
+          "role": "Нападающий",
+          "birth_date": "22.10.2014",
+          "id_fhm": "3208"
+        }
+      ]
+    },
+    "events": [
+      {
+        "type": "goal",
+        "team": "s-team",
+        "player_name": "Ежелев Д.",
+        "player_id_fhm": "3210",
+        "f-pass": "N/A",
+        "f-pass_id_fhm": "N/A",
+        "s-pass": "N/A",
+        "s-pass_id_fhm": "N/A",
+        "time_sec": 283
+      },
+      {
+        "type": "penalty",
+        "team": "f-team",
+        "player_name": "Пимкин А.",
+        "player_id_fhm": "6978",
+        "start_time_sec": 367,
+        "end_time_sec": 487,
+        "violation_type": "Задержка соперника"
+      },
+      {
+        "type": "penalty",
+        "team": "s-team",
+        "player_name": "Воробьев Е.",
+        "player_id_fhm": "8612",
+        "start_time_sec": 555,
+        "end_time_sec": 675,
+        "violation_type": "Подножка"
+      },
+      {
+        "type": "goal",
+        "team": "s-team",
+        "player_name": "Конаков А.",
+        "player_id_fhm": "11784",
+        "f-pass": "Пересадин Е.",
+        "f-pass_id_fhm": "3168",
+        "s-pass": "N/A",
+        "s-pass_id_fhm": "N/A",
+        "time_sec": 582
+      },
+      {
+        "type": "goal",
+        "team": "f-team",
+        "player_name": "Гончаров М.",
+        "player_id_fhm": "9923",
+        "f-pass": "Силин Л.",
+        "f-pass_id_fhm": "6982",
+        "s-pass": "N/A",
+        "s-pass_id_fhm": "N/A",
+        "time_sec": 790
+      },
+      {
+        "type": "goal",
+        "team": "s-team",
+        "player_name": "Куц В.",
+        "player_id_fhm": "3195",
+        "f-pass": "N/A",
+        "f-pass_id_fhm": "N/A",
+        "s-pass": "N/A",
+        "s-pass_id_fhm": "N/A",
+        "time_sec": 1530
+      },
+      {
+        "type": "penalty",
+        "team": "s-team",
+        "player_name": "Новиков Г.",
+        "player_id_fhm": "6457",
+        "start_time_sec": 1866,
+        "end_time_sec": 1866,
+        "violation_type": "Задержка клюшкой"
+      },
+      {
+        "type": "goal",
+        "team": "f-team",
+        "player_name": "Арнаут И.",
+        "player_id_fhm": "8962",
+        "f-pass": "N/A",
+        "f-pass_id_fhm": "N/A",
+        "s-pass": "N/A",
+        "s-pass_id_fhm": "N/A",
+        "time_sec": 1866
+      },
+      {
+        "type": "penalty",
+        "team": "s-team",
+        "player_name": "Речиц М.",
+        "player_id_fhm": "3202",
+        "start_time_sec": 1866,
+        "end_time_sec": 1951,
+        "violation_type": "Бросок клюшки"
+      },
+      {
+        "type": "goal",
+        "team": "f-team",
+        "player_name": "Флигинских В.",
+        "player_id_fhm": "9509",
+        "f-pass": "Волвенкин А.",
+        "f-pass_id_fhm": "8963",
+        "s-pass": "N/A",
+        "s-pass_id_fhm": "N/A",
+        "time_sec": 1951
+      },
+      {
+        "type": "penalty",
+        "team": "f-team",
+        "player_name": "Нурмухаметов Д.",
+        "player_id_fhm": "2553",
+        "start_time_sec": 2001,
+        "end_time_sec": 2121,
+        "violation_type": "Блокировка"
+      },
+      {
+        "type": "penalty",
+        "team": "s-team",
+        "player_name": "Николаев Д.",
+        "player_id_fhm": "3200",
+        "start_time_sec": 2067,
+        "end_time_sec": 2187,
+        "violation_type": "Подножка"
+      },
+      {
+        "type": "goal",
+        "team": "f-team",
+        "player_name": "Калиш И.",
+        "player_id_fhm": "6971",
+        "f-pass": "Силин Л.",
+        "f-pass_id_fhm": "6982",
+        "s-pass": "Орлов А.",
+        "s-pass_id_fhm": "6977",
+        "time_sec": 2263
+      },
+      {
+        "type": "penalty",
+        "team": "f-team",
+        "player_name": "Волвенкин А.",
+        "player_id_fhm": "8963",
+        "start_time_sec": 2448,
+        "end_time_sec": 2568,
+        "violation_type": "Подножка"
+      },
+      {
+        "type": "penalty",
+        "team": "f-team",
+        "player_name": "Волчков С.",
+        "player_id_fhm": "8964",
+        "start_time_sec": 2533,
+        "end_time_sec": 2653,
+        "violation_type": "Задержка клюшкой"
+      },
+      {
+        "type": "penalty",
+        "team": "f-team",
+        "player_name": "Нурмухаметов Д.",
+        "player_id_fhm": "2553",
+        "start_time_sec": 2923,
+        "end_time_sec": 3043,
+        "violation_type": "Задержка клюшкой"
+      },
+      {
+        "type": "goal",
+        "team": "f-team",
+        "player_name": "Арнаут И.",
+        "player_id_fhm": "8962",
+        "f-pass": "Шинкин Д.",
+        "f-pass_id_fhm": "6984",
+        "s-pass": "N/A",
+        "s-pass_id_fhm": "N/A",
+        "time_sec": 3074
+      },
+      {
+        "type": "goal",
+        "team": "f-team",
+        "player_name": "Шинкин Д.",
+        "player_id_fhm": "6984",
+        "f-pass": "N/A",
+        "f-pass_id_fhm": "N/A",
+        "s-pass": "N/A",
+        "s-pass_id_fhm": "N/A",
+        "time_sec": 3206
+      },
+      {
+        "type": "goal",
+        "team": "f-team",
+        "player_name": "Калиш И.",
+        "player_id_fhm": "6971",
+        "f-pass": "Силин Л.",
+        "f-pass_id_fhm": "6982",
+        "s-pass": "N/A",
+        "s-pass_id_fhm": "N/A",
+        "time_sec": 3310
+      },
+      {
+        "type": "penalty",
+        "team": "f-team",
+        "player_name": "Волчков С.",
+        "player_id_fhm": "8964",
+        "start_time_sec": 3401,
+        "end_time_sec": 3521,
+        "violation_type": "Толчок клюшкой"
+      }
+    ],
+    "tournament_name": "Первенство г. Москвы по хоккею 2014 г.р. 25/26",
+    "tour_number": "29",
+    "match_date": "2026-03-19",
+    "match_time": "14:30:00",
+    "venue_city": "Москва",
+    "venue_arena": "ЛЦ Созвездие",
+    "referees": [
+      "Фетисов В.В.",
+      "Юмашев К.С.",
+      "Юмашев Н.С."
+    ]
   }
 }

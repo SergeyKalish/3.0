@@ -719,6 +719,36 @@ class PlayerShiftMapReport:
         print(f"Всего сгенерировано листов: {len(images)}")
         return images
 
+    def generate_single(self, report_data: ReportData, mode: str, period_index: int = 0) -> Image.Image:
+        """
+        Генерирует один лист отчёта.
+        
+        :param report_data: данные отчёта
+        :param mode: 'game_on_sheet' для листа 'Матч', 'period_on_sheet' для периода
+        :param period_index: индекс периода (0, 1, 2...) для mode='period_on_sheet'
+        :return: изображение листа отчёта
+        """
+        total_pages = 1 + len(report_data.segments_info)
+        
+        if mode == 'game_on_sheet':
+            page_num = 1
+            return self._generate_sheet(
+                report_data,
+                mode='game_on_sheet',
+                period_index=0,
+                page_num=page_num,
+                total_pages=total_pages
+            )
+        else:
+            page_num = period_index + 2
+            return self._generate_sheet(
+                report_data,
+                mode='period_on_sheet',
+                period_index=period_index,
+                page_num=page_num,
+                total_pages=total_pages
+            )
+
     def _generate_sheet(self, report_data: ReportData, mode: str,
                         period_index: int = 0, page_num: int = 1,
                         total_pages: int = 1) -> Image.Image:
