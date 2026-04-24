@@ -3,9 +3,9 @@
 import io
 from PyQt5.QtWidgets import (
     QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QPushButton,
-    QLabel, QMessageBox, QSizePolicy
+    QLabel, QMessageBox, QSizePolicy, QCheckBox
 )
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QPixmap
 
 
@@ -15,6 +15,8 @@ class ReportViewerWindow(QMainWindow):
     Изображение всегда вписано в доступную область окна с сохранением пропорций.
     Поддерживает обновление отчёта через callback.
     """
+
+    closing = pyqtSignal()
 
     def __init__(self, pil_image, title="Отчёт", refresh_callback=None, parent=None):
         super().__init__(parent)
@@ -35,6 +37,10 @@ class ReportViewerWindow(QMainWindow):
         self.refresh_button = QPushButton("Обновить")
         self.refresh_button.clicked.connect(self.on_refresh_clicked)
         button_layout.addWidget(self.refresh_button)
+
+        self.auto_refresh_checkbox = QCheckBox("Автообновление")
+        button_layout.addWidget(self.auto_refresh_checkbox)
+
         button_layout.addStretch()
         layout.addLayout(button_layout)
 
@@ -92,6 +98,10 @@ class ReportViewerWindow(QMainWindow):
         except Exception as e:
             self.image_label.setText(f"Ошибка отображения изображения:\n{str(e)}")
             print(f"[DEBUG ReportViewerWindow] Ошибка отображения: {e}")
+
+    def closeEvent(self, event):
+        self.closing.emit()
+        super().closeEvent(event)
 
     def on_refresh_clicked(self):
         """Обработчик нажатия кнопки 'Обновить'."""

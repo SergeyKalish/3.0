@@ -32,6 +32,8 @@ class MainWindow(QMainWindow):
         # self.setGeometry(100, 100, 1600, 900) # Убираем фиксированный размер окна
         # Хранение пути проекта
         self.project_file_path: str = ""
+        # Ссылка на открытое окно просмотра отчёта №1
+        self._report_viewer_window = None
         # Недавние проекты
         self.recent_projects: list = []
         self.max_recent_projects = 5
@@ -163,6 +165,7 @@ class MainWindow(QMainWindow):
 
             # --- Сохранение проекта ---
             save_project_to_file(self.project, self.project_file_path)
+            self._try_auto_refresh_report()
 
             # --- Обновляем таблицу событий в R1 ---
             self.protocol_validation_widget.set_events(self.project.match.events)
@@ -634,6 +637,7 @@ class MainWindow(QMainWindow):
                 try:
                     #from utils.project_utils import save_project_to_file
                     save_project_to_file(self.project, self.project_file_path)
+                    self._try_auto_refresh_report()
                     self.status_label.setText(f"Смена ({numbers_str}) добавлена в {global_time:.1f}s. Проект сохранён.")
                 except Exception as e:
                     QMessageBox.warning(self, "Предупреждение", f"Не удалось сохранить проект: {str(e)}")
@@ -761,6 +765,7 @@ class MainWindow(QMainWindow):
         if self.project_file_path:
             try:
                 save_project_to_file(self.project, self.project_file_path)
+                self._try_auto_refresh_report()
                 self.status_label.setText(f"{status_detail} в {global_time:.1f}s. Проект сохранён.")
             except Exception as e:
                 QMessageBox.warning(self, "Предупреждение", f"Не удалось сохранить проект: {str(e)}")
@@ -857,6 +862,7 @@ class MainWindow(QMainWindow):
         # Сохранение проекта в указанный файл
         try:
             save_project_to_file(self.project, self.project_file_path)
+            self._try_auto_refresh_report()
             self.status_label.setText(f"Проект сохранён: {os.path.basename(self.project_file_path)}")
         except Exception as e:
             QMessageBox.critical(self, "Ошибка", f"Не удалось сохранить проект:\n{str(e)}")
@@ -989,6 +995,7 @@ class MainWindow(QMainWindow):
         # --- Конец нового ---
         try:
             save_project_to_file(self.project, self.project_file_path)
+            self._try_auto_refresh_report()
             self.status_label.setText(f"Проект сохранён: {os.path.basename(self.project_file_path)}")
             # При сохранении по новому пути, добавляем его в недавние
             self.add_to_recent_projects(self.project_file_path)
@@ -1061,6 +1068,7 @@ class MainWindow(QMainWindow):
         if self.project_file_path:
             try:
                 save_project_to_file(self.project, self.project_file_path)
+                self._try_auto_refresh_report()
                 # Сообщение об авто-сохранении убрано, чтобы не замещать более информативные сообщения
             except Exception as e:
                 QMessageBox.warning(self, "Предупреждение", f"Не удалось сохранить проект после SMART: {str(e)}")
@@ -1099,6 +1107,7 @@ class MainWindow(QMainWindow):
             try:
                 save_project_to_file(self.project, self.project_file_path)
                 self.status_label.setText("Проект сохранён (из LabelsTreeWidget).")
+                self._try_auto_refresh_report()
             except Exception as e:
                 QMessageBox.warning(self, "Предупреждение", f"Не удалось сохранить проект из LabelsTreeWidget: {str(e)}")
         else:
@@ -1106,6 +1115,19 @@ class MainWindow(QMainWindow):
             # Пока просто покажем предупреждение.
             self.status_label.setText("Нет пути для сохранения из LabelsTreeWidget.")
     # --- Конец нового метода ---
+
+    def _on_report_viewer_closed(self):
+        """Сбрасывает ссылку на окно отчёта при его закрытии."""
+        self._report_viewer_window = None
+
+    def _try_auto_refresh_report(self):
+        """Обновляет окно отчёта №1, если оно открыто и включено автообновление."""
+        if self._report_viewer_window is not None:
+            try:
+                if self._report_viewer_window.isVisible() and self._report_viewer_window.auto_refresh_checkbox.isChecked():
+                    self._report_viewer_window.on_refresh_clicked()
+            except Exception as e:
+                print(f"[DEBUG] Ошибка автообновления отчёта: {e}")
 
     # --- Новый метод для выбора диапазона в selector и переключения плеера ---
     def _select_range_in_selector_and_playback(self, range_name: str):
@@ -1221,7 +1243,9 @@ class MainWindow(QMainWindow):
                 refresh_callback=lambda: self._generate_report_1(current_mode_text),
                 parent=self
             )
+            viewer.closing.connect(self._on_report_viewer_closed)
             viewer.show()
+            self._report_viewer_window = viewer
             self.status_label.setText(f"Отчёт №1 сгенерирован: {window_title}")
 
         except Exception as e:

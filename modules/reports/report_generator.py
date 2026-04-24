@@ -2985,19 +2985,25 @@ class PlayerShiftMapReport:
             if not player_number and 'player_number' in goal.context:
                 player_number = goal.context.get('player_number', '')
 
-            author_text = player_name  # Только имя без номера
+            prefix = ""
             if goal.context.get("is_penalty_shot"):
-                author_text += " [Б]"
+                prefix = "[Б] "
+
+            author_text = prefix + player_name  # Только имя (с префиксом) без номера
 
             text_bbox = draw.textbbox((0, 0), author_text, font=font)
             text_w = text_bbox[2] - text_bbox[0]
             text_h = text_bbox[3] - text_bbox[1]
 
+            prefix_w = self._measure_text_width(prefix, styles.GOAL_AUTHOR_FONT_SIZE_PT) if prefix else 0
+
             goals_with_data.append({
                 'goal': goal,
                 'base_x': x_pos,
                 'peg_y': authors_y - styles.GOALS_SCALE_HEIGHT_PX,
-                'text': author_text,
+                'text': player_name,
+                'prefix': prefix,
+                'prefix_w': prefix_w,
                 'text_w': text_w,
                 'text_h': text_h,
                 'color': color,
@@ -3057,7 +3063,9 @@ class PlayerShiftMapReport:
                 self._draw_dashed_line(draw, start_x, start_y, end_x, end_y, 
                                     LEADER_LINE_COLOR, LEADER_LINE_DASH, 1)
 
-            draw.text((text_x, text_y), gwd['text'], fill=gwd['color'], font=font)
+            if gwd['prefix']:
+                draw.text((text_x, text_y), gwd['prefix'], fill="#000000", font=font)
+            draw.text((text_x + gwd['prefix_w'], text_y), gwd['text'], fill=gwd['color'], font=font)
 
     def _draw_dashed_line(self, draw: ImageDraw, x1: int, y1: int, x2: int, y2: int,
                         color: str, dash: tuple, width: int):
