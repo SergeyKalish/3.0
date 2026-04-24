@@ -134,10 +134,11 @@ TABLE_X = MARGIN_LEFT + (CONTENT_W - TABLE_TOTAL_WIDTH) // 2
 # =============================================================================
 LEGEND_ITEMS = [
     ("Д/Г", "Домашняя / Гостевая игра"),
-    ("В/П", "Победа / Поражение"),
+    ("В/П", "Выиграна / Проиграна"),
     ("СМ", "Количество смен в матче"),
     ("СрСм", "Среднее время смены (сек)"),
     ("ВрМ", "Время на льду в матче (ММ:СС)"),
+    ("PPG", "Среднее количество очков за матч"),
     ("Б", "Время в большинстве (ММ:СС)"),
     ("М", "Время в меньшинстве (ММ:СС)"),
     ("Г", "Голы"),
@@ -338,13 +339,50 @@ class PlayerSeasonReportGenerator:
     def _draw_table(self, img: Image.Image, draw: ImageDraw,
                     summary: PlayerSeasonSummary, table_zone_top: int, season_name: str):
         TOURNAMENT_NAME_HEIGHT = 50
+        LOGO_FHM_PATH = os.path.join("Data", "team_logos", "fhm.png")
+        LOGO_SZ_PATH = os.path.join("Data", "team_logos", "301.png")
 
-        # --- НАЗВАНИЕ ТУРНИРА ---
+        # --- НАЗВАНИЕ ТУРНИРА (прижато к правой границе таблицы, жирный) ---
         font_tournament = self._get_font(LEGEND_TITLE_FONT_SIZE_PT, bold=True)
         tw, th = self._measure_text(season_name, LEGEND_TITLE_FONT_SIZE_PT, bold=True)
-        tx = TABLE_X + (TABLE_TOTAL_WIDTH - tw) // 2
+        tx = TABLE_X + TABLE_TOTAL_WIDTH - tw
         ty = table_zone_top + 10
-        draw.text((tx, ty), season_name, fill="#000000", font=font_tournament)
+        draw.text((tx, ty), season_name, fill="#000000", font=font_tournament,
+                  stroke_width=1, stroke_fill="#000000")
+
+        # --- ЛОГОТИП FHM (оригинальный размер, над названием, прижат к правому краю) ---
+        logo_fhm = None
+        if os.path.exists(LOGO_FHM_PATH):
+            try:
+                logo_fhm = Image.open(LOGO_FHM_PATH).convert("RGBA")
+                logo_fhm_w, logo_fhm_h = logo_fhm.size
+                logo_fhm_x = TABLE_X + TABLE_TOTAL_WIDTH - logo_fhm_w
+                logo_fhm_y = ty - logo_fhm_h - 10
+                if logo_fhm_y < 0:
+                    logo_fhm_y = 0
+                img.paste(logo_fhm, (logo_fhm_x, logo_fhm_y), logo_fhm)
+            except Exception:
+                pass
+
+        # --- ЛОГОТИП СОЗВЕЗДИЯ (выравнивание видимой высоты с FHM, левее FHM) ---
+        if os.path.exists(LOGO_SZ_PATH) and logo_fhm is not None:
+            try:
+                logo_sz = Image.open(LOGO_SZ_PATH).convert("RGBA")
+                # Обрезаем прозрачные поля и выравниваем видимую высоту
+                fhm_bbox = logo_fhm.getbbox()
+                sz_bbox = logo_sz.getbbox()
+                if fhm_bbox and sz_bbox:
+                    fhm_visible_h = fhm_bbox[3] - fhm_bbox[1]
+                    sz_visible_h = sz_bbox[3] - sz_bbox[1]
+                    ratio = fhm_visible_h / sz_visible_h
+                    new_w = int((sz_bbox[2] - sz_bbox[0]) * ratio)
+                    new_h = fhm_visible_h
+                    logo_sz = logo_sz.crop(sz_bbox).resize((new_w, new_h), Image.Resampling.LANCZOS)
+                    logo_sz_x = logo_fhm_x - new_w - 20
+                    logo_sz_y = logo_fhm_y + (logo_fhm_h - new_h) // 2
+                    img.paste(logo_sz, (logo_sz_x, logo_sz_y), logo_sz)
+            except Exception:
+                pass
 
         table_top = ty + th + 20
         num_matches = len(summary.matches)
@@ -436,9 +474,11 @@ class PlayerSeasonReportGenerator:
         wins = summary.total_wins()
         losses = summary.total_losses()
         avg_sec = summary.avg_shift_seconds()
+        num_matches = len(summary.matches)
+        ppg = round(summary.total_points() / num_matches, 2) if num_matches else 0.0
 
         values = [
-            "",                         # № п/п
+            "",                         # № п/п (объединяется с 1 и 2 ниже)
             "",                         # № тура
             "",                         # logo
             "ИТОГО",                    # Соперник
@@ -459,7 +499,25 @@ class PlayerSeasonReportGenerator:
             self._fmt_pm_total(summary.total_on_ice_diff(), is_total=True),
         ]
 
+        # --- Объединённая ячейка PPG (колонки 0–2) ---
+        ppg_x = x_offsets[0]
+        ppg_w = TABLE_COL_WIDTHS[0] + TABLE_COL_WIDTHS[1] + TABLE_COL_WIDTHS[2]
+        draw.rectangle([ppg_x, y, ppg_x + ppg_w, y + h], fill=TOTAL_ROW_BG, outline=TABLE_GRID_COLOR, width=1)
+
+        font_bold = self._get_font(TABLE_FONT_SIZE_PT, bold=True)
+        label = "PPG"
+        eq_val = f" = {ppg:.2f}"
+        lw, lh = self._measure_text(label, TABLE_FONT_SIZE_PT, bold=True)
+        ew, _ = self._measure_text(eq_val, TABLE_FONT_SIZE_PT, bold=True)
+        total_tw = lw + ew
+        tx = ppg_x + (ppg_w - total_tw) // 2
+        ty_text = y + (h - lh) // 2
+        draw.text((tx, ty_text), label, fill=TABLE_HEADER_TEXT_COLOR, font=font_bold)
+        draw.text((tx + lw, ty_text), eq_val, fill=TABLE_TEXT_COLOR, font=font_bold)
+
         for i, val in enumerate(values):
+            if i in (0, 1, 2):
+                continue
             x = x_offsets[i]
             w = TABLE_COL_WIDTHS[i]
             align = TABLE_COL_ALIGNS[i]
@@ -542,28 +600,24 @@ class PlayerSeasonReportGenerator:
     # ЛЕГЕНДА
     # -------------------------------------------------------------------------
     def _draw_legend(self, draw: ImageDraw, footer_zone_top: int):
-        font_title = self._get_font(LEGEND_TITLE_FONT_SIZE_PT, bold=True)
         font_text = self._get_font(LEGEND_FONT_SIZE_PT)
 
-        y = footer_zone_top + 10
-
-        title = "Обозначения таблицы:"
-        tw, th = self._measure_text(title, LEGEND_TITLE_FONT_SIZE_PT, bold=True)
-        draw.text((CONTENT_X, y), title, fill="#000000", font=font_title)
-        y += th + 10
+        y = footer_zone_top + 15
 
         avail_w = CONTENT_W - 40
-        col1_w = int(avail_w * 0.28)
+        col1_w = int(avail_w * 0.30)
         col2_w = int(avail_w * 0.28)
         col3_w = avail_w - col1_w - col2_w
         col_xs = [CONTENT_X, CONTENT_X + col1_w + 20, CONTENT_X + col1_w + 20 + col2_w + 20]
         col_ws = [col1_w, col2_w, col3_w]
         row_h = 40
 
+        col_counts = [6, 5, 5]
+        start_idx = 0
         for col_idx in range(3):
             cy = y
-            start_idx = col_idx * 5
-            end_idx = start_idx + 5
+            count = col_counts[col_idx]
+            end_idx = start_idx + count
             for item_idx in range(start_idx, end_idx):
                 abbr, desc = LEGEND_ITEMS[item_idx]
                 abbr_text = f"{abbr}:"
@@ -573,3 +627,4 @@ class PlayerSeasonReportGenerator:
                 abbr_w, _ = self._measure_text(abbr_text, LEGEND_FONT_SIZE_PT)
                 draw.text((ix + abbr_w + 5, cy), desc, fill="#333333", font=font_text)
                 cy += row_h
+            start_idx = end_idx
