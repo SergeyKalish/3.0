@@ -1,7 +1,7 @@
 # ui/labels_tree_widget.py
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTreeWidget, QTreeWidgetItem, QHeaderView, QMenu, QAction, QMessageBox
 from PyQt5.QtCore import pyqtSignal, Qt
-from PyQt5.QtGui import QKeySequence # Импортируем QKeySequence для горячей клавиши
+from PyQt5.QtGui import QKeySequence, QColor, QBrush # Импортируем QKeySequence для горячей клавиши, QColor/QBrush для подсветки
 from model.project import GenericLabel, CalculatedRange # Импортируем модель метки и диапазона
 from typing import List, Set # Импортируем List и Set
 
@@ -165,6 +165,13 @@ class LabelsTreeWidget(QWidget):
         self._video_player_ref = video_player_widget
         self._save_callback = save_callback
         self._rosters_ref = rosters_ref
+
+        # --- Подсветка меток с одинаковым временем в одной категории ---
+        from collections import defaultdict
+        time_counts = defaultdict(int)
+        for label in generic_labels:
+            time_counts[(label.label_type, label.global_time)] += 1
+        # --- Конец подсветки ---
 
         # --- Новое: Сохранить состояние развёрнутости перед очисткой ---
         self._save_expansion_state()
@@ -484,6 +491,12 @@ class LabelsTreeWidget(QWidget):
                                         # --- Конец нового ---
                                         # Сохраняем индекс метки в списке как user data в первом столбце дочернего элемента
                                         child_item.setData(4, 0, id(label)) # Используем id объекта как уникальный ключ
+                                        # --- Подсветка дублирующегося времени ---
+                                        if time_counts.get((label.label_type, label.global_time), 0) > 1:
+                                            pink_brush = QBrush(QColor(255, 192, 203))
+                                            for col in range(4):
+                                                child_item.setBackground(col, pink_brush)
+                                        # --- Конец подсветки ---
                                     else:
                                          # Логирование или игнорирование, если узел не найден (маловероятно)
                                         print(f"WARNING: Parent item {parent_key} not found for label {label.id} with period_name {period_name}")
@@ -519,6 +532,12 @@ class LabelsTreeWidget(QWidget):
                         # --- Конец нового ---
                         # Сохраняем индекс метки в списке как user data в первом столбце дочернего элемента
                         child_item.setData(4, 0, id(label)) # Используем id объекта как уникальный ключ
+                        # --- Подсветка дублирующегося времени ---
+                        if time_counts.get((label.label_type, label.global_time), 0) > 1:
+                            pink_brush = QBrush(QColor(255, 192, 203))
+                            for col in range(4):
+                                child_item.setBackground(col, pink_brush)
+                        # --- Конец подсветки ---
             else:
                 # --- Старая логика для остальных типов (например, "Сегмент", "Гол", "Удаление") ---
                 # Создаём узел для типа метки
@@ -553,6 +572,12 @@ class LabelsTreeWidget(QWidget):
                     # --- Конец нового ---
                     # Сохраняем индекс метки в списке как user data в первом столбце дочернего элемента
                     child_item.setData(4, 0, id(label)) # Используем id объекта как уникальный ключ
+                    # --- Подсветка дублирующегося времени ---
+                    if time_counts.get((label.label_type, label.global_time), 0) > 1:
+                        pink_brush = QBrush(QColor(255, 192, 203))
+                        for col in range(4):
+                            child_item.setBackground(col, pink_brush)
+                    # --- Конец подсветки ---
             # --- Конец новой/старой логики ---
 
 

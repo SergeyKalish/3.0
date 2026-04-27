@@ -1252,10 +1252,10 @@ class MainWindow(QMainWindow):
             viewer = ReportViewerWindow(
                 pil_image=sheet_image,
                 title=window_title,
-                refresh_callback=lambda: self._generate_report_1(current_mode_text),
+                mode_text=current_mode_text,
+                generate_callback=self._generate_report_1,
                 parent=self
             )
-            viewer.closing.connect(self._on_report_viewer_closed)
             viewer.show()
             self._report_viewer_window = viewer
             self.status_label.setText(f"Отчёт №1 сгенерирован: {window_title}")
