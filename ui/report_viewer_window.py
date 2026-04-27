@@ -3,7 +3,7 @@
 import io
 from PyQt5.QtWidgets import (
     QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QPushButton,
-    QLabel, QMessageBox, QSizePolicy, QButtonGroup
+    QLabel, QMessageBox, QSizePolicy, QButtonGroup, QCheckBox
 )
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
@@ -38,6 +38,9 @@ class ReportViewerWindow(QMainWindow):
         self.refresh_button = QPushButton("Обновить")
         self.refresh_button.clicked.connect(self.on_refresh_clicked)
         button_layout.addWidget(self.refresh_button)
+
+        self.auto_refresh_checkbox = QCheckBox("Автообновление")
+        button_layout.addWidget(self.auto_refresh_checkbox)
 
         button_layout.addSpacing(20)
 

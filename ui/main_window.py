@@ -338,6 +338,8 @@ class MainWindow(QMainWindow):
         self.run_smart_button.clicked.connect(self.run_smart_analysis)
         # 6. Сигнал от чекбокса SMART -> обновление состояния
         self.auto_smart_checkbox.stateChanged.connect(self.on_auto_smart_toggled)
+        # 6.1. Сигнал от LabelsTreeWidget об изменении развёрнутости -> сохранение в проект
+        self.labels_tree_widget.expansionStateChanged.connect(self._on_labels_tree_expansion_changed)
         # 7. Сигнал от LabelsTreeWidget о выборе диапазона для воспроизведения -> переключение в плеере
         self.labels_tree_widget.rangeSelectedForPlayback.connect(self._select_range_in_selector_and_playback)
         # 8. Сигнал от кнопки Отчет №1 -> генерация отчёта
@@ -901,6 +903,15 @@ class MainWindow(QMainWindow):
                 if saved_filter_states:
                     self.timeline_widget.set_saved_filter_states(saved_filter_states)
                 # --- Конец нового ---
+                # --- Новое: Загрузка состояния auto_smart_checkbox ---
+                auto_smart = getattr(self.project.match, 'auto_smart_enabled', None)
+                self.auto_smart_checkbox.setChecked(auto_smart if auto_smart is not None else False)
+                # --- Конец нового ---
+                # --- Новое: Загрузка сохранённой развёрнутости LabelsTreeWidget ---
+                saved_expansion_states = getattr(self.project.match, 'labels_tree_expansion_states', None)
+                if saved_expansion_states:
+                    self.labels_tree_widget.set_saved_expansion_states(saved_expansion_states)
+                # --- Конец нового ---
                 # --- Новое: Запуск SMART после загрузки видео ---
                 # Это обновит calculated_ranges, включая "Всё видео", независимо от того, был ли он в старом проекте
                 self.run_smart_analysis()
@@ -964,12 +975,20 @@ class MainWindow(QMainWindow):
     # --- Новый метод для переключения авто-SMART ---
     def on_auto_smart_toggled(self, state):
         """Обработчик изменения состояния auto_smart_checkbox."""
-        if state == Qt.Checked:
+        is_checked = (state == Qt.Checked)
+        if hasattr(self, 'project') and hasattr(self.project, 'match'):
+            self.project.match.auto_smart_enabled = is_checked
+        if is_checked:
             self.status_label.setText("Автоматический вызов SMART включён.")
             # Запускаем SMART при включении, чтобы обновить интерфейс на случай, если метки уже были
             self.run_smart_analysis()
         else:
             self.status_label.setText("Автоматический вызов SMART отключён.")
+
+    def _on_labels_tree_expansion_changed(self, states: dict):
+        """Сохраняет текущие состояния развёрнутости LabelsTreeWidget в проект."""
+        if hasattr(self, 'project') and hasattr(self.project, 'match'):
+            self.project.match.labels_tree_expansion_states = states
     # --- Конец нового метода ---
 
     # --- Новый вспомогательный метод ---

@@ -117,6 +117,10 @@ class Match:
         # --- СОСТОЯНИЯ ФИЛЬТРОВ TIMELINE ---
         timeline_filter_states: Optional[Dict[str, Dict[str, bool]]] = None,
         # ------------------------------------
+        # --- НАСТРОЙКИ UI ---
+        auto_smart_enabled: Optional[bool] = None,
+        labels_tree_expansion_states: Optional[Dict[str, Any]] = None,
+        # --------------------
     ):
                 # --- ОСНОВНЫЕ ПОЛЯ (были пропущены!) ---
         self.generic_labels: List[GenericLabel] = generic_labels or []
@@ -141,6 +145,10 @@ class Match:
         # --- СОСТОЯНИЯ ФИЛЬТРОВ TIMELINE ---
         self.timeline_filter_states: Optional[Dict[str, Dict[str, bool]]] = timeline_filter_states
         # ------------------------------------
+        # --- НАСТРОЙКИ UI ---
+        self.auto_smart_enabled: Optional[bool] = auto_smart_enabled
+        self.labels_tree_expansion_states: Optional[Dict[str, Any]] = labels_tree_expansion_states
+        # --------------------
 
 
     def to_dict(self) -> Dict[str, Any]:
@@ -181,6 +189,10 @@ class Match:
             # --- СОСТОЯНИЯ ФИЛЬТРОВ TIMELINE ---
             "timeline_filter_states": self.timeline_filter_states,
             # ------------------------------------
+            # --- НАСТРОЙКИ UI ---
+            "auto_smart_enabled": self.auto_smart_enabled,
+            "labels_tree_expansion_states": self.labels_tree_expansion_states,
+            # --------------------
         }
 
     @classmethod
@@ -240,6 +252,10 @@ class Match:
             # --- СОСТОЯНИЯ ФИЛЬТРОВ TIMELINE ---
             timeline_filter_states=raw_match_data.get("timeline_filter_states"),
             # ------------------------------------
+            # --- НАСТРОЙКИ UI ---
+            auto_smart_enabled=raw_match_data.get("auto_smart_enabled"),
+            labels_tree_expansion_states=raw_match_data.get("labels_tree_expansion_states"),
+            # --------------------
             )
 
 class Project:

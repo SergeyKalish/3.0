@@ -76,6 +76,8 @@ class LabelsTreeWidget(QWidget):
     rangeSelectedForPlayback = pyqtSignal(str) # Передаёт name диапазона
     # --- Новый сигнал для двойного клика по метке "Смена" ---
     shiftLabelDoubleClicked = pyqtSignal(dict, float) # Передаёт context и global_time метки "Смена"
+    # --- Новый сигнал для изменения состояния развёрнутости ---
+    expansionStateChanged = pyqtSignal(dict)
     # ---
 
     def __init__(self):
@@ -146,8 +148,17 @@ class LabelsTreeWidget(QWidget):
         self._expanded_periodic_items: Set[str] = set()
         # --- Конец нового ---
 
+        # --- Новое: Сохранённые состояния развёрнутости из проекта ---
+        self._saved_expansion_states: Optional[dict] = None
+        # --- Конец нового ---
+
         # --- Новое: Атрибут для хранения ссылок на статические узлы ---
         self._periodic_parent_items = {}
+        # --- Конец нового ---
+
+        # --- Новое: Подключение сигналов развёрнутости ---
+        self.labels_tree.itemExpanded.connect(self._on_expansion_changed)
+        self.labels_tree.itemCollapsed.connect(self._on_expansion_changed)
         # --- Конец нового ---
 
 
@@ -585,6 +596,22 @@ class LabelsTreeWidget(QWidget):
         self._restore_expansion_state()
         # --- Конец нового ---
 
+    def get_expansion_states(self) -> dict:
+        """Возвращает текущие состояния развёрнутости узлов дерева."""
+        return {
+            "parent_items": list(self._expanded_parent_items),
+            "periodic_items": list(self._expanded_periodic_items),
+        }
+
+    def set_saved_expansion_states(self, states: Optional[dict]):
+        """Устанавливает состояния развёрнутости из проекта для применения при обновлении дерева."""
+        self._saved_expansion_states = states
+
+    def _on_expansion_changed(self, item):
+        """Обработчик изменения развёрнутости узла."""
+        self._save_expansion_state()
+        self.expansionStateChanged.emit(self.get_expansion_states())
+
     # --- Новые методы для сохранения и восстановления состояния развёрнутости ---
     def _save_expansion_state(self):
         """Сохраняет текущее состояние развёрнутости узлов."""
@@ -610,7 +637,28 @@ class LabelsTreeWidget(QWidget):
 
     def _restore_expansion_state(self):
         """Восстанавливает состояние развёрнутости узлов."""
-        # Проходим по корневым элементам и восстанавливаем их состояние
+        # Применяем сохранённые состояния из проекта, если они есть (приоритетнее текущих)
+        if self._saved_expansion_states is not None:
+            saved_parent_items = set(self._saved_expansion_states.get("parent_items", []))
+            saved_periodic_items = set(self._saved_expansion_states.get("periodic_items", []))
+
+            for i in range(self.labels_tree.topLevelItemCount()):
+                parent_item = self.labels_tree.topLevelItem(i)
+                if parent_item:
+                    parent_text = parent_item.text(0)
+                    parent_item.setExpanded(parent_text in saved_parent_items)
+
+                    for j in range(parent_item.childCount()):
+                        child_item = parent_item.child(j)
+                        if child_item:
+                            child_text = child_item.text(0)
+                            child_item.setExpanded(child_text in saved_periodic_items)
+
+            # Сбрасываем, чтобы не применять повторно при следующих обновлениях внутри сессии
+            self._saved_expansion_states = None
+            return
+
+        # Стандартное восстановление из текущей сессии
         for i in range(self.labels_tree.topLevelItemCount()):
             parent_item = self.labels_tree.topLevelItem(i)
             if parent_item:
