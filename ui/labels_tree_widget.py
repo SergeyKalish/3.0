@@ -74,6 +74,8 @@ class LabelsTreeWidget(QWidget):
     labelSelected = pyqtSignal(float) # Передаёт global_time метки
     # --- Новый сигнал для выбора диапазона ---
     rangeSelectedForPlayback = pyqtSignal(str) # Передаёт name диапазона
+    # --- Новый сигнал для двойного клика по метке "Смена" ---
+    shiftLabelDoubleClicked = pyqtSignal(dict, float) # Передаёт context и global_time метки "Смена"
     # ---
 
     def __init__(self):
@@ -603,6 +605,7 @@ class LabelsTreeWidget(QWidget):
         """
         Обработчик двойного клика по элементу дерева.
         Эмитирует сигнал labelSelected с global_time метки или rangeSelectedForPlayback с name диапазона.
+        Для меток "Смена" дополнительно эмитирует shiftLabelDoubleClicked с context и global_time.
         """
         # Проверяем, является ли элемент дочерним (не родительским узлом "Метки" или "Диапазоны")
         if item.parent():
@@ -615,6 +618,9 @@ class LabelsTreeWidget(QWidget):
                     for label in self._generic_labels_ref:
                         if id(label) == obj_id:
                             # Это метка
+                            # Если это метка "Смена", эмитируем дополнительный сигнал
+                            if label.label_type == "Смена" and label.context:
+                                self.shiftLabelDoubleClicked.emit(label.context, label.global_time)
                             self.labelSelected.emit(label.global_time)
                             return # Выходим после обработки метки
                 if self._calculated_ranges_ref:

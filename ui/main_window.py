@@ -332,6 +332,8 @@ class MainWindow(QMainWindow):
         range_selector.currentTextChanged.connect(self.on_range_selection_changed)
         # 4. Сигнал от LabelsTreeWidget о выборе метки -> переход к времени в плеере
         self.labels_tree_widget.labelSelected.connect(self.go_to_time)
+        # 4.1. Сигнал от LabelsTreeWidget о двойном клике по метке "Смена" -> восстановление состава
+        self.labels_tree_widget.shiftLabelDoubleClicked.connect(self._on_shift_label_double_clicked)
         # 5. Сигнал от кнопки SMART -> вызов SMART
         self.run_smart_button.clicked.connect(self.run_smart_analysis)
         # 6. Сигнал от чекбокса SMART -> обновление состояния
@@ -1012,6 +1014,16 @@ class MainWindow(QMainWindow):
         self.video_player_widget.setFocus()
         # - Конец нового -
     # --- Конец нового метода ---
+
+    def _on_shift_label_double_clicked(self, context: dict, global_time_sec: float):
+        """
+        Обработчик двойного клика по метке 'Смена' в LabelsTreeWidget.
+        Переходит к времени метки и восстанавливает состояние чекбоксов в LineupModuleWidget.
+        """
+        # Переходим к времени метки
+        self.go_to_time(global_time_sec)
+        # Восстанавливаем состояние чекбоксов и включаем "Показать смену слева..."
+        self.lineup_module_widget.restore_shift_state_from_label(context)
 
     # --- Новый метод для вызова SMART ---
 # ui/main_window.py

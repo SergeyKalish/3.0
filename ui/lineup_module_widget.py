@@ -204,25 +204,7 @@ class LineupModuleWidget(QWidget):
             # print(f"[DEBUG] Raw players on ice from label: {players_on_ice_raw}") # Для отладки
             # --- КОНЕЦ ИСПРАВЛЕНИЯ ---
 
-            # --- НОВОЕ: Нормализация players_on_ice к списку строк id_fhm ---
-            normalized_players_on_ice = []
-            if isinstance(players_on_ice_raw, list):
-                for item in players_on_ice_raw:
-                    if isinstance(item, str):
-                        # Если элемент - строка (старый формат), добавляем как есть
-                        normalized_players_on_ice.append(item)
-                    elif isinstance(item, dict):
-                        # Если элемент - словарь (новый формат), извлекаем id_fhm
-                        player_id = item.get("id_fhm")
-                        if player_id:
-                            normalized_players_on_ice.append(player_id)
-                        else:
-                            # Логируем, если id_fhm нет в словаре
-                            print(f"[WARNING] 'id_fhm' not found in player dict: {item}")
-                    else:
-                        # Логируем, если элемент не строка и не словарь
-                        print(f"[WARNING] Unexpected item type in players_on_ice: {type(item)}, value: {item}")
-            # --- КОНЕЦ НОВОГО ---
+            normalized_players_on_ice = self._normalize_players_on_ice(players_on_ice_raw)
 
             if normalized_players_on_ice: # Проверяем, что список не пустой после нормализации
                  # print(f"[DEBUG] Normalized players on ice: {normalized_players_on_ice}") # Для отладки
@@ -233,6 +215,55 @@ class LineupModuleWidget(QWidget):
         else:
             # print(f"[DEBUG] No 'Смена' labels found before time {time}") # Для отладки
             return None
+
+    @staticmethod
+    def _normalize_players_on_ice(players_on_ice_raw):
+        """
+        Нормализует players_on_ice к списку строк id_fhm.
+        Поддерживает старый формат (список строк) и новый формат (список словарей).
+        """
+        normalized_players_on_ice = []
+        if isinstance(players_on_ice_raw, list):
+            for item in players_on_ice_raw:
+                if isinstance(item, str):
+                    normalized_players_on_ice.append(item)
+                elif isinstance(item, dict):
+                    player_id = item.get("id_fhm")
+                    if player_id:
+                        normalized_players_on_ice.append(player_id)
+                    else:
+                        print(f"[WARNING] 'id_fhm' not found in player dict: {item}")
+                else:
+                    print(f"[WARNING] Unexpected item type in players_on_ice: {type(item)}, value: {item}")
+        return normalized_players_on_ice
+
+    def restore_shift_state_from_label(self, context: dict):
+        """
+        Восстанавливает состояние чекбоксов и включает чекбокс 'Показать смену слева...'
+        на основе контекста метки 'Смена' при двойном клике в дереве меток.
+        """
+        if not isinstance(context, dict):
+            print(f"[WARNING] restore_shift_state_from_label: context is not a dict, got {type(context)}: {context}")
+            return
+
+        players_on_ice_raw = context.get("players_on_ice")
+        normalized_ids = self._normalize_players_on_ice(players_on_ice_raw)
+
+        if not normalized_ids:
+            print(f"[WARNING] restore_shift_state_from_label: no players found in context: {context}")
+            return
+
+        # Сохраняем ID восстановленных игроков
+        self._last_restored_player_ids = set(normalized_ids)
+        self._manual_change_occurred_after_restore = False
+
+        # Включаем чекбокс 'Показать смену слева...' без вызова его слота
+        self.show_last_change_before_time_checkbox.blockSignals(True)
+        self.show_last_change_before_time_checkbox.setChecked(True)
+        self.show_last_change_before_time_checkbox.blockSignals(False)
+
+        # Восстанавливаем чекбоксы игроков
+        self.restore_from_context({"players_on_ice": normalized_ids})
 
 
     def _on_package_button_clicked(self, package_name: str):
