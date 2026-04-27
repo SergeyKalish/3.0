@@ -444,6 +444,8 @@ class TimelineWidget(QWidget):
     """
     # Сигнал для навигации плеера
     globalTimeRequested = pyqtSignal(float)
+    # Сигнал для изменения состояний фильтров
+    filterStatesChanged = pyqtSignal(dict)
 
      # --- Новые атрибуты для фильтрации типов ---
     # Можно сделать их изменяемыми через метод, если нужно гибко
@@ -475,6 +477,10 @@ class TimelineWidget(QWidget):
         # Словари для чекбоксов фильтров
         self.filter_checkboxes_generic: dict[str, QCheckBox] = {}
         self.filter_checkboxes_calculated: dict[str, QCheckBox] = {}
+
+        # --- Сохранённые состояния фильтров из проекта (применяются при создании чекбоксов) ---
+        self.saved_filter_states: Optional[dict] = None
+        # --------------------------------------------------------------------------------------
 
         # --- Установка FocusPolicy ---
         self.setFocusPolicy(Qt.StrongFocus)
@@ -603,6 +609,18 @@ class TimelineWidget(QWidget):
                 # Если чекбокс с таким label_type был и есть, восстанавливаем его состояние
                 self.filter_checkboxes_calculated[label_type].setChecked(was_checked)
                 # print(f"[DEBUG] _create_filter_checkboxes: восстановлено состояние для CalculatedRange: {label_type} (checked={was_checked})")
+
+        # --- НОВОЕ: Применяем состояния, сохранённые в проекте (если есть) ---
+        if self.saved_filter_states is not None:
+            for label_type, was_checked in self.saved_filter_states.get("generic", {}).items():
+                if label_type in self.filter_checkboxes_generic:
+                    self.filter_checkboxes_generic[label_type].setChecked(was_checked)
+            for label_type, was_checked in self.saved_filter_states.get("calculated", {}).items():
+                if label_type in self.filter_checkboxes_calculated:
+                    self.filter_checkboxes_calculated[label_type].setChecked(was_checked)
+            # Сбрасываем, чтобы не применять повторно при следующем пересоздании внутри сессии
+            self.saved_filter_states = None
+        # --- КОНЕЦ НОВОГО ---
         # --- КОНЕЦ НОВОГО ---
 
 
@@ -612,6 +630,8 @@ class TimelineWidget(QWidget):
         # Перерисовываем сцену при изменении фильтра
         if self.scene:
             self.scene.redraw()
+        # Эмитируем сигнал с текущими состояниями для сохранения в проект
+        self.filterStatesChanged.emit(self.get_filter_states())
 
     # --- Новый метод для расчёта масштаба ---
     def _calculate_scale(self):
@@ -723,6 +743,17 @@ class TimelineWidget(QWidget):
 
 
     # --- Заглушка для метода обновления данных ---
+    def get_filter_states(self) -> dict:
+        """Возвращает текущие состояния чекбоксов фильтров."""
+        return {
+            "generic": {label_type: checkbox.isChecked() for label_type, checkbox in self.filter_checkboxes_generic.items()},
+            "calculated": {label_type: checkbox.isChecked() for label_type, checkbox in self.filter_checkboxes_calculated.items()},
+        }
+
+    def set_saved_filter_states(self, states: Optional[dict]):
+        """Устанавливает состояния фильтров из проекта для применения при создании чекбоксов."""
+        self.saved_filter_states = states
+
     def update_data(self, generic_labels: list[GenericLabel], calculated_ranges: list[CalculatedRange]):
         """Обновляет внутренние списки данных и чекбоксы фильтров."""
         #print(f"[DEBUG] TimelineWidget.update_data() вызван. generic_labels: {len(generic_labels)}, calculated_ranges: {len(calculated_ranges)}")

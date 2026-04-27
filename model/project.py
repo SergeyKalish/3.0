@@ -114,6 +114,9 @@ class Match:
         venue_arena: Optional[str] = None,
         referees: Optional[List[str]] = None,
         # -----------------------------
+        # --- СОСТОЯНИЯ ФИЛЬТРОВ TIMELINE ---
+        timeline_filter_states: Optional[Dict[str, Dict[str, bool]]] = None,
+        # ------------------------------------
     ):
                 # --- ОСНОВНЫЕ ПОЛЯ (были пропущены!) ---
         self.generic_labels: List[GenericLabel] = generic_labels or []
@@ -135,6 +138,9 @@ class Match:
         self.venue_arena: Optional[str] = venue_arena
         self.referees: List[str] = referees or []
         # ------------------
+        # --- СОСТОЯНИЯ ФИЛЬТРОВ TIMELINE ---
+        self.timeline_filter_states: Optional[Dict[str, Dict[str, bool]]] = timeline_filter_states
+        # ------------------------------------
 
 
     def to_dict(self) -> Dict[str, Any]:
@@ -172,6 +178,9 @@ class Match:
             "venue_arena": self.venue_arena,
             "referees": self.referees,
             # ------------------
+            # --- СОСТОЯНИЯ ФИЛЬТРОВ TIMELINE ---
+            "timeline_filter_states": self.timeline_filter_states,
+            # ------------------------------------
         }
 
     @classmethod
@@ -228,6 +237,9 @@ class Match:
             venue_arena=raw_match_data.get("venue_arena"),
             referees=raw_match_data.get("referees", []),
             # ------------------
+            # --- СОСТОЯНИЯ ФИЛЬТРОВ TIMELINE ---
+            timeline_filter_states=raw_match_data.get("timeline_filter_states"),
+            # ------------------------------------
             )
 
 class Project:

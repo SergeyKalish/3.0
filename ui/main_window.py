@@ -355,10 +355,17 @@ class MainWindow(QMainWindow):
         self.video_player_widget.positionChanged.connect(self._update_lineup_widget_state)
         # 3.3. Сигнал от range_selector для обновления активного диапазона на TimelineWidget (Вариант 3)
         range_selector.currentTextChanged.connect(self._update_timeline_active_range)
+        # 3.4. Сигнал изменения фильтров TimelineWidget -> сохранение в проект
+        self.timeline_widget.filterStatesChanged.connect(self._on_timeline_filters_changed)
 
         # Подключаем сигнал изменения типа метки
         label_group = self.universal_label_editor_widget.label_type_group
         label_group.buttonToggled.connect(self.on_label_type_toggled)
+
+    def _on_timeline_filters_changed(self, states: dict):
+        """Сохраняет текущие состояния фильтров TimelineWidget в проект."""
+        if hasattr(self, 'project') and hasattr(self.project, 'match'):
+            self.project.match.timeline_filter_states = states
 
     def _update_lineup_widget_state(self):
         """
@@ -889,6 +896,11 @@ class MainWindow(QMainWindow):
                 self.video_player_widget.load_video(self.current_video_path)
                 self.status_label.setText(f"Открыт проект: {os.path.basename(project_path)}")
                 self.add_to_recent_projects(project_path)
+                # --- Новое: Загрузка сохранённых фильтров TimelineWidget ---
+                saved_filter_states = getattr(self.project.match, 'timeline_filter_states', None)
+                if saved_filter_states:
+                    self.timeline_widget.set_saved_filter_states(saved_filter_states)
+                # --- Конец нового ---
                 # --- Новое: Запуск SMART после загрузки видео ---
                 # Это обновит calculated_ranges, включая "Всё видео", независимо от того, был ли он в старом проекте
                 self.run_smart_analysis()
